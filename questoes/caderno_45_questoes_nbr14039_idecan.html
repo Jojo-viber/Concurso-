@@ -1,0 +1,1541 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<style>
+    @page {
+        size: A4;
+        margin: 14mm 12mm;
+        background-color: #f8fafc;
+        @bottom-right {
+            content: "Página " counter(page) " de " counter(pages);
+            font-size: 8.5pt;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: #64748b;
+        }
+        @bottom-left {
+            content: "Caderno 45 Questões NBR 14039 & Média Tensão • Bloco Ouro | Foco IDECAN";
+            font-size: 8.5pt;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: #64748b;
+        }
+    }
+
+    *, *::before, *::after {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        color: #1e293b;
+        font-size: 9.35pt;
+        line-height: 1.45;
+        background-color: #f8fafc;
+    }
+
+    .header-banner {
+        background-color: #0f172a;
+        color: #ffffff;
+        padding: 18px 20px;
+        border-radius: 6px;
+        margin-bottom: 18px;
+    }
+
+    .header-banner h1 {
+        margin: 0 0 6px 0;
+        font-size: 16.5pt;
+        font-weight: 700;
+        letter-spacing: -0.3px;
+        color: #38bdf8;
+    }
+
+    .header-banner p {
+        margin: 0;
+        font-size: 9.2pt;
+        color: #cbd5e1;
+    }
+
+    .meta-table {
+        width: 100%;
+        margin-top: 10px;
+        border-collapse: collapse;
+    }
+
+    .meta-table td {
+        padding: 4px 8px;
+        font-size: 8.5pt;
+        color: #94a3b8;
+        border-top: 1px solid #334155;
+    }
+
+    .meta-table strong {
+        color: #f1f5f9;
+    }
+
+    .guide-intro {
+        background-color: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-left: 4px solid #eab308;
+        padding: 12px 14px;
+        border-radius: 4px;
+        margin-bottom: 20px;
+    }
+
+    .guide-intro h3 {
+        margin: 0 0 5px 0;
+        font-size: 10.8pt;
+        color: #854d0e;
+    }
+
+    .guide-intro p {
+        margin: 0;
+        font-size: 9pt;
+        color: #475569;
+    }
+
+    .question-card {
+        background-color: #ffffff;
+        border: 1px solid #cbd5e1;
+        border-radius: 6px;
+        padding: 12px 14px;
+        margin-bottom: 18px;
+        page-break-inside: avoid;
+    }
+
+    .q-badge-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 8px;
+    }
+
+    .q-number {
+        font-size: 10pt;
+        font-weight: 700;
+        color: #0f172a;
+    }
+
+    .q-tag {
+        text-align: right;
+        font-size: 7.8pt;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: #0284c7;
+        letter-spacing: 0.4px;
+    }
+
+    .q-statement {
+        font-size: 9.2pt;
+        font-weight: 500;
+        color: #1e293b;
+        margin-bottom: 10px;
+        line-height: 1.42;
+        text-align: justify;
+    }
+
+    .alternatives {
+        margin-left: 4px;
+        margin-bottom: 10px;
+    }
+
+    .alt-item {
+        font-size: 8.9pt;
+        color: #334155;
+        margin-bottom: 3.5px;
+        padding-left: 6px;
+    }
+
+    .alt-item strong {
+        color: #0f172a;
+    }
+
+    .solution-box {
+        background-color: #f1f5f9;
+        border: 1px solid #cbd5e1;
+        border-radius: 4px;
+        padding: 9px 11px;
+        margin-top: 8px;
+    }
+
+    .sol-header {
+        font-size: 8.6pt;
+        font-weight: 700;
+        color: #047857;
+        margin-bottom: 4px;
+        display: block;
+    }
+
+    .sol-text {
+        font-size: 8.7pt;
+        color: #334155;
+        line-height: 1.4;
+        text-align: justify;
+    }
+
+    .tip-box {
+        background-color: #fffbeb;
+        border: 1px solid #fde68a;
+        border-left: 3px solid #d97706;
+        border-radius: 3px;
+        padding: 6px 9px;
+        margin-top: 6px;
+    }
+
+    .tip-title {
+        font-size: 8.2pt;
+        font-weight: 700;
+        color: #92400e;
+        margin-bottom: 2px;
+        display: block;
+    }
+
+    .tip-text {
+        font-size: 8.2pt;
+        color: #78350f;
+        line-height: 1.35;
+    }
+
+    .math {
+        font-family: 'Times New Roman', Times, serif;
+        font-style: italic;
+        font-weight: bold;
+        color: #0369a1;
+    }
+
+    ul, ol {
+        margin: 3px 0 5px 16px;
+        padding: 0;
+    }
+
+    li {
+        margin-bottom: 2px;
+    }
+</style>
+</head>
+<body>
+
+<div class="header-banner">
+    <h1>Caderno de 45 Questões • ABNT NBR 14039 & Instalações MT</h1>
+    <p>Cabines Primárias, Transformadores, Proteção, Tarifação e Aterramento em Média Tensão • Bloco Ouro • Foco: IDECAN</p>
+    <table class="meta-table">
+        <tr>
+            <td style="width: 33%;"><strong>Cargo:</strong> Engenheiro Eletricista</td>
+            <td style="width: 33%;"><strong>Meta do Bloco:</strong> 45 Questões Concluídas</td>
+            <td style="width: 34%; text-align: right;"><strong>Status:</strong> 100% Cobertura do Edital</td>
+        </tr>
+    </table>
+</div>
+
+<div class="guide-intro">
+    <h3>Raio-X de Média Tensão e NBR 14039 para a IDECAN</h3>
+    <p>Este caderno aborda todo o núcleo de Média Tensão do edital: cabines primárias e de medição, critérios de proteção geral (fusíveis HH vs disjuntores de MT), relés secundários e funções ANSI (50/51, 50N/51N, 87T, 63), operação de TCs e TPs, transformadores a óleo e a seco, ensaios a vazio e de curto-circuito, cálculo de $I_{cc}$ por impedância percentual ($Z\%$), estrutura tarifária horossazonal (Grupo A, Subgrupo A4, Tarifas Verde e Azul), correção do fator de potência em MT e aterramento de subestações.</p>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 01</td>
+            <td class="q-tag">Campo de Aplicação • Faixa de Tensão da NBR 14039</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        A norma ABNT NBR 14039 (Instalações elétricas de média tensão de 1,0 kV a 36,2 kV) estabelece as prescrições para o projeto e a execução de instalações elétricas. O seu campo de aplicação abrange circuitos alimentados em corrente alternada com valores eficazes de tensão nominal situados na faixa de:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Superior a 50 V até 1.000 V.</div>
+<div class="alt-item"><strong>B)</strong> Superior a 1,0 kV até 36,2 kV inclusive.</div>
+<div class="alt-item"><strong>C)</strong> Superior a 3,8 kV até 69 kV.</div>
+<div class="alt-item"><strong>D)</strong> De 13,8 kV a 230 kV.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Conforme o item 1.1 da NBR 14039, a norma aplica-se a instalações elétricas de média tensão com tensão nominal de <strong>1,0 kV a 36,2 kV</strong> sob frequência industrial de 60 Hz.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Fronteiras normativas: NBR 5410 (BT: até 1 kV CA) | NBR 14039 (MT: > 1 kV até 36,2 kV CA) | NBR 5422 / Alta Tensão (> 36,2 kV).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 02</td>
+            <td class="q-tag">Proteção Geral na Entrada de Serviço • Potência Limite de Transformador</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Segundo a NBR 14039 e as normas de fornecimento em MT das concessionárias de energia, a proteção geral na entrada de serviço de uma subestação consumidora pode ser realizada por chave seccionadora conjugada com fusíveis tipo HH (limitação de corrente) desde que a potência total instalada de transformação não ultrapasse:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> 150 kVA</div>
+<div class="alt-item"><strong>B)</strong> 300 kVA</div>
+<div class="alt-item"><strong>C)</strong> 500 kVA (ou 300 kVA a depender da concessionária, com teto normativo de 300 kVA)</div>
+<div class="alt-item"><strong>D)</strong> 1.500 kVA</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa C</span>
+        <div class="sol-text">
+            A NBR 14039 e os padrões de concessionárias estabelecem que para potências instaladas de transformação de até 300 kVA (ou em certos regulamentos até 500 kVA para transformador único), admite-se proteção geral por chave fusível HH. Acima desse limite, é obrigatório o uso de disjuntor de MT acionado por relés secundários de proteção (funções 50/51 e 50N/51N).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Guarde a transição: Até 300 kVA = Chave seccionadora + Fusíveis HH. Acima de 300 kVA = Disjuntor geral de MT com relé secundário microprocessado.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 03</td>
+            <td class="q-tag">Relés de Proteção • Códigos ANSI em Cabines Primárias</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Em uma cabine primária de média tensão com transformador de 750 kVA, o projeto exige um relé de proteção secundário para comandar a abertura do disjuntor de MT. As funções mínimas obrigatórias para proteção de sobrecorrente de fase (temporizada e instantânea) e sobrecorrente de terra (temporizada e instantânea) correspondem, na codificação ANSI, a:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> 27, 59, 81U e 81O</div>
+<div class="alt-item"><strong>B)</strong> 50/51 e 50N/51N</div>
+<div class="alt-item"><strong>C)</strong> 87T, 49 e 63</div>
+<div class="alt-item"><strong>D)</strong> 21, 67 e 79</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            As funções essenciais de sobrecorrente são:<br>• <strong>51:</strong> Sobrecorrente temporizada de fase;<br>• <strong>50:</strong> Sobrecorrente instantânea de fase;<br>• <strong>51N / 51G:</strong> Sobrecorrente temporizada de neutro/terra;<br>• <strong>50N / 50G:</strong> Sobrecorrente instantânea de neutro/terra.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">50 = Instantâneo (sem retardo); 51 = Temporizado (curva inversa). Letra 'N' ou 'G' = Falta para a Terra (Neutro/Ground).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 04</td>
+            <td class="q-tag">Transformadores de Potencial (TP) • Finalidade e Segurança</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Em cubículos de medição e proteção em média tensão (13,8 kV), os Transformadores de Potencial (TP) são utilizados para alimentar instrumentos de medição, relés e medidores de faturamento da concessionária. A respeito do circuito secundário de um TP, é uma regra obrigatória de segurança e operação:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> O circuito secundário do TP deve operar em curto-circuito permanente.</div>
+<div class="alt-item"><strong>B)</strong> O circuito secundário do TP nunca deve ser aterrado.</div>
+<div class="alt-item"><strong>C)</strong> O secundário do TP deve ter um de seus terminais solidamente aterrado e NUNCA pode ser curto-circuitado, sob risco de queima por sobrecorrente.</div>
+<div class="alt-item"><strong>D)</strong> O TP reduz a corrente de linha mantendo a tensão de 13,8 kV nos instrumentos.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa C</span>
+        <div class="sol-text">
+            O TP opera como transformador de tensão com carga de alta impedância (voltímetros, relés). Curto-circuitar o secundário de um TP gera corrente de curto elevadíssima, provocando sua destruição. Além disso, um dos terminais do secundário deve ser aterrado por segurança contra acoplamento capacitivo primário-secundário.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">TP: secundário em circuito aberto (NUNCA curto-circuitar!). TC: secundário em curto-circuito (NUNCA deixar aberto!). A banca SEMPRE cruza essas duas regras!</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 05</td>
+            <td class="q-tag">Transformadores de Corrente (TC) • Operação e Saturação</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        A respeito dos Transformadores de Corrente (TC) empregados em sistemas de média tensão para medição e proteção (NBR 14039), assinale a afirmativa correta:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Caso seja necessário desconectar um instrumento de medição do secundário de um TC com o primário energizado, os seus terminais secundários devem ser prévia e obrigatoriamente curto-circuitados.</div>
+<div class="alt-item"><strong>B)</strong> Abrir o secundário de um TC energizado é uma manobra segura que anula as tensões perigosas nos bornes.</div>
+<div class="alt-item"><strong>C)</strong> Os TCs de proteção operam na região de saturação magnética para correntes nominais de carga.</div>
+<div class="alt-item"><strong>D)</strong> O enrolamento secundário padrão de TCs para faturamento em MT possui corrente nominal de 100 A.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa A</span>
+        <div class="sol-text">
+            Se o secundário de um TC energizado for aberto ($I_s = 0$), toda a corrente primária atua como corrente de magnetização ($I_m = I_p$), elevando a indução magnética no núcleo ao ponto de saturação e induzindo picos de tensão de milhares de volts ($kV$) nos bornes secundários, gerando arco elétrico, risco de morte e destruição do isolamento.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">TC aberto no secundário = Tensão induzida perigosíssima ($kV$) + Queima do isolamento. Sempre curto-circuitar antes de manobrar!</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 06</td>
+            <td class="q-tag">Subestações Abrigadas • Ventilação e Aberturas Naturais</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Segundo a NBR 14039, os compartimentos de subestações abrigadas que contenham transformadores a óleo ou a seco devem dispor de ventilação natural ou forçada adequada para dissipar as perdas térmicas dos equipamentos. Quando a ventilação for natural por aberturas (venezianas), as aberturas de entrada de ar frio e saída de ar quente devem ser posicionadas, respectivamente:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Ambas no teto da subestação.</div>
+<div class="alt-item"><strong>B)</strong> Abertura de entrada de ar na parte inferior (próxima ao piso) e abertura de saída de ar na parte superior (oposta e próxima ao teto).</div>
+<div class="alt-item"><strong>C)</strong> Ambas junto ao piso no mesmo alinhamento de parede.</div>
+<div class="alt-item"><strong>D)</strong> Abertura de entrada no teto e saída no piso através de canaletas de drenagem.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Para garantir a circulação por efeito termossifão (convecção natural do ar), o ar frio entra pela parte inferior da parede externa e o ar aquecido pelas perdas do transformador (menos denso) sobe e sai pelas venezianas superiores na parede oposta.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Efeito Chaminé: Ar frio entra por baixo; ar quente sai por cima na face oposta.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 07</td>
+            <td class="q-tag">Cabines de Transformação • Volume de Óleo e Bacia de Contenção</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Em subestações abrigadas ou desabrigadas contendo transformadores com isolamento em líquido isolante inflamável (óleo mineral), a NBR 14039 e as normas de combate a incêndio exigem a instalação de bacia de contenção com dreno ou canaleta e caixa separadora de óleo quando o volume individual de óleo do equipamento for superior a:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> 50 litros</div>
+<div class="alt-item"><strong>B)</strong> 100 litros</div>
+<div class="alt-item"><strong>C)</strong> 200 litros (ou tanques acima de volume unitário específico com brita/pedra britada)</div>
+<div class="alt-item"><strong>D)</strong> 5.000 litros</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa C</span>
+        <div class="sol-text">
+            A NBR 14039 (item 4.2.4) e as instruções técnicas de bombeiros exigem bacia de contenção ou canaletas de drenagem com camada de brita 1 ou 2 (espessura mínima de 10 a 15 cm como abafador de chama) e reservatório para coletar 100% do volume de líquido isolante em equipamentos com mais de 200 litros de óleo mineral.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Transformador a óleo mineral em cabine: Bacia de contenção para 100% do óleo + Camada de brita (extintora de chama) + Caixa separadora água/óleo.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 08</td>
+            <td class="q-tag">Transformadores a Seco • Características e Vantagens</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        O emprego de transformadores do tipo seco encapsulados em resina epóxi em subestações de média tensão tem se tornado prioritário em edifícios comerciais, hospitais e shoppings. A principal justificativa técnica e normativa para essa escolha em relação aos transformadores a óleo mineral é:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Possuírem menor peso e dispensarem qualquer manutenção preditiva.</div>
+<div class="alt-item"><strong>B)</strong> Serem autoextinguíveis, não propagadores de chama, isentos de risco de explosão por fluido combustível e dispensarem bacias de contenção de óleo e paredes corta-fogo complexas.</div>
+<div class="alt-item"><strong>C)</strong> Apresentarem rendimento elétrico de 100% sem dissipação de calor.</div>
+<div class="alt-item"><strong>D)</strong> Suportarem curto-circuito franco por tempo indeterminado sem desligamento.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Transformadores a seco utilizam resinas termofixas classe F (155°C) ou H (180°C) que não propagam chama e não oferecem risco ambiental de vazamento ou contaminação do lençol freático, dispensando sistemas de contenção de líquidos inflamáveis.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Transformador a Seco: Autoextinguível + Sem risco de vazamento de óleo + Ideal para locais com alta concentração de público.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 09</td>
+            <td class="q-tag">Coordenação de Isolamento • Tensão Suportável Nominal aos Impulsos (NBI / BIL)</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Na especificação de equipamentos para uma subestação de média tensão na classe de tensão de 15 kV (tensão nominal de operação 13,8 kV) segundo a NBR 14039, o Nível Básico de Isolamento a Impulso Atmosférico (NBI ou BIL) padronizado é de:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> 30 kV</div>
+<div class="alt-item"><strong>B)</strong> 60 kV</div>
+<div class="alt-item"><strong>C)</strong> 95 kV (ou 110 kV)</div>
+<div class="alt-item"><strong>D)</strong> 250 kV</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa C</span>
+        <div class="sol-text">
+            Para a classe de tensão de 15 kV (tensão de 13,8 kV), a NBR 14039 e as normas de equipamentos (ABNT NBR IEC 62271) fixam o NBI (Tensão suportável nominal de impulso atmosférico - onda 1,2/50 μs) tipicamente em **95 kV** (podendo atingir 110 kV em linhas mais expostas). Para a classe 24,2 kV (tensão 23 kV), o NBI é 125 kV ou 150 kV; para 36,2 kV (tensão 34,5 kV), o NBI é 170 kV.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Grave os NBIs clássicos de MT: Classe 15 kV (13,8 kV) -> NBI = 95 kV | Classe 24,2 kV -> NBI = 125/150 kV | Classe 36,2 kV (34,5 kV) -> NBI = 170 kV.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 10</td>
+            <td class="q-tag">Esquemas de Aterramento em Média Tensão • Métodos da NBR 14039</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Assim como na baixa tensão, a NBR 14039 normaliza esquemas de aterramento para instalações de média tensão identificados por códigos de duas letras (TN, TT e IT). No esquema **IT** de média tensão:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> O neutro do transformador é aterrado diretamente e as massas são ligadas ao neutro.</div>
+<div class="alt-item"><strong>B)</strong> O neutro da fonte é isolado da terra ou aterrado através de uma impedância de valor elevado (resistor ou reator de aterramento), e as massas da instalação são aterradas solidamente.</div>
+<div class="alt-item"><strong>C)</strong> É obrigatório o uso de condutor PEN compartilhado em média tensão.</div>
+<div class="alt-item"><strong>D)</strong> A proteção contra sobrecorrente desarma na primeira falta monofásica com corrente igual à de curto-circuito trifásico.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Em média tensão, o esquema IT possui o neutro da subestação isolado ou aterrado por resistor de neutro (para limitar a corrente de falta a terra a valores seguros como 10 A a 50 A), garantindo continuidade operacional ou desligamento controlado sem danos aos estatores de geradores e motores de MT.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Esquema IT em MT = Neutro isolado ou com resistor limitador de corrente de falta a terra.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 11</td>
+            <td class="q-tag">Dispositivos de Manobra • Chaves Seccionadoras sob Carga vs a Vazio</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Em cabines primárias de média tensão, as chaves seccionadoras tripolares podem ser do tipo 'sem carga' (abertura a vazio) ou 'sob carga' (com câmaras de extinção de arco). De acordo com a NBR 14039, uma chave seccionadora comum sem câmara de extinção (seccionador a vazio):
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Pode abrir o circuito alimentando motores a plena carga.</div>
+<div class="alt-item"><strong>B)</strong> Deve possuir intertravamento eletromecânico que impeça sua abertura antes do desligamento prévio do disjuntor de média tensão ou dos disjuntores gerais de baixa tensão.</div>
+<div class="alt-item"><strong>C)</strong> Substitui o disjuntor na interrupção de faltas por curto-circuito.</div>
+<div class="alt-item"><strong>D)</strong> Deve ser operada sem vara de manobra isolada.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Chaves seccionadoras a vazio não possuem capacidade de ruptura para correntes de carga. Se forem abertas sob carga, formar-se-á um arco voltaico violento entre polos, com risco de queima do operador e curto-circuito trifásico na cabine. Por isso, o intertravamento mecânico com o disjuntor a jusante é obrigatório.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Chave sem carga / Seccionador a vazio = Intertravamento obrigatório com o disjuntor. Nunca manobrar sob corrente de carga!</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 12</td>
+            <td class="q-tag">Disjuntores de Média Tensão • Meios de Extinção do Arco</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Nos projetos modernos de subestações de média tensão (13,8 kV a 34,5 kV), os antigos disjuntores a Grande Volume de Óleo (GVO) e Pequeno Volume de Óleo (PVO) foram tecnologicamente substituídos em novas instalações por disjuntores com meio de isolamento e extinção de arco em:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Ar comprimido e mercúrio líquido.</div>
+<div class="alt-item"><strong>B)</strong> Vácuo (ampolas de vácuo) e Gás Hexafluoreto de Enxofre (SF6).</div>
+<div class="alt-item"><strong>C)</strong> Óleo mineral tratado e glicerina.</div>
+<div class="alt-item"><strong>D)</strong> Água desmineralizada pressurizada.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            A tecnologia padrão atual em MT divide-se em disjuntores a **Vácuo** (altíssima vida útil mecânica e reduzida manutenção) e a **SF6** (gás hexafluoreto de enxofre com altíssima rigidez dielétrica e capacidade de desionização do arco elétrico).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Disjuntores modernos de MT: Vácuo (muito comum de 13,8 a 34,5 kV) e SF6 (muito comum em MT e alta tensão).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 13</td>
+            <td class="q-tag">Dimensionamento de Cabos Isolados de MT • Camada Semicondutora e Blindagem</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Diferentemente dos condutores de baixa tensão, os cabos isolados unipolares de média tensão (ex.: 8,7/15 kV) possuem uma estrutura multicamadas rigorosa. A camada metálica de fitas ou fios de cobre concêntricos (blindagem metálica) sobre a isolação de EPR/XLPE tem como função primordial:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Aumentar a flexibilidade mecânica do cabo durante o lançamento.</div>
+<div class="alt-item"><strong>B)</strong> Confinar o campo elétrico radialmente no dielétrico, garantir potencial nulo na superfície externa do cabo, equalizar os esforços eletrostáticos e drenar correntes capacitivas de fuga à terra.</div>
+<div class="alt-item"><strong>C)</strong> Servir como condutor de fase reserva em caso de quebra dos filamentos internos.</div>
+<div class="alt-item"><strong>D)</strong> Impedir a entrada de ar no interior do condutor de cobre.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            A blindagem semicondutora e a blindagem metálica criam uma distribuição radial e homogênea das linhas de campo elétrico, evitando concentrações pontuais de gradiente de potencial que destruiriam o dielétrico por descargas parciais (efeito corona/trilhamento). Além disso, aterra a superfície externa garantindo segurança ao toque.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Blindagem de cabo MT = Confinamento radial do campo elétrico + Potencial zero externo + Drenagem de corrente de fuga à terra.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 14</td>
+            <td class="q-tag">Para-Raios de Média Tensão • Tecnologia de Óxido de Zinco (ZnO)</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Na proteção de transformadores e cabos de subestações de média tensão contra sobretensões transitórias originadas por descargas atmosféricas ou manobras, utilizam-se para-raios de MT do tipo resistores não lineares de Óxido de Zinco (ZnO) sem centelhadores (gapless). A principal característica funcional do varistor de ZnO é:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Manter resistência ôhmica constante independente do valor da tensão aplicada.</div>
+<div class="alt-item"><strong>B)</strong> Apresentar altíssima impedância na tensão nominal de regime contínuo (conduzindo corrente de fuga insignificante em mA) e reduzir bruscamente sua resistência a valores ínfimos durante o surto de tensão, drenando a corrente de descarga à terra e grampeando a tensão residual.</div>
+<div class="alt-item"><strong>C)</strong> Curto-circuitar a linha permanentemente após o primeiro raio, exigindo troca obrigatória do elemento.</div>
+<div class="alt-item"><strong>D)</strong> Bloquear a corrente contínua e amplificar as ondas de tensão senoidal de 60 Hz.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Os para-raios de ZnO possuem curva V x I altamente não linear. Sob tensão nominal contínua (MCOV), comportam-se como isoladores. Ao chegar uma sobretensão que ultrapassa a tensão de disparo, a resistência cai quase a zero, drenando dezenas de kA para o solo e limitando a tensão sobre o transformador abaixo do NBI.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Para-raios ZnO sem gaps: Alta resistência na tensão normal; Baixíssima resistência durante o surto (ceifa a sobretensão).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 15</td>
+            <td class="q-tag">Distâncias de Segurança no Ar • Afastamentos Mínimos na NBR 14039</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Em subestações abrigadas em alvenaria com barramentos nus em média tensão na classe 15 kV (tensão nominal 13,8 kV), a NBR 14039 estipula distâncias mínimas de isolamento no ar para evitar disrupção dielétrica. A distância mínima no ar entre partes vivas de fases distintas (fase-fase) e entre partes vivas e estruturas aterradas (fase-terra) é de tipicamente:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> 20 mm e 10 mm</div>
+<div class="alt-item"><strong>B)</strong> 50 mm e 30 mm</div>
+<div class="alt-item"><strong>C)</strong> 160 mm (fase-fase) e 120 mm a 150 mm (fase-terra)</div>
+<div class="alt-item"><strong>D)</strong> 1.500 mm e 1.000 mm</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa C</span>
+        <div class="sol-text">
+            Tabela da NBR 14039 para classe 15 kV (NBI 95 kV): Distância mínima fase-fase no ar = **160 mm**; Distância mínima fase-terra no ar = **120 mm a 150 mm** (a depender do NBI e nível de poluição).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Classe 15 kV (13,8 kV) em ar calmo abrigado: ~16 cm entre fases e ~15 cm fase-massa.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 16</td>
+            <td class="q-tag">Fusíveis Limitadores tipo HH • Proteção de Transformadores MT</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Os fusíveis tipo HH (fusíveis de média tensão de alta capacidade de interrupção com areia de sílica) são projetados para atuar com extrema rapidez na eliminação de curto-circuitos. A respeito de sua curva de atuação e dimensionamento para proteção de transformadores MT, assinale a opção correta:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> O fusível HH deve ser dimensionado com corrente nominal exatamente igual à corrente de pico da corrente de magnetização (inrush) do transformador.</div>
+<div class="alt-item"><strong>B)</strong> A corrente nominal do fusível HH deve ser escolhida tipicamente entre 1,3 e 2,0 vezes a corrente nominal primária do transformador, suportando a corrente de inrush sem queima indevida e garantindo a atuação na sobrecorrente sustentada.</div>
+<div class="alt-item"><strong>C)</strong> Fusíveis HH nunca operam sob curto-circuito franco, necessitando de um disjuntor em série para abertura.</div>
+<div class="alt-item"><strong>D)</strong> Após a queima de um fusível HH de uma das fases, os outros dois fusíveis das fases adjacentes devem ser mantidos no circuito por até 5 anos.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            A corrente nominal do fusível HH ($I_{n,fus}$) é especificada tipicamente entre **1,3 a 2,0 vezes a corrente nominal primária** ($I_{n1}$) do transformador. Esse sobredimensionamento impede que o pico da corrente de inrush (que pode atingir de 8 a 12 vezes a corrente nominal por ciclos iniciais) rompa o elo fusível durante a energização a vazio.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Fusível HH do primário: $I_{fusivel} pprox 1,4 	ext{ a } 2,0 	imes I_{nominal\_primaria}$ para suportar o *inrush* do transformador.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 17</td>
+            <td class="q-tag">Corrente de Inrush em Transformadores • Causa Física e Transitório</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Ao se energizar a vazio um transformador de média tensão, observa-se um transitório eletromagnético caracterizado por um pico severo de corrente denominado corrente de magnetização transitória (*inrush*). Esse fenômeno ocorre devido a:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Curto-circuito temporário no enrolamento secundário.</div>
+<div class="alt-item"><strong>B)</strong> Saturação profunda do núcleo ferromagnético provocada pelo fluxo magnético residual e pela componente de fluxo contínuo induzida no momento do fechamento da chave em relação à fase da onda senoidal de tensão.</div>
+<div class="alt-item"><strong>C)</strong> Rompimento da rigidez dielétrica do óleo isolante.</div>
+<div class="alt-item"><strong>D)</strong> Ressonância capacitiva nos cabos de alimentação secundários.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            O *inrush* surge porque o fluxo magnético no instante da energização pode atingir até o dobro do fluxo de regime permanente somado ao fluxo residual no ferro. O núcleo satura profundamente, a permeabilidade magnética $\mu$ cai bruscamente para próximo da permeabilidade do ar, e a indutância de magnetização desaba, provocando altíssima corrente primária rica em 2ª harmônica.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Inrush = Saturação do núcleo de ferro na energização a vazio (transitório com forte presença de 2ª harmônica, usada pelos relés para bloquear disparos falsos).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 18</td>
+            <td class="q-tag">Acessórios de Proteção Própria do Transformador • Relé Buchholz (Função 63)</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Transformadores de potência imersos em líquido isolante providos de conservador de óleo possuem um dispositivo de proteção instalado na tubulação entre o tanque principal e o tanque de expansão. Esse dispositivo, que detecta o acúmulo de gases por degradação térmica do óleo e o fluxo violento de óleo sob faltas internas graves, é denominado:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Relé de Buchholz (Função ANSI 63 / 71).</div>
+<div class="alt-item"><strong>B)</strong> Válvula de alívio de pressão com diafragma de vidro.</div>
+<div class="alt-item"><strong>C)</strong> Indicador magnético de nível de óleo.</div>
+<div class="alt-item"><strong>D)</strong> Termômetro bimetálico tipo ponteiro.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa A</span>
+        <div class="sol-text">
+            O **Relé de Buchholz** é o dispositivo clássico de proteção mecânica interna de transformadores com conservador. Ele opera em dois estágios: 1) Contato de alarme (pequenos defeitos dielétricos que geram bolhas de gás lentas); 2) Contato de desarme/trip do disjuntor de MT (curto-circuito interno que gera onda de pressão e fluxo violento de óleo).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Relé Buchholz: Detecta bolhas de gás (alarme) e onda de choque de óleo (trip instantâneo do disjuntor).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 19</td>
+            <td class="q-tag">Proteção Diferencial de Transformador • Função ANSI 87T</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Em grandes subestações de média/alta tensão (transformadores de força tipicamente acima de 5 MVA), utiliza-se a proteção diferencial percentual de transformador (Função ANSI 87T). O princípio básico de atuação dessa função fundamenta-se na:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Medição exclusiva da temperatura do ponto mais quente (*hot-spot*) dos enrolamentos.</div>
+<div class="alt-item"><strong>B)</strong> Comparação fasorial contínua entre as correntes de entrada (primário) e as correntes de saída (secundário) devidamente compensadas em relação de espiras e defasagem angular do grupo de ligação, operando instantaneamente quando a corrente de desbalanço (diferencial) ultrapassa o limiar ajustado.</div>
+<div class="alt-item"><strong>C)</strong> Verificação do tempo de atraso dos fusíveis do primário.</div>
+<div class="alt-item"><strong>D)</strong> Monitoração da tensão de sequência zero durante faltas monofásicas na rede da concessionária.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            A função **87T** compara a corrente que entra com a corrente que sai do transformador ($ec{I}_{dif} = ec{I}_1 - ec{I}_2$). Em operação normal ou falta externa, a corrente diferencial é nula. Em falta interna (curto entre espiras ou para a carcaça), surge corrente de desbalanço, disparando o relé instantaneamente com altíssima seletividade e sensibilidade.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">ANSI 87 / 87T = Proteção Diferencial (compara corrente que entra com corrente que sai).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 20</td>
+            <td class="q-tag">Ensaio a Vazio em Transformadores • Determinação de Parâmetros</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        No ensaio a vazio de um transformador de média tensão realizado aplicando-se tensão nominal em um dos enrolamentos com o outro em circuito aberto, os instrumentos medem a potência ativa consumida ($P_0$), a tensão ($V_0$) e a corrente a vazio ($I_0$). Esse ensaio permite determinar diretamente:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> As perdas no cobre por efeito Joule a plena carga e a resistência de enrolamento.</div>
+<div class="alt-item"><strong>B)</strong> A impedância de curto-circuito percentual ($Z\%$) e a reatância de dispersão.</div>
+<div class="alt-item"><strong>C)</strong> As perdas no ferro (perdas no núcleo por histerese e correntes parasitas de Foucault) e os parâmetros do ramo de magnetização em derivação ($R_c$ e $X_m$).</div>
+<div class="alt-item"><strong>D)</strong> O nível de isolamento suportável sob impulso atmosférico.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa C</span>
+        <div class="sol-text">
+            No ensaio a vazio, a corrente é muito baixa (apenas $I_0$, em torno de 1% a 3% de $I_n$), tornando as perdas no cobre desprezíveis ($R \cdot I_0^2 pprox 0$). Portanto, toda a potência ativa lida no wattímetro ($P_0$) representa as **perdas no núcleo de ferro** (histerese + Foucault), permitindo calcular a resistência do núcleo ($R_c$) e a reatância de magnetização ($X_m$).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Ensaio a Vazio = Perdas no Ferro ($P_0$) + Ramo de Magnetização ($R_c, X_m$). Ensaio de Curto-Circuito = Perdas no Cobre ($P_{cc}$) + Impedância série ($R_{eq}, X_{eq}, Z\%$).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 21</td>
+            <td class="q-tag">Ensaio de Curto-Circuito em Transformadores • Determinação de Parâmetros</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Durante o ensaio de curto-circuito de um transformador de média tensão com o enrolamento secundário em curto-circuito franco e aplicando-se no primário uma tensão reduzida ($V_{cc}$) ajustada para que circule a corrente nominal ($I_n$), a potência ativa medida no wattímetro ($P_{cc}$) representa:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> As perdas no ferro do núcleo por histerese magnética.</div>
+<div class="alt-item"><strong>B)</strong> As perdas totais nos enrolamentos por efeito Joule a plena carga (perdas no cobre) e a impedância equivalente série ($R_{eq} + jX_{eq}$).</div>
+<div class="alt-item"><strong>C)</strong> A corrente de fuga da isolação sólida em regime contínuo.</div>
+<div class="alt-item"><strong>D)</strong> O consumo de potência reativa capacitiva dos cabos terminais.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Como a tensão aplicada é muito baixa (apenas $V_{cc}$, cerca de 3% a 6% de $V_n$), o fluxo no ferro é insignificante, tornando as perdas no núcleo desprezíveis. Toda a potência ativa medida reflete as **perdas no cobre a plena carga** ($P_{cu} = R_{eq} \cdot I_n^2$), permitindo calcular a impedância percentual ($Z\%$).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Ensaio de Curto-Circuito = Perdas no Cobre a plena carga ($P_{cc}$) + Impedância de curto-circuito ($Z\%$).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 22</td>
+            <td class="q-tag">Cálculo de Impedância Percentual (Z%) • Corrente de Curto Simétrica</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Um transformador trifásico de subestação com potência nominal de $S_n = 1.000	ext{ kVA}$, tensões de $13{,}8	ext{ kV} / 380	ext{ V}$ ($220	ext{ V}$ fase-neutro) possui impedância percentual de curto-circuito de $Z\% = 5{,}0\%$. Desprezando a impedância da rede de média tensão a montante e considerando a barra de 380 V alimentada exclusivamente por esse transformador, a corrente de curto-circuito trifásico simétrico presumida ($I_{cc3\phi}$) no barramento de baixa tensão é de aproximadamente:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> 1.519 A</div>
+<div class="alt-item"><strong>B)</strong> 7.597 A</div>
+<div class="alt-item"><strong>C)</strong> 30.387 A (~30,4 kA)</div>
+<div class="alt-item"><strong>D)</strong> 60.774 A</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa C</span>
+        <div class="sol-text">
+            1. Calcular a corrente nominal secundária ($I_{n2}$):<br>$$I_{n2} = rac{S_n}{\sqrt{3} \cdot V_{linha}} = rac{1.000.000	ext{ VA}}{\sqrt{3} \cdot 380	ext{ V}} = rac{1.000.000}{658{,}18} pprox 1.519{,}34	ext{ A}$$<br>2. Calcular a corrente de curto-circuito simétrica secundária com base em $Z\%$:<br>$$I_{cc3\phi} = rac{I_{n2}}{Z_{p.u.}} = rac{1.519{,}34	ext{ A}}{0{,}05} = 1.519{,}34 	imes 20 pprox 30.386{,}8	ext{ A} pprox 30{,}4	ext{ kA}$$
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Atalho de concurso: $I_{cc} = rac{I_{nominal}}{Z\% / 100} = I_{nominal} 	imes \left(rac{100}{Z\%}ight)$. Se $Z\% = 5\%$, a corrente de curto é exatamente 20 vezes a corrente nominal!</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 23</td>
+            <td class="q-tag">Estrutura Tarifária em Média Tensão • Grupo A e Subgrupos</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Segundo a regulamentação tarifária da ANEEL e a NBR 14039, os consumidores atendidos em média tensão pertencem ao **Grupo A** (alta/média tensão). A subestação de um consumidor atendido na tensão nominal de 13,8 kV enquadra-se especificamente no subgrupo tarifário:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Subgrupo A1 (tensão $\ge 230	ext{ kV}$)</div>
+<div class="alt-item"><strong>B)</strong> Subgrupo A2 (tensão de $88	ext{ kV}$ a $138	ext{ kV}$)</div>
+<div class="alt-item"><strong>C)</strong> Subgrupo A3a (tensão de $30	ext{ kV}$ a $44	ext{ kV}$)</div>
+<div class="alt-item"><strong>D)</strong> Subgrupo A4 (tensão de $2{,}3	ext{ kV}$ a $25	ext{ kV}$)</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa D</span>
+        <div class="sol-text">
+            Divisão dos subgrupos do Grupo A pela ANEEL:<br>• <strong>A1:</strong> Tensão $\ge 230	ext{ kV}$;<br>• <strong>A2:</strong> Tensão de $88	ext{ kV}$ a $138	ext{ kV}$;<br>• <strong>A3:</strong> Tensão de $69	ext{ kV}$;<br>• <strong>A3a:</strong> Tensão de $30	ext{ kV}$ a $44	ext{ kV}$;<br>• <strong>A4:</strong> Tensão de **$2{,}3	ext{ kV}$ a $25	ext{ kV}$** (onde se enquadram as redes convencionais de 13,8 kV);<br>• <strong>AS:</strong> Subterrâneo.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">13,8 kV pertence à faixa de 2,3 kV a 25 kV, logo é **Subgrupo A4**.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 24</td>
+            <td class="q-tag">Tarifação Horossazonal • Modalidades Verde vs Azul</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Um consumidor industrial atendido em 13,8 kV (Subgrupo A4) está avaliando a contratação tarifária entre as modalidades **Horossazonal Azul** e **Horossazonal Verde**. A diferença estrutural na cobrança da demanda de potência entre essas modalidades reside no fato de que:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Na modalidade Verde há cobrança de duas tarifas de demanda distintas (uma na ponta e outra fora de ponta), enquanto na Azul a tarifa de demanda é única.</div>
+<div class="alt-item"><strong>B)</strong> Na modalidade Azul são cobradas tarifas de demanda diferenciadas para os horários de ponta e fora de ponta, enquanto na modalidade Verde há uma tarifa de demanda única aplicável independentemente do horário.</div>
+<div class="alt-item"><strong>C)</strong> A modalidade Verde não permite o consumo de energia no horário de ponta.</div>
+<div class="alt-item"><strong>D)</strong> A modalidade Azul é restrita a consumidores rurais em baixa tensão.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            • **Tarifa Azul:** Demanda com dois valores contratados/faturados: Demanda Ponta e Demanda Fora de Ponta.<br>• **Tarifa Verde:** Demanda com valor único contratado (mesma tarifa de demanda para ponta e fora de ponta), porém o consumo em kWh no horário de ponta possui tarifa energética muito mais elevada.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Tarifa Azul = Demanda DIFERENCIADA (Ponta e Fora Ponta). Tarifa Verde = Demanda ÚNICA (mesmo preço kW em qualquer horário).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 25</td>
+            <td class="q-tag">Fator de Potência Regulatório • Limite ANEEL e Horário Capacitivo</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Segundo a Resolução Normativa ANEEL nº 1.000/2021 e a NBR 14039, o limite mínimo para o fator de potência das instalações consumidoras de média e baixa tensão é de $0{,}92$. A respeito das regras de faturamento de excedentes reativos indutivos e capacitivos, assinale a correta:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> O fator de potência pode ser indutivo ou capacitivo sem restrição em qualquer hora do dia sem cobrança de excedente.</div>
+<div class="alt-item"><strong>B)</strong> No período compreendido entre 00h00 e 06h00 da madrugada, o fator de potência capacitivo inferior a 0,92 é passível de cobrança de energia reativa excedente pela distribuidora.</div>
+<div class="alt-item"><strong>C)</strong> Fator de potência indutivo só é cobrado se for inferior a 0,50.</div>
+<div class="alt-item"><strong>D)</strong> Bancos de capacitores em média tensão devem ficar permanentemente ligados mesmo com a fábrica desligada na madrugada.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            A ANEEL estabelece que: 1) Das 06h00 às 24h00, apura-se reativo **indutivo** excedente ($FP < 0{,}92$ indutivo); 2) Das 00h00 às 06h00 (madrugada), apura-se reativo **capacitivo** excedente ($FP < 0{,}92$ capacitivo, provocado por bancos capacitivos fixos superdimensionados com fábrica vazia).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Madrugada (00h às 06h): Cuidado com sobrecompensação capacitiva! FP capacitivo < 0,92 gera cobrança de reativo excedente.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 26</td>
+            <td class="q-tag">Bancos de Capacitores em Média Tensão • Manobra e Ressonância Harmônica</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Na instalação de bancos de capacitores automáticos para correção do fator de potência em barramentos de média tensão (13,8 kV) contendo cargas não lineares (como inversores de frequência e retificadores), deve-se prever a instalação de reatores de dessintonia (anti-ressonância) em série com as células capacitivas. O objetivo primordial desse reator é:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Aumentar a potência reativa fornecida pelo banco em 100%.</div>
+<div class="alt-item"><strong>B)</strong> Deslocar a frequência de ressonância paralela do conjunto transformador-banco para uma faixa abaixo da menor harmônica presente (tipicamente abaixo da 5ª harmônica), evitando a queima prematura dos capacitores por sobrecorrente de ressonância.</div>
+<div class="alt-item"><strong>C)</strong> Transformar a energia reativa excedente em energia mecânica.</div>
+<div class="alt-item"><strong>D)</strong> Desligar o neutro do gerador na ausência de tensão da rede.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Em sistemas industriais com harmônicas (5ª e 7ª ordens), a capacitância do banco pode formar um circuito ressonante paralelo com a indutância do transformador ($f_r = rac{1}{2\pi\sqrt{L C}}$). Se a frequência de ressonância coincidir com a 5ª harmônica (300 Hz), ocorre amplificação massiva de corrente e queima de capacitores. Os **reatores de dessintonia** reduzem a frequência de sintonia (ex.: para 189 Hz ou 210 Hz), mantendo o circuito indutivo para harmônicas.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Reator de dessintonia em banco de capacitor = Evita ressonância harmônica com o transformador.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 27</td>
+            <td class="q-tag">Proteção contra Sobretensões • Faltas Monofásicas em Sistemas IT</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Em um sistema de média tensão com esquema de aterramento isolado (IT), quando ocorre uma falta franca de uma das fases para a terra (curto monofásico-terra), as tensões das fases sãs (não defeituosas) em relação à terra:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Caem imediatamente para zero volts.</div>
+<div class="alt-item"><strong>B)</strong> Permanecem inalteradas no valor da tensão de fase ($V_f = V_L / \sqrt{3}$).</div>
+<div class="alt-item"><strong>C)</strong> Elevam-se para o valor da tensão de linha entre fases ($V_L = \sqrt{3} \cdot V_f$), submetendo a isolação dos cabos e equipamentos a uma sobretensão temporária de cerca de 73%.</div>
+<div class="alt-item"><strong>D)</strong> Dobram de frequência para 120 Hz.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa C</span>
+        <div class="sol-text">
+            Em sistemas isolados (IT), o potencial de terra passa a ser o potencial da fase em falta. Consequentemente, as outras duas fases sãs passam a enxergar a terra com o módulo da tensão de linha ($V_L = \sqrt{3} \cdot V_f pprox 1{,}73 \cdot V_f$). Por essa razão, os cabos isolados para sistemas IT de 13,8 kV devem possuir classe de isolamento reforçada ($8{,}7/15	ext{ kV}$ ou $12/20	ext{ kV}$).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Falta monofásica em sistema IT -> Tensão das fases sãs para a terra sobe de $V_f$ para $V_L$ ($+73\%$).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 28</td>
+            <td class="q-tag">Ensaios de Comissionamento em MT • Ensaio de Tensão Aplicada (Hipot)</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Na verificação final de conformidade de uma cabine primária e seus cabos de média tensão recém-instalados (NBR 14039), antes da energização oficial pela concessionária, realiza-se o ensaio de rigidez dielétrica por Tensão Aplicada (Hipot). A respeito desse ensaio em cabos com isolação de polietileno reticulado (XLPE), recomenda-se preferencialmente o método:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Ensaio com corrente contínua pura em altíssima tensão por 24 horas ininterruptas.</div>
+<div class="alt-item"><strong>B)</strong> Ensaio em corrente alternada na frequência muito baixa (VLF - *Very Low Frequency*, tipicamente a 0,1 Hz), evitando a injeção de cargas espaciais residuais destrutivas comuns ao ensaio DC.</div>
+<div class="alt-item"><strong>C)</strong> Teste com megômetro manual de 250 V.</div>
+<div class="alt-item"><strong>D)</strong> Aplicação direta da tensão de 230 kV sem aterramento prévio.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            O ensaio DC em cabos XLPE envelhecidos ou novos pode aprisionar cargas espaciais que degradam irreversivelmente a isolação sólida. A norma internacional IEEE 400 e as concessionárias exigem o ensaio de tensão suportável CA em frequência muito baixa (**VLF a 0,1 Hz**), que estressa adequadamente o dielétrico sem gerar danos por carga residual.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Hipot em cabos isolados de MT (XLPE/EPR) = Ensaio VLF (Very Low Frequency a 0,1 Hz).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 29</td>
+            <td class="q-tag">Segurança e Sinalização em Cabines • Bloqueio Kirk e Chave de Aterramento</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Segundo a NBR 14039 e a NR-10, o acesso físico ao cubículo de barramentos ou do transformador em uma subestação abrigada só deve ser liberado após procedimentos rigorosos de segurança mecânica. O sistema de segurança composto por fechaduras com chaves transferíveis que obriga a abertura do disjuntor, o desligamento da seccionadora e o fechamento da chave de aterramento temporário antes de liberar a porta do cubículo é denominado:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Sistema de Intertravamento por Chaves Codificadas (Intertravamento Kirk / Castell).</div>
+<div class="alt-item"><strong>B)</strong> Relé térmico temporizado com selo magnético.</div>
+<div class="alt-item"><strong>C)</strong> Botoeira de parada de emergência cogumelo comum.</div>
+<div class="alt-item"><strong>D)</strong> Sensor infravermelho de presença humana.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa A</span>
+        <div class="sol-text">
+            O **Intertravamento Kirk (ou Castell)** utiliza chaves mecânicas presas em fechaduras sequenciais. A chave que abre a porta do compartimento de média tensão só é liberada pela fechadura da chave de aterramento rápido de MT, que por sua vez só recebe a chave liberada pelo disjuntor desenergizado e bloqueado.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Intertravamento por chave transferível / Kirk = Garante mecanicamente que a porta só abre com tudo desligado e aterrado.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 30</td>
+            <td class="q-tag">Dimensionamento de Barramentos • Esforços Eletrodinâmicos em Curto-Circuito</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Em subestações de média tensão, os barramentos rígidos de cobre ou alumínio e seus isoladores de pedestal (suporte) devem ser dimensionados não apenas para a capacidade térmica contínua de corrente, mas também para suportar as forças eletrodinâmicas máximas de repulsão no instante do pico de curto-circuito. Essa força de repulsão entre barras paralelas segundo a Lei de Biot-Savart e a NBR 14039 é proporcional:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Diretamente à raiz quadrada da tensão nominal do sistema.</div>
+<div class="alt-item"><strong>B)</strong> Diretamente ao quadrado do valor de crista da corrente de curto-circuito ($I_{pico}^2$) e inversamente à distância entre os centros dos barramentos ($d$).</div>
+<div class="alt-item"><strong>C)</strong> Inversamente à frequência da rede elevada à quarta potência.</div>
+<div class="alt-item"><strong>D)</strong> Apenas à massa do cobre em quilogramas por metro linear.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            A força eletrodinâmica de repulsão entre condutores paralelos no curto-circuito é dada pela equação: $$F = 0{,}2 \cdot rac{I_{pico}^2 \cdot L}{d}$$ Onde $I_{pico}$ é a corrente de crista assimétrica ($kA$), $L$ é o vão entre isoladores e $d$ é o espaçamento entre fases. A força cresce com o **quadrado da corrente** ($I^2$).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Força eletrodinâmica em barras de MT $\propto I_{pico}^2 / d$. Se a corrente de curto dobra, o esforço mecânico sobre os isoladores quadruplica!</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 31</td>
+            <td class="q-tag">Manutenção em Subestações • Análise Cromatográfica de Gases no Óleo</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Na manutenção preditiva de transformadores de potência em média tensão isolados a óleo mineral, o ensaio laboratorial de **Cromatografia em Fase Gasosa dos Gases Dissolvidos (DGA)** permite diagnosticar precocemente falhas incipientes. A presença expressiva de gás **Acetileno ($C_2H_2$)** dissolvido no óleo é o indicador característico inequívoco de:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Envelhecimento natural do papel isolante sob temperatura normal de 60°C.</div>
+<div class="alt-item"><strong>B)</strong> Arcos elétricos e descargas de alta energia com temperaturas superiores a 700°C no interior do transformador.</div>
+<div class="alt-item"><strong>C)</strong> Entrada acidental de umidade atmosférica pela sílica gel do conservador.</div>
+<div class="alt-item"><strong>D)</strong> Operação prolongada com fator de potência capacitivo na barra secundária.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Gases combustíveis dissolvidos no óleo:<br>• **Hidrogênio ($H_2$):** Descargas parciais / Efeito corona;<br>• **Metano ($CH_4$) e Etano ($C_2H_6$):** Sobreaquecimento térmico de baixa temperatura no óleo ($< 300^\circ	ext{C}$);<br>• **Etileno ($C_2H_4$):** Sobreaquecimento térmico severo no óleo ($> 300^\circ	ext{C}$);<br>• **Monóxido/Dióxido de Carbono ($CO / CO_2$):** Degradação térmica da celulose do papel isolante;<br>• **Acetileno ($C_2H_2$):** **Arcos elétricos de alta temperatura ($> 700^\circ	ext{C}$)** - defeito elétrico gravíssimo.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Acetileno ($C_2H_2$) no óleo = ARCO ELÉTRICO interno de alta energia (risco iminente de explosão).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 32</td>
+            <td class="q-tag">Secador de Ar com Sílica Gel • Conservador de Óleo</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        O tanque de expansão (conservador) de transformadores de média tensão possui um tubo de respiro conectado a um recipiente contendo cristais de sílica gel com indicador colorimétrico. Quando a sílica gel está seca e apta para absorver a umidade do ar que entra no tanque, sua cor é predominantemente **azul** (ou laranja). Ao saturar-se de umidade, sua cor altera-se para:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Preto fosco</div>
+<div class="alt-item"><strong>B)</strong> Rosa (ou verde claro nas versões ecológicas)</div>
+<div class="alt-item"><strong>C)</strong> Amarelo fluorescente</div>
+<div class="alt-item"><strong>D)</strong> Roxo escuro metálico</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            A sílica gel impregnada com cloreto de cobalto é originalmente **azul** quando ativa (anidra). À medida que absorve a umidade do ar durante os ciclos de respiro térmico do transformador, ela hidrata-se e torna-se **rosa**, indicando a necessidade urgente de substituição ou regeneração térmica em estufa.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Sílica gel: Azul = Seca / Ativa. Rosa = Saturada de umidade / Exige troca.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 33</td>
+            <td class="q-tag">Grupos de Ligação de Transformadores • Dyn1 e Dyn11</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Em projetos de subestações de distribuição e industriais no Brasil, a grande maioria dos transformadores de distribuição MT/BT (13,8 kV / 380-220 V) adota o grupo de ligação **Dyn1** ou **Dyn11**. A notação **Dyn1** significa formalmente que:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> O enrolamento primário é ligado em Estrela, o secundário em Triângulo com neutro acessível, e a tensão secundária está adiantada de 30° em relação à primária.</div>
+<div class="alt-item"><strong>B)</strong> O enrolamento primário é ligado em Triângulo (D), o secundário em Estrela (y) com neutro acessível (n), e os fasores de tensão do secundário estão atrasados de 30° (correspondente a 1 hora no mostrador do relógio, $1 	imes 30^\circ = 30^\circ$) em relação aos fasores homólogos do primário.</div>
+<div class="alt-item"><strong>C)</strong> O transformador só pode operar em corrente contínua pura.</div>
+<div class="alt-item"><strong>D)</strong> A defasagem angular entre primário e secundário é de 180° simétricos.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Decodificação do grupo de ligação:<br>• <strong>D:</strong> Primário em Triângulo (Delta);<br>• <strong>y:</strong> Secundário em Estrela (wye);<br>• <strong>n:</strong> Secundário com neutro acessível para o barramento de BT;<br>• <strong>1:</strong> Ângulo de defasagem de $1 	imes 30^\circ = 30^\circ$ de atraso do secundário em relação ao primário (Dyn11 seria $11 	imes 30^\circ = 330^\circ = +30^\circ$ adiantado).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Dyn: D = Triângulo primário; y = Estrela secundário; n = Neutro acessível; Número = Múltiplo de 30° de defasagem horária.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 34</td>
+            <td class="q-tag">Resistência de Isolamento em Transformadores MT • Índice de Polarização (IP)</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Na avaliação do estado de isolamento dos enrolamentos de um transformador de média tensão com megômetro de 5.000 V CC, realizam-se leituras de resistência de isolamento aos 1 minuto ($R_{1min}$) e aos 10 minutos ($R_{10min}$). O **Índice de Polarização (IP)** é calculado pela razão $IP = R_{10min} / R_{1min}$. Um transformador com isolamento saudável, seco e livre de contaminação deve apresentar um valor de IP de no mínimo:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Menor que 0,5</div>
+<div class="alt-item"><strong>B)</strong> Exatamente 1,0</div>
+<div class="alt-item"><strong>C)</strong> Superior a 2,0 (sendo aceitável entre 1,5 e 2,0, e excelente acima de 2,0)</div>
+<div class="alt-item"><strong>D)</strong> 100,0</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa C</span>
+        <div class="sol-text">
+            Critérios normativos da NBR 14039 e IEEE 43:<br>• $IP < 1{,}0$: Perigoso / Ruptura dielétrica iminente;<br>• $1{,}0 \le IP < 1{,}5$: Questionável / Presença de umidade e sujeira;<br>• $1{,}5 \le IP < 2{,}0$: Bom;<br>• **$IP \ge 2{,}0$:** Isolamento excelente, seco e despolarizado adequadamente.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Índice de Polarização (10 min / 1 min): $IP \ge 2{,}0$ = Isolamento excelente. Índice de Absorção (1 min / 30 s): $IA \ge 1{,}3$ = Bom.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 35</td>
+            <td class="q-tag">Cabines Blindadas (Metal-Clad / Metal-Enclosed) • Vantagens</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        As subestações de média tensão compactas em cubículos metálicos blindados (*Switchgear Metal-Clad* segundo a NBR IEC 62271-200 e NBR 14039) oferecem alta confiabilidade operacional. A característica construtiva que define uma blindagem *Metal-Clad* verdadeira é:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> A inexistência de barreiras metálicas internas entre o disjuntor e os barramentos.</div>
+<div class="alt-item"><strong>B)</strong> A segregação total dos componentes internos em compartimentos metálicos independentes e aterrados (compartimento do disjuntor extraível, compartimento de barramentos principais, compartimento de cabos e compartimento de instrumentos de baixa tensão), providos de alívio de sobrepressão para arco interno.</div>
+<div class="alt-item"><strong>C)</strong> O uso obrigatório de paredes de concreto armado com espessura de 50 cm entre cubículos.</div>
+<div class="alt-item"><strong>D)</strong> A operação exclusiva por controle remoto via satélite.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            O cubículo *Metal-Clad* possui quatro compartimentos 100% segregados por chapas metálicas aterradas (barramentos, disjuntor extraível, cabos/TCs/para-raios e controle BT). Em caso de arco interno em um compartimento, o flap superior direciona a onda de choque para cima e as outras partes da cabine permanecem intactas.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Metal-Clad = Compartimentação metálica total e independente com disjuntor extraível e duto de alívio de arco interno.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 36</td>
+            <td class="q-tag">Proteção de Alimentadores MT • Função de Religamento (ANSI 79)</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Nas subestações de distribuição de média tensão aéreas, os relés de proteção de alimentadores incorporam a função de Religamento Automático (Função ANSI 79). O emprego dessa função fundamenta-se na constatação empírica de que:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> 100% das faltas em redes elétricas são permanentes e exigem a troca imediata de postes.</div>
+<div class="alt-item"><strong>B)</strong> A grande maioria das faltas em redes aéreas de média tensão (cerca de 80% a 90%) possui natureza transitória (como galhos de árvore tocando momentaneamente a fiação, descargas atmosféricas induzidas ou pássaros), extinguindo-se o arco elétrico após um breve intervalo sem tensão de alguns ciclos.</div>
+<div class="alt-item"><strong>C)</strong> O religamento automático serve para queimar os fusíveis dos consumidores industriais.</div>
+<div class="alt-item"><strong>D)</strong> A função 79 é exclusiva para acionamento de motores síncronos.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Como a imensa maioria dos curtos em linhas aéreas de MT são defeitos fugitivos/transitórios, o religador desliga a linha por 0,5 s a 2 s para desionizar o caminho do arco e tenta religar automaticamente (até 3 ou 4 tentativas). Se a falta cessar, o fornecimento é restabelecido sem intervenção de equipes de campo.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Função 79 = Religador Automático (restabelece fornecimento após faltas transitórias na rede aérea de MT).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 37</td>
+            <td class="q-tag">Dimensionamento de Eletrodos de Aterramento em Subestações • Malha de Terra</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        O projeto da malha de aterramento de uma subestação de média tensão (NBR 14039 e IEEE Std 80) visa garantir a segurança pessoal contra choques perigosos durante curtos-circuitos para a terra. As duas variáveis limites de segurança fundamentais que devem ser calculadas e limitadas no solo da subestação são:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> A tensão nominal de linha e a resistência de tração do cobre.</div>
+<div class="alt-item"><strong>B)</strong> A Tensão de Passo (diferença de potencial entre dois pés afastados por 1 metro) e a Tensão de Toque (diferença de potencial entre a mão em contato com a estrutura metálica aterrada e a superfície do solo onde a pessoa pisa).</div>
+<div class="alt-item"><strong>C)</strong> A corrente de magnetização e a reatância capacitiva do transformador.</div>
+<div class="alt-item"><strong>D)</strong> O fator de potência e o ângulo de perdas dielétricas tang delta.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Durante uma falta para a terra na subestação, o Potencial de Terra da Malha ($GPR$) se eleva. Para não eletrocutar operadores ou transeuntes, o espaçamento entre cabos da malha e a camada superficial de brita devem garantir que:<br>1) **Tensão de Toque ($V_{toque}$)** $\le V_{toque,admissivel}$;<br>2) **Tensão de Passo ($V_{passo}$)** $\le V_{passo,admissivel}$.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Malha de Terra de Subestação: Dimensionada rigorosamente para conter **Tensão de Toque** e **Tensão de Passo** abaixo dos limites letais de fibrilação.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 38</td>
+            <td class="q-tag">Efeito Pelicular (Skin Effect) em Barramentos de MT</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Em barramentos de média tensão que conduzem correntes alternadas elevadas de 60 Hz, observa-se que a densidade de corrente não é uniforme em toda a seção transversal condutora, concentrando-se predominantemente na periferia/superfície do barramento. Esse fenômeno é o **Efeito Pelicular (*Skin Effect*)**, o qual provoca:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Redução da resistência ôhmica efetiva do barramento em CA em relação à CC.</div>
+<div class="alt-item"><strong>B)</strong> Aumento da resistência efetiva em corrente alternada ($R_{CA} > R_{CC}$) devido à diminuição da área útil condutora de corrente, justificando a utilização preferencial de barras tubulares ocas ou barras chatas laminadas em paralelo.</div>
+<div class="alt-item"><strong>C)</strong> Anulação do campo magnético ao redor do barramento.</div>
+<div class="alt-item"><strong>D)</strong> Aumento linear da tensão de fase para neutro.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            As linhas de fluxo magnético internas criam indutância maior no centro do condutor do que em sua superfície externa. Isso empurra os elétrons para a periferia. Como o miolo do cabo quase não conduz corrente, a resistência em CA aumenta. Em grandes correntes, utilizam-se barras tubulares ocas para economizar peso e maximizar a condução periférica.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Efeito Pelicular (Skin Effect): Corrente CA concentra-se na borda do condutor -> Aumenta a resistência em CA ($R_{CA} > R_{CC}$).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 39</td>
+            <td class="q-tag">Iluminação e Tomadas em Subestações • Alimentação Auxiliar BT</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        De acordo com as prescrições de segurança da NBR 14039, os circuitos de iluminação normal, iluminação de emergência e tomadas de uso geral no interior de uma cabine primária abrigada de média tensão devem ser alimentados por:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Uma derivação direta não protegida conectada aos barramentos de 13,8 kV.</div>
+<div class="alt-item"><strong>B)</strong> Circuitos de baixa tensão protegidos (220/127 V) derivados do painel geral de baixa tensão (QGBT) ou transformador de serviços auxiliares, sendo proibida a alimentação direta de cargas em MT sem proteção apropriada.</div>
+<div class="alt-item"><strong>C)</strong> Exclusivamente por baterias alcalinas recarregadas por luz solar externa.</div>
+<div class="alt-item"><strong>D)</strong> Pelo enrolamento terciário em triângulo de TPs de faturamento.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Os serviços auxiliares de subestações (iluminação, tomadas de manutenção, motorização de disjuntores, no-breaks e relés de proteção) são alimentados pelo sistema de baixa tensão (220/127 V CA e 125 V ou 24 V CC através de banco de baterias).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Serviços auxiliares e iluminação da cabine = Sempre em Baixa Tensão (BT) através do QGBT ou sistema auxiliar CC.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 40</td>
+            <td class="q-tag">Muflas e Terminações em Cabos de MT • Alívio de Campo Elétrico</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Na conexão de cabos isolados de média tensão a transformadores, disjuntores ou chaves seccionadoras, é obrigatório o uso de **Terminações de MT (Muflas)** contráteis a frio ou a quente. A principal função do cone de alívio ou tubo de alívio integrado à terminação é:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Evitar que a água da chuva entre no tanque de óleo do transformador.</div>
+<div class="alt-item"><strong>B)</strong> Aliviar e redistribuir suavemente a concentração excessiva de linhas de campo elétrico que ocorre no ponto exato onde a blindagem semicondutora do cabo é cortada/removida, impedindo a perfuração do dielétrico por descargas parciais superficiais.</div>
+<div class="alt-item"><strong>C)</strong> Aumentar a flexibilidade mecânica do terminal de cobre.</div>
+<div class="alt-item"><strong>D)</strong> Transformar o cabo unipolar em um cabo tripolar blindado.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Ao preparar a ponta do cabo para conexão, a blindagem semicondutora aterrada é descascada. Nesse ponto de descontinuidade geométrica, as linhas de campo elétrico sofrem uma refração e concentração brutal de gradiente de potencial ($E = dV/dx$). Sem o cone de alívio de estresse elétrico da terminação, o ar ou o isolamento rompem em minutos por arco elétrico.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Terminação de MT / Mufla = **Controle e alívio do estresse do campo elétrico** no corte da blindagem do cabo.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 41</td>
+            <td class="q-tag">Chaves de Aterramento Rápido (Seccionador de Terra)</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Em cubículos de média tensão com disjuntor extraível, os seccionadores de aterramento (*Earthing Switch*) são dispositivos essenciais de segurança do operador. A sua manobra de fechamento é projetada para:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Aterrar solidamente os barramentos ou cabos de entrada previamente desenergizados, descarregando cargas residuais capacitivas e garantindo segurança total antes do acesso de técnicos ao cubículo.</div>
+<div class="alt-item"><strong>B)</strong> Ligar a fase A diretamente ao neutro do transformador para economizar energia.</div>
+<div class="alt-item"><strong>C)</strong> Funcionar como relé de sobrecorrente temporizado.</div>
+<div class="alt-item"><strong>D)</strong> Regular a tensão secundária do transformador em 60 Hz.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa A</span>
+        <div class="sol-text">
+            Após o seccionamento da alimentação, os cabos e barramentos retêm carga capacitiva armazenada de alta tensão. A chave de aterramento rápido fecha os condutores à malha de terra da subestação, eliminando qualquer tensão residual ou indução eletrostática de circuitos vizinhos.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Chave de Aterramento de MT = Descarrega tensão capacitiva residual e aterra as barras para manutenção segura.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 42</td>
+            <td class="q-tag">Ensaios em Óleo Isolante Mineral • Tensão de Rigidez Dielétrica</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Na manutenção periódica de transformadores de média tensão em conformidade com a NBR 14039 e NBR 10576, coleta-se amostra de óleo isolante para teste de rigidez dielétrica em centelhador padronizado com eletrodos esféricos ou semiesféricos (norma ABNT/IEC). O valor mínimo da tensão de ruptura dielétrica para que um óleo mineral em serviço seja considerado em boas condições de uso é tipicamente de no mínimo:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> 5 kV</div>
+<div class="alt-item"><strong>B)</strong> 10 kV</div>
+<div class="alt-item"><strong>C)</strong> 30 kV (ou superior a 35 kV em transformadores novos)</div>
+<div class="alt-item"><strong>D)</strong> 300 kV</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa C</span>
+        <div class="sol-text">
+            Conforme a NBR 10576: Óleo novo em transformador de MT deve suportar tensão de ruptura dielétrica $\ge 40	ext{ kV}$ (ou $\ge 50	ext{ kV}$). Em serviço (óleo usado), o valor não deve cair abaixo de **$30	ext{ kV}$** (com espaçamento padrão de 2,5 mm entre eletrodos). Valores abaixo de 30 kV exigem tratamento termovácuo ou troca imediata por excesso de umidade e impurezas.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Rigidez dielétrica de óleo mineral em MT: Mínimo aceitável em operação $\ge 30	ext{ kV}$.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 43</td>
+            <td class="q-tag">Sistemas de Corrente Contínua Auxiliar • Baterias e Carregadores em MT</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Em subestações de média e alta tensão de grande porte providas de disjuntores motorizados e relés de proteção numéricos, o sistema de alimentação do circuito de comando e da bobina de abertura (trip) do disjuntor utiliza obrigatoriamente um sistema ininterrupto de Corrente Contínua (banco de baterias estacionárias 125 V CC ou 24/48 V CC com retificador/carregador). A razão fundamental para essa exigência técnica é:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Economizar cobre no cabeamento do transformador de força.</div>
+<div class="alt-item"><strong>B)</strong> Assegurar que, durante um curto-circuito severo trifásico no qual a tensão alternada da subestação colapse para zero volts, a bobina de abertura e os relés de proteção possuam energia auxiliar garantida para comandar a extinção da falta.</div>
+<div class="alt-item"><strong>C)</strong> Reduzir a velocidade de quebra do arco elétrico nos polos do disjuntor.</div>
+<div class="alt-item"><strong>D)</strong> Evitar o aquecimento térmico dos transformadores de potencial.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Se a bobina de abertura do disjuntor dependesse da própria tensão alternada (CA) da rede, em um curto-circuito severo a tensão cairia a zero e o disjuntor não conseguiria abrir, destruindo a subestação inteira. O banco de baterias em Corrente Contínua garante disparo 100% autônomo mesmo em colapso total da rede elétrica.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Banco de Baterias CC em Subestações = Garante trip do disjuntor mesmo sob blecaute ou curto-circuito com tensão zero em CA.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 44</td>
+            <td class="q-tag">Aterramento Temporário • Regras da NR-10 e NBR 14039</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Durante intervenções de manutenção corretiva nos barramentos de média tensão de uma cabine primária, após o seccionamento, o impedimento de reenergização e a constatação da ausência de tensão com detector de média tensão por contato, a etapa seguinte obrigatória de segurança é:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Ligar os transformadores de iluminação de emergência.</div>
+<div class="alt-item"><strong>B)</strong> Instalação do conjunto de aterramento temporário com equipotencialização das três fases e conexão sólida à malha de aterramento.</div>
+<div class="alt-item"><strong>C)</strong> Fechar imediatamente a porta da cabine primária sem aviso prévio.</div>
+<div class="alt-item"><strong>D)</strong> Injetar ar comprimido em todas as ampolas a vácuo dos disjuntores.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Conforme a NR-10 (item 10.5.1) e a NBR 14039, os 6 passos da desenergização são: 1) Seccionamento; 2) Impedimento de reenergização; 3) Constatação da ausência de tensão; **4) Instalação de aterramento temporário com equipotencialização dos condutores**; 5) Proteção dos elementos energizados existentes na zona controlada; 6) Sinalização de impedimento de reenergização.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Passo 4 da desenergização: Instalação de aterramento temporário e equipotencialização!</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 45</td>
+            <td class="q-tag">Transformadores em Paralelo • Condições Obrigatórias</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Para que dois transformadores de média tensão operem satisfatoriamente em paralelo em uma subestação compartilhando a mesma barra de carga sem circulação perigosa de correntes internas de circulação a vazio e com divisão proporcional de carga, eles devem atender simultaneamente às seguintes condições:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Ter potências nominais exatamente idênticas e fabricantes iguais, dispensando compatibilidade de tensão.</div>
+<div class="alt-item"><strong>B)</strong> Mesma relação de transformação (mesmas tensões nominais de primário e secundário), mesmo grupo de ligação (mesma defasagem angular), mesma sequência de fases e impedâncias percentuais de curto-circuito ($Z\%$) iguais ou muito próximas (com tolerância máxima de $\pm 10\%$).</div>
+<div class="alt-item"><strong>C)</strong> Um transformador deve ser a óleo e o outro a seco para equilíbrio térmico.</div>
+<div class="alt-item"><strong>D)</strong> O neutro de um deve ser aterrado e o do outro deve ser ligado à fase central.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Requisitos estritos para paralelismo de transformadores:<br>1. **Mesma relação de transformação** ($V_1/V_2$ iguais para evitar corrente de circulação a vazio);<br>2. **Mesmo grupo de defasagem angular** (ex.: ambos Dyn1);<br>3. **Mesma sequência de fases** (A-B-C);<br>4. **Mesma impedância de curto-circuito ($Z\%$)** para que a carga se divida proporcionalmente à potência nominal de cada máquina.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Paralelismo de transformadores: Mesmas tensões nominais + Mesmo grupo de defasagem + Mesma sequência de fases + Mesmos $Z\%$.</span>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

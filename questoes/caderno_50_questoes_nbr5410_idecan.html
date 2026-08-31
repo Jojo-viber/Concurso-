@@ -1,0 +1,1686 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<style>
+    @page {
+        size: A4;
+        margin: 14mm 12mm;
+        background-color: #f8fafc;
+        @bottom-right {
+            content: "Página " counter(page) " de " counter(pages);
+            font-size: 8.5pt;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: #64748b;
+        }
+        @bottom-left {
+            content: "Caderno 50 Questões ABNT NBR 5410 • Foco IDECAN | Engenharia Elétrica";
+            font-size: 8.5pt;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: #64748b;
+        }
+    }
+
+    *, *::before, *::after {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        color: #1e293b;
+        font-size: 9.4pt;
+        line-height: 1.45;
+        background-color: #f8fafc;
+    }
+
+    .header-banner {
+        background-color: #0f172a;
+        color: #ffffff;
+        padding: 18px 20px;
+        border-radius: 6px;
+        margin-bottom: 18px;
+    }
+
+    .header-banner h1 {
+        margin: 0 0 6px 0;
+        font-size: 16.5pt;
+        font-weight: 700;
+        letter-spacing: -0.3px;
+        color: #38bdf8;
+    }
+
+    .header-banner p {
+        margin: 0;
+        font-size: 9.2pt;
+        color: #cbd5e1;
+    }
+
+    .meta-table {
+        width: 100%;
+        margin-top: 10px;
+        border-collapse: collapse;
+    }
+
+    .meta-table td {
+        padding: 4px 8px;
+        font-size: 8.5pt;
+        color: #94a3b8;
+        border-top: 1px solid #334155;
+    }
+
+    .meta-table strong {
+        color: #f1f5f9;
+    }
+
+    .guide-intro {
+        background-color: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-left: 4px solid #eab308;
+        padding: 12px 14px;
+        border-radius: 4px;
+        margin-bottom: 20px;
+    }
+
+    .guide-intro h3 {
+        margin: 0 0 5px 0;
+        font-size: 10.8pt;
+        color: #854d0e;
+    }
+
+    .guide-intro p {
+        margin: 0;
+        font-size: 9pt;
+        color: #475569;
+    }
+
+    .question-card {
+        background-color: #ffffff;
+        border: 1px solid #cbd5e1;
+        border-radius: 6px;
+        padding: 12px 14px;
+        margin-bottom: 18px;
+        page-break-inside: avoid;
+    }
+
+    .q-badge-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 8px;
+    }
+
+    .q-number {
+        font-size: 10pt;
+        font-weight: 700;
+        color: #0f172a;
+    }
+
+    .q-tag {
+        text-align: right;
+        font-size: 7.8pt;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: #0284c7;
+        letter-spacing: 0.4px;
+    }
+
+    .q-statement {
+        font-size: 9.2pt;
+        font-weight: 500;
+        color: #1e293b;
+        margin-bottom: 10px;
+        line-height: 1.42;
+        text-align: justify;
+    }
+
+    .alternatives {
+        margin-left: 4px;
+        margin-bottom: 10px;
+    }
+
+    .alt-item {
+        font-size: 8.9pt;
+        color: #334155;
+        margin-bottom: 3.5px;
+        padding-left: 6px;
+    }
+
+    .alt-item strong {
+        color: #0f172a;
+    }
+
+    .solution-box {
+        background-color: #f1f5f9;
+        border: 1px solid #cbd5e1;
+        border-radius: 4px;
+        padding: 9px 11px;
+        margin-top: 8px;
+    }
+
+    .sol-header {
+        font-size: 8.6pt;
+        font-weight: 700;
+        color: #047857;
+        margin-bottom: 4px;
+        display: block;
+    }
+
+    .sol-text {
+        font-size: 8.7pt;
+        color: #334155;
+        line-height: 1.4;
+        text-align: justify;
+    }
+
+    .tip-box {
+        background-color: #fffbeb;
+        border: 1px solid #fde68a;
+        border-left: 3px solid #d97706;
+        border-radius: 3px;
+        padding: 6px 9px;
+        margin-top: 6px;
+    }
+
+    .tip-title {
+        font-size: 8.2pt;
+        font-weight: 700;
+        color: #92400e;
+        margin-bottom: 2px;
+        display: block;
+    }
+
+    .tip-text {
+        font-size: 8.2pt;
+        color: #78350f;
+        line-height: 1.35;
+    }
+
+    .math {
+        font-family: 'Times New Roman', Times, serif;
+        font-style: italic;
+        font-weight: bold;
+        color: #0369a1;
+    }
+
+    ul, ol {
+        margin: 3px 0 5px 16px;
+        padding: 0;
+    }
+
+    li {
+        margin-bottom: 2px;
+    }
+</style>
+</head>
+<body>
+
+<div class="header-banner">
+    <h1>Caderno Completo de 50 Questões • ABNT NBR 5410</h1>
+    <p>Instalações Elétricas de Baixa Tensão • Bloco Ouro • Foco Total: Banca IDECAN</p>
+    <table class="meta-table">
+        <tr>
+            <td style="width: 33%;"><strong>Cargo:</strong> Engenheiro Eletricista</td>
+            <td style="width: 33%;"><strong>Meta do Bloco:</strong> 50 Questões Concluídas</td>
+            <td style="width: 34%; text-align: right;"><strong>Status:</strong> 100% Cobertura do Edital</td>
+        </tr>
+    </table>
+</div>
+
+<div class="guide-intro">
+    <h3>Mapeamento Completo da NBR 5410 para a Prova</h3>
+    <p>Este caderno consolida as <strong>50 questões essenciais da NBR 5410</strong> cobrindo: previsão de cargas de iluminação e TUGs/TUEs, dimensionamento de condutores (critério térmico, queda de tensão e curto-circuito), esquemas de aterramento (TN-S, TN-C, TN-C-S, TT, IT), dimensionamento de neutro e condutor PE, dispositivos DR de alta sensibilidade, coordenação de disjuntores contra sobrecarga (IB ≤ In ≤ Iz), DPS Classes I/II/III, taxas de ocupação em eletrodutos, circuitos de emergência/GMG, influências externas e ensaios de comissionamento.</p>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 01</td>
+            <td class="q-tag">Previsão de Cargas • Iluminação Residencial</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        No projeto elétrico de uma edificação residencial regido pela NBR 5410, uma sala retangular possui dimensões de 4,0 m x 5,5 m (área de 22,0 m²). De acordo com os critérios mínimos para determinação da carga de iluminação, a potência aparente mínima a ser prevista para esse cômodo é:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> 100 VA</div>
+<div class="alt-item"><strong>B)</strong> 220 VA</div>
+<div class="alt-item"><strong>C)</strong> 340 VA</div>
+<div class="alt-item"><strong>D)</strong> 400 VA</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa C</span>
+        <div class="sol-text">
+            1. Área = 22,0 m².<br>2. Primeiros 6 m² = 100 VA.<br>3. Área restante = 16 m². Como 16 / 4 = 4 blocos inteiros de 4 m², acrescentam-se 4 x 60 VA = 240 VA.<br>4. Total = 100 + 240 = 340 VA.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Apenas acréscimos inteiros de 4 m² geram 60 VA. Frações não completas não somam carga adicional.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 02</td>
+            <td class="q-tag">Previsão de Cargas • Tomadas de Uso Geral (TUG)</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Uma cozinha retangular possui dimensões de 3,0 m x 4,0 m (perímetro de 14,0 m). Segundo a NBR 5410, o número mínimo de pontos de tomada de uso geral (TUG) e a potência mínima total atribuída a esses pontos são, respectivamente:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> 3 tomadas e 300 VA</div>
+<div class="alt-item"><strong>B)</strong> 4 tomadas e 1.900 VA</div>
+<div class="alt-item"><strong>C)</strong> 4 tomadas e 2.400 VA</div>
+<div class="alt-item"><strong>D)</strong> 5 tomadas e 2.000 VA</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            1. Perímetro = 14,0 m.<br>2. Cozinhas/copas: 1 TUG a cada 3,5 m ou fração -> 14 / 3,5 = 4 tomadas.<br>3. Potências: 3 primeiros pontos com 600 VA cada + excedente com 100 VA -> (3 x 600) + (1 x 100) = 1.900 VA.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Em áreas molhadas (cozinha, lavanderia, área de serviço), o divisor é 3,5 m e os 3 primeiros pontos recebem 600 VA cada.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 03</td>
+            <td class="q-tag">Capacidade de Condução • Fatores de Correção</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Um circuito terminal monofásico (220 V) alimenta uma carga com corrente de projeto IB = 36 A. Os condutores de PVC serão instalados em eletroduto embutido com temperatura ambiente de 40°C (fator fT = 0,87) agrupado com outro circuito (fator fA = 0,80). A corrente de projeto corrigida (IB') para busca em tabela é de aproximadamente:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> 25,0 A</div>
+<div class="alt-item"><strong>B)</strong> 36,0 A</div>
+<div class="alt-item"><strong>C)</strong> 45,2 A</div>
+<div class="alt-item"><strong>D)</strong> 51,7 A</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa D</span>
+        <div class="sol-text">
+            IB' = IB / (fT x fA) = 36 / (0,87 x 0,80) = 36 / 0,696 ≈ 51,72 A.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Para encontrar a corrente de tabela (Iz), divide-se a corrente de projeto pelos fatores de correção.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 04</td>
+            <td class="q-tag">Queda de Tensão Admissível • Limites Globais e Parciais</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Em uma instalação predial comercial alimentada diretamente pela rede pública de distribuição de baixa tensão (ponto de entrega em BT), o limite máximo de queda de tensão admissível global da entrada até o ponto terminal mais distante, e o limite máximo restrito ao circuito terminal são, respectivamente:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> 4% e 2%</div>
+<div class="alt-item"><strong>B)</strong> 5% e 4%</div>
+<div class="alt-item"><strong>C)</strong> 7% e 4%</div>
+<div class="alt-item"><strong>D)</strong> 7% e 5%</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Conforme a NBR 5410 item 6.2.7: alimentado pela rede pública em BT = 5% no total; circuitos terminais isolados nunca podem ultrapassar 4%.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Rede pública BT = 5% máx global. Subestação própria/gerador = 7% máx global. Terminal isolado = sempre no máx 4%.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 05</td>
+            <td class="q-tag">Esquemas de Aterramento • TN-S, TN-C, TT e IT</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        A NBR 5410 proíbe expressamente o uso de dispositivos a corrente diferencial-residual (DR) para seccionamento automático em esquemas de aterramento do tipo:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> TN-S</div>
+<div class="alt-item"><strong>B)</strong> TT</div>
+<div class="alt-item"><strong>C)</strong> TN-C</div>
+<div class="alt-item"><strong>D)</strong> IT com neutro</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa C</span>
+        <div class="sol-text">
+            No esquema TN-C, o condutor PEN combina neutro e proteção. Seccioná-lo ou passá-lo por DR anula a proteção contra choques e impede a detecção de corrente de fuga pelo toroide.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Nunca use DR no esquema TN-C e nunca passe o condutor PEN por dentro de dispositivos de seccionamento.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 06</td>
+            <td class="q-tag">Dispositivos DR • Proteção Adicional de Alta Sensibilidade</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Segundo a NBR 5410, entende-se por dispositivo DR de alta sensibilidade aquele cuja corrente diferencial-residual nominal de atuação (IΔn) possui valor de no máximo:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> 10 mA</div>
+<div class="alt-item"><strong>B)</strong> 30 mA</div>
+<div class="alt-item"><strong>C)</strong> 100 mA</div>
+<div class="alt-item"><strong>D)</strong> 300 mA</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Alta sensibilidade = IΔn ≤ 30 mA (proteção para contato direto e indireto humano). Valores superiores (como 300 mA ou 500 mA) são de baixa sensibilidade (proteção patrimonial contra incêndio).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">30 mA é a fronteira fisiológica para evitar fibrilação ventricular em choques elétricos residenciais.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 07</td>
+            <td class="q-tag">Condutor de Proteção (PE) • Critério da Tabela 58</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Para um circuito cujos condutores de fase de cobre possuem seção nominal SF = 50 mm², a seção mínima do condutor de proteção (PE) de mesmo material, determinada pela Tabela 58 da NBR 5410, é:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> 16 mm²</div>
+<div class="alt-item"><strong>B)</strong> 25 mm²</div>
+<div class="alt-item"><strong>C)</strong> 35 mm²</div>
+<div class="alt-item"><strong>D)</strong> 50 mm²</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Para SF > 35 mm², SPE = SF / 2 = 50 / 2 = 25 mm².
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Regra do PE: SF ≤ 16 -> SPE = SF; 16 < SF ≤ 35 -> SPE = 16 mm²; SF > 35 -> SPE = SF / 2.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 08</td>
+            <td class="q-tag">Proteção contra Sobrecargas • Coordenação Disjuntor-Cabo</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Na proteção de condutores contra sobrecargas segundo a NBR 5410, a corrente nominal do disjuntor (In) e sua corrente convencional de atuação (I2) devem satisfazer, em relação à corrente de projeto (IB) e à capacidade de condução (Iz), às seguintes condições:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> IB ≤ In ≤ Iz e I2 ≤ 1,45 . Iz</div>
+<div class="alt-item"><strong>B)</strong> In ≤ IB ≤ Iz e I2 ≤ 1,00 . Iz</div>
+<div class="alt-item"><strong>C)</strong> IB ≤ Iz ≤ In e I2 ≥ 1,45 . Iz</div>
+<div class="alt-item"><strong>D)</strong> Iz ≤ In ≤ IB e I2 ≤ 1,20 . IB</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa A</span>
+        <div class="sol-text">
+            Inequação clássica da NBR 5410 (item 5.3.4.1): IB ≤ In ≤ Iz e I2 ≤ 1,45 . Iz.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">A capacidade do cabo (Iz) deve ser maior ou igual à do disjuntor (In), que por sua vez deve ser maior ou igual à de carga (IB).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 09</td>
+            <td class="q-tag">Seções Mínimas de Condutores de Fase • Resistência Mecânica</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Conforme a Tabela 47 da NBR 5410, as seções mínimas dos condutores de cobre para circuitos fixos de iluminação, circuitos de tomadas de força e circuitos de sinalização/controle são, respectivamente:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> 1,0 mm², 2,5 mm² e 0,5 mm²</div>
+<div class="alt-item"><strong>B)</strong> 1,5 mm², 2,5 mm² e 0,5 mm²</div>
+<div class="alt-item"><strong>C)</strong> 1,5 mm², 1,5 mm² e 1,0 mm²</div>
+<div class="alt-item"><strong>D)</strong> 2,5 mm², 4,0 mm² e 1,5 mm²</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Iluminação = 1,5 mm²; Tomadas/Força = 2,5 mm²; Sinalização/Controle = 0,5 mm².
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Mesmo que o cálculo da corrente resulte em bitola menor, os mínimos mecânicos normativos são mandatórios.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 10</td>
+            <td class="q-tag">Grau de Proteção de Invólucros • Código IP</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Um quadro elétrico de distribuição instalado em área externa desabrigada com especificação de grau de proteção IP65 assegura:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Proteção contra corpos sólidos > 12,5 mm e imersão temporária.</div>
+<div class="alt-item"><strong>B)</strong> Total estanqueidade à poeira e proteção contra jatos de água em todas as direções.</div>
+<div class="alt-item"><strong>C)</strong> Proteção contra poeira fina sem vácuo e gotas de chuva vertical.</div>
+<div class="alt-item"><strong>D)</strong> Sem vedação contra pós e proteção para submersão contínua.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            1º dígito 6 = Totalmente estanque a poeira. 2º dígito 5 = Protegido contra jatos d'água.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">IP65: 6 = à prova de poeira; 5 = jatos de água.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 11</td>
+            <td class="q-tag">Divisão da Instalação • Circuitos Terminais e Independentes</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        De acordo com as regras de divisão da instalação da NBR 5410, assinale a opção correta a respeito da separação de circuitos:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Cargas de iluminação e tomadas de uso geral podem compartilhar livremente o mesmo circuito terminal em qualquer tipo de instalação residencial sem restrição.</div>
+<div class="alt-item"><strong>B)</strong> Todo ponto de utilização com corrente nominal superior a 10 A (como chuveiros, fornos elétricos e ar-condicionado) deve constituir um circuito terminal exclusivo e independente (TUE).</div>
+<div class="alt-item"><strong>C)</strong> É permitido ligar todos os pontos de tomadas de uso específico de uma residência a um único disjuntor geral de 50 A.</div>
+<div class="alt-item"><strong>D)</strong> Circuitos de iluminação devem ser agrupados obrigatoriamente com circuitos de força para otimizar o uso do condutor neutro compartilhado.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Equipamentos com corrente nominal > 10 A devem ser alimentados por circuitos terminais independentes e dedicados (Tomadas de Uso Específico - TUE).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Corrente > 10 A = circuito exclusivo (TUE individual). Em residências, iluminação e tomadas de uso geral devem ter circuitos distintos.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 12</td>
+            <td class="q-tag">Dimensionamento do Condutor Neutro • Presença de Harmônicas</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Em circuitos trifásicos com neutro que alimentam cargas predominantemente não lineares (como computadores, retificadores e luminárias eletrônicas com elevada taxa de harmônicas de 3ª ordem - THD-3 > 33%), a NBR 5410 prescreve que a seção do condutor neutro (SN) em relação à dos condutores de fase (SF) deve ser:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Reduzida à metade da seção de fase (SN = SF / 2).</div>
+<div class="alt-item"><strong>B)</strong> Igual à seção de fase sem qualquer correção adicional.</div>
+<div class="alt-item"><strong>C)</strong> Dimensionada com seção superior à dos condutores de fase (SN ≥ SF) para suportar a soma das correntes harmônicas de sequência zero.</div>
+<div class="alt-item"><strong>D)</strong> O neutro deve ser eliminado e substituído por aterramento local da carcaça dos equipamentos.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa C</span>
+        <div class="sol-text">
+            Harmônicas de 3ª ordem (e seus múltiplos ímpares: 9ª, 15ª) são de sequência zero e somam-se aritmeticamente no condutor neutro. Com taxa acima de 33%, o neutro conduz corrente superior à de fase, exigindo seção ampliada (SN ≥ SF).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">3ª harmônica e cargas eletrônicas pesadas = neutro com corrente maior que a fase (SN ≥ SF).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 13</td>
+            <td class="q-tag">Dispositivos de Proteção contra Surtos (DPS) • Classes de Ensaio</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Segundo a NBR 5410 e a NBR 5419, os Dispositivos de Proteção contra Surtos (DPS) são classificados em classes de ensaio de acordo com sua função e localização. O DPS de Classe I é destinado especificamente para:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Proteção fina de equipamentos eletrônicos sensíveis no ponto de utilização (tomadas).</div>
+<div class="alt-item"><strong>B)</strong> Proteção contra sobretensões de manobra originadas internamente na instalação secundária.</div>
+<div class="alt-item"><strong>C)</strong> Suportar os efeitos diretos de descargas atmosféricas (onda 10/350 μs), sendo tipicamente instalado no ponto de entrada da edificação provida de SPDA.</div>
+<div class="alt-item"><strong>D)</strong> Operar exclusivamente como filtro de ruído eletromagnético de alta frequência sem descarga de corrente à terra.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa C</span>
+        <div class="sol-text">
+            Classe I: Ensaio com onda 10/350 μs (corrente de raio direta - ponto de entrada com SPDA). Classe II: Ensaio com onda 8/20 μs (sobretensões induzidas / quadros gerais e de distribuição). Classe III: Proteção fina de equipamentos sensíveis junto à carga (onda combinada 1,2/50 μs e 8/20 μs).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Classe I = 10/350 μs (Raio direto/Entrada). Classe II = 8/20 μs (Surtos induzidos/Quadros). Classe III = Fina (Junto ao aparelho).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 14</td>
+            <td class="q-tag">Taxa de Ocupação de Eletrodutos • Espaço Livre</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Para garantir a dissipação térmica e a integridade da isolação dos cabos durante a enfiação, a NBR 5410 estipula limites máximos para a taxa de ocupação da área da seção transversal útil interna dos eletrodutos. Para 1 condutor, 2 condutores e 3 ou mais condutores no mesmo eletroduto, as taxas máximas de ocupação são, respectivamente:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> 53%, 31% e 40%</div>
+<div class="alt-item"><strong>B)</strong> 60%, 40% e 30%</div>
+<div class="alt-item"><strong>C)</strong> 50%, 33% e 25%</div>
+<div class="alt-item"><strong>D)</strong> 40%, 40% e 40%</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa A</span>
+        <div class="sol-text">
+            Item 6.2.11.1 da NBR 5410: 1 condutor = 53%; 2 condutores = 31%; 3 ou mais condutores = 40%.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Decore a tríade de ocupação de eletrodutos da 5410: 53% (1 cabo), 31% (2 cabos) e 40% (3 ou mais cabos).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 15</td>
+            <td class="q-tag">Disjuntores Termomagnéticos • Curvas de Disparo B, C e D</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Na especificação de disjuntores modulares em conformidade com a NBR IEC 60898 e NBR 5410, as curvas de disparo instantâneo (magnético) B, C e D atuam em faixas específicas de múltiplos da corrente nominal (In). A curva mais indicada para proteção de circuitos com cargas indutivas moderadas e motores de pequena potência com partida direta (atuação magnética entre 5 In e 10 In) é a:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Curva A</div>
+<div class="alt-item"><strong>B)</strong> Curva B</div>
+<div class="alt-item"><strong>C)</strong> Curva C</div>
+<div class="alt-item"><strong>D)</strong> Curva D</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa C</span>
+        <div class="sol-text">
+            Curva B: 3 a 5 In (cargas puramente resistivas, aquecedores, chuveiros, cabos longos). Curva C: 5 a 10 In (cargas indutivas moderadas, iluminação fluorescente, tomadas gerais, pequenos motores). Curva D: 10 a 20 In (transformadores MT/BT, grandes motores, cargas com elevado pico de partida).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Curva B = 3 a 5 In (resistivo). Curva C = 5 a 10 In (padrão geral / motores leves). Curva D = 10 a 20 In (transformadores / motores pesados).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 16</td>
+            <td class="q-tag">Seccionamento e Manobra • Proteção e Bloqueio</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Segundo a NBR 5410, todo circuito elétrico deve possuir meios de seccionamento que permitam sua desenergização para manutenção e inspeção. A respeito do seccionamento do condutor neutro em sistemas BT, assinale a correta:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> O neutro nunca pode ser seccionado em nenhuma circunstância em nenhum esquema.</div>
+<div class="alt-item"><strong>B)</strong> No esquema TN-S, o seccionamento do neutro é obrigatório em todos os circuitos terminais monofásicos e trifásicos.</div>
+<div class="alt-item"><strong>C)</strong> No esquema TN-C, o condutor PEN não pode ser seccionado nem conter dispositivos de interrupção unipolares.</div>
+<div class="alt-item"><strong>D)</strong> O seccionamento do neutro deve ser sempre realizado antes do seccionamento dos condutores de fase no momento da abertura do circuito.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa C</span>
+        <div class="sol-text">
+            No esquema TN-C, o condutor PEN assegura o retorno da corrente e a proteção da carcaça. É estritamente vedada a inserção de elementos de seccionamento no PEN. Em chaves multipolares com neutro, as fases abrem antes ou simultaneamente ao neutro.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Regra áurea de segurança: o condutor PEN nunca pode ser interrompido nem seccionado por chaves unipolares.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 17</td>
+            <td class="q-tag">Proteção contra Choques por Contato Indireto • Tempo de Desconexão</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Em esquemas de aterramento TN em 220/380 V sob corrente alternada, a NBR 5410 prescreve tempos máximos de atuação para o seccionamento automático da alimentação em circuitos terminais que alimentam equipamentos portáteis. Esse tempo máximo de desarme é de:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> 0,1 s</div>
+<div class="alt-item"><strong>B)</strong> 0,4 s</div>
+<div class="alt-item"><strong>C)</strong> 1,0 s</div>
+<div class="alt-item"><strong>D)</strong> 5,0 s</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Tabela 40 da NBR 5410: Para tensão nominal de 127 V a 220 V contra a terra em esquemas TN, o tempo máximo de desligamento em circuitos terminais é de 0,4 s (e 0,2 s em esquemas TT). Para circuitos de distribuição/alimentadores, admite-se até 5,0 s.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Tempo de desarme em circuitos terminais (127/220V): TN = 0,4 s; TT = 0,2 s. Alimentadores = 5,0 s.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 18</td>
+            <td class="q-tag">Identificação dos Condutores por Cor • Padrão Normativo</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        A NBR 5410 estabelece padronização de cores para o isolamento dos condutores elétricos a fim de garantir a segurança na manutenção. A cor exclusiva para o condutor Neutro e a combinação obrigatória para o Condutor de Proteção (PE) são, respectivamente:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Azul-escuro e Vermelho.</div>
+<div class="alt-item"><strong>B)</strong> Azul-claro e Verde (ou Verde-amarelo).</div>
+<div class="alt-item"><strong>C)</strong> Preto e Cinza.</div>
+<div class="alt-item"><strong>D)</strong> Branco e Amarelo.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Neutro = Azul-claro. Condutor de Proteção (PE) = Verde ou Verde-Amarelo (brasileirinho). Condutor PEN = Azul-claro com anilhas verdes nos pontos visíveis (ou vice-versa). Fases = Qualquer cor exceto azul-claro e verde/verde-amarelo (geralmente preto, vermelho, branco ou cinza).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Neutro = Azul-claro (sempre). Terra (PE) = Verde ou Verde/Amarelo. Nunca use essas cores para condutores de fase!</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 19</td>
+            <td class="q-tag">Dimensionamento por Curto-Circuito • Integral de Joule (k²S²)</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Para proteger um condutor de cobre com isolação de PVC contra curto-circuitos de curta duração (t ≤ 5 s) segundo a NBR 5410, a energia específica passante suportada pelo condutor é regida pela equação térmica I²t ≤ k²S². Para cabos de cobre com isolação de PVC 70°C, a constante k vale aproximadamente:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> 74</div>
+<div class="alt-item"><strong>B)</strong> 115</div>
+<div class="alt-item"><strong>C)</strong> 143</div>
+<div class="alt-item"><strong>D)</strong> 226</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Valores normativos de k da NBR 5410 (Tabela 43 / 54B): Cobre/PVC = 115; Cobre/EPR ou XLPE = 143; Alumínio/PVC = 76; Alumínio/EPR ou XLPE = 95.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Cobre com PVC (70°C a 160°C) -> k = 115. Cobre com XLPE/EPR (90°C a 250°C) -> k = 143.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 20</td>
+            <td class="q-tag">Locais com Banheira ou Chuveiro • Volume de Proteção</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        A NBR 5410 define zonas de proteção (volumes 0, 1, 2 e 3) para locais contendo chuveiro ou banheira. Sobre o Volume 0 (interior da banheira ou cuba do box), é correto afirmar:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> É permitida a instalação de interruptores normais de 250 V desde que abrigados.</div>
+<div class="alt-item"><strong>B)</strong> São admitidas tomadas elétricas comuns desde que protegidas por DR de 30 mA.</div>
+<div class="alt-item"><strong>C)</strong> Só é permitida a instalação de equipamentos elétricos que utilizem SELV (Tensão Extrabaixa de Segurança) com tensão nominal não superior a 12 V e grau de proteção IPX7.</div>
+<div class="alt-item"><strong>D)</strong> É permitida a passagem de circuitos alimentadores de outros cômodos dentro de eletrodutos embutidos no piso do box.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa C</span>
+        <div class="sol-text">
+            No Volume 0 (imersão em banheira/box): Apenas aparelhos previstos para uso nesse volume alimentados por SELV com tensão máxima de 12 V CA (ou 30 V CC) e índice de proteção no mínimo IPX7.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Volume 0 = interior da banheira/fundo do box -> Apenas SELV até 12 V e IPX7.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 21</td>
+            <td class="q-tag">Previsão de Cargas • Tomadas de Uso Geral em Dormitórios e Salas</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Para uma sala de estar com dimensões de 4,0 m x 6,0 m (perímetro de 20,0 m e área de 24,0 m²), o número mínimo de tomadas de uso geral (TUG) exigido pela NBR 5410 é de:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> 3 tomadas</div>
+<div class="alt-item"><strong>B)</strong> 4 tomadas</div>
+<div class="alt-item"><strong>C)</strong> 5 tomadas</div>
+<div class="alt-item"><strong>D)</strong> 6 tomadas</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Em salas e dormitórios: 1 ponto de tomada a cada 5,0 m ou fração de perímetro, espaçados o mais uniformemente possível. Perímetro = 20,0 m -> 20,0 / 5,0 = 4 tomadas.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Áreas secas (sala, quarto) = 1 TUG a cada 5,0 m de perímetro ou fração. Áreas molhadas (cozinha, área de serviço) = 1 TUG a cada 3,5 m.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 22</td>
+            <td class="q-tag">Previsão de Cargas • Potência das TUGs em Cômodos Secos</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Segundo a NBR 5410, em cômodos ou dependências tais como salas, dormitórios, escritórios e corredores, cada ponto de tomada de uso geral (TUG) previsto deve ter uma potência atribuída de no mínimo:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> 60 VA</div>
+<div class="alt-item"><strong>B)</strong> 100 VA</div>
+<div class="alt-item"><strong>C)</strong> 300 VA</div>
+<div class="alt-item"><strong>D)</strong> 600 VA</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Salas, quartos e locais análogos: no mínimo 100 VA por ponto de tomada.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Cômodos secos = 100 VA/tomada. Banheiro, cozinha, copa, lavanderia = 600 VA (nos 3 primeiros) e 100 VA nos excedentes.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 23</td>
+            <td class="q-tag">Dimensionamento de Condutores • Método de Instalação B1</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Na Tabela 36 da NBR 5410, o método de instalação de referência B1 corresponde a:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Cabos unipolares ou multipolares fixados diretamente em parede.</div>
+<div class="alt-item"><strong>B)</strong> Condutores isolados em eletroduto de seção circular embutido em alvenaria.</div>
+<div class="alt-item"><strong>C)</strong> Cabos tripolares instalados ao ar livre sobre leitos perfurados.</div>
+<div class="alt-item"><strong>D)</strong> Condutores nus instalados diretamente enterrados no solo.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Método B1: Condutores isolados ou cabos unipolares em eletroduto de seção circular embutido em alvenaria (ou em canaleta fechada embutida).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">B1 = eletroduto embutido em alvenaria (método mais comum da construção civil residencial).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 24</td>
+            <td class="q-tag">Temperaturas Características das Isolações • PVC vs XLPE/EPR</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        A NBR 5410 define limites de temperatura nos condutores para regime contínuo, regime de sobrecarga e regime de curto-circuito. Para condutores com isolação termofixa (XLPE ou EPR), essas três temperaturas limites são, respectivamente:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> 70°C, 100°C e 160°C</div>
+<div class="alt-item"><strong>B)</strong> 90°C, 130°C e 250°C</div>
+<div class="alt-item"><strong>C)</strong> 105°C, 140°C e 300°C</div>
+<div class="alt-item"><strong>D)</strong> 60°C, 90°C e 200°C</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Termofixo (XLPE/EPR): 90°C (regime contínuo), 130°C (sobrecarga), 250°C (curto-circuito). Termoplástico (PVC): 70°C (contínuo), 100°C (sobrecarga), 160°C (curto-circuito).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">PVC = 70 / 100 / 160°C. XLPE/EPR = 90 / 130 / 250°C. A banca cobra isso exaustivamente!</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 25</td>
+            <td class="q-tag">Esquema de Aterramento IT • Primeira e Segunda Falta</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        No esquema de aterramento IT em baixa tensão, nenhuma parte viva da fonte é diretamente aterrada (sendo isolada da terra ou aterrada através de uma impedância elevada). A principal vantagem operacional do esquema IT em hospitais e processos industriais críticos é:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Desligar instantaneamente toda a fábrica no primeiro contato acidental de uma fase com a terra.</div>
+<div class="alt-item"><strong>B)</strong> Não interromper a alimentação do circuito durante a ocorrência da primeira falta à terra (apenas sinalizar pelo DSI - Dispositivo Supervisor de Isolamento).</div>
+<div class="alt-item"><strong>C)</strong> Dispensar completamente o uso de condutores de proteção (PE) nas carcaças dos equipamentos.</div>
+<div class="alt-item"><strong>D)</strong> Permitir tensões de toque infinitas sem risco à vida humana.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            No esquema IT, na 1ª falta de isolação, a corrente de defeito é insignificante (fecha pelas capacitâncias ou pela alta impedância). O circuito permanece funcionando e o DSI aciona um alarme sonoro/visual para equipe de manutenção corrigir antes da 2ª falta.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Esquema IT = Alta continuidade de serviço (não desliga na 1ª falta, apenas sinaliza pelo DSI).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 26</td>
+            <td class="q-tag">Equipotencialização Principal • Barramento BEP</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Segundo a NBR 5410, em cada edificação deve ser realizada uma equipotencialização principal unindo os elementos condutivos ao Barramento de Equipotencialização Principal (BEP). Devem ser ligados ao BEP:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Apenas as fases do quadro de medição e a carcaça do disjuntor geral.</div>
+<div class="alt-item"><strong>B)</strong> O condutor de aterramento, o condutor neutro de entrada (em esquemas TN), as tubulações metálicas de água/gás e as armaduras metálicas da estrutura de concreto.</div>
+<div class="alt-item"><strong>C)</strong> Somente os condutores de proteção dos circuitos terminais de tomadas.</div>
+<div class="alt-item"><strong>D)</strong> Exclusivamente os cabos de descida do SPDA, sendo proibida a união com o aterramento elétrico.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Ao BEP conectam-se: condutor de aterramento, condutores de proteção principal, condutor PEN/Neutro da rede (no ponto de entrega), tubulações metálicas de utilidades (água, gás, esgoto metálico) e elementos estruturais metálicos.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">BEP unifica tudo: Aterramento elétrico + Estrutura de concreto + Tubulações metálicas externas.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 27</td>
+            <td class="q-tag">Proteção contra Sobretensões • Coordenação de DPS</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Para a correta coordenação entre dois estágios de Dispositivos de Proteção contra Surtos (um DPS Classe I na entrada e um DPS Classe II no quadro de distribuição interno), a distância de desacoplamento em cabeamento entre eles deve ser tipicamente de no mínimo:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> 1 metro</div>
+<div class="alt-item"><strong>B)</strong> 5 a 10 metros</div>
+<div class="alt-item"><strong>C)</strong> 50 metros</div>
+<div class="alt-item"><strong>D)</strong> 100 metros</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Para que a indutância dos cabos crie a diferença de potencial necessária para fazer o DPS de montante (Classe I) disparar antes de sobrecarregar o DPS de jusante (Classe II), exige-se um desacoplamento de no mínimo 5 a 10 metros de cabo (ou o uso de indutores de desacoplamento).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Desacoplamento DPS Classe I -> Classe II: mínimo 5 a 10 m de cabo.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 28</td>
+            <td class="q-tag">Condutor de Proteção em Instalações Fixas • Seção Mínima sem Proteção Mecânica</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Quando um condutor de proteção (PE) não faz parte do mesmo cabo que os condutores de fase e não é instalado dentro de um eletroduto fechado (condutor de proteção lançado separadamente), a NBR 5410 estabelece que sua seção mínima de cobre, caso NÃO possua proteção mecânica adicional, deve ser de:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> 1,5 mm²</div>
+<div class="alt-item"><strong>B)</strong> 2,5 mm²</div>
+<div class="alt-item"><strong>C)</strong> 4,0 mm²</div>
+<div class="alt-item"><strong>D)</strong> 6,0 mm²</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa C</span>
+        <div class="sol-text">
+            Conforme a NBR 5410 item 6.4.3.1.3: Se o condutor de proteção for lançado separadamente dos condutores de fase: Com proteção mecânica = mínimo 2,5 mm² Cu; Sem proteção mecânica = mínimo 4,0 mm² Cu.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">PE avulso fora de duto: com proteção mecânica = 2,5 mm²; sem proteção mecânica = 4,0 mm².</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 29</td>
+            <td class="q-tag">Fator de Demanda • Dimensionamento de Quadros</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        O fator de demanda de uma instalação ou grupo de circuitos é formalmente definido pela relação entre:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> A potência instalada total e a corrente nominal do transformador.</div>
+<div class="alt-item"><strong>B)</strong> A demanda máxima solicitada em um determinado intervalo de tempo e a potência total instalada.</div>
+<div class="alt-item"><strong>C)</strong> O fator de potência médio diário e o fator de carga da instalação.</div>
+<div class="alt-item"><strong>D)</strong> A queda de tensão máxima admissível e a resistência ôhmica do alimentador.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Fator de Demanda (FD) = Demanda Máxima / Potência Total Instalada (FD ≤ 1,0).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">FD = Potência simultânea máxima consumida dividida pela soma total das potências nominais instaladas.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 30</td>
+            <td class="q-tag">Circuitos de Segurança • Iluminação de Emergência e Bombas de Incêndio</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        A respeito dos circuitos elétricos que alimentam serviços de segurança (bombas de pressurização de hidrantes, iluminação de emergência e exaustão de fumaça) conforme a NBR 5410, é INCORRETO afirmar:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Devem ser independentes de outros circuitos da instalação predial normal.</div>
+<div class="alt-item"><strong>B)</strong> A proteção contra sobrecarga desses circuitos pode ser omitida caso a interrupção intempestiva do circuito coloque em risco a segurança das pessoas durante o incêndio.</div>
+<div class="alt-item"><strong>C)</strong> Os cabos devem possuir características de resistência ao fogo ou passar por rotas devidamente protegidas contra ação térmica das chamas.</div>
+<div class="alt-item"><strong>D)</strong> Devem ser desligados compulsoriamente junto com a chave geral de entrada no primeiro momento de combate ao fogo.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa D</span>
+        <div class="sol-text">
+            Os circuitos de segurança NUNCA são desligados pela chave geral convencional do prédio; eles possuem derivação antes da chave geral ou alimentação por GMG próprio com chave de transferência automática (ATS).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Em circuitos de segurança (bombas de incêndio), a proteção contra sobrecarga pode ser dispensada (mantendo-se apenas curto-circuito) para garantir funcionamento contínuo.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 31</td>
+            <td class="q-tag">Locais de Habitação • Quantidade de Pontos de Iluminação</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Em cada cômodo ou dependência de uma habitação, a NBR 5410 exige a previsão de pelo menos:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Dois pontos de luz comandados por interruptores paralelos (three-way).</div>
+<div class="alt-item"><strong>B)</strong> Um ponto de luz fixo no teto, comandado por interruptor de parede.</div>
+<div class="alt-item"><strong>C)</strong> Uma arandela na parede a cada 3 metros de perímetro.</div>
+<div class="alt-item"><strong>D)</strong> Dois circuitos de iluminação independentes para evitar blecaute total.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Item 9.5.2.1.1: Em cada cômodo ou dependência deve ser previsto pelo menos um ponto de luz fixo no teto, comandado por interruptor de parede (em áreas externas e pequenos depósitos/halls admite-se arandela).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Mínimo normativo por cômodo = 1 ponto de luz no teto com interruptor de parede.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 32</td>
+            <td class="q-tag">Proteção contra Sobretensões • Instalação de DPS no Quadro Principal</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Na instalação de um DPS em um quadro de distribuição alimentado por esquema TN-S, a conexão do DPS deve ser realizada entre:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Apenas entre as fases e o neutro, sem ligação ao condutor PE.</div>
+<div class="alt-item"><strong>B)</strong> Cada condutor de fase e o condutor PE, e entre o condutor Neutro e o condutor PE (Modo Comum e Diferencial).</div>
+<div class="alt-item"><strong>C)</strong> Exclusivamente entre a fase central e o eletrodo de aterramento externo.</div>
+<div class="alt-item"><strong>D)</strong> Em série com os cabos de alimentação de força das cargas.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            No esquema TN-S, a proteção típica (Modo 1 ou Modo 3) conecta DPS entre cada fase e o barramento PE (ou de neutro) e entre Neutro e PE, drenando os surtos de modo comum e diferencial diretamente para o terra.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">O DPS é instalado sempre em paralelo com o circuito de alimentação, nunca em série!</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 33</td>
+            <td class="q-tag">Proteção por Separação Elétrica • Transformador de Isolação</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        A proteção por separação elétrica individual contra choques elétricos é obtida através de:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Conexão das massas a um disjuntor diferencial-residual de 300 mA.</div>
+<div class="alt-item"><strong>B)</strong> Alimentação do circuito através de um transformador de isolação (com isolação galvânica entre primário e secundário) com circuito secundário desprovido de aterramento intencional.</div>
+<div class="alt-item"><strong>C)</strong> Instalação de condutores de alumínio revestidos de borracha sintética.</div>
+<div class="alt-item"><strong>D)</strong> Uso obrigatório de tensões nominais superiores a 1.000 V.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            A separação elétrica alimenta uma única carga (ou circuito isolado) através de transformador de separação com secundário não aterrado. Um contato unipolar com a parte viva não fecha circuito com a terra.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Transformador de isolação 1:1 sem terra no secundário = Proteção por Separação Elétrica.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 34</td>
+            <td class="q-tag">Comandos de Motores • Seccionamento e Proteção contra Falta de Fase</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Nos circuitos terminais de motores elétricos em baixa tensão (NBR 5410), o dispositivo destinado à proteção contra sobrecargas térmicas e perda de fase é tipicamente o:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Contator auxiliar</div>
+<div class="alt-item"><strong>B)</strong> Relé térmico bimetálico (ou relé eletrônico de sobrecarga)</div>
+<div class="alt-item"><strong>C)</strong> Disjuntor unipolar de curva B</div>
+<div class="alt-item"><strong>D)</strong> Fusível ultra-rápido.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            A proteção contra sobrecarga em motores é realizada por relés térmicos bimetálicos (ou relés eletrônicos de sobrecarga) associados a contatores, os quais possuem mecanismo de disparo diferencial sensível à falta de fase.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Curto-circuito do motor = Disjuntor-motor / Fusível aR; Sobrecarga do motor = Relé térmico / Relé eletrônico.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 35</td>
+            <td class="q-tag">Previsão de Cargas • Tomadas em Varandas e Sacadas</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Em varandas, sacadas e marquises de edificações residenciais, a NBR 5410 estabelece a obrigatoriedade de:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Pelo menos um ponto de tomada de uso geral, independentemente da área do local.</div>
+<div class="alt-item"><strong>B)</strong> Nenhum ponto de tomada devido ao risco de chuva.</div>
+<div class="alt-item"><strong>C)</strong> Um ponto de tomada a cada 2 metros de parapeito.</div>
+<div class="alt-item"><strong>D)</strong> Tomadas exclusivas para 20 A em circuito trifásico.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa A</span>
+        <div class="sol-text">
+            Item 9.5.2.2.1 subalínea 'e': Em varandas deve ser previsto pelo menos um ponto de tomada (se a varanda tiver área muito reduzida ou formato inviável, o ponto pode ser situado próximo ao acesso).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Varandas e sacadas residenciais = no mínimo 1 tomada (obrigatoriamente protegida por DR de alta sensibilidade).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 36</td>
+            <td class="q-tag">Dimensionamento pelo Critério da Queda de Tensão • Equação Monofásica</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Um circuito terminal monofásico de 220 V com condutores de cobre (condutividade γ = 56 m/(Ω.mm²)) alimenta uma carga resistiva de 4,4 kW (IB = 20 A) situada a uma distância de L = 35 metros do quadro de distribuição. A seção nominal do condutor que garante uma queda de tensão não superior a 2% (ΔU = 4,4 V) é de no mínimo:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> 2,5 mm²</div>
+<div class="alt-item"><strong>B)</strong> 4,0 mm²</div>
+<div class="alt-item"><strong>C)</strong> 5,68 mm² (comercial 6,0 mm²)</div>
+<div class="alt-item"><strong>D)</strong> 10,0 mm²</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa C</span>
+        <div class="sol-text">
+            Fórmula da queda de tensão monofásica: S = (2 . L . IB) / (γ . ΔU) = (2 x 35 x 20) / (56 x 4,4) = 1400 / 246,4 = 5,68 mm². Seção comercial imediatamente superior = 6,0 mm².
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Monofásico: S = 2 . L . I / (γ . ΔU). Trifásico: S = √3 . L . I . cosφ / (γ . ΔU). Cobre γ = 56 (a 20°C) ou 45 (a quente).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 37</td>
+            <td class="q-tag">Sistemas de Alimentação de Emergência • GMG e No-breaks</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Em sistemas que contam com Grupos Motogeradores a Diesel (GMG) e Nobreaks (UPS) para alimentação de reserva em baixa tensão segundo a NBR 5410, a chave de transferência automática (ATS) responsável pela comutação entre a rede da concessionária e o gerador deve possuir:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Seccionamento monopolar sem intertravamento.</div>
+<div class="alt-item"><strong>B)</strong> Intertravamento mecânico e elétrico obrigatório para impedir o paralelismo acidental não sincronizado entre a rede e o gerador.</div>
+<div class="alt-item"><strong>C)</strong> Fusíveis comuns de baixa capacidade em série com o neutro do gerador.</div>
+<div class="alt-item"><strong>D)</strong> Ligação direta sem disjuntores de proteção nos cabos do alternador.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Para evitar que a tensão do gerador seja injetada na rede desenergizada da concessionária (risco fatal para operadores) e impedir curto-circuito por paralelismo fora de fase, a chave reversora DEVE possuir intertravamento mecânico e elétrico.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Chave ATS Rede/Gerador = Intertravamento mecânico + elétrico obrigatório.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 38</td>
+            <td class="q-tag">Tensão de Contato Limite (UL) • Ambientes Secos vs Molhados</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Segundo a NBR 5410, a tensão de contato limite convencional (UL) considerada não perigosa ao corpo humano em corrente alternada para condições normais (ambientes secos) e para condições restritivas (ambientes molhados/imersos) é de, respectivamente:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> 127 V e 50 V</div>
+<div class="alt-item"><strong>B)</strong> 50 V e 25 V</div>
+<div class="alt-item"><strong>C)</strong> 220 V e 110 V</div>
+<div class="alt-item"><strong>D)</strong> 24 V e 12 V</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Conforme NBR 5410 e NBR IEC 60364: UL = 50 V CA em locais secos (situação normal 1) e UL = 25 V CA em locais úmidos/molhados (situação 2) ou 12 V em locais condutivos confinados.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Tensão limite de segurança (UL): 50 V (seco) e 25 V (molhado/úmido).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 39</td>
+            <td class="q-tag">Condutor de Proteção em Paralelo • Barramento de Terra</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Quando condutores de fase são instalados em paralelo (formando cabos múltiplos por fase em alimentadores de grande porte), a NBR 5410 estabelece que o condutor de proteção (PE):
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Deve ser omitido e substituído por aterramento de carcaça local.</div>
+<div class="alt-item"><strong>B)</strong> Pode ser único, dimensionado para a corrente de falta total, ou instalado um condutor de proteção em cada conduto/eletroduto contendo os condutores de fase.</div>
+<div class="alt-item"><strong>C)</strong> Deve ter obrigatoriamente três vezes a bitola da fase.</div>
+<div class="alt-item"><strong>D)</strong> Só pode ser de alumínio maciço sem emendas.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Quando os condutores de fase correm em eletrodutos paralelos, deve-se dispor um condutor de proteção em cada duto ou um condutor PE comum dimensionado pela soma total das fases.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Cabos de fase em paralelo em dutos separados exigem condutor PE em cada canalização para evitar laços indutivos.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 40</td>
+            <td class="q-tag">Disjuntores em Paralelo • Proibição Normativa</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        A respeito da ligação de dispositivos de proteção contra sobrecorrentes (disjuntores ou fusíveis) em paralelo para aumentar a capacidade de corrente de um circuito, a NBR 5410 estabelece que:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> É amplamente recomendada em quadros de distribuição compactos.</div>
+<div class="alt-item"><strong>B)</strong> É permitida desde que os disjuntores sejam do mesmo fabricante e mesma curva.</div>
+<div class="alt-item"><strong>C)</strong> É proibida a colocação de dispositivos de proteção em paralelo para proteger um mesmo condutor ou circuito terminal.</div>
+<div class="alt-item"><strong>D)</strong> É permitida apenas se a corrente total ultrapassar 1.000 A.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa C</span>
+        <div class="sol-text">
+            A NBR 5410 proíbe a colocação de disjuntores em paralelo para somar capacidades nominais, pois pequenas diferenças de impedância nos contatos provocam divisão desigual de corrente e desarme intempestivo em cascata.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Nunca coloque disjuntores em paralelo para somar corrente!</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 41</td>
+            <td class="q-tag">Eletrocalhas e Leitos • Fator de Agrupamento em Bandejas</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Em instalações elétricas industriais em que cabos unipolares são dispostos em camada única sobre leitos perfurados ou bandejas ao ar livre (Método F da NBR 5410), o fator de agrupamento (fA):
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> É sempre igual a zero.</div>
+<div class="alt-item"><strong>B)</strong> É superior (menos penalizante) ao fator de agrupamento em eletrodutos fechados embutidos em alvenaria devido à melhor ventilação natural.</div>
+<div class="alt-item"><strong>C)</strong> É fixo em 0,50 para qualquer número de cabos.</div>
+<div class="alt-item"><strong>D)</strong> Só se aplica se os cabos forem de alumínio.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Leitos e bandejas perfuradas permitem convecção natural de ar. Por isso, os fatores de agrupamento (Tabela 42 da NBR 5410) são significativamente mais favoráveis (ex.: 0,85 a 0,90) do que em eletrodutos fechados (ex.: 0,70 ou 0,60).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Leitos/Bandejas abertas = melhor resfriamento = fator de agrupamento mais próximo de 1,0.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 42</td>
+            <td class="q-tag">Previsão de Cargas • Tomadas em Banheiros</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Em banheiros residenciais, segundo as prescrições mínimas da NBR 5410, deve ser previsto no mínimo:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Nenhum ponto de tomada por questões de segurança.</div>
+<div class="alt-item"><strong>B)</strong> Um ponto de tomada junto ao lavatório, com potência mínima de 600 VA, a uma distância mínima de 60 cm do limite do boxe (Volume 2/3).</div>
+<div class="alt-item"><strong>C)</strong> Três pontos de tomada de 100 VA cada dentro da área de banho.</div>
+<div class="alt-item"><strong>D)</strong> Duas tomadas de 1.000 VA dedicadas a hidromassagem.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            No banheiro: pelo menos 1 ponto de tomada junto ao lavatório com potência atribuída de 600 VA, respeitando as distâncias de segurança (fora dos Volumes 0 e 1).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Banheiro = no mínimo 1 tomada junto ao lavatório de 600 VA (com DR obrigatório).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 43</td>
+            <td class="q-tag">Extra-Baixa Tensão • SELV vs PELV</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Os circuitos em extra-baixa tensão de segurança (tensão nominal ≤ 50 V CA ou ≤ 120 V CC) são classificados em SELV (Safety Extra-Low Voltage) e PELV (Protective Extra-Low Voltage). A diferença fundamental entre eles reside no fato de que:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> O circuito SELV possui condutor aterrado, enquanto o PELV é totalmente isolado da terra.</div>
+<div class="alt-item"><strong>B)</strong> O circuito SELV é eletricamente separado da terra e de outros circuitos, enquanto o circuito PELV pode ter um ponto aterrado intencionalmente.</div>
+<div class="alt-item"><strong>C)</strong> O circuito SELV só opera em corrente contínua e o PELV em corrente alternada.</div>
+<div class="alt-item"><strong>D)</strong> O PELV não requer fonte de segurança com isolamento galvânico.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            SELV = Separated (Isolado da terra e de outros sistemas). PELV = Protective (Possui ligação à terra para fins de equipotencialização/proteção). Ambos operam com fontes de segurança (como transformadores de segurança isoladores).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">SELV = Sem aterramento (totalmente isolado). PELV = Pode ter ponto aterrado (Protective Earth).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 44</td>
+            <td class="q-tag">Conexões e Emendas • Requisitos Normativos</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        A respeito de emendas e conexões de condutores elétricos segundo a NBR 5410, assinale a afirmativa correta:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> É permitido fazer emendas de condutores dentro de eletrodutos embutidos em alvenaria desde que isoladas com fita isolante comum.</div>
+<div class="alt-item"><strong>B)</strong> As conexões e emendas de condutores devem ser realizadas exclusivamente dentro de caixas de derivação, caixas de passagem ou invólucros apropriados e acessíveis.</div>
+<div class="alt-item"><strong>C)</strong> Não é obrigatório manter a continuidade da isolação elétrica no ponto de emenda.</div>
+<div class="alt-item"><strong>D)</strong> Emendas em condutores de proteção (PE) são proibidas em qualquer ponto da edificação.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            As conexões e emendas NUNCA podem ficar dentro de eletrodutos; devem estar localizadas dentro de caixas de derivação/passagem acessíveis para inspeção e manutenção.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Emenda dentro de eletroduto = ERRO GRAVE DE PROVA. Conexões somente em caixas acessíveis.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 45</td>
+            <td class="q-tag">Influências Externas • Classificação por Três Caracteres</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Na NBR 5410, as influências externas às quais a instalação elétrica está submetida são codificadas por um grupo de 3 caracteres (uma letra e dois números). A letra inicial indica a categoria geral do ambiente, sendo:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> A = Condições ambientais; B = Utilização / Qualificação das pessoas; C = Construção das edificações.</div>
+<div class="alt-item"><strong>B)</strong> A = Alta tensão; B = Baixa tensão; C = Corrente contínua.</div>
+<div class="alt-item"><strong>C)</strong> A = Água; B = Bloqueio; C = Calor.</div>
+<div class="alt-item"><strong>D)</strong> A = Área rural; B = Área urbana; C = Área industrial.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa A</span>
+        <div class="sol-text">
+            1ª Letra do código de influências externas: A = Condições Ambientais (ex.: AD = presença de água; AE = presença de poeira); B = Utilização / Usuários (ex.: BA = capacidade das pessoas; BC = contato com a terra); C = Construção do edifício (ex.: CA = materiais de construção; CB = propagação de incêndio).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Código de Influências: A = Ambiente; B = Pessoas/Utilização; C = Construção predial.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 46</td>
+            <td class="q-tag">Corrente de Curto-Circuito Presumida • Capacidade de Interrupção</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Para que um disjuntor atue com segurança na eliminação de uma falta franca na origem de uma instalação sem risco de explosão ou soldagem dos contatos (NBR 5410), a sua Capacidade de Interrupção Nominal em Curto-Circuito (Icn ou Icu) deve ser:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Menor que a corrente nominal de projeto do circuito (IB).</div>
+<div class="alt-item"><strong>B)</strong> Igual à corrente de sobrecarga convencional (I2).</div>
+<div class="alt-item"><strong>C)</strong> Maior ou igual à corrente de curto-circuito presumida máxima no ponto de sua instalação.</div>
+<div class="alt-item"><strong>D)</strong> Limitada estritamente a 1,45 vezes a capacidade do cabo (Iz).</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa C</span>
+        <div class="sol-text">
+            A capacidade de ruptura (Icn/Icu) do disjuntor deve ser superior ou igual à máxima corrente de curto-circuito simétrica presumida no barramento onde ele está conectado.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Capacidade de Ruptura (kA) do disjuntor ≥ Icc máxima presumida no ponto de instalação.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 47</td>
+            <td class="q-tag">Esquema TN-C-S • Ponto de Separação do PEN</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        No esquema de aterramento TN-C-S, as funções de neutro e proteção são combinadas em um único condutor (PEN) na parte inicial da instalação e separadas em condutores distintos (PE e N) a partir de um determinado ponto. A respeito do ponto de separação, a NBR 5410 determina que:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Uma vez separados em PE e N, é terminantemente proibido reuni-los novamente em qualquer ponto a jusante.</div>
+<div class="alt-item"><strong>B)</strong> Os condutores PE e N podem ser interligados novamente no quadro terminal para equilibrar a tensão.</div>
+<div class="alt-item"><strong>C)</strong> O condutor PE deve ser eliminado após a separação.</div>
+<div class="alt-item"><strong>D)</strong> O neutro deve ser ligado diretamente à carcaça metálica de todas as tomadas a jusante.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa A</span>
+        <div class="sol-text">
+            No esquema TN-C-S: Da origem até o quadro geral usa-se PEN (TN-C). A partir do barramento do QGD onde o PEN se divide em Neutro e PE, os condutores NUNCA MAIS podem ser reconectados a jusante!
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">TN-C-S: Uma vez separados PE e N, NUNCA mais se juntam no circuito!</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 48</td>
+            <td class="q-tag">Verificação Final da Instalação • Ensaio de Resistência de Isolamento</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Na inspeção e ensaios de verificação final de uma instalação elétrica de baixa tensão (NBR 5410), o ensaio de medição da resistência de isolamento dos condutores vivos em circuitos com tensão nominal de 220/380 V deve ser realizado com tensão de ensaio contínua de 500 V CC. O valor mínimo admissível da resistência de isolamento é de:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> 0,1 MΩ</div>
+<div class="alt-item"><strong>B)</strong> 0,5 MΩ</div>
+<div class="alt-item"><strong>C)</strong> 1,0 MΩ</div>
+<div class="alt-item"><strong>D)</strong> 10,0 MΩ</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa C</span>
+        <div class="sol-text">
+            Tabela 60 da NBR 5410: Para circuitos com tensão nominal até 500 V (incluindo 127, 220 e 380 V), a tensão de ensaio em corrente contínua é de 500 V CC e a resistência de isolamento mínima aceitável é de 1,0 MΩ (1 megohm). Para SELV/PELV com teste a 250 V CC, o mínimo é 0,5 MΩ.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Resistência de isolamento em 220/380 V: Tensão de teste = 500 V CC -> Resistência mínima = 1,0 MΩ.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 49</td>
+            <td class="q-tag">Instalação de Chuveiros Elétricos • Conexão por Tomada vs Conector Fixo</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Em relação à ligação de aparelhos elétricos fixos de alta potência em banheiros (como chuveiros e aquecedores elétricos instantâneos com potência tipicamente superior a 4.400 W), a NBR 5410 e as boas práticas de instalações determinam:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> O uso obrigatório de plugue e tomada comum de 10 A.</div>
+<div class="alt-item"><strong>B)</strong> A ligação direta através de conectores apropriados (como conectores de porcelana ou bornes com mola) em caixa de derivação fechada, sendo proibido o uso de plugue e tomada comum devido à corrente elevada.</div>
+<div class="alt-item"><strong>C)</strong> A eliminação do condutor de aterramento para evitar choque durante o banho.</div>
+<div class="alt-item"><strong>D)</strong> O compartilhamento do circuito do chuveiro com as tomadas da bancada do lavatório.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Chuveiros residenciais consomem de 25 A a 35 A (em 220 V) ou até 50 A (em 127 V). As tomadas padronizadas (NBR 14136) suportam no máximo 10 A ou 20 A. Portanto, a ligação de chuveiros deve ser direta por conectores certificados (porcelana/bornes isolados) dentro de caixa fechada.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Chuveiro elétrico = Conexão direta por conectores certificados (sem tomada comum plug/fêmea) + circuito exclusivo + DR.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 50</td>
+            <td class="q-tag">Aterramento e Equipotencialização • Eletrodo Embutido em Fundação</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        A NBR 5410 estabelece uma preferência explícita para o sistema de aterramento de novas edificações. Dentre as opções abaixo, o arranjo preferencialmente recomendado pela norma para constituir o eletrodo de aterramento principal é:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Uma única haste de cobre cravada isoladamente no solo a 10 metros do prédio.</div>
+<div class="alt-item"><strong>B)</strong> O uso exclusivo da tubulação plástica de esgoto sanitário.</div>
+<div class="alt-item"><strong>C)</strong> Eletrodos de aterramento embutidos nas armaduras de aço das fundações da edificação (estacas, blocos e baldrames) formando um anel fechado.</div>
+<div class="alt-item"><strong>D)</strong> A carcaça metálica do transformador da concessionária pública.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa C</span>
+        <div class="sol-text">
+            Item 6.4.1.1.1 da NBR 5410: Toda edificação deve dispor de uma infraestrutura de aterramento. A solução preferencial e prioritária é o uso das armaduras metálicas do concreto das fundações (ou fita de aço embutida no concreto das fundações), que oferecem excelente dispersão e equipotencialização natural.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Aterramento preferencial da NBR 5410 = Armaduras de aço das fundações de concreto (aterramento estrutural).</span>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
