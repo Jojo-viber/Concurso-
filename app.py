@@ -194,6 +194,42 @@ st.sidebar.progress(min(qtd_prata / 190, 1.0))
 st.sidebar.write(f"🥉 **Bloco Bronze:** {qtd_bronze} / 60 questões")
 st.sidebar.progress(min(qtd_bronze / 60, 1.0))
 
+# --- Gerenciamento e Backup de Progresso (Streamlit Cloud & Local) ---
+st.sidebar.divider()
+st.sidebar.subheader("💾 Backup & Sincronização")
+
+json_progresso = json.dumps(progresso, ensure_ascii=False, indent=2)
+st.sidebar.download_button(
+    label="📥 Baixar Progresso (.json)",
+    data=json_progresso,
+    file_name="progresso_usuario.json",
+    mime="application/json",
+    help="Baixe seu arquivo de progresso para guardar no PC/Celular ou subir no GitHub.",
+    use_container_width=True
+)
+
+arquivo_upload = st.sidebar.file_uploader(
+    "📤 Restaurar Progresso (.json):",
+    type=["json"],
+    help="Envie seu arquivo progresso_usuario.json para restaurar as questões já respondidas."
+)
+
+if arquivo_upload is not None:
+    upload_sig = f"{arquivo_upload.name}_{arquivo_upload.size}"
+    if st.session_state.get("ultimo_upload_sig") != upload_sig:
+        try:
+            conteudo_carregado = json.load(arquivo_upload)
+            if isinstance(conteudo_carregado, dict):
+                st.session_state.progresso.update(conteudo_carregado)
+                salvar_progresso(st.session_state.progresso)
+                st.session_state.ultimo_upload_sig = upload_sig
+                st.sidebar.success(f"✅ {len(conteudo_carregado)} questões restauradas!")
+                st.rerun()
+            else:
+                st.sidebar.error("Formato inválido do arquivo JSON.")
+        except Exception as e:
+            st.sidebar.error(f"Erro ao ler arquivo: {e}")
+
 st.sidebar.divider()
 st.sidebar.subheader("🔍 Filtros de Busca")
 
@@ -255,7 +291,7 @@ def renderizar_questao(q):
             if historico.get("acertou"):
                 col_t2.success("✅ Acertou")
             else:
-                col_t2.error("❌ Errou")
+                col_t2.warning(f"❌ Errada (Marcou: {historico.get('resposta', '-')})")
         
         st.markdown(q["enunciado"], unsafe_allow_html=True)
         st.write("")
@@ -301,17 +337,20 @@ def renderizar_questao(q):
             salvar_progresso(progresso)
             st.rerun()
 
-        if historico:
-            st.divider()
-            if historico.get("acertou"):
-                st.success(f"**Gabarito Correto:** Alternativa **{q['gabarito']}**")
+        # Gabarito e Resolução ocultos por padrão para não dar spoiler (expander fechado)
+        st.write("")
+        with st.expander("💡 Ver Gabarito Oficial & Resolução Detalhada", expanded=False):
+            if historico:
+                if historico.get("acertou"):
+                    st.success(f"**Gabarito Oficial:** Alternativa **{q['gabarito']}** (Você acertou!)")
+                else:
+                    st.error(f"**Gabarito Oficial:** Alternativa **{q['gabarito']}** (Na última tentativa você marcou **{historico.get('resposta')}**)")
             else:
-                st.error(f"**Gabarito Correto:** Alternativa **{q['gabarito']}** (Você marcou **{historico.get('resposta')}**)")
-            
-            with st.expander("💡 Resolução Detalhada & Dica IDECAN", expanded=True):
-                st.markdown(q["resolucao"], unsafe_allow_html=True)
-                if q["dica"]:
-                    st.markdown(q["dica"], unsafe_allow_html=True)
+                st.info(f"**Gabarito Oficial:** Alternativa **{q['gabarito']}**")
+                
+            st.markdown(q["resolucao"], unsafe_allow_html=True)
+            if q["dica"]:
+                st.markdown(q["dica"], unsafe_allow_html=True)
 
 # --- Área Principal ---
 st.title("📚 Resolução de Questões IDECAN")
