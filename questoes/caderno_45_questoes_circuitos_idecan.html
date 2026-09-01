@@ -332,28 +332,24 @@
             <td class="q-tag">Teorema de Thévenin • Obtenção de Equivalente em CA</td>
         </tr>
     </table>
-    <div class="q-statement">
-        Na análise de circuitos em corrente alternada em regime permanente senoidal, o Teorema de Thévenin estabelece que qualquer rede linear vista a partir de dois terminais A e B pode ser substituída por:
-    </div>
+    <div class="q-statement">Uma rede linear operando em regime senoidal apresenta, nos terminais A–B, tensão de circuito aberto $V_{AB}=80\angle10^\circ\,V$. Quando A e B são curto-circuitados, circula $I_{cc}=10\angle-30^\circ\,A$ de A para B. Qual equivalente reproduz o comportamento externo da rede?</div>
     <div class="alternatives">
         <div class="alt-item">
-<strong>A)</strong> Uma fonte ideal de tensão fasorial em paralelo com a impedância equivalente vista nos terminais.</div>
+<strong>A)</strong> Uma fonte $80\angle10^\circ\,V$ em paralelo com $8\angle40^\circ\,\Omega$.</div>
 <div class="alt-item">
-<strong>B)</strong> Uma fonte ideal de tensão fasorial em série com a admitância equivalente da rede.</div>
+<strong>B)</strong> Uma fonte $10\angle-30^\circ\,A$ em série com $8\angle-40^\circ\,\Omega$.</div>
 
     <div class="alt-item">
-<strong>C)</strong> Uma fonte ideal de tensão fasorial de Thévenin (Vth) em série com uma impedância equivalente de Thévenin (Zth).</div>
+<strong>C)</strong> Uma fonte $80\angle10^\circ\,V$ em série com $8\angle40^\circ\,\Omega$.</div>
 <div class="alt-item">
-<strong>D)</strong> Uma fonte ideal de corrente fasorial em série com a impedância equivalente vista nos terminais.</div>
+<strong>D)</strong> Uma fonte $80\angle-10^\circ\,V$ em série com $0{,}125\angle40^\circ\,S$.</div>
 </div>
     <div class="solution-box">
         <span class="sol-header">Gabarito Comentado: Alternativa C</span>
-        <div class="sol-text">
-            O Teorema de Thévenin afirma que todo circuito elétrico linear com fontes e impedâncias pode ser substituído, em relação a dois terminais, por uma única fonte fasorial de tensão $\vec{V}_{th}$ (tensão de circuito aberto nos terminais) em série com uma impedância complexa equivalente $\vec{Z}_{th}$ (impedância vista dos terminais com fontes independentes desativadas).
-        </div>
+        <div class="sol-text">A tensão do equivalente é a tensão em vazio: $V_{eq}=V_{AB}$. Sua impedância é $Z_{eq}=V_{AB}/I_{cc}=8\angle[10^\circ-(-30^\circ)]=8\angle40^\circ\,\Omega$. Para uma representação por fonte de tensão, essa impedância fica em série. Logo, a alternativa C é a única que acerta simultaneamente grandeza, ângulo e associação.</div>
         <div class="tip-box">
             <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
-            <span class="tip-text">Thévenin = Fonte de tensão ($V_{th}$) em SÉRIE com impedância ($Z_{th}$). Norton = Fonte de corrente ($I_N$) em PARALELO com impedância ($Z_N$).</span>
+            <span class="tip-text">Extraia primeiro os dois ensaios: circuito aberto fornece a tensão; curto-circuito, combinado com essa tensão, fornece a impedância. Só depois escolha a topologia da fonte equivalente.</span>
         </div>
     </div>
 </div>
@@ -464,28 +460,24 @@
             <td class="q-tag">Ressonância Série em Circuitos RLC • Frequência de Ressonância</td>
         </tr>
     </table>
-    <div class="q-statement">
-        Em um circuito série composto por um resistor R = 10 Ω, um indutor L = 25 mH e um capacitor C = 100 μF alimentado por fonte senoidal, a frequência de ressonância angular (ω0 em rad/s) e a impedância equivalente total do circuito nessa frequência são:
-    </div>
+    <div class="q-statement">Um circuito RLC série possui $R=10\,\Omega$, $L=25\,mH$ e $C=100\,\mu F$ e é alimentado por $V=100\,V_{rms}$. Na ressonância, quais são aproximadamente a frequência angular, a corrente da fonte e o módulo da tensão no indutor?</div>
     <div class="alternatives">
         <div class="alt-item">
-<strong>A)</strong> ω0 = 100 rad/s e Z = 0 Ω</div>
+<strong>A)</strong> $\omega_0=400\,rad/s$, $I=10\,A$ e $|V_L|=100\,V$.</div>
 <div class="alt-item">
-<strong>B)</strong> ω0 = 377 rad/s e Z = 50 Ω</div>
+<strong>B)</strong> $\omega_0=632{,}5\,rad/s$, $I=4\,A$ e $|V_L|=63{,}3\,V$.</div>
 
     <div class="alt-item">
-<strong>C)</strong> ω0 = 1.000 rad/s e Z = 25 Ω</div>
+<strong>C)</strong> $\omega_0=1.000\,rad/s$, $I=10\,A$ e $|V_L|=250\,V$.</div>
 <div class="alt-item">
-<strong>D)</strong> ω0 = 632,5 rad/s e Z = 10 Ω (puramente resistiva)</div>
+<strong>D)</strong> $\omega_0=632{,}5\,rad/s$, $I=10\,A$ e $|V_L|\approx158\,V$.</div>
 </div>
     <div class="solution-box">
         <span class="sol-header">Gabarito Comentado: Alternativa D</span>
-        <div class="sol-text">
-            1. Frequência angular de ressonância: $$\omega_0 = \frac{1}{\sqrt{L \cdot C}} = \frac{1}{\sqrt{25 \times 10^{-3} \cdot 100 \times 10^{-6}}} = \frac{1}{\sqrt{2{,}5 \times 10^{-6}}} = \frac{1}{1{,}581 \times 10^{-3}} \approx 632{,}45\text{ rad/s}$$<br>2. Na ressonância série, $X_L = X_C$, logo as reatâncias se anulam ($jX_L - jX_C = 0$), tornando a impedância mínima e puramente resistiva: $Z = R = 10\ \Omega$.
-        </div>
+        <div class="sol-text">A ressonância ocorre em $\omega_0=1/\sqrt{LC}=1/\sqrt{0{,}025\cdot100\times10^{-6}}\approx632{,}5\,rad/s$. Como $X_L=X_C$, a impedância total vale $R=10\,\Omega$ e $I=100/10=10\,A$. Então $|V_L|=I\omega_0L\approx10\cdot632{,}5\cdot0{,}025=158\,V$. A tensão individual no reativo pode superar a tensão da fonte.</div>
         <div class="tip-box">
             <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
-            <span class="tip-text">Ressonância RLC série: $\omega_0 = \frac{1}{\sqrt{LC}}$, corrente máxima, fator de potência unitário e impedância igual a $R$.</span>
+            <span class="tip-text">Em ressonância série, cancele as reatâncias apenas na soma. Elas continuam produzindo tensões individuais, que devem ser calculadas com a corrente ressonante.</span>
         </div>
     </div>
 </div>
@@ -497,28 +489,24 @@
             <td class="q-tag">Harmônicas de Sequência Zero • Comportamento do Neutro</td>
         </tr>
     </table>
-    <div class="q-statement">
-        Em um sistema elétrico trifásico a quatro condutores alimentando cargas não lineares simétricas, as correntes harmônicas de 3ª ordem (180 Hz) presentes nas três fases caracterizam-se por:
-    </div>
+    <div class="q-statement">Em uma instalação trifásica a quatro fios, cada fase possui uma componente fundamental de $60\,A$ e uma componente de terceira harmônica de $18\,A$. Admitindo cargas não lineares idênticas e desprezando outras harmônicas, quais são os valores eficazes aproximados da corrente em cada fase e da terceira harmônica no neutro?</div>
     <div class="alternatives">
         <div class="alt-item">
-<strong>A)</strong> Comportarem-se como componentes de sequência positiva, com soma fasorial nula no neutro.</div>
+<strong>A)</strong> $60{,}0\,A$ por fase e $0\,A$ no neutro.</div>
 <div class="alt-item">
-<strong>B)</strong> Circularem apenas entre os condutores de fase, sem contribuição mensurável no neutro.</div>
+<strong>B)</strong> $78{,}0\,A$ por fase e $31{,}2\,A$ no neutro.</div>
 
     <div class="alt-item">
-<strong>C)</strong> Comportarem-se como componentes de sequência negativa, com defasagem de 120° entre as fases.</div>
+<strong>C)</strong> $63{,}0\,A$ por fase e $18{,}0\,A$ no neutro.</div>
 <div class="alt-item">
-<strong>D)</strong> Serem componentes de sequência zero, estando perfeitamente em fase entre si nas três fases, somando-se aritmeticamente no condutor neutro ($I_N \approx 3 \cdot I_{h3}$).</div>
+<strong>D)</strong> $62{,}6\,A$ por fase e $54{,}0\,A$ no neutro.</div>
 </div>
     <div class="solution-box">
         <span class="sol-header">Gabarito Comentado: Alternativa D</span>
-        <div class="sol-text">
-            Harmônicas de ordem múltipla de 3 (3ª, 9ª, 15ª - conhecidas como 'triplens') são harmônicas de sequência zero. Como estão em fase em todas as fases ($\vec{I}_{a3} = \vec{I}_{b3} = \vec{I}_{c3}$), elas não se anulam no nó neutro, somando-se no condutor neutro, onde $I_{N3} = 3 \cdot I_{3\phi}$, podendo superaquecê-lo.
-        </div>
+        <div class="sol-text">Fundamental e terceira harmônica são ortogonais, portanto $I_f=\sqrt{60^2+18^2}\approx62{,}6\,A$. As componentes fundamentais equilibradas se anulam no neutro. Já as terceiras harmônicas são de sequência zero e chegam em fase, resultando em $I_N=3\cdot18=54\,A$.</div>
         <div class="tip-box">
             <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
-            <span class="tip-text">3ª harmônica e múltiplos ímpares de 3 = Sequência ZERO -&gt; Somam-se no Neutro ($I_N = 3 \cdot I_{fase3}$).</span>
+            <span class="tip-text">Não some ordens harmônicas aritmeticamente no mesmo condutor: use soma quadrática. No neutro, identifique antes se a harmônica é tríplice e, portanto, aditiva.</span>
         </div>
     </div>
 </div>
@@ -563,28 +551,24 @@
             <td class="q-tag">Leis de Kirchhoff • Conservação de Cargas e Energia</td>
         </tr>
     </table>
-    <div class="q-statement">
-        Na análise de circuitos elétricos em regime estacionário, a Lei de Kirchhoff das Correntes (LKC) e a Lei de Kirchhoff das Tensões (LKT) fundamentam-se, respectivamente, nos princípios físicos universais de:
-    </div>
+    <div class="q-statement">Em um nó de um circuito, chegam correntes de $4\,A$ e $1{,}5\,A$. Saem uma corrente de $2\,A$ e outra corrente $i$. Se o potencial do nó é $12\,V$ e uma carga absorve $24\,W$ por um dos ramos de saída, qual par é compatível com as leis de Kirchhoff e com a convenção passiva?</div>
     <div class="alternatives">
         <div class="alt-item">
-<strong>A)</strong> Conservação da carga elétrica (somatório das correntes nodais nulo) e conservação da energia (somatório das quedas de tensão em malha fechada nulo).</div>
+<strong>A)</strong> $i=3{,}5\,A$ e a carga de $24\,W$ conduz $2\,A$ saindo do nó.</div>
 <div class="alt-item">
-<strong>B)</strong> Conservação da quantidade de movimento e conservação da entropia.</div>
+<strong>B)</strong> $i=7{,}5\,A$ e a carga de $24\,W$ conduz $0{,}5\,A$ entrando no nó.</div>
 <div class="alt-item">
-<strong>C)</strong> Indução eletromagnética de Faraday e efeito fotoelétrico.</div>
+<strong>C)</strong> $i=2{,}5\,A$ e a carga de $24\,W$ conduz $3\,A$ saindo do nó.</div>
 
     <div class="alt-item">
-<strong>D)</strong> Conservação da massa condutora e conservação do fluxo magnético.</div>
+<strong>D)</strong> $i=5{,}5\,A$ e a carga de $24\,W$ conduz $2\,A$ entrando no nó.</div>
 </div>
     <div class="solution-box">
         <span class="sol-header">Gabarito Comentado: Alternativa A</span>
-        <div class="sol-text">
-            LKC baseia-se no princípio da conservação da carga elétrica (não há acúmulo de cargas em um nó). LKT baseia-se na conservação da energia (o trabalho para deslocar uma carga ao longo de um percurso fechado é nulo).
-        </div>
+        <div class="sol-text">Pela LKC, $4+1{,}5=2+i$, portanto $i=3{,}5\,A$. Para uma carga que absorve potência sob tensão de $12\,V$, $I=P/V=2\,A$ e, pela convenção passiva, a corrente entra no terminal de maior potencial; vista no balanço do nó alimentador, ela sai do nó em direção à carga.</div>
         <div class="tip-box">
             <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
-            <span class="tip-text">LKC = Conservação da Carga. LKT = Conservação da Energia.</span>
+            <span class="tip-text">Separe conservação de carga e potência. Faça primeiro o balanço algébrico de correntes e depois verifique o sentido pela convenção passiva.</span>
         </div>
     </div>
 </div>
@@ -596,28 +580,24 @@
             <td class="q-tag">Potência Complexa • Definição Fasorial</td>
         </tr>
     </table>
-    <div class="q-statement">
-        Em regime senoidal permanente, a potência complexa (S) fornecida a uma carga alimentada por tensão fasorial V e percorrida por corrente fasorial I é formalmente definida por:
-    </div>
+    <div class="q-statement">Uma carga monofásica é alimentada por $V=230\angle0^\circ\,V$ e conduz $I=10\angle-36{,}87^\circ\,A$. A potência complexa absorvida e a natureza da carga são:</div>
     <div class="alternatives">
         <div class="alt-item">
-<strong>A)</strong> $S = V \cdot I$</div>
+<strong>A)</strong> $S=2.300-j0\,VA$, com fator de potência unitário.</div>
 <div class="alt-item">
-<strong>B)</strong> $S = V^* \cdot I^*$</div>
+<strong>B)</strong> $S=1.840-j1.380\,VA$, de natureza capacitiva.</div>
 <div class="alt-item">
-<strong>C)</strong> $S = V \cdot I^*$ (onde $I^*$ é o conjugado complexo do fasor da corrente).</div>
+<strong>C)</strong> $S=1.840+j1.380\,VA$, de natureza indutiva.</div>
 <div class="alt-item">
-<strong>D)</strong> $S = \frac{V}{I^*}$</div>
+<strong>D)</strong> $S=2.300+j1.725\,VA$, de natureza indutiva.</div>
 
     </div>
     <div class="solution-box">
         <span class="sol-header">Gabarito Comentado: Alternativa C</span>
-        <div class="sol-text">
-            A potência complexa é dada por $\vec{S} = \vec{V} \cdot \vec{I}^* = P + jQ$. O conjugado complexo da corrente é obrigatório para que a potência reativa indutiva seja positiva ($+jQ$) quando a corrente estiver atrasada da tensão.
-        </div>
+        <div class="sol-text">Para potência absorvida, $S=VI^*=230\angle0^\circ\cdot10\angle36{,}87^\circ=2.300\angle36{,}87^\circ\,VA$. Convertendo: $P=1.840\,W$ e $Q=+1.380\,var$. O sinal positivo de $Q$ indica comportamento indutivo.</div>
         <div class="tip-box">
             <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
-            <span class="tip-text">Potência Complexa: $\vec{S} = \vec{V} \cdot \vec{I}^* = P + jQ$ (o fasor da corrente SEMPRE entra conjugado).</span>
+            <span class="tip-text">Ao usar fasores eficazes, conjugue a corrente. Depois interprete o sinal de $Q$; não tente deduzir a natureza da carga apenas pelo módulo de $S$.</span>
         </div>
     </div>
 </div>
@@ -629,28 +609,24 @@
             <td class="q-tag">Carga Desequilibrada em Estrela a 3 Fios • Deslocamento de Neutro</td>
         </tr>
     </table>
-    <div class="q-statement">
-        Quando uma carga trifásica desequilibrada ligada em estrela (Y) é alimentada por sistema a 3 fios (sem condutor neutro), ocorre o fenômeno do Deslocamento do Ponto Neutro ($V_{n'n}$). Esse deslocamento provoca:
-    </div>
+    <div class="q-statement">Uma fonte trifásica equilibrada possui tensões de fase de $120\,V$. Uma carga em estrela sem neutro tem $Z_A=10\,\Omega$ e $Z_B=Z_C=20\,\Omega$, todas resistivas. Considerando $V_A=120\angle0^\circ\,V$, quais são aproximadamente o deslocamento do neutro da carga e o maior módulo de tensão em uma de suas fases?</div>
     <div class="alternatives">
         <div class="alt-item">
-<strong>A)</strong> Aumento imediato do fator de potência para 1,0.</div>
+<strong>A)</strong> $V_{n'n}=0\,V$ e $V_{fase,max}=120\,V$.</div>
 <div class="alt-item">
-<strong>B)</strong> Tensões perfeitamente equilibradas e iguais sobre as três fases da carga.</div>
+<strong>B)</strong> $V_{n'n}=60\angle0^\circ\,V$ e $V_{fase,max}=180\,V$.</div>
 <div class="alt-item">
-<strong>C)</strong> Sobretensões em algumas fases da carga e subtensões em outras, com flutuação do potencial do neutro da carga em relação ao neutro da fonte.</div>
+<strong>C)</strong> $V_{n'n}=30\angle0^\circ\,V$ e $V_{fase,max}=137{,}5\,V$.</div>
 <div class="alt-item">
-<strong>D)</strong> Anulação completa das correntes de linha.</div>
+<strong>D)</strong> $V_{n'n}=30\angle180^\circ\,V$ e $V_{fase,max}=90\,V$.</div>
 
     </div>
     <div class="solution-box">
         <span class="sol-header">Gabarito Comentado: Alternativa C</span>
-        <div class="sol-text">
-            Sem o condutor neutro para fixar o potencial zero, o ponto neutro da carga desequilibrada flutua ($V_{n'n} = \frac{V_{an}Y_a + V_{bn}Y_b + V_{cn}Y_c}{Y_a + Y_b + Y_c}$), fazendo com que as tensões de fase na carga fiquem desiguais, podendo queimar equipamentos por sobretensão.
-        </div>
+        <div class="sol-text">Pelo método do nó flutuante, $V_{n'n}=(V_AY_A+V_BY_B+V_CY_C)/(Y_A+Y_B+Y_C)$. Como $Y_A=0{,}1\,S$, $Y_B=Y_C=0{,}05\,S$ e $V_B+V_C=-120\,V$, resulta $V_{n'n}=(12-6)/0{,}2=30\angle0^\circ\,V$. A fase A recebe $90\,V$; nas fases B e C, o módulo é aproximadamente $137{,}5\,V$.</div>
         <div class="tip-box">
             <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
-            <span class="tip-text">Neutro rompido com carga desequilibrada = Deslocamento de neutro (sobretensão nas fases mais leves).</span>
+            <span class="tip-text">Sem neutro, não presuma tensões de fase iguais. Calcule o potencial do ponto estrela pela média ponderada das tensões usando as admitâncias das cargas.</span>
         </div>
     </div>
 </div>
@@ -695,28 +671,24 @@
             <td class="q-tag">Componentes Simétricas de Fortescue • Sequências Positiva, Negativa e Zero</td>
         </tr>
     </table>
-    <div class="q-statement">
-        O Teorema de Fortescue permite decompor qualquer sistema trifásico desequilibrado em três sistemas simétricos equilibrados de fasores: Sequência Positiva ($1$), Sequência Negativa ($2$) e Sequência Zero ($0$). A Sequência Negativa caracteriza-se por:
-    </div>
+    <div class="q-statement">As correntes de linha de uma carga são $I_A=30\angle0^\circ\,A$, $I_B=20\angle-120^\circ\,A$ e $I_C=10\angle120^\circ\,A$. O módulo da componente de sequência zero é aproximadamente:</div>
     <div class="alternatives">
         <div class="alt-item">
-<strong>A)</strong> Fasores com frequência angular triplicada.</div>
+<strong>A)</strong> $20\,A$.</div>
 <div class="alt-item">
-<strong>B)</strong> Três fasores de módulos iguais defasados de 120° com sequência de rotação de fases invertida (A-C-B) em relação à sequência original da rede.</div>
+<strong>B)</strong> $5{,}77\,A$.</div>
 <div class="alt-item">
-<strong>C)</strong> Ausência de defasagem angular entre fases.</div>
+<strong>C)</strong> $10\,A$.</div>
 
     <div class="alt-item">
-<strong>D)</strong> Três fasores em fase e de mesmo módulo.</div>
+<strong>D)</strong> $0\,A$.</div>
 </div>
     <div class="solution-box">
         <span class="sol-header">Gabarito Comentado: Alternativa B</span>
-        <div class="sol-text">
-            Sequência Positiva (1): módulos iguais, 120°, sequência direta (A-B-C). Sequência Negativa (2): módulos iguais, 120°, sequência inversa (A-C-B). Sequência Zero (0): três fasores de módulos iguais e perfeitamente em fase entre si.
-        </div>
+        <div class="sol-text">A componente zero é $I_0=(I_A+I_B+I_C)/3$. Em forma retangular: $I_A=30+j0$, $I_B=-10-j17{,}32$ e $I_C=-5+j8{,}66$. A soma é $15-j8{,}66$, cujo módulo é $17{,}32\,A$. Dividindo por 3, $|I_0|\approx5{,}77\,A$.</div>
         <div class="tip-box">
             <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
-            <span class="tip-text">Fortescue: Seq (+) = Direta A-B-C; Seq (-) = Inversa A-C-B; Seq (0) = Em fase.</span>
+            <span class="tip-text">Para componentes simétricas, converta os fasores em forma retangular antes de somar. A sequência zero é a média fasorial, não a média dos módulos.</span>
         </div>
     </div>
 </div>
@@ -728,28 +700,24 @@
             <td class="q-tag">Impedância de um Capacitor em CA • Reatância Capacitiva</td>
         </tr>
     </table>
-    <div class="q-statement">
-        A reatância capacitiva (Xc em ohms) de um capacitor de capacitância C submetido a uma tensão senoidal de frequência angular ω é expressa por:
-    </div>
+    <div class="q-statement">Um indutor ideal de $L=80\,mH$ deve ser compensado por um capacitor em paralelo para que as susceptâncias se anulem em $60\,Hz$. O valor aproximado da capacitância é:</div>
     <div class="alternatives">
         <div class="alt-item">
-<strong>A)</strong> $X_c = \frac{1}{\omega \cdot C}$</div>
+<strong>A)</strong> $88\,\mu F$.</div>
 <div class="alt-item">
-<strong>B)</strong> $X_c = \frac{1}{\sqrt{\omega \cdot C}}$</div>
+<strong>B)</strong> $33\,\mu F$.</div>
 
     <div class="alt-item">
-<strong>C)</strong> $X_c = \frac{\omega}{C}$</div>
+<strong>C)</strong> $220\,\mu F$.</div>
 <div class="alt-item">
-<strong>D)</strong> $X_c = \omega \cdot C$</div>
+<strong>D)</strong> $8{,}8\,\mu F$.</div>
 </div>
     <div class="solution-box">
         <span class="sol-header">Gabarito Comentado: Alternativa A</span>
-        <div class="sol-text">
-            A impedância complexa do capacitor é $Z_C = \frac{1}{j\omega C} = -j\frac{1}{\omega C}$. Em módulo, a reatância capacitiva é $X_C = \frac{1}{\omega C} = \frac{1}{2\pi f C}\ \Omega$.
-        </div>
+        <div class="sol-text">Na ressonância paralela ideal, $\omega C=1/(\omega L)$, logo $C=1/(\omega^2L)$. Com $\omega=2\pi60\approx377\,rad/s$, resulta $C\approx1/(377^2\cdot0{,}08)=87{,}9\,\mu F$.</div>
         <div class="tip-box">
             <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
-            <span class="tip-text">Capacitor: $X_C = \frac{1}{\omega C}$ (diminui com o aumento da frequência). Indutor: $X_L = \omega L$.</span>
+            <span class="tip-text">Em paralelo, trabalhe com susceptâncias. Igualar diretamente $L$ e $C$ ou usar apenas $1/(\omega C)$ sem compará-lo a $\omega L$ gera os distratores.</span>
         </div>
     </div>
 </div>
@@ -893,28 +861,24 @@
             <td class="q-tag">Ponte de Wheatstone em Corrente Contínua • Condição de Equilíbrio</td>
         </tr>
     </table>
-    <div class="q-statement">
-        Uma ponte de Wheatstone é composta por quatro resistores R1, R2, R3 e Rx dispostos em losango. A condição de equilíbrio (corrente nula no galvanômetro central) que permite calcular a resistência desconhecida Rx é:
-    </div>
+    <div class="q-statement">Uma ponte de Wheatstone está em equilíbrio com $R_1=120\,\Omega$, $R_2=180\,\Omega$ e $R_3=200\,\Omega$. O resistor desconhecido $R_x$ sofre aumento de $2\%$ por aquecimento, enquanto os demais permanecem constantes. Quais são o valor inicial de $R_x$ e a condição posterior da ponte?</div>
     <div class="alternatives">
         <div class="alt-item">
-<strong>A)</strong> $R_x = \frac{R_1 + R_2}{R_3}$</div>
+<strong>A)</strong> $R_x=133{,}3\,\Omega$ e a ponte permanece equilibrada.</div>
 
     <div class="alt-item">
-<strong>B)</strong> $R_1 \cdot R_x = R_2 \cdot R_3 \implies R_x = \frac{R_2 \cdot R_3}{R_1}$</div>
+<strong>B)</strong> $R_x=300\,\Omega$ e a ponte passa a apresentar tensão de desequilíbrio.</div>
 <div class="alt-item">
-<strong>C)</strong> $R_x = R_1 \cdot R_2 \cdot R_3$</div>
+<strong>C)</strong> $R_x=300\,\Omega$ e a corrente do galvanômetro permanece necessariamente nula.</div>
 <div class="alt-item">
-<strong>D)</strong> $R_1 + R_3 = R_2 + R_x$</div>
+<strong>D)</strong> $R_x=480\,\Omega$ e a ponte passa a apresentar tensão de desequilíbrio.</div>
 </div>
     <div class="solution-box">
         <span class="sol-header">Gabarito Comentado: Alternativa B</span>
-        <div class="sol-text">
-            Na ponte de Wheatstone em equilíbrio, o produto das resistências dos braços opostos é igual: $R_1 \cdot R_x = R_2 \cdot R_3 \implies R_x = \frac{R_2 \cdot R_3}{R_1}$.
-        </div>
+        <div class="sol-text">No equilíbrio, $R_1R_x=R_2R_3$, portanto $R_x=180\cdot200/120=300\,\Omega$. Após o aumento, $R_x=306\,\Omega$ e a igualdade dos produtos deixa de existir, surgindo tensão no ramo detector.</div>
         <div class="tip-box">
             <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
-            <span class="tip-text">Ponte de Wheatstone equilibrada: Multiplicação em cruz dos resistores opostos é igual!</span>
+            <span class="tip-text">Calcule primeiro o valor no equilíbrio e só depois aplique a variação. Uma alteração em apenas um braço rompe a razão, mesmo que seja pequena.</span>
         </div>
     </div>
 </div>
@@ -926,28 +890,24 @@
             <td class="q-tag">Divisor de Tensão Resistivo • Equação Fundamental</td>
         </tr>
     </table>
-    <div class="q-statement">
-        Dois resistores R1 = 20 Ω e R2 = 80 Ω estão ligados em série e alimentados por uma fonte de tensão contínua de V = 100 V. A tensão elétrica medida sobre o resistor R2 é de:
-    </div>
+    <div class="q-statement">Um divisor possui $R_1=20\,k\Omega$ em série com $R_2=80\,k\Omega$ sob $100\,V$. Um voltímetro de resistência interna $80\,k\Omega$ é conectado em paralelo com $R_2$. Qual tensão será indicada?</div>
     <div class="alternatives">
         <div class="alt-item">
-<strong>A)</strong> 20 V</div>
+<strong>A)</strong> $40\,V$.</div>
 <div class="alt-item">
-<strong>B)</strong> 50 V</div>
+<strong>B)</strong> $50\,V$.</div>
 <div class="alt-item">
-<strong>C)</strong> 80 V</div>
+<strong>C)</strong> $66{,}7\,V$.</div>
 <div class="alt-item">
-<strong>D)</strong> 100 V</div>
+<strong>D)</strong> $80\,V$.</div>
 
     </div>
     <div class="solution-box">
         <span class="sol-header">Gabarito Comentado: Alternativa C</span>
-        <div class="sol-text">
-            Pela regra do divisor de tensão: $V_{R2} = V \cdot \left(\frac{R_2}{R_1 + R_2}\right) = 100 \cdot \left(\frac{80}{20 + 80}\right) = 100 \cdot \left(\frac{80}{100}\right) = 80\text{ V}$.
-        </div>
+        <div class="sol-text">O instrumento carrega o divisor: $R_2\parallel R_V=80\parallel80=40\,k\Omega$. A tensão medida é $100\cdot40/(20+40)=66{,}7\,V$. O valor de $80\,V$ seria obtido apenas com voltímetro ideal.</div>
         <div class="tip-box">
             <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
-            <span class="tip-text">Divisor de tensão: $V_x = V_{total} \times \frac{R_x}{R_{equivalente\_serie}}$.</span>
+            <span class="tip-text">Sempre que o enunciado informar resistência interna do instrumento, redesenhe o circuito incluindo-a. O valor sem carga costuma aparecer como distrator.</span>
         </div>
     </div>
 </div>
@@ -959,28 +919,24 @@
             <td class="q-tag">Divisor de Corrente Resistivo • Dois Ramos em Paralelo</td>
         </tr>
     </table>
-    <div class="q-statement">
-        Dois resistores R1 = 10 Ω e R2 = 40 Ω estão associados em paralelo e recebem uma corrente total de I = 10 A. A corrente elétrica que flui através do ramo do resistor R1 é:
-    </div>
+    <div class="q-statement">Dois resistores, $R_1=10\,\Omega$ e $R_2=40\,\Omega$, estão em paralelo e recebem corrente total de $10\,A$. A corrente em $R_1$ e a potência total dissipada pelo conjunto são:</div>
     <div class="alternatives">
         <div class="alt-item">
-<strong>A)</strong> 2 A</div>
+<strong>A)</strong> $2\,A$ e $800\,W$.</div>
 <div class="alt-item">
-<strong>B)</strong> 5 A</div>
+<strong>B)</strong> $5\,A$ e $500\,W$.</div>
 <div class="alt-item">
-<strong>C)</strong> 10 A</div>
+<strong>C)</strong> $10\,A$ e $1.000\,W$.</div>
 
     <div class="alt-item">
-<strong>D)</strong> 8 A</div>
+<strong>D)</strong> $8\,A$ e $800\,W$.</div>
 </div>
     <div class="solution-box">
         <span class="sol-header">Gabarito Comentado: Alternativa D</span>
-        <div class="sol-text">
-            Pela regra do divisor de corrente entre dois ramos paralelos: $I_1 = I \cdot \left(\frac{R_2}{R_1 + R_2}\right) = 10 \cdot \left(\frac{40}{10 + 40}\right) = 10 \cdot \left(\frac{40}{50}\right) = 8\text{ A}$.
-        </div>
+        <div class="sol-text">A resistência equivalente é $R_{eq}=10\parallel40=8\,\Omega$, logo a tensão do conjunto é $V=10\cdot8=80\,V$. Assim, $I_1=80/10=8\,A$ e $P_T=VI_T=80\cdot10=800\,W$.</div>
         <div class="tip-box">
             <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
-            <span class="tip-text">Divisor de corrente: A corrente no resistor 1 é proporcional ao resistor OPOSTO ($R_2$) dividido pela soma!</span>
+            <span class="tip-text">No divisor de corrente, o ramo de menor resistência conduz mais. Para a potência total, use a tensão comum obtida pela resistência equivalente.</span>
         </div>
     </div>
 </div>
@@ -1091,28 +1047,24 @@
             <td class="q-tag">Valor Eficaz (RMS) de Onda Senoidal Pura</td>
         </tr>
     </table>
-    <div class="q-statement">
-        O valor eficaz ($V_{rms}$) de uma tensão alternada senoidal pura com valor de pico de $V_p = 311\text{ V}$ é calculado dividindo-se o valor de pico por $\sqrt{2}$. Esse valor eficaz é de aproximadamente:
-    </div>
+    <div class="q-statement">Uma tensão periódica é composta por nível contínuo de $100\,V$ somado a uma componente senoidal de valor eficaz $120\,V$. Admitindo componentes ortogonais, o valor eficaz total e o fator de crista, se o pico positivo é $100+120\sqrt2$, são aproximadamente:</div>
     <div class="alternatives">
         <div class="alt-item">
-<strong>A)</strong> 220 V</div>
+<strong>A)</strong> $156{,}2\,V$ e $1{,}73$.</div>
 <div class="alt-item">
-<strong>B)</strong> 380 V</div>
+<strong>B)</strong> $220\,V$ e $1{,}00$.</div>
 
     <div class="alt-item">
-<strong>C)</strong> 127 V</div>
+<strong>C)</strong> $120\,V$ e $2{,}25$.</div>
 <div class="alt-item">
-<strong>D)</strong> 110 V</div>
+<strong>D)</strong> $156{,}2\,V$ e $1{,}00$.</div>
 </div>
     <div class="solution-box">
         <span class="sol-header">Gabarito Comentado: Alternativa A</span>
-        <div class="sol-text">
-            $V_{rms} = \frac{V_p}{\sqrt{2}} = \frac{311}{1{,}4142} \approx 219{,}9\text{ V} \approx 220\text{ V}$.
-        </div>
+        <div class="sol-text">O valor eficaz total é $\sqrt{100^2+120^2}=156{,}2\,V$. O pico positivo vale $100+120\sqrt2\approx269{,}7\,V$, então $FC=269{,}7/156{,}2\approx1{,}73$.</div>
         <div class="tip-box">
             <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
-            <span class="tip-text">Senóide pura: $V_{rms} = \frac{V_{pico}}{\sqrt{2}} \approx 0{,}707 \cdot V_{pico}$. Tensão de pico da rede de 220 V é $\approx 311\text{ V}$.</span>
+            <span class="tip-text">Componentes contínua e alternada somam-se quadraticamente no RMS, mas instantaneamente no pico. Não aplique $\sqrt2$ ao sinal composto inteiro.</span>
         </div>
     </div>
 </div>
@@ -1124,28 +1076,24 @@
             <td class="q-tag">Valor Médio de Onda Senoidal Retificada em Onda Completa</td>
         </tr>
     </table>
-    <div class="q-statement">
-        Para uma tensão senoidal com valor de pico Vp retificada em onda completa por ponte de diodos sem filtro capacitivo, o valor médio da tensão contínua na carga é expresso por:
-    </div>
+    <div class="q-statement">Uma ponte retificadora monofásica alimenta carga resistiva a partir de senoide com pico de $100\,V$. Cada diodo apresenta queda constante de $1\,V$ e dois diodos conduzem por semiciclo. Desprezando o intervalo próximo ao cruzamento por zero, o valor médio aproximado na carga é:</div>
     <div class="alternatives">
         <div class="alt-item">
-<strong>A)</strong> $V_{med} = \frac{V_p}{\pi}$</div>
+<strong>A)</strong> $31{,}8\,V$.</div>
 <div class="alt-item">
-<strong>B)</strong> $V_{med} = \frac{2 \cdot V_p}{\pi} \approx 0{,}637 \cdot V_p$</div>
+<strong>B)</strong> $61{,}7\,V$.</div>
 <div class="alt-item">
-<strong>C)</strong> $V_{med} = \frac{V_p}{\sqrt{2}}$</div>
+<strong>C)</strong> $70{,}7\,V$.</div>
 <div class="alt-item">
-<strong>D)</strong> $V_{med} = \sqrt{3} \cdot V_p$</div>
+<strong>D)</strong> $63{,}7\,V$.</div>
 
     </div>
     <div class="solution-box">
         <span class="sol-header">Gabarito Comentado: Alternativa B</span>
-        <div class="sol-text">
-            Retificação de meia onda: $V_{med} = \frac{V_p}{\pi}$. Retificação de onda completa: $V_{med} = \frac{2 \cdot V_p}{\pi} \approx 0{,}637 \cdot V_p$.
-        </div>
+        <div class="sol-text">Para a onda completa ideal, $V_{med}=2V_p/\pi=63{,}66\,V$. Aproximando a queda do par condutor por $2\,V$ durante a condução, resulta cerca de $61{,}7\,V$.</div>
         <div class="tip-box">
             <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
-            <span class="tip-text">Retificador onda completa: $V_{medio} = \frac{2 \cdot V_{pico}}{\pi}$. Meia onda: $V_{medio} = \frac{V_{pico}}{\pi}$.</span>
+            <span class="tip-text">Conte quantos diodos conduzem simultaneamente. Em ponte monofásica são dois; a queda deve ser aplicada ao valor médio ideal, conforme a aproximação declarada.</span>
         </div>
     </div>
 </div>
@@ -1157,28 +1105,24 @@
             <td class="q-tag">Teorema da Superposição • Circuitos Lineares</td>
         </tr>
     </table>
-    <div class="q-statement">
-        O Teorema da Superposição para determinação de correntes e tensões em circuitos lineares com múltiplas fontes independentes estabelece que, ao analisar a contribuição de uma única fonte:
-    </div>
+    <div class="q-statement">Um nó é ligado ao terra por $R=10\,\Omega$, recebe uma fonte de corrente de $3\,A$ e também se liga, por $20\,\Omega$, ao terminal positivo de uma fonte ideal de $40\,V$ referida ao terra. Pela superposição, qual é a tensão do nó?</div>
     <div class="alternatives">
         <div class="alt-item">
-<strong>A)</strong> Os resistores do circuito devem ser aterrados.</div>
+<strong>A)</strong> $10\,V$.</div>
 
     <div class="alt-item">
-<strong>B)</strong> Todas as fontes devem ser mantidas ligadas em sua potência máxima.</div>
+<strong>B)</strong> $20\,V$.</div>
 <div class="alt-item">
-<strong>C)</strong> As demais fontes independentes de tensão devem ser curto-circuitadas ($V=0$) e as fontes independentes de corrente devem ser abertas ($I=0$).</div>
+<strong>C)</strong> $33{,}3\,V$.</div>
 <div class="alt-item">
-<strong>D)</strong> As demais fontes de tensão devem ser abertas e as de corrente curto-circuitadas.</div>
+<strong>D)</strong> $40\,V$.</div>
 </div>
     <div class="solution-box">
         <span class="sol-header">Gabarito Comentado: Alternativa C</span>
-        <div class="sol-text">
-            Para 'desligar' uma fonte no Teorema da Superposição: Fonte de Tensão desativada = Curto-circuito ($V=0$); Fonte de Corrente desativada = Circuito aberto ($I=0$). Fontes dependentes nunca são desativadas.
-        </div>
+        <div class="sol-text">Com apenas a fonte de corrente, a fonte de tensão é curto-circuitada: $10\parallel20=6{,}667\,\Omega$, dando $V_1=3\cdot6{,}667=20\,V$. Com apenas a fonte de tensão, a fonte de corrente é aberta e o divisor fornece $V_2=40\cdot10/(20+10)=13{,}33\,V$. Logo $V=33{,}33\,V$.</div>
         <div class="tip-box">
             <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
-            <span class="tip-text">Superposição: Anular fonte de tensão = colocar em CURTO; Anular fonte de corrente = ABRIR o ramo.</span>
+            <span class="tip-text">Ao desativar fontes independentes, preserve as resistências do circuito e some algebricamente as contribuições. Confira o resultado com uma equação nodal única.</span>
         </div>
     </div>
 </div>
@@ -1190,28 +1134,24 @@
             <td class="q-tag">Teorema de Norton • Equivalente com Fonte de Corrente</td>
         </tr>
     </table>
-    <div class="q-statement">
-        Na determinação do circuito equivalente de Norton entre dois terminais A e B de uma rede linear, a corrente de Norton (IN) é obtida calculando-se:
-    </div>
+    <div class="q-statement">Uma rede linear apresenta $V_{oc}=48\,V$ nos terminais e fornece $I_{cc}=6\,A$ quando eles são curto-circuitados. Ao conectar uma carga de $4\,\Omega$, quais são a corrente da carga e a potência nela dissipada?</div>
     <div class="alternatives">
         <div class="alt-item">
-<strong>A)</strong> A corrente que circula entre os terminais A e B quando eles são colocados em curto-circuito direto.</div>
+<strong>A)</strong> $4\,A$ e $64\,W$.</div>
 <div class="alt-item">
-<strong>B)</strong> O produto entre a potência da carga e a frequência da rede.</div>
+<strong>B)</strong> $6\,A$ e $144\,W$.</div>
 
     <div class="alt-item">
-<strong>C)</strong> A impedância medida com todas as fontes ativadas.</div>
+<strong>C)</strong> $3\,A$ e $36\,W$.</div>
 <div class="alt-item">
-<strong>D)</strong> A tensão entre os terminais A e B em circuito aberto.</div>
+<strong>D)</strong> $8\,A$ e $256\,W$.</div>
 </div>
     <div class="solution-box">
         <span class="sol-header">Gabarito Comentado: Alternativa A</span>
-        <div class="sol-text">
-            A corrente de Norton ($I_N$) é a corrente de curto-circuito entre os terminais ($I_{sc}$). A impedância de Norton ($Z_N$) é idêntica à impedância de Thévenin ($Z_N = Z_{th}$), e a relação entre elas é dada pela Lei de Ohm: $V_{th} = I_N \cdot Z_N$.
-        </div>
+        <div class="sol-text">A resistência equivalente é $R_N=V_{oc}/I_{cc}=8\,\Omega$ e $I_N=6\,A$. Pela divisão de corrente no equivalente de Norton, $I_L=6\cdot8/(8+4)=4\,A$. Logo $P_L=I_L^2R_L=64\,W$.</div>
         <div class="tip-box">
             <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
-            <span class="tip-text">Norton: $I_N$ é a corrente de CURTO-CIRCUITO nos terminais ($I_{sc}$).</span>
+            <span class="tip-text">Converta os ensaios em parâmetros do equivalente e só então conecte a carga. No Norton, a fonte de corrente fica em paralelo com a resistência interna.</span>
         </div>
     </div>
 </div>
@@ -1223,28 +1163,24 @@
             <td class="q-tag">Análise Nodal • Método dos Nós</td>
         </tr>
     </table>
-    <div class="q-statement">
-        Na aplicação do Método das Tensões Nodais em um circuito elétrico com N nós essenciais, o número de equações linearmente independentes baseadas na Lei de Kirchhoff das Correntes (LKC) necessárias para resolver o circuito é de:
-    </div>
+    <div class="q-statement">Um circuito possui quatro nós essenciais, sendo um escolhido como referência. Entre dois nós não de referência existe uma fonte ideal de tensão, formando um supernó. Para montar o sistema pelo método nodal, utiliza-se:</div>
     <div class="alternatives">
         <div class="alt-item">
-<strong>A)</strong> N + 1 equações</div>
+<strong>A)</strong> Quatro equações de LKC, uma para cada nó, sem utilizar a relação de tensão imposta pela fonte ideal.</div>
 
     <div class="alt-item">
-<strong>B)</strong> N - 1 equações (escolhendo-se um nó como referência/terra)</div>
+<strong>B)</strong> Uma LKC para o supernó, a restrição da fonte e a equação do nó restante, totalizando três equações.</div>
 <div class="alt-item">
-<strong>C)</strong> N equações</div>
+<strong>C)</strong> Duas equações de LKT para contornar a fonte e uma LKC adicional escrita exclusivamente no nó de referência.</div>
 <div class="alt-item">
-<strong>D)</strong> 2N equações</div>
+<strong>D)</strong> Cinco equações independentes: quatro balanços nodais e uma equação adicional para a corrente da fonte.</div>
 </div>
     <div class="solution-box">
         <span class="sol-header">Gabarito Comentado: Alternativa B</span>
-        <div class="sol-text">
-            Na análise nodal, seleciona-se um dos nós como referência (potencial 0 V) e aplicam-se equações de LKC nos $N-1$ nós restantes.
-        </div>
+        <div class="sol-text">Com quatro nós, há três tensões nodais desconhecidas. A fonte entre dois nós cria um supernó: escreve-se uma LKC envolvendo sua fronteira e uma equação de restrição entre as duas tensões, além da equação do outro nó não de referência. O número de equações independentes permanece igual ao de incógnitas.</div>
         <div class="tip-box">
             <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
-            <span class="tip-text">Análise Nodal = $N - 1$ equações de nós.</span>
+            <span class="tip-text">Fonte de tensão entre dois nós não elimina o método nodal. Agrupe os nós em um supernó e acrescente a relação de tensão imposta pela fonte.</span>
         </div>
     </div>
 </div>
@@ -1256,29 +1192,24 @@
             <td class="q-tag">Análise de Malhas • Método das Correntes de Malha</td>
         </tr>
     </table>
-    <div class="q-statement">
-        Na formulação matricial da Análise de Malhas baseada na Lei de Kirchhoff das Tensões (LKT) para um circuito planar com M malhas independentes, os termos fora da diagonal principal da matriz de resistências ($R_{ij}$ onde $i 
-eq j$) representam:
-    </div>
+    <div class="q-statement">Duas malhas compartilham um resistor de $5\,\Omega$. A primeira possui ainda $3\,\Omega$ exclusivos e a segunda, $7\,\Omega$ exclusivos. Adotando correntes de malha horárias $I_1$ e $I_2$, qual matriz de resistências é correta?</div>
     <div class="alternatives">
         <div class="alt-item">
-<strong>A)</strong> A potência reativa consumida pelas fontes.</div>
+<strong>A)</strong> $\begin{bmatrix}3&amp;5\\5&amp;7\end{bmatrix}$.</div>
 
     <div class="alt-item">
-<strong>B)</strong> A resistência total da malha i somada à malha j.</div>
+<strong>B)</strong> $\begin{bmatrix}8&amp;5\\5&amp;12\end{bmatrix}$.</div>
 <div class="alt-item">
-<strong>C)</strong> O inverso da capacitância equivalente do circuito.</div>
+<strong>C)</strong> $\begin{bmatrix}8&amp;-7\\-3&amp;12\end{bmatrix}$.</div>
 <div class="alt-item">
-<strong>D)</strong> O valor negativo da resistência compartilhada (mútua) entre a malha i e a malha j.</div>
+<strong>D)</strong> $\begin{bmatrix}8&amp;-5\\-5&amp;12\end{bmatrix}$.</div>
 </div>
     <div class="solution-box">
         <span class="sol-header">Gabarito Comentado: Alternativa D</span>
-        <div class="sol-text">
-            Na matriz de malhas $[R]\cdot[I] = [V]$: Termos da diagonal principal ($R_{ii}$) são a soma das resistências da malha $i$ (positivos); Termos fora da diagonal ($R_{ij}$) são as resistências mútuas compartilhadas entre as malhas $i$ e $j$ com sinal negativo (quando as correntes de malha circulam no mesmo sentido).
-        </div>
+        <div class="sol-text">Cada termo diagonal é a soma das resistências da respectiva malha: $8\,\Omega$ e $12\,\Omega$. Como as correntes horárias atravessam o resistor comum em sentidos opostos, os termos mútuos são $-5\,\Omega$. Assim, a matriz é $[[8,-5],[-5,12]]$.</div>
         <div class="tip-box">
             <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
-            <span class="tip-text">Matriz de Malha: Diagonal = Resistência própria da malha; Fora da diagonal = - (Resistência compartilhada).</span>
+            <span class="tip-text">Diagonal: soma da própria malha. Fora da diagonal: negativo da resistência compartilhada, para correntes de malha escolhidas no mesmo sentido de rotação.</span>
         </div>
     </div>
 </div>
@@ -1290,28 +1221,24 @@ eq j$) representam:
             <td class="q-tag">Fator de Potência Unitário • Circuito RLC em Ressonância</td>
         </tr>
     </table>
-    <div class="q-statement">
-        Quando um circuito RLC paralelo opera em sua frequência de ressonância natural, o ângulo de fase total entre a tensão aplicada e a corrente total drenada da fonte é de:
-    </div>
+    <div class="q-statement">Em um RLC paralelo ideal na ressonância, a fonte fornece $2\,A$ ao ramo resistivo, enquanto circulam $15\,A$ no indutor e $15\,A$ no capacitor. A corrente total da fonte e o fator de potência são:</div>
     <div class="alternatives">
         <div class="alt-item">
-<strong>A)</strong> 0° (fator de potência unitário, cos φ = 1,0)</div>
+<strong>A)</strong> $2\,A$ e $1{,}0$.</div>
 <div class="alt-item">
-<strong>B)</strong> +90° (puramente indutivo)</div>
+<strong>B)</strong> $17\,A$ e $0{,}118$ indutivo.</div>
 <div class="alt-item">
-<strong>C)</strong> -90° (puramente capacitivo)</div>
+<strong>C)</strong> $30\,A$ e $0{,}067$ capacitivo.</div>
 <div class="alt-item">
-<strong>D)</strong> 180° (em oposição de fase)</div>
+<strong>D)</strong> $32\,A$ e $1{,}0$.</div>
 
     </div>
     <div class="solution-box">
         <span class="sol-header">Gabarito Comentado: Alternativa A</span>
-        <div class="sol-text">
-            Na ressonância (série ou paralela), a reatância indutiva cancela a reatância capacitiva ($B_L = B_C$ ou $X_L = X_C$). O circuito comporta-se como puramente resistivo, a corrente fica em fase com a tensão e o fator de potência é unitário ($\cos\varphi = 1{,}0$).
-        </div>
+        <div class="sol-text">As correntes reativas são iguais e opostas, cancelando-se na entrada. A fonte conduz apenas os $2\,A$ do ramo resistivo, em fase com a tensão; portanto, o fator de potência é unitário. As correntes internas podem ser muito maiores que a corrente da fonte.</div>
         <div class="tip-box">
             <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
-            <span class="tip-text">Ressonância = Reatâncias canceladas -&gt; Fator de potência $\cos\varphi = 1,0$ (em fase).</span>
+            <span class="tip-text">Faça a soma fasorial das correntes dos ramos. Em ressonância paralela, não some os módulos de $I_L$ e $I_C$.</span>
         </div>
     </div>
 </div>
@@ -1323,28 +1250,24 @@ eq j$) representam:
             <td class="q-tag">Relação entre Impedância e Admitância Complexas</td>
         </tr>
     </table>
-    <div class="q-statement">
-        Em regime permanente senoidal, a Admitância complexa (Y) é definida como o inverso da Impedância (Z = R + jX). As partes real e imaginária da admitância Y = G + jB são denominadas, respectivamente:
-    </div>
+    <div class="q-statement">Um resistor de $20\,\Omega$ está em paralelo com um capacitor de reatância $X_C=10\,\Omega$. A admitância equivalente e o módulo da impedância do conjunto são:</div>
     <div class="alternatives">
         <div class="alt-item">
-<strong>A)</strong> Resistência e Reatância.</div>
+<strong>A)</strong> $Y=0{,}05-j0{,}10\,S$ e $|Z|=8{,}94\,\Omega$.</div>
 <div class="alt-item">
-<strong>B)</strong> Condutância (G) e Susceptância (B).</div>
+<strong>B)</strong> $Y=0{,}05+j0{,}10\,S$ e $|Z|=8{,}94\,\Omega$.</div>
 <div class="alt-item">
-<strong>C)</strong> Relutância e Permeância.</div>
+<strong>C)</strong> $Y=0{,}15+j0\,S$ e $|Z|=6{,}67\,\Omega$.</div>
 <div class="alt-item">
-<strong>D)</strong> Indutância e Capacitância.</div>
+<strong>D)</strong> $Y=20-j10\,S$ e $|Z|=30\,\Omega$.</div>
 
     </div>
     <div class="solution-box">
         <span class="sol-header">Gabarito Comentado: Alternativa B</span>
-        <div class="sol-text">
-            Admitância $Y = \frac{1}{Z} = G + jB$. Onde $G$ é a **Condutância** (expressa em Siemens, S) e $B$ é a **Susceptância** (em Siemens, S). $G = \frac{R}{R^2 + X^2}$ e $B = -\frac{X}{R^2 + X^2}$.
-        </div>
+        <div class="sol-text">$Y_R=1/20=0{,}05\,S$. Como $Z_C=-j10\,\Omega$, $Y_C=1/Z_C=+j0{,}10\,S$. Logo $Y=0{,}05+j0{,}10\,S$ e $|Z|=1/|Y|=1/\sqrt{0{,}05^2+0{,}10^2}=8{,}94\,\Omega$.</div>
         <div class="tip-box">
             <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
-            <span class="tip-text">Impedância $Z = R + jX$ (Resistência + Reatância). Admitância $Y = G + jB$ (Condutância + Susceptância).</span>
+            <span class="tip-text">Em paralelo, some admitâncias. Lembre que inverter $-jX_C$ troca o sinal: a susceptância capacitiva é positiva na convenção adotada.</span>
         </div>
     </div>
 </div>
@@ -1389,28 +1312,24 @@ eq j$) representam:
             <td class="q-tag">Frequência de Amostragem e Teorema de Nyquist</td>
         </tr>
     </table>
-    <div class="q-statement">
-        No processamento digital de sinais e medição digital de grandezas elétricas em sistemas de potência (relés digitais e medidores), para evitar o fenômeno de mascaramento de frequência (*aliasing*), a taxa de amostragem mínima ($f_s$) deve ser:
-    </div>
+    <div class="q-statement">Um relé digital deve medir até a 15ª harmônica de uma rede de $60\,Hz$. Há um filtro antialiasing com banda útil até essa frequência máxima. Entre as taxas disponíveis, qual é a menor que satisfaz estritamente Nyquist?</div>
     <div class="alternatives">
         <div class="alt-item">
-<strong>A)</strong> Menor que a metade da frequência máxima de interesse.</div>
+<strong>A)</strong> $900\,amostras/s$.</div>
 <div class="alt-item">
-<strong>B)</strong> Exatamente igual a 60 Hz invariável.</div>
+<strong>B)</strong> $1.200\,amostras/s$.</div>
 <div class="alt-item">
-<strong>C)</strong> Igual a dez vezes a tensão nominal do barramento.</div>
+<strong>C)</strong> $1.800\,amostras/s$.</div>
 
     <div class="alt-item">
-<strong>D)</strong> Pelo menos o dobro da maior frequência harmônica contida no sinal ($f_s \ge 2 \cdot f_{max}$).</div>
+<strong>D)</strong> $2.000\,amostras/s$.</div>
 </div>
     <div class="solution-box">
         <span class="sol-header">Gabarito Comentado: Alternativa D</span>
-        <div class="sol-text">
-            Pelo Teorema da Amostragem de Nyquist-Shannon: Para reconstruir perfeitamente um sinal analógico amostrado digitalmente, a frequência de amostragem $f_s$ deve ser estritamente superior ao dobro da máxima frequência espectral componente do sinal ($f_s \ge 2 \cdot f_{max}$).
-        </div>
+        <div class="sol-text">A 15ª harmônica vale $15\cdot60=900\,Hz$. O critério exige $f_s&gt;2f_{max}=1.800\,amostras/s$ quando se pede satisfação estrita. Entre as opções, a menor adequada é $2.000\,amostras/s$.</div>
         <div class="tip-box">
             <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
-            <span class="tip-text">Critério de Nyquist: Frequência de amostragem deve ser no mínimo o DOBRO da maior frequência do sinal ($f_s \ge 2 f_{max}$).</span>
+            <span class="tip-text">Determine primeiro a maior frequência física de interesse. Depois aplique Nyquist; observe se o enunciado aceita igualdade ou exige margem estrita.</span>
         </div>
     </div>
 </div>
@@ -1488,28 +1407,24 @@ eq j$) representam:
             <td class="q-tag">Circuito RL de Primeira Ordem • Constante de Tempo (τ)</td>
         </tr>
     </table>
-    <div class="q-statement">
-        Em um circuito RL série alimentado por fonte contínua degrau, a constante de tempo do circuito (τ em segundos) que dita a velocidade transitória de subida da corrente é expressa por:
-    </div>
+    <div class="q-statement">Um circuito RL série com $R=20\,\Omega$ e $L=100\,mH$ é ligado a uma fonte contínua de $100\,V$ em $t=0$. Desprezando corrente inicial, qual é aproximadamente a corrente em $t=10\,ms$?</div>
     <div class="alternatives">
         <div class="alt-item">
-<strong>A)</strong> $	au = R \cdot L$</div>
+<strong>A)</strong> $0{,}68\,A$.</div>
 <div class="alt-item">
-<strong>B)</strong> $	au = \frac{1}{\sqrt{RL}}$</div>
+<strong>B)</strong> $3{,}16\,A$.</div>
 
     <div class="alt-item">
-<strong>C)</strong> $	au = \frac{L}{R}$</div>
+<strong>C)</strong> $4{,}32\,A$.</div>
 <div class="alt-item">
-<strong>D)</strong> $	au = \frac{R}{L}$</div>
+<strong>D)</strong> $5{,}00\,A$.</div>
 </div>
     <div class="solution-box">
         <span class="sol-header">Gabarito Comentado: Alternativa C</span>
-        <div class="sol-text">
-            No circuito RL série de 1ª ordem, a constante de tempo é $	au = \frac{L}{R}$ (segundos). Após $1	au$, a corrente atinge 63,2% do valor final; após $5	au$, considera-se atingido o regime permanente (99,3%).
-        </div>
+        <div class="sol-text">A constante de tempo é $\tau=L/R=0{,}1/20=5\,ms$. A corrente final é $I_\infty=100/20=5\,A$. Em $10\,ms=2\tau$, $i=5(1-e^{-2})\approx4{,}32\,A$.</div>
         <div class="tip-box">
             <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
-            <span class="tip-text">Constante de tempo: Circuito RL $\rightarrow 	au = \frac{L}{R}$. Circuito RC $\rightarrow 	au = R \cdot C$.</span>
+            <span class="tip-text">Calcule separadamente o valor final e a constante de tempo. Depois identifique quantos $\tau$ transcorreram e aplique a exponencial de subida.</span>
         </div>
     </div>
 </div>
@@ -1521,28 +1436,24 @@ eq j$) representam:
             <td class="q-tag">Circuito RC de Primeira Ordem • Constante de Tempo (τ)</td>
         </tr>
     </table>
-    <div class="q-statement">
-        Em um circuito RC série com resistor R = 50 kΩ e capacitor C = 20 μF, a constante de tempo de carga (τ) do circuito é de:
-    </div>
+    <div class="q-statement">Um circuito RC série com $R=50\,k\Omega$ e $C=20\,\mu F$, inicialmente descarregado, é ligado a uma fonte contínua de $100\,V$. Após $1{,}0\,s$, quais são aproximadamente a tensão no capacitor e a corrente do circuito?</div>
     <div class="alternatives">
         <div class="alt-item">
-<strong>A)</strong> 2,5 s</div>
+<strong>A)</strong> $V_C=36{,}8\,V$ e $i=1{,}26\,mA$.</div>
 <div class="alt-item">
-<strong>B)</strong> 1,0 s</div>
+<strong>B)</strong> $V_C=63{,}2\,V$ e $i=0{,}736\,mA$.</div>
 <div class="alt-item">
-<strong>C)</strong> 10,0 s</div>
+<strong>C)</strong> $V_C=63{,}2\,V$ e $i=2{,}00\,mA$.</div>
 
     <div class="alt-item">
-<strong>D)</strong> 0,001 s</div>
+<strong>D)</strong> $V_C=100\,V$ e $i=0{,}736\,mA$.</div>
 </div>
     <div class="solution-box">
         <span class="sol-header">Gabarito Comentado: Alternativa B</span>
-        <div class="sol-text">
-            $$	au = R \cdot C = (50 \times 10^3\ \Omega) \cdot (20 \times 10^{-6}\text{ F}) = 1000 \times 10^{-3} = 1{,}0\text{ segundo}$$
-        </div>
+        <div class="sol-text">A constante de tempo é $\tau=RC=50\times10^3\cdot20\times10^{-6}=1\,s$. Em $t=\tau$, $V_C=100(1-e^{-1})\approx63{,}2\,V$. A corrente vale $i=(100/R)e^{-1}=2\,mA\cdot e^{-1}\approx0{,}736\,mA$.</div>
         <div class="tip-box">
             <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
-            <span class="tip-text">Cálculo direto: $	au = R \cdot C = 50.000 \times 0{,}000020 = 1\text{ segundo}$.</span>
+            <span class="tip-text">Em carga RC, tensão do capacitor cresce como $1-e^{-t/\tau}$, enquanto a corrente decai como $e^{-t/\tau}$. Em um tempo de constante, os percentuais são complementares.</span>
         </div>
     </div>
 </div>
@@ -1554,28 +1465,24 @@ eq j$) representam:
             <td class="q-tag">Fator de Crista de uma Forma de Onda</td>
         </tr>
     </table>
-    <div class="q-statement">
-        O Fator de Crista ($FC$) de uma grandeza elétrica periódica é definido pela razão entre o seu valor de pico e o seu valor eficaz ($FC = V_p / V_{rms}$). Para uma onda senoidal pura, o valor do fator de crista é exatamente:
-    </div>
+    <div class="q-statement">Um equipamento suporta pico máximo de $325\,V$. A tensão aplicada possui $V_{rms}=180\,V$ e fator de crista $1{,}9$. Qual conclusão é correta?</div>
     <div class="alternatives">
         <div class="alt-item">
-<strong>A)</strong> $\sqrt{2} \approx 1{,}414$</div>
+<strong>A)</strong> O pico é $342\,V$ e ultrapassa o limite em $17\,V$.</div>
 <div class="alt-item">
-<strong>B)</strong> 1,00</div>
+<strong>B)</strong> O pico é $180\,V$ e há margem de $145\,V$.</div>
 <div class="alt-item">
-<strong>C)</strong> $\frac{\pi}{2} \approx 1{,}571$</div>
+<strong>C)</strong> O pico é $94{,}7\,V$ e há margem de $230{,}3\,V$.</div>
 <div class="alt-item">
-<strong>D)</strong> $\sqrt{3} \approx 1{,}732$</div>
+<strong>D)</strong> O pico é $325\,V$ porque o fator de crista se aplica apenas a senoides.</div>
 
     </div>
     <div class="solution-box">
         <span class="sol-header">Gabarito Comentado: Alternativa A</span>
-        <div class="sol-text">
-            Para senoide pura: $V_{rms} = \frac{V_p}{\sqrt{2}} \implies FC = \frac{V_p}{V_{rms}} = \frac{V_p}{V_p / \sqrt{2}} = \sqrt{2} \approx 1{,}414$.
-        </div>
+        <div class="sol-text">Por definição, $FC=V_p/V_{rms}$. Logo $V_p=1{,}9\cdot180=342\,V$, que excede $325\,V$ em $17\,V$. O fator de crista não é restrito a ondas senoidais.</div>
         <div class="tip-box">
             <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
-            <span class="tip-text">Fator de Crista da senoide $= \sqrt{2} \approx 1,414$. Fator de Forma $= \frac{V_{rms}}{V_{medio}} = \frac{\pi}{2\sqrt{2}} \approx 1,11$.</span>
+            <span class="tip-text">Fator de crista relaciona pico e RMS. Em problemas de suportabilidade, compare o pico calculado diretamente com o limite do equipamento.</span>
         </div>
     </div>
 </div>
@@ -1587,28 +1494,24 @@ eq j$) representam:
             <td class="q-tag">Fator de Forma de uma Forma de Onda</td>
         </tr>
     </table>
-    <div class="q-statement">
-        O Fator de Forma ($FF$) de uma onda periódica é definido pela relação entre o seu valor eficaz e o seu valor médio retificado ($FF = V_{rms} / V_{med}$). Para uma onda senoidal pura, o fator de forma vale aproximadamente:
-    </div>
+    <div class="q-statement">Um instrumento de resposta ao valor médio é calibrado para indicar RMS de senoides multiplicando o valor médio retificado por $1{,}11$. Ao medir uma onda cujo $V_{med,ret}=100\,V$ e $V_{rms}$ verdadeiro é $130\,V$, quais são a indicação e o erro relativo aproximado?</div>
     <div class="alternatives">
         <div class="alt-item">
-<strong>A)</strong> 1,73</div>
+<strong>A)</strong> $130\,V$ e $0\%$.</div>
 
     <div class="alt-item">
-<strong>B)</strong> 1,00</div>
+<strong>B)</strong> $100\,V$ e $-23{,}1\%$.</div>
 <div class="alt-item">
-<strong>C)</strong> 1,41</div>
+<strong>C)</strong> $144{,}3\,V$ e $+11\%$.</div>
 <div class="alt-item">
-<strong>D)</strong> 1,11</div>
+<strong>D)</strong> $111\,V$ e $-14{,}6\%$.</div>
 </div>
     <div class="solution-box">
         <span class="sol-header">Gabarito Comentado: Alternativa D</span>
-        <div class="sol-text">
-            $$FF = \frac{V_{rms}}{V_{med}} = \frac{V_p / \sqrt{2}}{2V_p / \pi} = \frac{\pi}{2\sqrt{2}} = \frac{3{,}1416}{2 \times 1{,}4142} \approx 1{,}11$$
-        </div>
+        <div class="sol-text">O instrumento indica $1{,}11\cdot100=111\,V$. O erro relativo é $(111-130)/130\approx-14{,}6\%$. A calibração pelo fator de forma senoidal só é exata quando a forma de onda é senoidal.</div>
         <div class="tip-box">
             <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
-            <span class="tip-text">Fator de Forma da senoide pura $= 1,11$.</span>
+            <span class="tip-text">Diferencie o que o instrumento indica do RMS verdadeiro. Em onda distorcida, o fator $1{,}11$ não corrige universalmente a leitura média.</span>
         </div>
     </div>
 </div>
@@ -1620,28 +1523,24 @@ eq j$) representam:
             <td class="q-tag">Impedância de Aterramento em Alta Frequência • Comportamento Indutivo</td>
         </tr>
     </table>
-    <div class="q-statement">
-        Sob a injeção de correntes de surto de alta frequência (como descargas atmosféricas de 100 kHz a 1 MHz), os condutores da malha de aterramento deixam de se comportar como resistência pura e passam a apresentar forte impedância devido à:
-    </div>
+    <div class="q-statement">Dois condutores de aterramento em cobre possuem a mesma resistência em corrente contínua. Para um surto rápido, o trajeto A tem $2\,m$ retilíneos e o trajeto B tem $12\,m$ com uma curva fechada. Qual comparação é tecnicamente adequada?</div>
     <div class="alternatives">
         <div class="alt-item">
-<strong>A)</strong> Redução da resistividade do solo para zero.</div>
+<strong>A)</strong> Os dois têm a mesma impedância, pois a resistência em corrente contínua é igual.</div>
 <div class="alt-item">
-<strong>B)</strong> Ressonância capacitiva entre o ar e as hastes.</div>
+<strong>B)</strong> O trajeto B tende a ter menor impedância por possuir maior comprimento metálico.</div>
 <div class="alt-item">
-<strong>C)</strong> Indutância própria dos condutores metálicos de cobre ($\omega L$), que eleva a impedância de surto nos primeiros metros de condutor.</div>
+<strong>C)</strong> O trajeto A tende a ter menor impedância de surto por apresentar menor indutância de percurso.</div>
 <div class="alt-item">
-<strong>D)</strong> Anulação das forças eletrodinâmicas.</div>
+<strong>D)</strong> O trajeto A tende a ter maior impedância porque condutores curtos concentram mais corrente.</div>
 
     </div>
     <div class="solution-box">
         <span class="sol-header">Gabarito Comentado: Alternativa C</span>
-        <div class="sol-text">
-            Em transitórios rápidos de raios (frequências de centenas de kHz), a parcela indutiva da impedância do cabo ($Z = R + j\omega L$) predomina sobre a resistência ôhmica pura, impedindo a circulação da corrente para partes distantes da malha e concentrando a elevação de potencial no ponto de impacto.
-        </div>
+        <div class="sol-text">Em surtos, a parcela $\omega L$ pode dominar. Percursos longos e curvas fechadas elevam a indutância e a queda de tensão transitória. Assim, o trajeto curto, direto e com curvas suaves tende a apresentar menor impedância de surto, embora a resistência ôhmica não explique sozinha o fenômeno.</div>
         <div class="tip-box">
             <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
-            <span class="tip-text">Aterramento sob raio = Comportamento INDUTIVO predominante ($V = L \cdot di/dt$).</span>
+            <span class="tip-text">Para descargas e frentes rápidas, pense em impedância do percurso, não apenas em resistência medida com corrente contínua. Comprimento e geometria importam.</span>
         </div>
     </div>
 </div>
@@ -1653,28 +1552,24 @@ eq j$) representam:
             <td class="q-tag">Potência Aparente Trifásica • Relação com Tensão e Corrente de Linha</td>
         </tr>
     </table>
-    <div class="q-statement">
-        A expressão matemática correta que relaciona a potência aparente trifásica total (S em VA) com os módulos da tensão de linha eficaz (VL) e da corrente de linha eficaz (IL) em um sistema trifásico equilibrado é:
-    </div>
+    <div class="q-statement">Uma carga trifásica equilibrada é alimentada com $V_L=380\,V$, $I_L=50\,A$ e fator de potência $0{,}80$ indutivo. As potências aparente e ativa totais são aproximadamente:</div>
     <div class="alternatives">
         <div class="alt-item">
-<strong>A)</strong> $S = \frac{V_L \cdot I_L}{\sqrt{3}}$</div>
+<strong>A)</strong> $19{,}0\,kVA$ e $15{,}2\,kW$.</div>
 
     <div class="alt-item">
-<strong>B)</strong> $S = \sqrt{3} \cdot V_L \cdot I_L$</div>
+<strong>B)</strong> $32{,}9\,kVA$ e $26{,}3\,kW$.</div>
 <div class="alt-item">
-<strong>C)</strong> $S = V_L \cdot I_L$</div>
+<strong>C)</strong> $32{,}9\,kVA$ e $41{,}2\,kW$.</div>
 <div class="alt-item">
-<strong>D)</strong> $S = 3 \cdot V_L \cdot I_L$</div>
+<strong>D)</strong> $57{,}0\,kVA$ e $45{,}6\,kW$.</div>
 </div>
     <div class="solution-box">
         <span class="sol-header">Gabarito Comentado: Alternativa B</span>
-        <div class="sol-text">
-            A potência aparente trifásica total em qualquer sistema equilibrado (seja estrela ou triângulo) em função das grandezas de linha é: $S_{3\phi} = \sqrt{3} \cdot V_L \cdot I_L$. Em função das grandezas de fase, é $S_{3\phi} = 3 \cdot V_f \cdot I_f$.
-        </div>
+        <div class="sol-text">$S=\sqrt3V_LI_L=\sqrt3\cdot380\cdot50\approx32{,}9\,kVA$. A potência ativa é $P=S\cos\varphi=32{,}9\cdot0{,}80\approx26{,}3\,kW$.</div>
         <div class="tip-box">
             <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
-            <span class="tip-text">Potência trifásica com linha: $\sqrt{3} \cdot V_L \cdot I_L$. Com fase: $3 \cdot V_f \cdot I_f$.</span>
+            <span class="tip-text">Quando os dados são tensão e corrente de linha, aplique $\sqrt3$ uma única vez. Depois use o fator de potência para passar de $S$ para $P$.</span>
         </div>
     </div>
 </div>
@@ -1686,28 +1581,24 @@ eq j$) representam:
             <td class="q-tag">Ponte de Graetz Trifásica • Retificador Hexafásico a Diodos</td>
         </tr>
     </table>
-    <div class="q-statement">
-        Um retificador trifásico em ponte completa a diodos (Ponte de Graetz com 6 diodos) sem capacitor de filtro alimenta uma carga puramente resistiva a partir de uma tensão de linha eficaz de $V_L = 220\text{ V}$. A frequência fundamental da ondulação (*ripple*) de tensão na saída contínua é de:
-    </div>
+    <div class="q-statement">Uma ponte trifásica de seis pulsos, sem filtro capacitivo, é alimentada por rede de $60\,Hz$ com tensão de linha eficaz de $220\,V$. Desprezando quedas nos diodos, quais são aproximadamente a frequência da ondulação e a tensão média ideal na saída? Considere $V_{dc}\approx1{,}35V_L$.</div>
     <div class="alternatives">
         <div class="alt-item">
-<strong>A)</strong> 60 Hz</div>
+<strong>A)</strong> $60\,Hz$ e $297\,V$.</div>
 <div class="alt-item">
-<strong>B)</strong> 360 Hz (6 vezes a frequência da rede)</div>
+<strong>B)</strong> $360\,Hz$ e $297\,V$.</div>
 <div class="alt-item">
-<strong>C)</strong> 120 Hz</div>
+<strong>C)</strong> $120\,Hz$ e $171\,V$.</div>
 <div class="alt-item">
-<strong>D)</strong> 720 Hz</div>
+<strong>D)</strong> $720\,Hz$ e $311\,V$.</div>
 
     </div>
     <div class="solution-box">
         <span class="sol-header">Gabarito Comentado: Alternativa B</span>
-        <div class="sol-text">
-            A ponte retificadora trifásica de 6 pulsos (Ponte de Graetz) gera 6 pulsos de condução a cada ciclo da rede elétrica de 60 Hz. Portanto, a frequência de ondulação (*ripple*) na carga CC é $f_{ripple} = 6 \cdot f_{rede} = 6 \times 60\text{ Hz} = 360\text{ Hz}$.
-        </div>
+        <div class="sol-text">A ponte trifásica produz seis pulsos por período, logo $f_{ripple}=6\cdot60=360\,Hz$. A média ideal é $V_{dc}\approx1{,}35\cdot220=297\,V$.</div>
         <div class="tip-box">
             <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
-            <span class="tip-text">Retificador trifásico de 6 diodos = 6 pulsos por ciclo $\rightarrow f_{ripple} = 6 \times 60 = 360\text{ Hz}$.</span>
+            <span class="tip-text">Separe as duas relações: número de pulsos determina a frequência da ondulação; a tensão média usa o fator próprio da ponte trifásica.</span>
         </div>
     </div>
 </div>
