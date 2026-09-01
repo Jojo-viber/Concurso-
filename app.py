@@ -480,7 +480,7 @@ def renderizar_fragmento(fragmento):
         imagem = imagens[int(match.group(1))]
         caminho = os.path.realpath(os.path.join(QUESTOES_DIR, imagem["src"]))
         if caminho.startswith(raiz_questoes + os.sep) and os.path.isfile(caminho):
-            st.image(caminho, caption=imagem["alt"], use_column_width=True)
+            st.image(caminho, caption=imagem["alt"], use_container_width=True)
         else:
             st.warning("Imagem da questão não encontrada.")
 
