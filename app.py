@@ -22,6 +22,8 @@ QUESTOES_DIR = "questoes"
 DADOS_USUARIOS_DIR = "dados_usuarios"
 USUARIOS_FILE = os.path.join(DADOS_USUARIOS_DIR, "usuarios.json")
 PROGRESSO_LEGADO_FILE = "progresso_usuario.json"
+MIGRACAO_GABARITOS_FILE = "migracao_gabaritos_v2.json"
+REVISAO_QUESTOES = "v2"
 
 if not os.path.exists(QUESTOES_DIR):
     os.makedirs(QUESTOES_DIR)
@@ -292,9 +294,18 @@ todas_questoes = carregar_todas_questoes()
 
 # Sincronização do progresso salvo
 progresso = st.session_state.progresso
+migracao_gabaritos = carregar_json(MIGRACAO_GABARITOS_FILE, {})
 houve_ajuste = False
 for q in todas_questoes:
     if q["id"] in progresso:
+        registro = progresso[q["id"]]
+        if registro.get("revisao_questoes") != REVISAO_QUESTOES:
+            resposta_antiga = registro.get("resposta")
+            conversao = migracao_gabaritos.get(q["id"], {})
+            if resposta_antiga in conversao:
+                registro["resposta"] = conversao[resposta_antiga]
+            registro["revisao_questoes"] = REVISAO_QUESTOES
+            houve_ajuste = True
         if progresso[q["id"]].get("bloco") != q["bloco"] or progresso[q["id"]].get("assunto") != q["assunto"]:
             progresso[q["id"]]["bloco"] = q["bloco"]
             progresso[q["id"]]["assunto"] = q["assunto"]
@@ -661,7 +672,10 @@ def renderizar_simulado():
     for indice, q in enumerate(questoes_simulado, start=1):
         with st.container(border=True):
             st.markdown(f"### Questão {indice} de {TOTAL_QUESTOES_SIMULADO}")
-            st.caption(f"{q['assunto']} • {q['subtema']}")
+            if finalizado:
+                st.caption(f"{q['assunto']} • {q['subtema']}")
+            else:
+                st.caption("Engenharia Elétrica • tema não identificado durante a prova")
             st.markdown(html_para_markdown(q["enunciado"]))
             alternativas = extrair_alternativas(q)
             for letra, texto in alternativas:
@@ -781,20 +795,18 @@ def renderizar_questao(q):
             salvar_progresso(progresso)
             st.rerun()
 
-        # Gabarito e Resolução ocultos por padrão para não dar spoiler (expander fechado)
         st.write("")
-        with st.expander("💡 Ver Gabarito Oficial & Resolução Detalhada", expanded=False):
-            if historico:
+        if historico:
+            with st.expander("💡 Ver Gabarito Oficial & Resolução Detalhada", expanded=False):
                 if historico.get("acertou"):
                     st.success(f"**Gabarito Oficial:** Alternativa **{q['gabarito']}** (Você acertou!)")
                 else:
                     st.error(f"**Gabarito Oficial:** Alternativa **{q['gabarito']}** (Na última tentativa você marcou **{historico.get('resposta')}**)")
-            else:
-                st.info(f"**Gabarito Oficial:** Alternativa **{q['gabarito']}**")
-                
-            st.markdown(html_para_markdown(q["resolucao"]))
-            if q["dica"]:
-                st.markdown(html_para_markdown(q["dica"]))
+                st.markdown(html_para_markdown(q["resolucao"]))
+                if q["dica"]:
+                    st.markdown(html_para_markdown(q["dica"]))
+        else:
+            st.caption("Confirme uma resposta para liberar o gabarito e a resolução.")
 
 # --- Área Principal ---
 if modo_aplicacao == "Simulado específico":
