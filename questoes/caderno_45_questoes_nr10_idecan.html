@@ -1,0 +1,1530 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<style>
+    @page {
+        size: A4;
+        margin: 14mm 12mm;
+        background-color: #f8fafc;
+        @bottom-right {
+            content: "Página " counter(page) " de " counter(pages);
+            font-size: 8.5pt;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: #64748b;
+        }
+        @bottom-left {
+            content: "Caderno de 45 Questões • NR-10 & Segurança em Eletricidade • Bloco Ouro | Foco IDECAN";
+            font-size: 8.5pt;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: #64748b;
+        }
+    }
+
+    *, *::before, *::after {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        color: #1e293b;
+        font-size: 9.35pt;
+        line-height: 1.45;
+        background-color: #f8fafc;
+    }
+
+    .header-banner {
+        background-color: #0f172a;
+        color: #ffffff;
+        padding: 18px 20px;
+        border-radius: 6px;
+        margin-bottom: 18px;
+    }
+
+    .header-banner h1 {
+        margin: 0 0 6px 0;
+        font-size: 16pt;
+        font-weight: 700;
+        letter-spacing: -0.3px;
+        color: #38bdf8;
+    }
+
+    .header-banner p {
+        margin: 0;
+        font-size: 9.2pt;
+        color: #cbd5e1;
+    }
+
+    .meta-table {
+        width: 100%;
+        margin-top: 10px;
+        border-collapse: collapse;
+    }
+
+    .meta-table td {
+        padding: 4px 8px;
+        font-size: 8.5pt;
+        color: #94a3b8;
+        border-top: 1px solid #334155;
+    }
+
+    .meta-table strong {
+        color: #f1f5f9;
+    }
+
+    .guide-intro {
+        background-color: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-left: 4px solid #eab308;
+        padding: 12px 14px;
+        border-radius: 4px;
+        margin-bottom: 20px;
+    }
+
+    .guide-intro h3 {
+        margin: 0 0 5px 0;
+        font-size: 10.8pt;
+        color: #854d0e;
+    }
+
+    .guide-intro p {
+        margin: 0;
+        font-size: 9pt;
+        color: #475569;
+    }
+
+    .question-card {
+        background-color: #ffffff;
+        border: 1px solid #cbd5e1;
+        border-radius: 6px;
+        padding: 12px 14px;
+        margin-bottom: 18px;
+        page-break-inside: avoid;
+    }
+
+    .q-badge-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 8px;
+    }
+
+    .q-number {
+        font-size: 10pt;
+        font-weight: 700;
+        color: #0f172a;
+    }
+
+    .q-tag {
+        text-align: right;
+        font-size: 7.8pt;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: #0284c7;
+        letter-spacing: 0.4px;
+    }
+
+    .q-statement {
+        font-size: 9.2pt;
+        font-weight: 500;
+        color: #1e293b;
+        margin-bottom: 10px;
+        line-height: 1.42;
+        text-align: justify;
+    }
+
+    .alternatives {
+        margin-left: 4px;
+        margin-bottom: 10px;
+    }
+
+    .alt-item {
+        font-size: 8.9pt;
+        color: #334155;
+        margin-bottom: 3.5px;
+        padding-left: 6px;
+    }
+
+    .alt-item strong {
+        color: #0f172a;
+    }
+
+    .solution-box {
+        background-color: #f1f5f9;
+        border: 1px solid #cbd5e1;
+        border-radius: 4px;
+        padding: 9px 11px;
+        margin-top: 8px;
+    }
+
+    .sol-header {
+        font-size: 8.6pt;
+        font-weight: 700;
+        color: #047857;
+        margin-bottom: 4px;
+        display: block;
+    }
+
+    .sol-text {
+        font-size: 8.7pt;
+        color: #334155;
+        line-height: 1.4;
+        text-align: justify;
+    }
+
+    .tip-box {
+        background-color: #fffbeb;
+        border: 1px solid #fde68a;
+        border-left: 3px solid #d97706;
+        border-radius: 3px;
+        padding: 6px 9px;
+        margin-top: 6px;
+    }
+
+    .tip-title {
+        font-size: 8.2pt;
+        font-weight: 700;
+        color: #92400e;
+        margin-bottom: 2px;
+        display: block;
+    }
+
+    .tip-text {
+        font-size: 8.2pt;
+        color: #78350f;
+        line-height: 1.35;
+    }
+
+    .math {
+        font-family: 'Times New Roman', Times, serif;
+        font-style: italic;
+        font-weight: bold;
+        color: #0369a1;
+    }
+</style>
+</head>
+<body>
+
+<div class="header-banner">
+    <h1>Caderno de 45 Questões • NR-10 & Segurança em Eletricidade</h1>
+    <p>Desenergização, Prontuário (PIE), Zonas de Risco, EPC/EPI e Procedimentos • Bloco Ouro • Foco: IDECAN</p>
+    <table class="meta-table">
+        <tr>
+            <td style="width: 33%;"><strong>Cargo:</strong> Engenheiro Eletricista</td>
+            <td style="width: 33%;"><strong>Meta do Bloco:</strong> 45 Questões Concluídas</td>
+            <td style="width: 34%; text-align: right;"><strong>Status:</strong> Bloco Ouro • Foco IDECAN</td>
+        </tr>
+    </table>
+</div>
+
+<div class="guide-intro">
+    <h3>Mapeamento Completo da NR-10 para a Prova</h3>
+    <p>Este caderno consolida as 45 questões estratégicas de Segurança em Eletricidade (NR-10): procedimentos de desenergização e reenergização (sequência cronológica de 6 etapas), constituição do Prontuário das Instalações Elétricas (PIE > 75 kW), zonas de risco e controlada (raios Rr e Rc), capacitação, qualificação, habilitação e autorização, medidas de proteção coletiva (EPC) e individual (EPI com ATPV), técnicas de trabalho em linha viva e linha morta, regras de bloqueio (LOTO) e auditorias de conformidade (RTI).</p>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 01</td>
+            <td class="q-tag">Desenergização • Sequência Cronológica Obrigatória</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Conforme o item 10.5.1 da NR-10, somente serão consideradas desenergizadas as instalações elétricas liberadas para trabalho mediante os procedimentos apropriados. A sequência cronológica correta e obrigatória das etapas iniciais desse procedimento é:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Constatação da ausência de tensão, seccionamento e impedimento de reenergização.</div>
+<div class="alt-item"><strong>B)</strong> Seccionamento, impedimento de reenergização e constatação da ausência de tensão.</div>
+<div class="alt-item"><strong>C)</strong> Impedimento de reenergização, seccionamento e instalação de aterramento temporário.</div>
+<div class="alt-item"><strong>D)</strong> Seccionamento, instalação de aterramento temporário e sinalização de impedimento.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            A sequência do item 10.5.1 da NR-10 é: a) seccionamento; b) impedimento de reenergização; c) constatação da ausência de tensão; d) instalação de aterramento temporário com equipotencialização; e) proteção dos elementos energizados existentes na zona controlada; f) instalação da sinalização de impedimento de reenergização.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Grave a sequência mnemônica dos 6 passos da NR-10: Seccionar -> Bloquear -> Testar ausência -> Aterrar/Equipotencializar -> Proteger adjacências -> Sinalizar.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 02</td>
+            <td class="q-tag">Reenergização • Procedimentos Sequenciais</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Para a reenergização de uma instalação elétrica previamente desenergizada segundo a NR-10, a primeira medida operacional a ser executada antes de restabelecer a tensão é:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> O fechamento imediato dos dispositivos de seccionamento geral da cabine.</div>
+<div class="alt-item"><strong>B)</strong> A retirada de todas as ferramentas, equipamentos e utensílios do local de trabalho.</div>
+<div class="alt-item"><strong>C)</strong> A remoção do aterramento temporário e da equipotencialização dos circuitos.</div>
+<div class="alt-item"><strong>D)</strong> A energização dos circuitos terminais de iluminação e tomadas de uso geral.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Conforme o item 10.5.2 da NR-10, a reenergização deve obedecer à seguinte sequência: 1º) retirada de ferramentas, utensílios e equipamentos; 2º) retirada da zona controlada de todos os trabalhadores não envolvidos no processo de reenergização; 3º) remoção do aterramento temporário, da equipotencialização e das proteções adicionais; 4º) remoção da sinalização de impedimento; 5º) destravamento e religamento dos dispositivos de seccionamento.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Reenergização é o inverso da desenergização: antes de tirar qualquer terra, limpe a área e retire pessoas e ferramentas!</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 03</td>
+            <td class="q-tag">Zonas de Risco e Controlada • Conceitos Fundamentais</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        A NR-10 estabelece distâncias no ar que delimitam zonas de risco, controlada e livre no entorno de pontos energizados. A Zona de Risco é normativamente definida como a:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Área externa à zona livre onde qualquer trabalhador não qualificado pode transitar livremente.</div>
+<div class="alt-item"><strong>B)</strong> Faixa situada entre a zona livre e a zona controlada, destinada exclusivamente à circulação de veículos.</div>
+<div class="alt-item"><strong>C)</strong> Área do entorno de parte condutora energizada, não segregada, acessível inclusive ao contato físico.</div>
+<div class="alt-item"><strong>D)</strong> Região confinada dentro de transformadores a seco mantida sob pressão positiva permanente.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa C</span>
+        <div class="sol-text">
+            Conforme o Anexo II da NR-10: Zona de Risco é o entorno de parte condutora energizada, não segregada, acessível inclusive ao contato físico, onde o trabalho é restrito a trabalhadores autorizados e com adoção de técnicas de trabalho sob tensão ou com instalações desenergizadas.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Zona de Risco = Contato físico ou arco elétrico iminente ($R_r$). Zona Controlada = Entorno intermediário ($R_c$). Zona Livre = Fora de $R_c$.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 04</td>
+            <td class="q-tag">Trabalho em Proximidade • Acesso à Zona Controlada</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        De acordo com a NR-10, o acesso e a realização de trabalhos na Zona Controlada no entorno de partes vivas energizadas são restritos a:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Qualquer empregado da empresa que possua registro ativo na CIPA.</div>
+<div class="alt-item"><strong>B)</strong> Trabalhadores autorizados que atendam aos requisitos de capacitação e instrução formal da norma.</div>
+<div class="alt-item"><strong>C)</strong> Técnicos de segurança do trabalho acompanhados de estagiários de nível médio.</div>
+<div class="alt-item"><strong>D)</strong> Operadores de máquinas pesadas portando calçados de segurança com biqueira de aço.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            O item 10.4.4 da NR-10 estabelece que as instalações elétricas devem ser mantidas em condições seguras e que os trabalhos em zonas controladas ou de risco só podem ser realizados por trabalhadores autorizados (capacitados, qualificados ou habilitados com treinamento específico e anuência formal da empresa).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Acesso a Zonas de Risco e Controlada exige autorização formal e treinamento de NR-10 (Básico de 40h + SEP se aplicável).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 05</td>
+            <td class="q-tag">Prontuário das Instalações Elétricas (PIE) • Limite de Potência</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        A constituição e a manutenção do Prontuário de Instalações Elétricas (PIE) são obrigatórias para estabelecimentos com carga instalada superior a:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> 25 kW</div>
+<div class="alt-item"><strong>B)</strong> 50 kW</div>
+<div class="alt-item"><strong>C)</strong> 75 kW</div>
+<div class="alt-item"><strong>D)</strong> 150 kW</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa C</span>
+        <div class="sol-text">
+            O item 10.2.4 da NR-10 prescreve que os estabelecimentos com carga instalada superior a 75 kW devem constituir e manter o Prontuário de Instalações Elétricas (PIE), contendo conjunto de procedimentos, laudos, esquemas unifilares e certificados.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Número de ouro da NR-10: Prontuário (PIE) é obrigatório a partir de 75 kW de carga instalada!</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 06</td>
+            <td class="q-tag">Conteúdo do PIE • Documentos Obrigatórios</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Dentre os documentos obrigatórios que devem integrar o Prontuário de Instalações Elétricas (PIE) de uma indústria segundo a NR-10, NÃO se inclui:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> O conjunto de procedimentos e instruções técnicas e de segurança para operação e manutenção.</div>
+<div class="alt-item"><strong>B)</strong> A documentação das inspeções e medições do sistema de proteção contra descargas atmosféricas (SPDA).</div>
+<div class="alt-item"><strong>C)</strong> Os certificados de calibração dos equipamentos de proteção coletiva e individual de isolação elétrica.</div>
+<div class="alt-item"><strong>D)</strong> A cópia da folha de pagamento e do contrato social da empresa prestadora de serviços elétricos.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa D</span>
+        <div class="sol-text">
+            Conforme o item 10.2.4 da NR-10, o PIE reúne esquemas unifilares atualizados, laudo do SPDA/aterramento, certificados de ensaios de EPI/EPC, certificados de treinamento dos trabalhadores, procedimentos de trabalho e relatórios de conformidade. Documentos contábeis e folha de pagamento não compõem o PIE.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Questão de exclusão da IDECAN: foque em documentos de segurança, laudos técnicos e certificados de conformidade elétrica.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 07</td>
+            <td class="q-tag">Qualificação, Habilitação e Capacitação • Conceitos Normativos</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Segundo as definições do item 10.8 da NR-10, é considerado profissional legalmente habilitado o trabalhador que:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Recebeu treinamento sob orientação de um profissional habilitado e trabalha sob sua responsabilidade.</div>
+<div class="alt-item"><strong>B)</strong> Comprova conclusão de curso específico na área elétrica reconhecido pelo Sistema Oficial de Ensino.</div>
+<div class="alt-item"><strong>C)</strong> Possui curso de nível superior ou técnico registrado no competente conselho de classe profissional.</div>
+<div class="alt-item"><strong>D)</strong> Exerce atividades de manutenção elétrica em carteira de trabalho há mais de cinco anos ininterruptos.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa C</span>
+        <div class="sol-text">
+            Diferenciação do item 10.8 da NR-10:<br>• <strong>Qualificado:</strong> concluiu curso na área elétrica no sistema oficial de ensino;<br>• <strong>Habilitado:</strong> qualificado E registrado no respectivo conselho de classe (ex.: CREA/CFT);<br>• <strong>Capacitado:</strong> treinado pela empresa sob responsabilidade de um habilitado;<br>• <strong>Autorizado:</strong> qualificado/capacitado/habilitado com anuência formal da empresa.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Tríade clássica: Qualificado (tem diploma) -> Habilitado (tem CREA/CFT) -> Autorizado (tem a 'canetada' da empresa).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 08</td>
+            <td class="q-tag">Treinamento de Segurança • Carga Horária e Validade</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Para a execução de serviços em instalações elétricas, a NR-10 exige a realização de treinamento de segurança (Curso Básico). A carga horária mínima e a periodicidade máxima para o treinamento de reciclagem são:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> 20 horas e reciclagem a cada 1 ano.</div>
+<div class="alt-item"><strong>B)</strong> 40 horas e reciclagem bienal (a cada 2 anos).</div>
+<div class="alt-item"><strong>C)</strong> 80 horas e reciclagem a cada 5 anos.</div>
+<div class="alt-item"><strong>D)</strong> 100 horas e reciclagem apenas na admissão do funcionário.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Conforme o Anexo III da NR-10: O Curso Básico - Segurança em Instalações e Serviços com Eletricidade possui carga horária mínima de 40 horas. O treinamento de reciclagem deve ocorrer a cada dois anos (bienal) ou em situações de troca de função, retorno de afastamento superior a 3 meses ou modificações significativas nas instalações.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Curso Básico NR-10 = 40h. Reciclagem bienal = 2 anos.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 09</td>
+            <td class="q-tag">Sistema Elétrico de Potência (SEP) • Treinamento Complementar</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Os trabalhadores que intervêm em instalações elétricas integrantes do Sistema Elétrico de Potência (SEP) ou em suas proximidades devem realizar obrigatoriamente o treinamento complementar, cuja carga horária mínima é de:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> 16 horas</div>
+<div class="alt-item"><strong>B)</strong> 20 horas</div>
+<div class="alt-item"><strong>C)</strong> 40 horas</div>
+<div class="alt-item"><strong>D)</strong> 60 horas</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa C</span>
+        <div class="sol-text">
+            O Anexo III da NR-10 fixa que os trabalhadores do SEP (alta e média tensão em geração, transmissão e distribuição) devem realizar, além do curso básico de 40 horas, o Curso Complementar - Segurança no Sistema Elétrico de Potência (SEP) com carga horária mínima de mais 40 horas.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Curso Básico = 40h | Curso Complementar SEP = +40h (Totalizando 80h para quem atua em média/alta tensão no SEP).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 10</td>
+            <td class="q-tag">Medidas de Proteção Coletiva (EPC) • Princípio da Prioridade</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        No planejamento de serviços em eletricidade, o item 10.2.8 da NR-10 preconiza a priorização das Medidas de Proteção Coletiva (EPC). Dentre as alternativas a seguir, assinale aquela que constitui a medida prioritária primária de proteção coletiva:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> O fornecimento de vestimentas antichama impermeabilizadas.</div>
+<div class="alt-item"><strong>B)</strong> A desenergização elétrica das instalações e o emprego de isolação física dos componentes.</div>
+<div class="alt-item"><strong>C)</strong> O uso exclusivo de luvas de borracha isolante com sobreluvas de vaqueta.</div>
+<div class="alt-item"><strong>D)</strong> A realização de exames médicos periódicos semestrais com eletroencefalograma.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            O item 10.2.8.1 estabelece que em todos os serviços em instalações elétricas devem ser adotadas prioritariamente medidas de proteção coletiva aplicáveis, mediante procedimentos, às atividades a serem desenvolvidas, de forma a garantir a segurança e a saúde dos trabalhadores. A desenergização elétrica é a medida prioritária por excelência (item 10.2.8.2), seguida do emprego de tensão de segurança.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Hierarquia de segurança da NR-10: 1º EPC / Desenergização -> 2º Tensão de segurança -> 3º EPI (quando inviável o controle coletivo total).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 11</td>
+            <td class="q-tag">Trabalho sob Tensão • Impedimento em Condições Adversas</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Segundo o item 10.6.4 da NR-10, os trabalhos em instalações elétricas ao ar livre sob tensão devem ser imediatamente suspensos quando:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> A temperatura ambiente ultrapassar 28°C em dias ensolarados.</div>
+<div class="alt-item"><strong>B)</strong> Ocorrerem condições meteorológicas adversas como chuvas intensas, descargas atmosféricas e vendavais que comprometam a segurança.</div>
+<div class="alt-item"><strong>C)</strong> O nível de ruído dos transformadores adjacentes atingir 65 dB.</div>
+<div class="alt-item"><strong>D)</strong> O índice de umidade relativa do ar for inferior a 40%.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Item 10.6.4: Os serviços em instalações elétricas sob tensão ao ar livre devem ser suspensos de imediato na iminência ou ocorrência de chuvas, ventos fortes, descargas atmosféricas e outras condições meteorológicas adversas.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Condição climática severa (chuva/raio) = Parada imediata de trabalhos sob tensão em áreas externas.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 12</td>
+            <td class="q-tag">Vestimentas de Trabalho • Efeito Corona e Arco Elétrico</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        A NR-10 estabelece critérios para as vestimentas de trabalho dos profissionais autorizados. A respeito dessas vestimentas (item 10.2.9.2), assinale a correta:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Devem ser confeccionadas exclusivamente com fibras sintéticas de poliamida pura para reduzir peso.</div>
+<div class="alt-item"><strong>B)</strong> Devem ser adequadas às atividades, contemplando a condutibilidade, inflamabilidade e influências eletromagnéticas (risco de arco e fogo repentino).</div>
+<div class="alt-item"><strong>C)</strong> Podem conter adornos metálicos aparentes desde que polidos.</div>
+<div class="alt-item"><strong>D)</strong> Dispensam ensaios de flamabilidade para trabalhos em circuitos de corrente contínua.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Item 10.2.9.2: As vestimentas de trabalho devem ser adequadas às atividades, devendo contemplar a condutibilidade, inflamabilidade e influências eletromagnéticas, sendo proibido o uso de adornos pessoais (item 10.2.9.3).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Vestimenta NR-10: Risco de arco elétrico/fogo repentino (tecido 100% algodão ou fibras intrinsecamente resistentes ao fogo - ATPV). Adornos são proibidos.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 13</td>
+            <td class="q-tag">Uso de Adornos Pessoais • Vedação Absoluta</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        A respeito do uso de adornos pessoais (como relógios, anéis, alianças, brincos, correntes e piercings) nos trabalhos em instalações elétricas, a NR-10 determina que:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> É permitido desde que revestidos com fita isolante comum.</div>
+<div class="alt-item"><strong>B)</strong> É expressamente proibido nos locais de trabalho com instalações elétricas ou em suas proximidades.</div>
+<div class="alt-item"><strong>C)</strong> É permitido apenas para profissionais legalmente habilitados com registro no conselho.</div>
+<div class="alt-item"><strong>D)</strong> É liberado durante a execução de ensaios de comissionamento em baixa tensão.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Item 10.2.9.3: É vedado o uso de adornos pessoais nos trabalhos com instalações elétricas ou em suas proximidades, pois metais aumentam o risco de contato acidental e queimaduras graves por arco elétrico.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Regra categórica: Adornos pessoais são 100% PROIBIDOS em serviços elétricos.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 14</td>
+            <td class="q-tag">Ordem de Serviço (OS) • Documentação de Liberação</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Conforme o item 10.11 da NR-10, os serviços em instalações elétricas devem ser precedidos de ordens de serviço específicas contendo, no mínimo:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> O valor do salário do operador e os dados bancários da equipe.</div>
+<div class="alt-item"><strong>B)</strong> O tipo, a data, o local e as referências aos procedimentos de trabalho a serem adotados.</div>
+<div class="alt-item"><strong>C)</strong> A lista de fornecedores de materiais elétricos credenciados no município.</div>
+<div class="alt-item"><strong>D)</strong> O comprovante de recolhimento da Anotação de Função Técnica na DRT.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Item 10.11.2: As ordens de serviço devem conter, no mínimo, o tipo, a data, o local e as referências aos procedimentos de trabalho a serem adotados na intervenção elétrica.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Ordem de Serviço (OS) da NR-10: Tipo de serviço + Data + Local + Procedimento operacional de segurança.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 15</td>
+            <td class="q-tag">Trabalho Individual • Proibição em Alta e Média Tensão</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        A NR-10 estabelece restrições expressas quanto à execução de serviços individuais em instalações elétricas. Em sistemas de Alta e Média Tensão (SEP e alta tensão), é correto afirmar:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Os serviços podem ser realizados individualmente se o trabalhador for habilitado.</div>
+<div class="alt-item"><strong>B)</strong> Os trabalhos em circuitos energizados em alta tensão ou integrantes do SEP nunca podem ser realizados individualmente, exigindo equipe de no mínimo dois trabalhadores.</div>
+<div class="alt-item"><strong>C)</strong> Admite-se trabalho individual em subestações de 13,8 kV desde que haja monitoramento por câmeras de vídeo.</div>
+<div class="alt-item"><strong>D)</strong> O trabalho em dupla é obrigatório apenas para a troca de fusíveis em 127 V.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Item 10.7.3: Os serviços em instalações elétricas energizadas em AT, bem como aqueles que sejam executados no SEP, não podem ser realizados individualmente (exige equipe com pelo menos 2 trabalhadores).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Alta Tensão / SEP energizado = Trabalho individual expressamente PROIBIDO (sempre em dupla ou equipe).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 16</td>
+            <td class="q-tag">Comunicação e Sinalização de Segurança • Travamento e Etiquetagem</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        O procedimento de Bloqueio e Etiquetagem (*Lockout & Tagout - LOTO*) exigido pela NR-10 para impedir a reenergização inadvertida baseia-se em:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Fechar o disjuntor e colocar aviso verbal ao encarregado do turno.</div>
+<div class="alt-item"><strong>B)</strong> Instalação de cadeados de travamento físico mecânico nos dispositivos de manobra acompanhados de etiquetas de sinalização padronizadas com identificação do responsável.</div>
+<div class="alt-item"><strong>C)</strong> Retirar apenas a manopla de comando sem aplicação de cadeados.</div>
+<div class="alt-item"><strong>D)</strong> Desligar o disjuntor geral da subestação e trancar a porta principal do prédio comercial.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Item 10.5.1 alíneas 'b' e 'f': O impedimento de reenergização e a sinalização exigem bloqueio físico (travas/cadeados mecânicos) e cartões de sinalização com identificação do trabalhador, impedindo manobra acidental.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Impedimento de reenergização = Travamento mecânico (cadeado) + Etiqueta de identificação pessoal.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 17</td>
+            <td class="q-tag">Aterramento Temporário • Critérios de Equipotencialização</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        A respeito da instalação do aterramento temporário em linhas desenergizadas segundo a NR-10, o conjunto deve ser conectado na seguinte ordem operacional:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Primeiramente aos cabos de fase e, em seguida, conectado à malha de terra.</div>
+<div class="alt-item"><strong>B)</strong> Primeiramente à malha de aterramento (terra) e, posteriormente, fixado aos condutores de fase.</div>
+<div class="alt-item"><strong>C)</strong> Conectado exclusivamente à fase central sem ligação à estrutura metálica.</div>
+<div class="alt-item"><strong>D)</strong> Conectado simultaneamente com o disjuntor em posição fechada.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Regra de ouro de segurança: O conjunto de aterramento temporário deve ser conectado PRIMEIRO ao ponto de terra e só depois aos condutores de fase. Na desmontagem, faz-se o inverso (desconecta da fase primeiro e da terra por último).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Montagem do Terra: Conecta no Terra primeiro -> depois na Fase. Desmontagem: Tira da Fase primeiro -> depois do Terra.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 18</td>
+            <td class="q-tag">Direito de Recusa • Situação de Risco Grave e Iminente</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        O item 10.14.1 da NR-10 consagra o Direito de Recusa do trabalhador. Esse direito assegura que o empregado pode interromper suas tarefas e recusar-se a executá-las sempre que:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> O valor do adicional de periculosidade não for pago até o quinto dia útil.</div>
+<div class="alt-item"><strong>B)</strong> Evidenciar riscos graves e iminentes para sua segurança e saúde ou a de outras pessoas, comunicando imediatamente o fato ao seu superior hierárquico.</div>
+<div class="alt-item"><strong>C)</strong> O clima estiver chuvoso durante atividades de escritório em ambiente interno.</div>
+<div class="alt-item"><strong>D)</strong> O equipamento de proteção individual fornecido for de cor diferente da preferida.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Item 10.14.1: Os trabalhadores devem interromper suas tarefas, exercendo o direito de recusa, sempre que constatarem evidências de riscos graves e iminentes para sua segurança e saúde ou a de outras pessoas, comunicando imediatamente o fato a seu superior hierárquico, que diligenciará as medidas cabíveis.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Direito de Recusa = Risco grave e iminente à vida/saúde com comunicação imediata à chefia.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 19</td>
+            <td class="q-tag">Responsabilidades Compartilhadas • Contratante e Contratada</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        A respeito das responsabilidades pela segurança em serviços com eletricidade segundo o item 10.13 da NR-10, é correto afirmar:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> A responsabilidade é exclusiva da empresa contratada, eximindo a tomadora de qualquer obrigação.</div>
+<div class="alt-item"><strong>B)</strong> A responsabilidade é solidária entre contratantes e contratadas pelo cumprimento rigoroso das medidas de proteção da NR-10.</div>
+<div class="alt-item"><strong>C)</strong> O trabalhador autônomo responde civilmente sem qualquer fiscalização da empresa contratante.</div>
+<div class="alt-item"><strong>D)</strong> As multas da fiscalização do trabalho são aplicadas exclusivamente aos operadores de campo.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Item 10.13.1: As responsabilidades quanto ao cumprimento desta NR são solidárias aos contratantes e contratados envolvidos.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Segurança do trabalho na NR-10 = Responsabilidade SOLIDÁRIA entre contratante e contratada.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 20</td>
+            <td class="q-tag">Autorização para Trabalhos • Procedimento Formal da Empresa</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        O processo de autorização formal de trabalhadores para intervenções elétricas conforme a NR-10 vincula-se a:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Uma declaração verbal em reunião de diálogo diário de segurança (DDS).</div>
+<div class="alt-item"><strong>B)</strong> Uma anuência formal da empresa registrada em sistema, mediante comprovação de capacitação, qualificação ou habilitação, exames médicos compatíveis (ASO) e treinamento específico.</div>
+<div class="alt-item"><strong>C)</strong> Ao simples registro da função de eletricista na Carteira de Trabalho Digital.</div>
+<div class="alt-item"><strong>D)</strong> À posse de ferramentas manuais com cabo isolado para 1.000 V.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Item 10.8.8: Os trabalhadores autorizados a trabalhar em instalações elétricas devem ter essa condição consignada no sistema de registro de empregado da empresa, após comprovação de aptidão médica (ASO com indicação de aptidão para eletricidade), capacitação técnica e treinamentos de NR-10.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Trabalhador Autorizado = Treinamento formal + ASO apto + Anuência formalizada pela empresa.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 21</td>
+            <td class="q-tag">Barreiras e Invólucros • Graus de Proteção e Acesso</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Na proteção contra contatos diretos com partes vivas segundo a NR-10, as barreiras e invólucros devem:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Ser removíveis manualmente sem o emprego de ferramentas ou chaves específicas.</div>
+<div class="alt-item"><strong>B)</strong> Ser fixados de forma segura e só poderem ser abertos ou removidos com a utilização de ferramentas ou mediante prévia desenergização.</div>
+<div class="alt-item"><strong>C)</strong> Ser fabricados exclusivamente em madeira compensada com verniz antichama.</div>
+<div class="alt-item"><strong>D)</strong> Conter orifícios abertos superiores a 50 mm para circulação livre de ar.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            As barreiras e invólucros protegem contra o contato direto acidental. Devem possuir fixação robusta e sua remoção só pode ocorrer com ferramenta apropriada ou intertravamento elétrico.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Barreiras e invólucros = Acesso somente com ferramentas ou chave de bloqueio.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 22</td>
+            <td class="q-tag">Obstáculos e Anteparos • Proteção Parcial</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        O uso de obstáculos como medida de proteção contra contatos diretos (NR-10 / NBR 5410) destina-se a:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Impedir qualquer aproximação voluntária de operadores qualificados.</div>
+<div class="alt-item"><strong>B)</strong> Impedir contatos involuntários com partes vivas durante operações rotineiras, não impedindo o contato deliberado.</div>
+<div class="alt-item"><strong>C)</strong> Eliminar completamente a necessidade de uso de calçados de segurança.</div>
+<div class="alt-item"><strong>D)</strong> Substituir a isolação básica dos condutores de média tensão.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Obstáculos destinam-se a impedir o contato elétrico involuntário (fortuito), mas não evitam o contato deliberado mediante contorno intencional do obstáculo.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Obstáculo = Evita contato involuntário/acidental (proteção parcial).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 23</td>
+            <td class="q-tag">Tensão de Segurança (SELV/PELV) • Medida de Proteção Coletiva</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        A NR-10 classifica a Tensão de Segurança como medida de proteção coletiva. Em locais secos sob corrente alternada, a tensão de segurança corresponde a valores não superiores a:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> 12 V CA</div>
+<div class="alt-item"><strong>B)</strong> 24 V CA</div>
+<div class="alt-item"><strong>C)</strong> 50 V CA</div>
+<div class="alt-item"><strong>D)</strong> 120 V CA</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa C</span>
+        <div class="sol-text">
+            Tensão de segurança: extra-baixa tensão originada de fonte de segurança, com valor eficaz não superior a 50 V em corrente alternada (ou 120 V CC) em condições normais secas.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Tensão de Segurança em locais secos = $\le 50	ext{ V CA}$ ou $\le 120	ext{ V CC}$.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 24</td>
+            <td class="q-tag">Trabalhos em Espaços Confinados • Associação com NR-33</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Durante a manutenção de subestações transformadoras subterrâneas em caixas de passagem visitáveis, além da NR-10, deve ser rigorosamente cumprida a:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> NR-18 (Construção Civil apenas)</div>
+<div class="alt-item"><strong>B)</strong> NR-33 (Segurança e Saúde nos Trabalhos em Espaços Confinados)</div>
+<div class="alt-item"><strong>C)</strong> NR-12 (Máquinas Operatrizes)</div>
+<div class="alt-item"><strong>D)</strong> NR-36 (Abate de Frangos)</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Subestações subterrâneas e galerias elétricas subterrâneas enquadram-se como Espaços Confinados, exigindo Permissão de Entrada e Trabalho (PET), medição contínua de gases e vigia conforme a NR-33.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Subestação subterrânea = NR-10 + NR-33 (PET, teste de gases e vigia externo).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 25</td>
+            <td class="q-tag">Trabalho em Altura em Redes Elétricas • Associação com NR-35</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        A execução de serviços em linhas aéreas de média tensão em postes exige, além da capacitação em NR-10, o cumprimento da NR-35 (Trabalho em Altura). A NR-35 aplica-se a atividades realizadas a partir de:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> 1,50 m do nível inferior.</div>
+<div class="alt-item"><strong>B)</strong> 2,00 m do nível inferior onde haja risco de queda.</div>
+<div class="alt-item"><strong>C)</strong> 3,50 m de altura do piso.</div>
+<div class="alt-item"><strong>D)</strong> 5,00 m de altura em relação ao solo.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Item 35.1.2 da NR-35: Considera-se trabalho em altura toda atividade executada acima de 2,00 m (dois metros) do nível inferior, onde haja risco de queda.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Trabalho em altura = Acima de 2,00 m do solo.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 26</td>
+            <td class="q-tag">Manobras de Chaves em Média Tensão • Uso de Vara de Manobra</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Na operação manual de chaves seccionadoras e chaves fusíveis de média tensão em redes aéreas, é obrigatório o uso de:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Luvas de látex cirúrgicas esterilizadas.</div>
+<div class="alt-item"><strong>B)</strong> Vara de manobra isolada certificada, luvas isolantes de borracha compatíveis com o nível de tensão e óculos de proteção contra arco.</div>
+<div class="alt-item"><strong>C)</strong> Alicate universal com cabo comum de PVC de 750 V.</div>
+<div class="alt-item"><strong>D)</strong> Bastão condutor de alumínio anodizado.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            A manobra de chaves de MT exige distanciamento seguro do operador com vara de manobra isolada (fibra de vidro com ensaio dielétrico periódico), luvas isolantes de borracha da classe de tensão e proteção facial/ocular contra arco.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Manobra em MT = Vara de manobra isolada + Luvas de borracha MT + Protetor facial contra arco elétrico.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 27</td>
+            <td class="q-tag">Detector de Ausência de Tensão • Teste de Funcionamento Prévio</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Antes de utilizar um detector de tensão por contato para constatar a ausência de tensão nos condutores de MT (Passo 3 da desenergização), o operador deve:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Lavar o sensor em água corrente.</div>
+<div class="alt-item"><strong>B)</strong> Testar o funcionamento do detector em uma fonte de tensão comprovadamente energizada ou dispositivo de teste próprio imediatamente antes e após a verificação.</div>
+<div class="alt-item"><strong>C)</strong> Desconectar a bateria do equipamento para economizar carga.</div>
+<div class="alt-item"><strong>D)</strong> Utilizá-lo sem luvas para aumentar a sensibilidade capacitiva.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            O detector de tensão deve ser testado antes da medição (para garantir que não está com defeito indicando falsa ausência de tensão) e logo após a medição.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Detector de tensão: Testar na fonte viva antes e depois da constatação da desenergização!</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 28</td>
+            <td class="q-tag">Resgate em Altura e Primeiros Socorros • Treinamento Obrigatório</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        A NR-10 determina que todo trabalhador autorizado a intervir em instalações elétricas deve possuir treinamento em:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Técnicas de combate a incêndio com água pressurizada em quadros elétricos.</div>
+<div class="alt-item"><strong>B)</strong> Noções de primeiros socorros, técnicas de resgate e reanimação cardiopulmonar (RCP).</div>
+<div class="alt-item"><strong>C)</strong> Pilotagem de caminhão guindauto tipo Munck.</div>
+<div class="alt-item"><strong>D)</strong> Arbitragem de conflitos sindicais.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Item 10.12.2: Os trabalhadores autorizados devem estar aptos a executar o resgate e prestar primeiros socorros a acidentados, especialmente por meio de reanimação cardiopulmonar.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Treinamento obrigatório da NR-10 inclui Primeiros Socorros e Ressuscitação Cardiopulmonar (RCP).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 29</td>
+            <td class="q-tag">Extintores para Incêndios em Instalações Energizadas • Classe C</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Em princípios de incêndio envolvendo painéis e equipamentos elétricos energizados (fogo Classe C), os agentes extintores recomendados são:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Água pressurizada em jato pleno.</div>
+<div class="alt-item"><strong>B)</strong> Dióxido de Carbono (CO2) e Pó Químico Seco (PQS).</div>
+<div class="alt-item"><strong>C)</strong> Espuma mecânica aquosa.</div>
+<div class="alt-item"><strong>D)</strong> Água com detergente sintético.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Fogo Classe C (equipamentos elétricos energizados): Usar agentes não condutores de eletricidade, como $CO_2$ (gás carbônico) e Pó Químico ($PQS/ABC$). Água e espuma conduzem eletricidade e provocam choque fatal.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Incêndio Classe C (elétrico energizado) = Extintor de $CO_2$ ou Pó Químico. NUNCA usar água!</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 30</td>
+            <td class="q-tag">Isolamento de Ferramentas Manuais • Norma NBR IEC 60900</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Ferramentas manuais isoladas utilizadas em serviços de baixa tensão (como alicates e chaves de fenda) devem ser ensaiadas e certificadas para suportar a tensão de:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> 250 V</div>
+<div class="alt-item"><strong>B)</strong> 500 V</div>
+<div class="alt-item"><strong>C)</strong> 1.000 V CA (ou 1.500 V CC)</div>
+<div class="alt-item"><strong>D)</strong> 13.800 V CA</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa C</span>
+        <div class="sol-text">
+            Conforme a NBR IEC 60900: Ferramentas manuais isoladas para trabalhos sob tensão em BT são certificadas com símbolo do duplo triângulo para até 1.000 V em corrente alternada (ou 1.500 V em corrente contínua).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Ferramenta isolada BT = Certificação de 1.000 V CA / 1.500 V CC (Duplo Triângulo).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 31</td>
+            <td class="q-tag">Inspeção de EPIs • Luvas Isolantes de Borracha</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        As luvas de borracha isolante para serviços em eletricidade devem passar por ensaios dielétricos laboratoriais periódicos e inspeção visual prévia. A periodicidade máxima para o reensaio elétrico laboratorial é de:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> 1 mês</div>
+<div class="alt-item"><strong>B)</strong> 6 meses (ou periodicidade definida pelo fabricante/norma)</div>
+<div class="alt-item"><strong>C)</strong> 2 anos</div>
+<div class="alt-item"><strong>D)</strong> 5 anos</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Segundo as normas técnicas (NBR 10622 / ASTM D120) e boas práticas de segurança, as luvas isolantes de borracha devem ser retestadas eletricamente em laboratório a cada 6 meses (ou antes se sofrerem suspeita de dano mecânico). Diariamente, antes do uso, realiza-se o teste de insuflamento de ar.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Luvas isolantes: Teste diário de inflamento de ar + Reensaio elétrico em laboratório a cada 6 meses.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 32</td>
+            <td class="q-tag">Classes de Luvas Isolantes de Borracha • Faixas de Tensão</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Uma luva isolante de borracha classificada como **Classe 2** segundo as normas técnicas é especificada para uso sob tensão máxima de trabalho de até:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> 500 V</div>
+<div class="alt-item"><strong>B)</strong> 1.000 V</div>
+<div class="alt-item"><strong>C)</strong> 17.000 V (17 kV)</div>
+<div class="alt-item"><strong>D)</strong> 36.000 V (36 kV)</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa C</span>
+        <div class="sol-text">
+            Classes de luvas de borracha:<br>• Classe 00: até 500 V;<br>• Classe 0: até 1.000 V;<br>• Classe 1: até 7.500 V;<br>• **Classe 2: até 17.000 V (17 kV)**;<br>• Classe 3: até 26.500 V;<br>• Classe 4: até 36.000 V.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Luvas isolantes: Classe 00 (500V) | Classe 0 (1kV) | Classe 2 (17kV - ideal para 13,8kV) | Classe 4 (36kV).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 33</td>
+            <td class="q-tag">Equipamentos Portáteis e Extensões • Dupla Isolação</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Em canteiros de obras e áreas industriais, ferramentas elétricas portáteis manuais (furadeiras, lixadeiras) devem possuir prioritariamente:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Carcaça de ferro fundido sem condutor de proteção.</div>
+<div class="alt-item"><strong>B)</strong> Dupla isolação ou isolação reforçada (identificadas pelo símbolo de dois quadrados concêntricos) ou proteção por DR de alta sensibilidade.</div>
+<div class="alt-item"><strong>C)</strong> Alimentação direta por geradores sem chave de proteção.</div>
+<div class="alt-item"><strong>D)</strong> Cabos condutores com isolação simples em papelão.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Ferramentas elétricas portáteis devem possuir isolação dupla (Classe II - símbolo de quadrado duplo) que dispensa o pino terra na tomada ou alimentação protegida por dispositivo DR diferencial-residual $\le 30	ext{ mA}$.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Ferramenta portátil segura = Símbolo de Dupla Isolação (dois quadrados concêntricos).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 34</td>
+            <td class="q-tag">Painéis Elétricos e Sinalização • Advertência de Risco</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Em todas as portas de salas elétricas, cubículos de subestações e portas de quadros de distribuição de circuitos, é obrigatória a fixação de:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Tabela com os nomes de todos os eletricistas da fábrica.</div>
+<div class="alt-item"><strong>B)</strong> Placas de sinalização de advertência e identificação de perigo elétrico (ex.: 'Perigo - Alta Tensão' ou 'Acesso Restrito a Pessoas Autorizadas').</div>
+<div class="alt-item"><strong>C)</strong> Cópia do balanço patrimonial da empresa.</div>
+<div class="alt-item"><strong>D)</strong> Termômetro de mercúrio de leitura externa.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Item 10.10.1: As instalações elétricas devem ser sinalizadas quanto à identificação de circuitos, advertências de perigo, restrição de acesso e impedimento de manobra.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Sinalização de segurança da NR-10 é obrigatória em todas as portas de quadros e salas elétricas.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 35</td>
+            <td class="q-tag">Manutenção de Linhas Desenergizadas • Linha Morta</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        No método de trabalho em linha desenergizada (potencial zero), a condição fundamental que garante a vida do trabalhador é:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> O uso de vestimenta de malha condutiva interligada ao condutor de fase.</div>
+<div class="alt-item"><strong>B)</strong> A manutenção contínua e ininterrupta do aterramento temporário em ambos os lados do vão de trabalho durante toda a execução da tarefa.</div>
+<div class="alt-item"><strong>C)</strong> A confiança exclusiva no aviso verbal do operador da subestação.</div>
+<div class="alt-item"><strong>D)</strong> A execução do serviço com ferramentas manuais não isoladas.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            No método da linha desenergizada, a equipe trabalha entre dois pontos de aterramento temporário equipotencializados (aterramento a montante e a jusante da zona de trabalho), garantindo que qualquer religamento acidental dispare as proteções a montante sem atingir o operador.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Trabalho em linha morta = Zona protegida entre dois conjuntos de aterramento temporário equipotencializados.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 36</td>
+            <td class="q-tag">Método ao Potencial • Trabalho em Linha Viva</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        No método de trabalho ao potencial em linhas de transmissão energizadas em alta tensão, o trabalhador:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Permanece conectado ao potencial de terra pisando diretamente no solo úmido.</div>
+<div class="alt-item"><strong>B)</strong> Fica eletricamente isolado da terra e no mesmo potencial elétrico do condutor de fase energizado através do uso de vestimenta condutiva especial (gaiola de Faraday).</div>
+<div class="alt-item"><strong>C)</strong> Toca os condutores energizados sem qualquer equipamento de proteção especial.</div>
+<div class="alt-item"><strong>D)</strong> Utiliza luvas de borracha comuns de baixa tensão.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            No método ao potencial, o eletricista fica no mesmo potencial elétrico da fase viva através de roupa condutiva que equaliza o campo eletrostático no corpo. Como não há diferença de potencial ($V=0$) entre o corpo e o cabo, não há circulação de corrente elétrica.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Método ao Potencial = Trabalhador no mesmo potencial da fase (com roupa condutiva/gaiola de Faraday).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 37</td>
+            <td class="q-tag">Método ao Contato • Trabalho em Linha Viva</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        O método de trabalho ao contato é amplamente empregado na manutenção de redes de distribuição de média tensão (13,8 kV a 34,5 kV). Esse método caracteriza-se por:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> O operador tocar diretamente o condutor energizado usando apenas as mãos nuas.</div>
+<div class="alt-item"><strong>B)</strong> O operador utilizar equipamentos de proteção individual isolantes (luvas e mangas de borracha da classe de tensão) e intervir diretamente nas fases a partir de cesto aéreo isolado.</div>
+<div class="alt-item"><strong>C)</strong> Aterrar a linha durante a intervenção com a chave de alimentação fechada.</div>
+<div class="alt-item"><strong>D)</strong> Realizar o serviço exclusivamente por meio de cordas sintéticas sem isolamento.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Método ao Contato: O trabalhador toca os componentes energizados utilizando EPIs isolantes apropriados (luvas de borracha de alta tensão + mangas de proteção) suportado por plataforma/cesto aéreo com braço isolado.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Método ao Contato = Luva isolante de MT + Manga de borracha + Caminhão com cesto isolado.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 38</td>
+            <td class="q-tag">Método à Distância • Trabalho em Linha Viva</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        No método de trabalho à distância em instalações elétricas energizadas, as tarefas são executadas:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Através de comandos de rádio sem operadores em campo.</div>
+<div class="alt-item"><strong>B)</strong> Pelo trabalhador posicionado a uma distância segura da parte energizada, manipulando bastões e varas de manobra isolantes com ferramentas adaptadas nas extremidades.</div>
+<div class="alt-item"><strong>C)</strong> Com cabos de aço galvanizado ligados aos condutores.</div>
+<div class="alt-item"><strong>D)</strong> Utilizando ferramentas manuais de uso comum apoiadas em escadas de alumínio.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Método à Distância: O operador permanece fora da zona de risco e executa tarefas nos cabos e isoladores através de bastões e varas isolantes universais acopladas a ferramentas específicas.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Método à Distância = Uso de bastões isolantes longos mantendo o trabalhador afastado da zona de risco.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 39</td>
+            <td class="q-tag">Análise Preliminar de Risco (APR) • Exigência Normativa</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Antes de iniciar qualquer intervenção em instalações elétricas, a equipe de trabalho deve elaborar formalmente a Análise Preliminar de Risco (APR). A finalidade principal da APR é:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Estimar o custo dos materiais elétricos a serem substituídos.</div>
+<div class="alt-item"><strong>B)</strong> Identificar os perigos, avaliar os riscos de cada etapa da atividade e definir as medidas preventivas e de controle necessárias para neutralizá-los.</div>
+<div class="alt-item"><strong>C)</strong> Justificar o pagamento de horas extras aos eletricistas.</div>
+<div class="alt-item"><strong>D)</strong> Dispensar a emissão da Ordem de Serviço.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Item 10.2.1: Em todas as intervenções elétricas devem ser avaliados previamente os riscos através de APR, mapeando perigos (arco, choque, queda) e definindo os EPCs, EPIs e procedimentos para a tarefa.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">APR = Identifica perigos, avalia riscos e define medidas de controle antes de iniciar a tarefa.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 40</td>
+            <td class="q-tag">Permissão de Trabalho (PT) • Atividades Não Rotineiras</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Para trabalhos não rotineiros em instalações elétricas energizadas ou em alta tensão, a NR-10 exige a emissão da Permissão de Trabalho (PT). A PT caracteriza-se por ser:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Uma autorização verbal concedida pelo encarregado de turma.</div>
+<div class="alt-item"><strong>B)</strong> Um documento escrito formal com prazo de validade determinado, aprovado por responsável autorizado, contendo as medidas de segurança indispensáveis para aquela tarefa específica.</div>
+<div class="alt-item"><strong>C)</strong> Um contrato comercial de prestação de serviços por empreitada.</div>
+<div class="alt-item"><strong>D)</strong> Uma declaração semestral de recolhimento de impostos.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            A Permissão de Trabalho (PT / PET) é uma autorização escrita, com validade restrita ao turno ou período da atividade, listando todas as condições de segurança a serem checadas antes da liberação do serviço.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Permissão de Trabalho (PT) = Documento escrito com tempo de validade para serviços críticos não rotineiros.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 41</td>
+            <td class="q-tag">Capacitação em Primeiros Socorros • Choque Elétrico e Fibrilação</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Durante o atendimento de primeiros socorros a uma vítima de choque elétrico em parada cardiorrespiratória (PCR), o procedimento emergencial prioritário a ser iniciado de imediato após garantir a desenergização do circuito é:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Oferecer água com açúcar à vítima inconsciente.</div>
+<div class="alt-item"><strong>B)</strong> Iniciar imediatamente as manobras de Reanimação Cardiopulmonar (RCP) com compressões torácicas contínuas e acionar o serviço médico de emergência / desfibrilador (DEA).</div>
+<div class="alt-item"><strong>C)</strong> Massagear os membros inferiores da vítima com álcool etílico.</div>
+<div class="alt-item"><strong>D)</strong> Aguardar a chegada do médico sem tocar na vítima.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Em parada cardíaca por fibrilação decorrente de choque elétrico, o tempo é crítico. Após garantir a desenergização da fonte (segurança do socorrista), deve-se chamar o socorro (SAMU/192) e iniciar imediatamente as compressões torácicas de alta qualidade (RCP) e utilizar o Desfibrilador Externo Automático (DEA).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Choque elétrico com PCR = Desenergizar a fonte -> Iniciar RCP (compressões no tórax) + Chamar resgate/DEA.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 42</td>
+            <td class="q-tag">Manutenção de Transformadores • Bloqueio de Chaves e Disjuntores</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Para realizar a manutenção preventiva programada em uma subestação consumidora de 13,8 kV, a garantia do estado de desenergização exige que os bloqueios mecânicos sejam aplicados:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Apenas no disjuntor de baixa tensão.</div>
+<div class="alt-item"><strong>B)</strong> Tanto na chave seccionadora de média tensão a montante quanto nos disjuntores gerais a jusante, impedindo qualquer possibilidade de retorno de tensão por geradores ou concessionária.</div>
+<div class="alt-item"><strong>C)</strong> Exclusivamente no medidor de faturamento da distribuidora.</div>
+<div class="alt-item"><strong>D)</strong> Apenas nas botoeiras do alarme de incêndio.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            O bloqueio contra reenergização acidental deve cobrir todas as fontes de alimentação possíveis: a chave seccionadora de entrada da concessionária e os disjuntores secundários (para evitar retorno de tensão por paralelismo de geradores ou no-breaks).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Bloqueio de subestação: Bloquear entrada de MT e saídas de BT (evita retorno por geradores).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 43</td>
+            <td class="q-tag">Aterramento de Carcaças de Motores • Proteção contra Contatos Indiretos</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        A ligação das carcaças metálicas dos motores elétricos ao condutor de proteção (PE) do sistema aterrado tem como função na segurança (NR-10 / NBR 5410):
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Aumentar a velocidade de rotação do rotor.</div>
+<div class="alt-item"><strong>B)</strong> Conduzir a corrente de defeito para a terra em caso de falha de isolação interna, provocando a atuação rápida do dispositivo de proteção contra sobrecorrentes ou DR antes que a carcaça atinja potencial perigoso.</div>
+<div class="alt-item"><strong>C)</strong> Diminuir o fator de potência da fábrica.</div>
+<div class="alt-item"><strong>D)</strong> Transformar o motor trifásico em gerador monofásico.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Aterrar a massa metálica cria um caminho de baixa impedância para a corrente de curto fase-massa, fazendo o disjuntor/fusível/DR desarmar instantaneamente no primeiro contato acidental, eliminando o risco de choque elétrico de contato indireto.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Aterramento de carcaça = Provoca desarme rápido da proteção durante falha de isolação interna.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 44</td>
+            <td class="q-tag">Zona Controlada • Definição Normativa do Raio Rc</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Na Tabela de Raios de Delimitação de Zonas da NR-10 (Anexo II), a fronteira que separa a Zona Livre da Zona Controlada para cada nível de tensão nominal é determinada pelo raio:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> $R_r$ (Raio de risco)</div>
+<div class="alt-item"><strong>B)</strong> $R_c$ (Raio de controle)</div>
+<div class="alt-item"><strong>C)</strong> $R_f$ (Raio de fase)</div>
+<div class="alt-item"><strong>D)</strong> $R_t$ (Raio de terra)</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Conforme o Anexo II da NR-10: O raio $R_c$ delimita a superfície externa da Zona Controlada com a Zona Livre. O raio $R_r$ delimita a superfície que separa a Zona de Risco da Zona Controlada.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Fronteira Zona Livre / Zona Controlada = Raio $R_c$. Fronteira Zona Controlada / Zona de Risco = Raio $R_r$.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 45</td>
+            <td class="q-tag">Auditorias de Conformidade da NR-10 • Relatório Técnico de Inspeção</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        As empresas devem realizar inspeções e avaliações periódicas de conformidade com a NR-10 em suas instalações elétricas. O documento resultante que aponta as não conformidades e o plano de ação corretivo com cronograma de adequação é o:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Livro de ocorrências da portaria.</div>
+<div class="alt-item"><strong>B)</strong> Relatório Técnico de Inspeções (RTI) das Instalações Elétricas integrado ao PIE.</div>
+<div class="alt-item"><strong>C)</strong> Contrato de prestação de serviços advocatícios.</div>
+<div class="alt-item"><strong>D)</strong> Atestado de saúde ocupacional coletivo.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            O Relatório Técnico de Inspeções (RTI) da NR-10 é o documento formal que audita toda a instalação elétrica, diagnostica desvios em relação à NR-10 e NBRs e estabelece o cronograma de adequação obrigatório a integrar o PIE.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">RTI (Relatório Técnico de Inspeções) = Diagnóstico de conformidade da NR-10 + Plano de adequação do PIE.</span>
+        </div>
+    </div>
+</div>
+</body></html>

@@ -1,0 +1,1530 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<style>
+    @page {
+        size: A4;
+        margin: 14mm 12mm;
+        background-color: #f8fafc;
+        @bottom-right {
+            content: "Página " counter(page) " de " counter(pages);
+            font-size: 8.5pt;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: #64748b;
+        }
+        @bottom-left {
+            content: "Caderno de 45 Questões • Aterramento e SPDA (NBR 5419) • Bloco Ouro | Foco IDECAN";
+            font-size: 8.5pt;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: #64748b;
+        }
+    }
+
+    *, *::before, *::after {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        color: #1e293b;
+        font-size: 9.35pt;
+        line-height: 1.45;
+        background-color: #f8fafc;
+    }
+
+    .header-banner {
+        background-color: #0f172a;
+        color: #ffffff;
+        padding: 18px 20px;
+        border-radius: 6px;
+        margin-bottom: 18px;
+    }
+
+    .header-banner h1 {
+        margin: 0 0 6px 0;
+        font-size: 16pt;
+        font-weight: 700;
+        letter-spacing: -0.3px;
+        color: #38bdf8;
+    }
+
+    .header-banner p {
+        margin: 0;
+        font-size: 9.2pt;
+        color: #cbd5e1;
+    }
+
+    .meta-table {
+        width: 100%;
+        margin-top: 10px;
+        border-collapse: collapse;
+    }
+
+    .meta-table td {
+        padding: 4px 8px;
+        font-size: 8.5pt;
+        color: #94a3b8;
+        border-top: 1px solid #334155;
+    }
+
+    .meta-table strong {
+        color: #f1f5f9;
+    }
+
+    .guide-intro {
+        background-color: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-left: 4px solid #eab308;
+        padding: 12px 14px;
+        border-radius: 4px;
+        margin-bottom: 20px;
+    }
+
+    .guide-intro h3 {
+        margin: 0 0 5px 0;
+        font-size: 10.8pt;
+        color: #854d0e;
+    }
+
+    .guide-intro p {
+        margin: 0;
+        font-size: 9pt;
+        color: #475569;
+    }
+
+    .question-card {
+        background-color: #ffffff;
+        border: 1px solid #cbd5e1;
+        border-radius: 6px;
+        padding: 12px 14px;
+        margin-bottom: 18px;
+        page-break-inside: avoid;
+    }
+
+    .q-badge-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 8px;
+    }
+
+    .q-number {
+        font-size: 10pt;
+        font-weight: 700;
+        color: #0f172a;
+    }
+
+    .q-tag {
+        text-align: right;
+        font-size: 7.8pt;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: #0284c7;
+        letter-spacing: 0.4px;
+    }
+
+    .q-statement {
+        font-size: 9.2pt;
+        font-weight: 500;
+        color: #1e293b;
+        margin-bottom: 10px;
+        line-height: 1.42;
+        text-align: justify;
+    }
+
+    .alternatives {
+        margin-left: 4px;
+        margin-bottom: 10px;
+    }
+
+    .alt-item {
+        font-size: 8.9pt;
+        color: #334155;
+        margin-bottom: 3.5px;
+        padding-left: 6px;
+    }
+
+    .alt-item strong {
+        color: #0f172a;
+    }
+
+    .solution-box {
+        background-color: #f1f5f9;
+        border: 1px solid #cbd5e1;
+        border-radius: 4px;
+        padding: 9px 11px;
+        margin-top: 8px;
+    }
+
+    .sol-header {
+        font-size: 8.6pt;
+        font-weight: 700;
+        color: #047857;
+        margin-bottom: 4px;
+        display: block;
+    }
+
+    .sol-text {
+        font-size: 8.7pt;
+        color: #334155;
+        line-height: 1.4;
+        text-align: justify;
+    }
+
+    .tip-box {
+        background-color: #fffbeb;
+        border: 1px solid #fde68a;
+        border-left: 3px solid #d97706;
+        border-radius: 3px;
+        padding: 6px 9px;
+        margin-top: 6px;
+    }
+
+    .tip-title {
+        font-size: 8.2pt;
+        font-weight: 700;
+        color: #92400e;
+        margin-bottom: 2px;
+        display: block;
+    }
+
+    .tip-text {
+        font-size: 8.2pt;
+        color: #78350f;
+        line-height: 1.35;
+    }
+
+    .math {
+        font-family: 'Times New Roman', Times, serif;
+        font-style: italic;
+        font-weight: bold;
+        color: #0369a1;
+    }
+</style>
+</head>
+<body>
+
+<div class="header-banner">
+    <h1>Caderno de 45 Questões • Aterramento e SPDA (NBR 5419)</h1>
+    <p>Métodos Franklin/Faraday/Eletrogeométrico, Níveis I a IV, Descidas, Malhas e MPS • Bloco Ouro • Foco: IDECAN</p>
+    <table class="meta-table">
+        <tr>
+            <td style="width: 33%;"><strong>Cargo:</strong> Engenheiro Eletricista</td>
+            <td style="width: 33%;"><strong>Meta do Bloco:</strong> 45 Questões Concluídas</td>
+            <td style="width: 34%; text-align: right;"><strong>Status:</strong> Bloco Ouro • Foco IDECAN</td>
+        </tr>
+    </table>
+</div>
+
+<div class="guide-intro">
+    <h3>Mapeamento Completo de SPDA e Aterramento para a Prova</h3>
+    <p>Este caderno reúne as 45 questões fundamentais da NBR 5419:2015 e Aterramento: estrutura das 4 partes da norma, Níveis de Proteção (I a IV), raios da esfera rolante (20 m a 60 m), dimensões de malha de Faraday (5x5 m a 20x20 m), espaçamento de descidas (10 m a 20 m), uso de armaduras de concreto armado (continuidade <= 0,2 ohm), aterramento em anel (Tipo B) e fundações, abolição do limite fixo de 10 ohms, equipotencialização no BEP, Medidas de Proteção contra Surtos (MPS), zonas LPZ, coordenação de DPS Classes I e II e medição de aterramento pelo método dos 62%.</p>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 01</td>
+            <td class="q-tag">NBR 5419 • Estrutura das Quatro Partes da Norma</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        A norma ABNT NBR 5419 (Proteção contra descargas atmosféricas) é estruturada em quatro partes interdependentes. A parte da norma que trata especificamente do Gerenciamento de Risco para determinar a necessidade de SPDA e selecionar o nível de proteção adequado é a:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> NBR 5419-1 (Princípios gerais).</div>
+<div class="alt-item"><strong>B)</strong> NBR 5419-2 (Gerenciamento de risco).</div>
+<div class="alt-item"><strong>C)</strong> NBR 5419-3 (Danos físicos a estruturas e perigos à vida).</div>
+<div class="alt-item"><strong>D)</strong> NBR 5419-4 (Sistemas elétricos e eletrônicos internos na estrutura).</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Estrutura da NBR 5419:<br>• <strong>Parte 1:</strong> Princípios gerais;<br>• <strong>Parte 2:</strong> Gerenciamento de risco (cálculo dos riscos R1, R2, R3, R4 e definição do Nível de Proteção I a IV);<br>• <strong>Parte 3:</strong> Danos físicos a estruturas e perigos à vida (projeto de captores, descidas, aterramento e equipotencialização);<br>• <strong>Parte 4:</strong> Sistemas elétricos e eletrônicos internos (medidas de proteção contra surtos - MPS, DPS e blindagem).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Decore a estrutura em 4 partes da 5419: 1 = Geral | 2 = Risco | 3 = Danos físicos (SPDA externo) | 4 = MPS (eletrônica/surtos).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 02</td>
+            <td class="q-tag">Níveis de Proteção contra Raios (NP) • Classes de SPDA</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        A NBR 5419 fixa quatro Níveis de Proteção contra descargas atmosféricas (NP I, NP II, NP III e NP IV). O Nível de Proteção mais rigoroso, projetado para interceptar descargas com as menores correntes de pico mínimas e maiores correntes máximas com eficácia de 98%, é o:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Nível I (Classe I de SPDA)</div>
+<div class="alt-item"><strong>B)</strong> Nível II (Classe II de SPDA)</div>
+<div class="alt-item"><strong>C)</strong> Nível III (Classe III de SPDA)</div>
+<div class="alt-item"><strong>D)</strong> Nível IV (Classe IV de SPDA)</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa A</span>
+        <div class="sol-text">
+            O Nível I é o mais exigente e seguro. Ele é dimensionado para interceptar raios a partir de correntes mínimas de 3 kA (raio da esfera rolante de apenas 20 metros) até correntes de pico máximas de 200 kA, oferecendo eficiência de proteção de 98%. O Nível IV tem eficiência de 80% (esfera de 60 metros).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Nível I = Mais rigoroso / Esfera menor ($R=20	ext{ m}$) / 98% de eficácia. Nível IV = Menos rigoroso / Esfera maior ($R=60	ext{ m}$).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 03</td>
+            <td class="q-tag">Métodos de Captura • Método Eletrogeométrico (Esfera Rolante)</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        No dimensionamento do subsistema de captação pelo Método Eletrogeométrico (Esfera Rolante / Modelo Eletrogeométrico) segundo a NBR 5419-3, o raio da esfera fictícia ($R$) para o Nível de Proteção I é de:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> 20 metros</div>
+<div class="alt-item"><strong>B)</strong> 30 metros</div>
+<div class="alt-item"><strong>C)</strong> 45 metros</div>
+<div class="alt-item"><strong>D)</strong> 60 metros</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa A</span>
+        <div class="sol-text">
+            Raios da Esfera Rolante conforme a NBR 5419-3:<br>• <strong>Nível I:</strong> $R = 20	ext{ metros}$;<br>• <strong>Nível II:</strong> $R = 30	ext{ metros}$;<br>• <strong>Nível III:</strong> $R = 45	ext{ metros}$;<br>• <strong>Nível IV:</strong> $R = 60	ext{ metros}$.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Esfera Rolante por Nível: I = 20 m | II = 30 m | III = 45 m | IV = 60 m. Questão certeira de concurso!</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 04</td>
+            <td class="q-tag">Método de Franklin • Ângulo de Proteção</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        O Método de Franklin (cone ou ângulo de proteção) consiste em utilizar hastes verticais pontiagudas para criar um volume cônico protegido. Segundo a NBR 5419, o ângulo de proteção ($lpha$) do captor Franklin:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> É constante e fixo em 45° para qualquer altura da edificação.</div>
+<div class="alt-item"><strong>B)</strong> Diminui à medida que aumenta a altura da estrutura em relação ao solo e varia com a classe de SPDA.</div>
+<div class="alt-item"><strong>C)</strong> Aumenta linearmente com a altura da edificação.</div>
+<div class="alt-item"><strong>D)</strong> É independente da classe de proteção do SPDA.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Conforme as curvas da NBR 5419-3: Quanto maior a altura da ponta captora em relação ao plano de referência ($h$), menor é o ângulo de proteção admissível $lpha$. Para alturas elevadas, o método de Franklin torna-se inviável, exigindo o método da esfera rolante ou gaiola de Faraday.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Franklin: Torre mais alta $ightarrow$ Ângulo de proteção menor ($lpha$ mais fechado).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 05</td>
+            <td class="q-tag">Método da Gaiola de Faraday (Malha) • Dimensões Máximas da Malha</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        No dimensionamento do subsistema de captação pelo Método da Malha (Gaiola de Faraday) para uma edificação enquadrada no Nível de Proteção I segundo a NBR 5419-3, o espaçamento máximo entre os condutores da malha (dimensão do reticulado) é de:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> $5	ext{ m} 	imes 5	ext{ m}$</div>
+<div class="alt-item"><strong>B)</strong> $10	ext{ m} 	imes 10	ext{ m}$</div>
+<div class="alt-item"><strong>C)</strong> $15	ext{ m} 	imes 15	ext{ m}$</div>
+<div class="alt-item"><strong>D)</strong> $20	ext{ m} 	imes 20	ext{ m}$</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa A</span>
+        <div class="sol-text">
+            Dimensões máximas da malha captora (Gaiola de Faraday) por nível:<br>• <strong>Nível I:</strong> $5	ext{ m} 	imes 5	ext{ m}$;<br>• <strong>Nível II:</strong> $10	ext{ m} 	imes 10	ext{ m}$;<br>• <strong>Nível III:</strong> $15	ext{ m} 	imes 15	ext{ m}$;<br>• <strong>Nível IV:</strong> $20	ext{ m} 	imes 20	ext{ m}$.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Malha da Gaiola de Faraday: I = $5	imes 5	ext{ m}$ | II = $10	imes 10	ext{ m}$ | III = $15	imes 15	ext{ m}$ | IV = $20	imes 20	ext{ m}$.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 06</td>
+            <td class="q-tag">Subsistema de Descidas • Espaçamento Médio entre Condutores</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Os condutores de descida do SPDA têm a função de conduzir a corrente do raio da cobertura até o subsistema de aterramento com segurança. Para o Nível de Proteção I, o espaçamento médio recomendado entre condutores de descida ao longo do perímetro da edificação é de:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> 10 metros</div>
+<div class="alt-item"><strong>B)</strong> 15 metros</div>
+<div class="alt-item"><strong>C)</strong> 20 metros</div>
+<div class="alt-item"><strong>D)</strong> 25 metros</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa A</span>
+        <div class="sol-text">
+            Espaçamento médio entre descidas na NBR 5419-3:<br>• <strong>Nível I:</strong> $10	ext{ metros}$;<br>• <strong>Nível II:</strong> $10	ext{ metros}$;<br>• <strong>Nível III:</strong> $15	ext{ metros}$;<br>• <strong>Nível IV:</strong> $20	ext{ metros}$.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Distância entre descidas: Nível I e II = 10 m | Nível III = 15 m | Nível IV = 20 m.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 07</td>
+            <td class="q-tag">Uso de Armaduras de Concreto como Descidas Naturais</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        A NBR 5419-3 incentiva a utilização das armaduras de aço embutidas nos pilares de concreto armado como condutores naturais de descida. Para que as armaduras possam ser utilizadas como descidas naturais, a norma estabelece que:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> As barras de aço devem ser revestidas com tinta plástica isolante.</div>
+<div class="alt-item"><strong>B)</strong> Deve ser assegurada a continuidade elétrica das barras longitudinais através de amarrações aramadas confiáveis ou solda exotérmica, com resistência elétrica total do topo à base inferior a 0,2 Ω.</div>
+<div class="alt-item"><strong>C)</strong> O prédio não pode ter mais de 10 metros de altura.</div>
+<div class="alt-item"><strong>D)</strong> É obrigatória a instalação de tubos de PVC externos cobrindo os pilares.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            As armaduras de concreto são excelentes descidas e dispersores naturais. A NBR 5419-3 permite seu uso desde que haja continuidade elétrica garantida (resistência entre topo e base $\le 0{,}2\ \Omega$), dispersando a corrente por dezenas de pilares em paralelo.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Descidas naturais em pilares de concreto armado: Permitidas e recomendadas! Exigência de continuidade com resistência $\le 0,2\ \Omega$.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 08</td>
+            <td class="q-tag">Subsistema de Aterramento • Arranjo em Anel Fechado (Tipo B)</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Para novas edificações com SPDA, a NBR 5419-3 estabelece uma preferência pelo arranjo de eletrodos de aterramento em anel fechado circundando a estrutura (Tipo B). Esse anel deve ser enterrado a uma profundidade de no mínimo:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> 0,10 m</div>
+<div class="alt-item"><strong>B)</strong> 0,50 m (tipicamente 0,50 m a 0,70 m e afastado cerca de 1 metro das paredes externas)</div>
+<div class="alt-item"><strong>C)</strong> 2,50 m</div>
+<div class="alt-item"><strong>D)</strong> 5,00 m</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            O eletrodo em anel externo (Tipo B) deve ser instalado a uma profundidade mínima de 0,50 m no solo e a uma distância aproximada de 1,0 m das paredes externas da edificação, garantindo equipotencialização periférica e redução de gradientes de potencial de passo.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Aterramento em Anel externo (Tipo B): Profundidade $\ge 0,50	ext{ m}$ | Afastamento das paredes $pprox 1,0	ext{ m}$.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 09</td>
+            <td class="q-tag">Valor da Resistência de Aterramento • Critério da NBR 5419:2015</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Na versão vigente da NBR 5419:2015, a respeito da exigência de um valor numérico ôhmico máximo fixo para a resistência de aterramento do SPDA (como os antigos 10 Ω da versão anterior), a norma estabelece que:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> É obrigatório atingir exatamente 1,0 Ω em qualquer tipo de solo arenoso.</div>
+<div class="alt-item"><strong>B)</strong> Não fixa mais um valor ôhmico rígido de 10 Ω, priorizando a geometria e continuidade da malha integrada (eletrodo em anel ou fundações) e a equipotencialização completa através do BEP para controle de tensões de passo e toque.</div>
+<div class="alt-item"><strong>C)</strong> A resistência de aterramento deve ser superior a 100 Ω para bloquear o raio.</div>
+<div class="alt-item"><strong>D)</strong> A medição da resistência de aterramento foi proibida por lei federal.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            A NBR 5419:2015 aboliu o limite arbitrário de 10 Ω. A norma foca na **configuração geométrica integrada da malha** (eletrodo em anel tipo B ou fundações tipo A) e na **equipotencialização total (MPS)**, pois sob ondas de impulso de alta frequência a impedância do aterramento depende da indutância da malha e não apenas da resistência em baixa frequência.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Mudança clássica da NBR 5419: Não existe mais a regra fixa de 'menos de 10 ohms'. O foco é geometria em anel/fundação e equipotencialização!</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 10</td>
+            <td class="q-tag">Equipotencialização de Elementos Metálicos • Barramento BEP</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        A principal medida de proteção contra centelhamentos perigosos no interior da edificação durante a descarga atmosférica é a equipotencialização. Devem ser interligados diretamente ao Barramento de Equipotencialização Principal (BEP):
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Apenas os condutores de fase energizados da subestação.</div>
+<div class="alt-item"><strong>B)</strong> Todas as tubulações metálicas de utilidades (água, gás, esgoto metálico), massas metálicas estruturais, blindagens de cabos de telecomunicações e condutores neutro/PE através de DPS.</div>
+<div class="alt-item"><strong>C)</strong> Somente as antenas de televisão coletiva.</div>
+<div class="alt-item"><strong>D)</strong> Exclusivamente os suportes de lâmpadas fluorescentes.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            A equipotencialização pelo BEP une todas as partes condutoras externas e internas: estruturas de concreto, tubulações metálicas de entrada, barramento de terra e neutro, e cabos de sinal/energia (estes últimos através de DPS classe I), evitando diferenças de potencial que provocariam arcos destrutivos.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">BEP é o coração do SPDA interno: Todo metal que entra na edificação é equipotencializado nele!</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 11</td>
+            <td class="q-tag">Anéis Intermediários de Equipotencialização em Prédios Altos</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Em edifícios altos com SPDA externo, a NBR 5419-3 exige a instalação de anéis horizontais de cinta intermediários interligando todas as descidas a cada:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> 5 metros de altura</div>
+<div class="alt-item"><strong>B)</strong> 10 a 20 metros de altura (tipicamente a cada 20 m)</div>
+<div class="alt-item"><strong>C)</strong> 50 metros de altura</div>
+<div class="alt-item"><strong>D)</strong> 100 metros de altura</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Em estruturas com mais de 20 m de altura, anéis horizontais intermediários devem ser instalados a cada 20 m de altura para equalizar os potenciais entre condutores de descida e reduzir os efeitos das descargas laterais.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Anéis de cintamento intermediários em prédios: A cada 20 m de altura.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 12</td>
+            <td class="q-tag">Descargas Laterais em Prédios Altos • Proteção Acima de 60 Metros</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Em edificações com altura superior a 60 metros, a NBR 5419-3 exige medidas específicas para proteção contra descargas atmosféricas laterais. Essa proteção deve cobrir:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Apenas o piso térreo e a garagem subterrânea.</div>
+<div class="alt-item"><strong>B)</strong> Os 20% superiores da altura total da estrutura (com pontas captoras, malhas e anéis perimetrais).</div>
+<div class="alt-item"><strong>C)</strong> Exclusivamente a caixa d'água de plástico.</div>
+<div class="alt-item"><strong>D)</strong> Somente as janelas voltadas para o norte.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Para prédios com altura $> 60	ext{ m}$, há risco de impactos diretos de raios laterais. A proteção lateral é mandatória nos **20% superiores** da altura da estrutura.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Prédios $> 60	ext{ m}$: Proteção contra impactos laterais obrigatória nos 20% superiores da altura!</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 13</td>
+            <td class="q-tag">Dispositivos de Proteção contra Surtos (DPS) • Classes na NBR 5419-4</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Na proteção de equipamentos sensíveis internos contra sobretensões transitórias induzidas pelo raio (Medidas de Proteção contra Surtos - MPS), o DPS de **Classe I** é ensaiado com a forma de onda padronizada de:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Onda $8/20\ \mu	ext{s}$ (corrente induzida)</div>
+<div class="alt-item"><strong>B)</strong> Onda $10/350\ \mu	ext{s}$ (corrente de raio direta)</div>
+<div class="alt-item"><strong>C)</strong> Onda $1{,}2/50\ \mu	ext{s}$ pura</div>
+<div class="alt-item"><strong>D)</strong> Onda senoidal de 60 Hz contínua</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            O DPS Classe I simula o impacto direto do raio na entrada da estrutura e é ensaiado com a onda de corrente de impulso **$10/350\ \mu	ext{s}$** (alta energia). O DPS Classe II é ensaiado com onda **$8/20\ \mu	ext{s}$** (sobretensões induzidas).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">DPS Classe I = Onda $10/350\ \mu	ext{s}$ (Impacto direto). DPS Classe II = Onda $8/20\ \mu	ext{s}$ (Induzido).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 14</td>
+            <td class="q-tag">Zonas de Proteção contra Raios (LPZ) • Conceito da NBR 5419-4</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        A NBR 5419-4 divide a estrutura em Zonas de Proteção contra Raios (LPZ - *Lightning Protection Zones*). A zona designada como **LPZ 0A** corresponde à:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Zona interna totalmente blindada e protegida contra campos magnéticos.</div>
+<div class="alt-item"><strong>B)</strong> Zona externa desprotegida exposta a descargas diretas de raio e ao campo eletromagnético total não atenuado.</div>
+<div class="alt-item"><strong>C)</strong> Área protegida pelo captor Franklin sem incidência de campo magnético.</div>
+<div class="alt-item"><strong>D)</strong> Sala de servidores com piso elevado condutivo.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Zonas LPZ:<br>• **LPZ 0A:** Externa, sob risco de raio direto e campo eletromagnético total;<br>• **LPZ 0B:** Externa protegida contra raio direto (na sombra do captor), mas sob campo eletromagnético total;<br>• **LPZ 1:** Interna, atenuada por blindagem e DPS na fronteira;<br>• **LPZ 2:** Sala interna com proteção fina.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">LPZ 0A = Totalmente exposta a raio direto e campo total. LPZ 1 = Interna protegida.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 15</td>
+            <td class="q-tag">Distância de Segurança (s) • Prevenção de Centelhamento Perigoso</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        A distância de separação de segurança ($s$) calculada pela NBR 5419-3 entre o condutor de descida externo do SPDA e massas metálicas internas visa impedir:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> O aquecimento do condutor por efeito pelicular.</div>
+<div class="alt-item"><strong>B)</strong> O centelhamento perigoso (fagulhamento destrutivo pelo ar) entre a descida energizada pelo raio e os metais aterrados no interior do prédio.</div>
+<div class="alt-item"><strong>C)</strong> A propagação de ondas de rádio FM na vizinhança.</div>
+<div class="alt-item"><strong>D)</strong> A queda de granizo sobre a cobertura.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Quando o raio desce pela haste externa, a tensão na descida sobe para milhares de volts ($V = L \cdot di/dt + R \cdot i$). Se uma tubulação metálica interna estiver muito próxima, o ar rompe por centelhamento lateral perigoso. A distância 's' é o afastamento mínimo no ar que impede esse centelhamento.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Distância de segurança 's' = Evita que o raio salte da descida externa para tubulações metálicas internas.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 16</td>
+            <td class="q-tag">Materiais para Condutores de SPDA • Corrosão Galvânica</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        A NBR 5419-3 proíbe a conexão direta bimetálica entre condutores de cobre e condutores de alumínio sem conectores bimetálicos certificados devido ao risco de:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Fusão nuclear espontânea.</div>
+<div class="alt-item"><strong>B)</strong> Corrosão galvânica acelerada do alumínio pela diferença de potencial eletroquímico na presença de umidade.</div>
+<div class="alt-item"><strong>C)</strong> Aumento da velocidade da luz no condutor.</div>
+<div class="alt-item"><strong>D)</strong> Desmagnetização permanente do aço das vigas.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            O cobre possui potencial de eletrodo nobre muito superior ao do alumínio. O contato direto na presença de eletrólito (água da chuva) provoca corrosão galvânica severa e destruição rápida do alumínio. Exige-se conector bimetálico.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Cobre com Alumínio direto = Corrosão galvânica violenta. Obrigatório conector bimetálico!</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 17</td>
+            <td class="q-tag">Seção Mínima dos Condutores de Descida de Cobre</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Segundo a Tabela 6 da NBR 5419-3, a seção nominal mínima padronizada para condutores de descida de cobre em cabo de seção circular é de:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> $16	ext{ mm}^2$</div>
+<div class="alt-item"><strong>B)</strong> $35	ext{ mm}^2$ (ou $50	ext{ mm}^2$ para cabo redondo)</div>
+<div class="alt-item"><strong>C)</strong> $95	ext{ mm}^2$</div>
+<div class="alt-item"><strong>D)</strong> $150	ext{ mm}^2$</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Tabela de materiais da NBR 5419-3:<br>• Cabo de cobre para descida e captação = **$50	ext{ mm}^2$** (ou fita de cobre $50	ext{ mm}^2$ com espessura $\ge 2	ext{ mm}$, ou fita de alumínio $70	ext{ mm}^2$).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Condutor de descida/captação de cobre = $50	ext{ mm}^2$ (mínimo normativo clássico).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 18</td>
+            <td class="q-tag">Haste de Aterramento tipo Copperweld • Camada de Cobre</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        As hastes de aço cobreado (tipo *copperweld*) utilizadas no subsistema de aterramento (NBR 5419 / NBR 13571) devem possuir camada eletrolítica de cobre aderente com espessura mínima de:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> 10 micras</div>
+<div class="alt-item"><strong>B)</strong> 50 micras</div>
+<div class="alt-item"><strong>C)</strong> 254 micras (0,254 mm / camada de 254 μm)</div>
+<div class="alt-item"><strong>D)</strong> 2.540 micras</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa C</span>
+        <div class="sol-text">
+            Para garantir resistência mecânica na cravação e durabilidade contra corrosão por mais de 30 anos no solo, as normas ABNT e internacionais exigem hastes com camada mínima de cobre de **254 micras (0,254 mm / camada nominal de 254 μm)**.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Haste de aço cobreado = Camada mínima de 254 micras de cobre!</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 19</td>
+            <td class="q-tag">Eletrodos de Aterramento Tipo A • Hastes Verticais Isoladas</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        O arranjo de aterramento Tipo A definido pela NBR 5419 caracteriza-se por:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Um anel fechado circundando todo o perímetro da edificação.</div>
+<div class="alt-item"><strong>B)</strong> Eletrodos individuais (hastes verticais cravadas ou condutores radiais horizontais) associados individualmente ao pé de cada condutor de descida, sem interligação em anel externo.</div>
+<div class="alt-item"><strong>C)</strong> Uso exclusivo da tubulação plástica de água fria.</div>
+<div class="alt-item"><strong>D)</strong> Aterramento no reservatório superior de concreto.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Arranjo Tipo A: Eletrodos radiais ou hastes verticais individuais na base de cada descida. Arranjo Tipo B: Eletrodo em anel fechado contínuo ou armaduras das fundações.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Aterramento Tipo A = Eletrodos radiais/individuais em cada descida. Tipo B = Anel fechado / Fundações.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 20</td>
+            <td class="q-tag">Periodicidade de Inspeção Visual do SPDA</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Conforme a NBR 5419-3, para estruturas contendo áreas com risco de explosão (indústrias químicas, postos de combustíveis) ou locais expostos a corrosão severa, a inspeção visual do SPDA deve ser realizada a cada:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> 6 meses</div>
+<div class="alt-item"><strong>B)</strong> 1 ano (e inspeção completa a cada 3 anos para estruturas comuns)</div>
+<div class="alt-item"><strong>C)</strong> 5 anos</div>
+<div class="alt-item"><strong>D)</strong> 10 anos</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            A NBR 5419-3 estabelece inspeção visual semestral ou anual e inspeção completa periódica: 1 ano para locais com risco de explosão ou expostos a corrosão severa; 3 anos para estruturas comuns.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Inspeção de SPDA: 1 ano (estruturas críticas/explosivas) | 3 anos (estruturas comuns).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 21</td>
+            <td class="q-tag">Resistividade Aparente do Solo • Método de Wenner</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Para o projeto do aterramento de subestações e SPDA, a estratificação do solo e o perfil de resistividade aparente são determinados em campo pelo Método dos Quatro Eletrodos de:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Método de Aron</div>
+<div class="alt-item"><strong>B)</strong> Método de Wenner (quatro hastes alinhadas com espaçamentos iguais)</div>
+<div class="alt-item"><strong>C)</strong> Método de Gramme</div>
+<div class="alt-item"><strong>D)</strong> Método de Biot-Savart</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            O Método de Wenner utiliza 4 eletrodos cravados em linha reta com espaçamento uniforme 'a'. Injeta-se corrente entre os eletrodos externos e mede-se a tensão entre os internos: $ho = 2\pi a R$.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Medição de resistividade do solo = Método de Wenner (4 hastes alinhadas e igualmente espaçadas).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 22</td>
+            <td class="q-tag">Medição da Resistência de Aterramento • Método da Queda de Potencial</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Na medição da resistência ôhmica de uma malha de aterramento concluída com terrômetro de 3 ou 4 bornes, o método mais preciso e normatizado é o da Queda de Potencial (Método dos 62%). O eletrodo auxiliar de potencial (P) deve ser posicionado a:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> 10% da distância da haste de corrente.</div>
+<div class="alt-item"><strong>B)</strong> 61,8% (~62%) da distância total até a haste auxiliar de corrente (C), na zona de platô de potencial nulo.</div>
+<div class="alt-item"><strong>C)</strong> 100% da distância após a haste de corrente.</div>
+<div class="alt-item"><strong>D)</strong> Exatamente no centro da malha predial.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            No método da queda de potencial, para evitar a sobreposição das curvas de resistência da malha e do eletrodo de corrente, a haste de potencial deve ser posicionada a 61,8% (~62%) da distância total.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Regra dos 62%: Haste de potencial posicionada a 62% da distância da haste de corrente.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 23</td>
+            <td class="q-tag">Cabos de Descida Não Naturais • Fixação e Trajetória</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Na instalação de condutores de descida externos de cobre fixados na fachada de edifícios (NBR 5419-3), a trajetória dos condutores deve ser:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Em zigue-zague com curvas de 90° fechadas para dissipar calor.</div>
+<div class="alt-item"><strong>B)</strong> O mais retilínea e vertical possível, evitando curvas acentuadas e loops indutivos para reduzir a reatância de dispersão.</div>
+<div class="alt-item"><strong>C)</strong> Enrolada em espiral ao redor dos tubos de esgoto.</div>
+<div class="alt-item"><strong>D)</strong> Totalmente embutida dentro de calhas plásticas de águas pluviais.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            A corrente do raio possui altíssima derivada ($di/dt pprox 100	ext{ kA}/\mu	ext{s}$). Qualquer curva em 90° ou loop cria indutância severa ($V = L \cdot di/dt$), gerando pontos de centelhamento lateral e ruptura mecânica.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Descida de SPDA: O mais RETILÍNEA e VERTICAL possível (evitar curvas e laços indutivos).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 24</td>
+            <td class="q-tag">Uso de Telhados Metálicos como Captores Naturais</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Telhas metálicas podem ser aproveitadas como elemento captor natural do SPDA (NBR 5419-3) desde que:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Sejam pintadas com verniz condutor reflexivo.</div>
+<div class="alt-item"><strong>B)</strong> Possuam espessura mínima metálica (t) padronizada (ex.: $\ge 0{,}5	ext{ mm}$ se não houver risco de perfuração, ou $\ge 4	ext{ mm}$ para aço se a perfuração for inaceitável) e continuidade elétrica entre placas garantida.</div>
+<div class="alt-item"><strong>C)</strong> Tenham espessura de papel alumínio de 0,05 mm.</div>
+<div class="alt-item"><strong>D)</strong> Não possuam fixação por parafusos metálicos.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Tabela 3 da NBR 5419-3: Telha metálica como captor natural exige espessura mínima: se não houver risco de perfuração/inflamação no interior $ightarrow t \ge 0{,}5	ext{ mm}$; se for necessário evitar perfuração $ightarrow t \ge 4	ext{ mm}$ (aço) ou $\ge 5	ext{ mm}$ (cobre).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Telhado metálico natural: $\ge 0,5	ext{ mm}$ (sem risco de fogo interno) ou $\ge 4	ext{ mm}$ (à prova de perfuração).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 25</td>
+            <td class="q-tag">Tensão de Passo no Entorno de Descidas • Medidas de Controle</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Para proteger pessoas contra choques perigosos por Tensão de Passo junto aos condutores de descida externos do SPDA no nível do solo (NBR 5419-3), deve-se adotar:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Pintura das calçadas com tinta amarela refletiva.</div>
+<div class="alt-item"><strong>B)</strong> Camada superficial isolante de asfalto (espessura $\ge 5	ext{ cm}$) ou brita ($\ge 10	ext{ cm}$) em um raio de 3 metros da descida, ou restrição física de acesso.</div>
+<div class="alt-item"><strong>C)</strong> Instalação de lâmpadas de sinalização de 12 V.</div>
+<div class="alt-item"><strong>D)</strong> Uso exclusivo de calçados de pano.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Medidas contra tensão de passo no pé da descida: 1) Camada de asfalto de 5 cm ou pedra britada de 10 cm num raio de 3 m; 2) Barreira física/guarda-corpo impedindo aproximação a menos de 3 m; 3) Sinalização e isolação dos condutores de descida até 3 m do solo.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Controle de tensão de passo na descida: 5 cm de asfalto ou 10 cm de brita em raio de 3 metros.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 26</td>
+            <td class="q-tag">Tensão de Toque no Condutor de Descida • Isolação de Proteção</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Na proteção contra Tensão de Toque junto às descidas externas do SPDA acessíveis ao público, o condutor de descida até a altura de 3 metros do solo pode ser protegido por:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Isolação de polietileno reticulado com nível de suportabilidade de impulso de 100 kV (onda 1,2/50 μs) ou eletroduto isolante de PVC rígido.</div>
+<div class="alt-item"><strong>B)</strong> Fita crepe comum de papel.</div>
+<div class="alt-item"><strong>C)</strong> Camada simples de tinta acrílica à base de água.</div>
+<div class="alt-item"><strong>D)</strong> Tubo metálico de cobre com furos de ventilação.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Item 8.1 da NBR 5419-3: Para eliminar o risco de toque, o condutor de descida deve ser isolado com cobertura dielétrica que suporte impulso de 100 kV (1,2/50 μs) ou embutido em eletroduto de PVC de alta espessura até pelo menos 3 metros acima do solo.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Proteção contra tensão de toque: Isolação para 100 kV ou duto de PVC até 3 m de altura do piso.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 27</td>
+            <td class="q-tag">Terminais de Interligação de Aterramento • Caixa de Inspeção</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Cada condutor de descida do SPDA externo deve possuir, próximo ao solo, uma junta de medição / conector de medição para ensaios. A finalidade dessa junta é:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Desligar o para-raios durante tempestades de granizo.</div>
+<div class="alt-item"><strong>B)</strong> Permitir desconectar temporariamente a descida da malha de aterramento para medição individual da resistência de terra com o terrômetro.</div>
+<div class="alt-item"><strong>C)</strong> Servir como tomada elétrica de força para ferramentas de jardim.</div>
+<div class="alt-item"><strong>D)</strong> Conectar o disjuntor de baixa tensão.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            A junta de medição (instalada em caixa de inspeção suspensa ou no piso) permite desacoplar a descida da malha de aterramento, possibilitando medir a resistência individual daquele eletrodo sem influência do restante do sistema.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Junta/Caixa de medição = Permite abrir a conexão para medir o aterramento com terrômetro.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 28</td>
+            <td class="q-tag">Solda Exotérmica em Malhas de Aterramento • Características</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        As conexões subterrâneas entre cabos de cobre da malha de aterramento do SPDA são preferencialmente realizadas por Solda Exotérmica. A principal vantagem desse processo é:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Permitir a desmontagem manual dos cabos a qualquer momento.</div>
+<div class="alt-item"><strong>B)</strong> Criar uma união molecular homogênea com condutividade elétrica idêntica ao condutor de cobre, insuscetível à corrosão galvânica e com capacidade de suportar correntes de curto sem soltura mecânica.</div>
+<div class="alt-item"><strong>C)</strong> Reduzir o diâmetro dos cabos em 50%.</div>
+<div class="alt-item"><strong>D)</strong> Dispensar o uso de moldes de grafite durante a aplicação.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            A reação aluminotérmica da solda exotérmica funde o cobre molecularmente. A conexão torna-se um bloco único de cobre maciço que nunca afrouxa por vibração, suporta a mesma corrente de fusão do cabo e não sofre corrosão de contato.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Solda Exotérmica = Fusão molecular do cobre (conexão permanente de altíssima condutividade).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 29</td>
+            <td class="q-tag">DPS Tipo Centelhador (Spark Gap) vs Varistor (MOV)</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        No projeto de MPS segundo a NBR 5419-4, comparando-se os DPS à base de Centelhador a Gás (*Spark Gap*) com os de Varistor de Óxido Metálico (MOV):
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> O centelhador possui tempo de resposta mais rápido e não conduz corrente subsequente.</div>
+<div class="alt-item"><strong>B)</strong> O centelhador apresenta característica de chaveamento de tensão com altíssima capacidade de corrente de surto (ideal para Classe I), enquanto o varistor possui característica de limitação suave de tensão com tempo de resposta em nanossegundos (ideal para Classe II).</div>
+<div class="alt-item"><strong>C)</strong> O varistor só pode ser usado em corrente contínua pura.</div>
+<div class="alt-item"><strong>D)</strong> O centelhador atua apenas por efeito térmico resistivo.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Centelhador (Spark Gap): Chaveador de tensão, suporta correntes brutas de raio ($10/350\ \mu	ext{s}$ - Classe I). Varistor (MOV): Limitador de tensão contínuo, tempo de resposta ultrarrápido ($< 25	ext{ ns}$), ideal para quadros de distribuição (Classe II).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Centelhador = Chaveador / Alta energia (Classe I). Varistor (MOV) = Limitador / Ultrarrápido (Classe II).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 30</td>
+            <td class="q-tag">Blindagem Magnética de Linhas de Sinal e Dados • Atenuação de Ruído</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Para mitigar as sobretensões induzidas por campos eletromagnéticos gerados pelo raio em cabos de rede e automação industrial (NBR 5419-4), a melhor prática de infraestrutura é:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Lançar os cabos sobre telhados metálicos sem eletrodutos.</div>
+<div class="alt-item"><strong>B)</strong> Lançar os cabos de dados no interior de eletrocalhas ou eletrodutos metálicos de aço galvanizado contínuos e aterrados em ambas as extremidades.</div>
+<div class="alt-item"><strong>C)</strong> Utilizar canaletas plásticas abertas próximas aos condutores de descida do SPDA.</div>
+<div class="alt-item"><strong>D)</strong> Enrolar os cabos de rede ao redor dos condutores de fase de 13,8 kV.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            O caminhamento em canaletas/eletrodutos metálicos fechados de aço galvanizado e aterrados em ambas as pontas atua como blindagem eletromagnética eficaz (Gaiola de Faraday), atenuando drasticamente a indução magnética no laço de cabos.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Blindagem de cabos de sinal: Eletroduto metálico contínuo e aterrado nas duas extremidades.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 31</td>
+            <td class="q-tag">Laço Indutivo em Cabeamento • Regra de Roteamento de Cabos</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Na instalação de cabos de energia e sinal no interior de edificações com SPDA (NBR 5419-4), a regra fundamental para minimizar a tensão induzida por campos magnéticos transitórios é:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Maximizar a área do laço formado entre os condutores de fase e de retorno de sinal.</div>
+<div class="alt-item"><strong>B)</strong> Minimizar a área do laço mantendo os condutores de ida e retorno (fase e neutro/PE) o mais próximos possível dentro da mesma canalização.</div>
+<div class="alt-item"><strong>C)</strong> Lançar o condutor neutro por rota totalmente separada da fase a 5 metros de distância.</div>
+<div class="alt-item"><strong>D)</strong> Eliminar o condutor de proteção PE dos quadros.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Pela Lei de Faraday ($e = -d\Phi/dt = -B \cdot dA/dt$), a força eletromotriz induzida é diretamente proporcional à **área do laço ($A$)** formado pelos condutores. Lançar os condutores agrupados minimiza a área do laço e reduz a sobretensão induzida a valores inofensivos.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Regra de ouro contra surtos induzidos: Minimizar a área do laço (cabos juntos no mesmo conduto).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 32</td>
+            <td class="q-tag">Aterramento de Torres de Telecomunicações • Anel e Radiais</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Em torres metálicas autoportantes de telecomunicações instaladas no solo, o subsistema de aterramento (NBR 5419) deve ser composto preferencialmente por:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Uma única haste vertical cravada no centro da base da torre.</div>
+<div class="alt-item"><strong>B)</strong> Um anel fechado interligando os pés de todas as pernas da torre, complementado por hastes profundas e condutores radiais externos interligados ao abrigo de equipamentos.</div>
+<div class="alt-item"><strong>C)</strong> O uso exclusivo da cerca perimetral de arame farpado.</div>
+<div class="alt-item"><strong>D)</strong> Eletrodos isolados sem equipotencialização com a rede elétrica da concessionária.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Aterramento de torres: Anel fechado conectando todos os pés da estrutura + hastes cravadas + interligação direta com a malha do abrigo de telecomunicações e aterramento da concessionária (BEP único).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Torre de telecom: Malha integrada em anel nos pés da torre unificada ao aterramento do abrigo.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 33</td>
+            <td class="q-tag">Corrosão em Aterramentos • Efeito do pH do Solo</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        A durabilidade e taxa de corrosão dos eletrodos de aterramento cravados no solo dependem fortemente das características químicas do terreno. Solos que apresentam maior agressividade corrosiva ao aço e cobre são:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Solos secos com resistividade superior a 10.000 Ω.m e pH neutro (pH = 7,0).</div>
+<div class="alt-item"><strong>B)</strong> Solos muito úmidos com baixo teor de oxigênio, elevada concentração de sais solúveis (cloretos e sulfatos) e pH ácido (pH < 5,0).</div>
+<div class="alt-item"><strong>C)</strong> Solos rochosos de granito maciço sem umidade.</div>
+<div class="alt-item"><strong>D)</strong> Camadas de areia pura de quartzo lavado.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Solos com pH ácido ($< 5,0$), alto teor de umidade e presença de cloretos/sulfatos são altamente corrosivos para metais enterrados, exigindo hastes com camada espessa de cobre ou cabos de maior seção.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Solo agressivo/corrosivo: Muito úmido + Sais solúveis (cloretos) + pH ácido ($< 5$).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 34</td>
+            <td class="q-tag">DPS em Esquemas de Aterramento TN-S • Conexão 3+1 vs 4+0</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        No esquema de aterramento TN-S, a instalação de DPS no quadro geral pode adotar o arranjo **Modo 4+0** ou **Modo 3+1**. No modo **4+0**:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Utilizam-se quatro DPS monofásicos conectados individualmente entre cada fase e o condutor PE, e entre o neutro e o condutor PE.</div>
+<div class="alt-item"><strong>B)</strong> Utiliza-se um único DPS trifásico ligado em série com a chave geral.</div>
+<div class="alt-item"><strong>C)</strong> Os quatro DPS são conectados exclusivamente entre as fases, dispensando a ligação ao terra.</div>
+<div class="alt-item"><strong>D)</strong> O condutor de proteção é eliminado do quadro.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa A</span>
+        <div class="sol-text">
+            No arranjo 4+0 (esquema TN-S com neutro e PE separados): 3 DPS são ligados de Fase para PE e 1 DPS é ligado de Neutro para PE (todos referenciados diretamente ao barramento de proteção).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Esquema 4+0 no TN-S: 3 DPS (Fase-PE) + 1 DPS (Neutro-PE).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 35</td>
+            <td class="q-tag">Desconexão Térmica de Segurança em DPS</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Os Dispositivos de Proteção contra Surtos à base de varistor (MOV) possuem internamente um dispositivo térmico de desconexão. A função desse mecanismo de segurança é:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Aumentar a corrente de curto-circuito da instalação.</div>
+<div class="alt-item"><strong>B)</strong> Desconectar automaticamente o varistor degradado do circuito quando ele atinge o fim de vida útil por corrente de fuga térmica sustentada, evitando a queima e incêndio do painel elétrico.</div>
+<div class="alt-item"><strong>C)</strong> Desligar o disjuntor geral da subestação no horário de ponta.</div>
+<div class="alt-item"><strong>D)</strong> Regular a frequência da rede para 60 Hz.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Varistores degradam-se após absorver múltiplos surtos, aumentando sua corrente de fuga em 60 Hz e aquecendo até o risco de combustão. O desconector térmico interno funde uma lâmina mecânica com mola, desacoplando o varistor e exibindo a bandeirola vermelha de defeito.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Bandeira vermelha no DPS = Desconector térmico atuou por fim de vida útil do varistor (troca imediata).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 36</td>
+            <td class="q-tag">Eletrodos de Fundação • Concreto como Eletrólito</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        A NBR 5419 e a NBR 5410 priorizam o uso das fundações de concreto armado como eletrodo de aterramento natural. O comportamento do concreto em contato com o solo deve-se ao fato de que:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> O concreto é um isolante elétrico perfeito que bloqueia a passagem de elétrons.</div>
+<div class="alt-item"><strong>B)</strong> O concreto curado enterrado retém umidade capilar e sais alcalinos, comportando-se como um semicondutor eletrolítico com resistividade média muito baixa (cerca de 30 a 90 Ω.m).</div>
+<div class="alt-item"><strong>C)</strong> O concreto impede que os elétrons cheguem ao lençol freático.</div>
+<div class="alt-item"><strong>D)</strong> O aço das armaduras sofre fusão automática durante a passagem da corrente.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            O concreto armado enterrado no solo possui comportamento higroscópico, retendo umidade e apresentando condutividade eletrolítica excelente ($ho pprox 30	ext{ a }90\ \Omega\cdot	ext{m}$), tornando as fundações um eletrodo de aterramento superior e de longa vida útil.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Concreto enterrado = Eletrodo natural excelente devido à retenção de umidade e condutividade iônica.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 37</td>
+            <td class="q-tag">Condutores de Captação • Suportação e Dilatação Térmica</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Na instalação de condutores de captação de cobre ou alumínio sobre telhados e coberturas (NBR 5419-3), os suportes e fixadores devem ser espaçados a cada:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> 0,50 m a 1,00 m no máximo, com previsão de juntas de dilatação térmica para absorver variações de temperatura.</div>
+<div class="alt-item"><strong>B)</strong> 5,00 m sem folga de dilatação.</div>
+<div class="alt-item"><strong>C)</strong> 10,0 m utilizando grampos plásticos comuns.</div>
+<div class="alt-item"><strong>D)</strong> 20,0 m fixados apenas nas extremidades.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa A</span>
+        <div class="sol-text">
+            Condutores de captação e descida devem ser fixados rigidamente com suportes espaçados a no máximo 1,0 m (ou 0,5 m em bordas de platibanda), com dobras/juntas de dilatação a cada 20 m de percurso reto para evitar deformação plástica pelo ciclo térmico dia/noite.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Fixação de condutores de SPDA: Suportes a cada 1 metro + Juntas de dilatação térmica.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 38</td>
+            <td class="q-tag">DPS em Linhas de Telecomunicações e Dados • NBR 5419-4</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Para proteção de portas de rede Ethernet RJ-45, centrais telefônicas e transmissores de dados de instrumentação contra surtos induzidos (MPS), utiliza-se DPS de sinal dotado de:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Fusíveis tipo faca NH de 100 A.</div>
+<div class="alt-item"><strong>B)</strong> Combinação híbrida de Tubos de Descarga a Gás (GDT) para correntes elevadas associados a diodos supressores de silício ultrarrápidos (TVS / Transil) para ceifamento em baixa tensão.</div>
+<div class="alt-item"><strong>C)</strong> Disjuntores termomagnéticos bipolares de curva C.</div>
+<div class="alt-item"><strong>D)</strong> Transformadores a óleo mineral trifásicos.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            DPS de sinal/dados utilizam tecnologia híbrida: GDT (centelhador a gás para suportar corrente de surto) + resistores/indutores de desacoplamento + diodos TVS/Zener de alta velocidade ($< 1	ext{ ns}$) para grampear a tensão em níveis inofensivos (ex.: 5 V a 48 V).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">DPS de dados/telecom = Tecnologia Híbrida (GDT + Diodo TVS ultrarrápido).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 39</td>
+            <td class="q-tag">Resistividade do Solo e Camadas • Estratificação Geológica</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Na interpretação das curvas de resistividade aparente obtidas pelo Método de Wenner, quando a curva de resistividade aparente ($ho_a$) diminui com o aumento do espaçamento entre eletrodos ($a$), conclui-se que:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> O solo possui apenas uma única camada homogênea infinita.</div>
+<div class="alt-item"><strong>B)</strong> As camadas mais profundas do subsolo possuem resistividade elétrica menor que a camada superficial (solo mais condutivo em profundidade, favorável a hastes profundas).</div>
+<div class="alt-item"><strong>C)</strong> O solo não conduz eletricidade em nenhuma profundidade.</div>
+<div class="alt-item"><strong>D)</strong> O valor da constante dielétrica do ar é zero.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Maior espaçamento 'a' no método de Wenner faz as linhas de corrente penetrarem mais profundamente. Se $ho_a$ cai com 'a' maior, as camadas profundas são mais condutivas (ex.: lençol freático ou argila úmida), indicando a eficácia do uso de hastes profundas ou poços de aterramento.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Curva de Wenner descende $ightarrow$ Subsolo profundo mais condutivo (ótimo para hastes cravadas profundas).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 40</td>
+            <td class="q-tag">Tratamento Químico de Solo • Gel Despolarizante</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Em solos rochosos ou arenosos com altíssima resistividade onde é difícil obter baixa impedância de aterramento, admite-se o tratamento do solo no entorno dos eletrodos com compostos condutivos (como bentonita ou cimento condutivo). A principal exigência normativa para esses produtos é:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Serem solúveis em água destilada.</div>
+<div class="alt-item"><strong>B)</strong> Não serem lixiviáveis pelas águas pluviais, não contaminarem o lençol freático e não provocarem corrosão química nos condutores metálicos de cobre.</div>
+<div class="alt-item"><strong>C)</strong> Conterem ácido sulfúrico concentrado para acelerar a condução.</div>
+<div class="alt-item"><strong>D)</strong> Apresentarem propriedades magnéticas permanentes.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Compostos químicos de tratamento de solo devem ser quimicamente inertes com o cobre, estáveis ao longo do tempo (não lixiviáveis) e ecologicamente aprovados (sem contaminação ambiental do lençol freático).
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Composto de tratamento de solo: Não corrosivo ao cobre + Não lixiviável + Ambientalmente seguro.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 41</td>
+            <td class="q-tag">Corrente de Raio • Parâmetros da Onda 10/350 μs</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        A forma de onda de impulso de corrente padronizada $10/350\ \mu	ext{s}$ utilizada nos ensaios de SPDA e DPS Classe I define que:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> A corrente atinge 10% do pico em 350 segundos.</div>
+<div class="alt-item"><strong>B)</strong> O tempo de subida da frente de onda da corrente do zero ao valor de crista é de 10 microssegundos, e o tempo para decair até 50% do valor de pico é de 350 microssegundos.</div>
+<div class="alt-item"><strong>C)</strong> A frequência da onda é de exatamente 10 kHz com 350 ciclos.</div>
+<div class="alt-item"><strong>D)</strong> A descarga é composta por 10 pulsos de 350 amperes.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Notação $T_1 / T_2$: $T_1 = 10\ \mu	ext{s}$ é o tempo virtual de subida da frente de onda até o pico; $T_2 = 350\ \mu	ext{s}$ é o tempo de meia-cauda (tempo até decair para metade do valor de pico), caracterizando uma onda com grande carga elétrica e ação térmica intensa.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Onda $10/350\ \mu	ext{s}$: $10\ \mu	ext{s}$ de subida / $350\ \mu	ext{s}$ até cair pela metade (onda de alta energia).</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 42</td>
+            <td class="q-tag">Efeito de Borda e Cantos de Edifícios • Densidade de Raios</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Pelo modelo de atração de descargas atmosféricas e estatística de impactos (NBR 5419-3), a região de uma edificação retangular que apresenta a maior probabilidade estatística de receber o impacto direto de um raio é:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> O centro exato da cobertura plana.</div>
+<div class="alt-item"><strong>B)</strong> Os cantos, quinas e vértices superiores da cobertura e bordas de platibanda, onde o gradiente de potencial elétrico é mais concentrado.</div>
+<div class="alt-item"><strong>C)</strong> A porta de entrada do subsolo.</div>
+<div class="alt-item"><strong>D)</strong> A face interna dos poços de elevadores.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            O efeito das pontas e descontinuidades geométricas concentra o campo eletrostático nas quinas, cantos e bordas superiores do prédio. Por essa razão, a malha captora e os captores pontiagudos devem ser instalados prioritariamente ao longo de todo o perímetro externo e nos vértices da platibanda.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Raios caem preferencialmente nas QUINAS, BORDAS e VÉRTICES da cobertura!</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 43</td>
+            <td class="q-tag">Aterramento de Cercas Metálicas Perimetrais</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Em subestações elétricas e plantas industriais cercadas por telas ou alambrados metálicos, a NBR 5419 e a NBR 14039 determinam que a cerca metálica deve:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Ser totalmente isolada do solo através de suportes de borracha.</div>
+<div class="alt-item"><strong>B)</strong> Ser periodicamente aterrada e equipotencializada com a malha geral da subestação (ou mantida isolada a distância segura com aterramento próprio nas extremidades e portões interligados por cordoalhas flexíveis).</div>
+<div class="alt-item"><strong>C)</strong> Ser conectada exclusivamente à fase B de 13,8 kV.</div>
+<div class="alt-item"><strong>D)</strong> Não conter portões articulados.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Cercas metálicas perimetrais devem ser aterradas a cada 20 a 50 metros, e os portões móveis devem ter ligação equipotencial flexível entre a folha e o batente para evitar choque por tensão de toque quando uma pessoa abrir o portão durante uma falta na subestação.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Cercas e portões de subestações: Aterramento contínuo + Cordoalhas flexíveis nos portões.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 44</td>
+            <td class="q-tag">Condutores de Descida Embutidos em Alvenaria</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        A NBR 5419-3 permite que condutores de descida não naturais sejam instalados embutidos dentro de paredes de alvenaria desde que:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Sejam lançados diretamente soltos na argamassa sem duto.</div>
+<div class="alt-item"><strong>B)</strong> Sejam instalados no interior de eletrodutos não metálicos (como PVC rígido) com recobrimento mínimo de argamassa de 5 cm ou características adequadas de suportabilidade mecânica e térmica.</div>
+<div class="alt-item"><strong>C)</strong> Fiquem colados ao lado de tubulações de gás GLP.</div>
+<div class="alt-item"><strong>D)</strong> Sejam feitos com fita de chumbo maleável.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            Descidas embutidas em alvenaria devem correr dentro de tubos de PVC para não trincar a alvenaria pela dilatação térmica e esforços eletrodinâmicos durante o raio.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Descidas embutidas na parede: Obrigatório uso de eletroduto protetor de PVC.</span>
+        </div>
+    </div>
+</div>
+
+<div class="question-card">
+    <table class="q-badge-table">
+        <tr>
+            <td class="q-number">Questão 45</td>
+            <td class="q-tag">Proteção de Antenas Externas no Topo de Edifícios</td>
+        </tr>
+    </table>
+    <div class="q-statement">
+        Antenas de telecomunicações, rádio e televisão instaladas no mastro do topo de edifícios dotados de SPDA (NBR 5419) devem:
+    </div>
+    <div class="alternatives">
+        <div class="alt-item"><strong>A)</strong> Ficar posicionadas acima de todos os captores para atrair o raio.</div>
+<div class="alt-item"><strong>B)</strong> Estar contidas dentro do volume de proteção do SPDA (na zona protegida por captores Franklin ou malhas), e a carcaça/mastro metálico da antena deve ser equipotencializado ao SPDA no topo, com instalação de DPS nos cabos coaxiais na entrada do prédio.</div>
+<div class="alt-item"><strong>C)</strong> Ser completamente desconectadas da terra.</div>
+<div class="alt-item"><strong>D)</strong> Usar cabos coaxiais sem malha de blindagem.</div>
+
+    </div>
+    <div class="solution-box">
+        <span class="sol-header">Gabarito Comentado: Alternativa B</span>
+        <div class="sol-text">
+            O mastro da antena deve estar dentro do cone/esfera de proteção do captor (nunca ser o ponto mais alto desprotegido) e ter seu mastro interligado à captação do SPDA, com DPS coaxial para proteger os televisores e receptores contra surtos induzidos.
+        </div>
+        <div class="tip-box">
+            <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
+            <span class="tip-text">Mastro de antena: Fica dentro do volume protegido do SPDA + Aterrado na captação + DPS no cabo coaxial.</span>
+        </div>
+    </div>
+</div>
+</body></html>
