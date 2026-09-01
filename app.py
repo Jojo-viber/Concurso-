@@ -3,7 +3,12 @@ import os
 import re
 from bs4 import BeautifulSoup
 import json
+import hashlib
+import hmac
+import secrets
+import uuid
 from datetime import datetime
+from filelock import FileLock
 
 st.set_page_config(
     page_title="Treinador IDECAN - Engenharia Elétrica",
@@ -12,10 +17,143 @@ st.set_page_config(
 )
 
 QUESTOES_DIR = "questoes"
-PROGRESSO_FILE = "progresso_usuario.json"
+DADOS_USUARIOS_DIR = "dados_usuarios"
+USUARIOS_FILE = os.path.join(DADOS_USUARIOS_DIR, "usuarios.json")
+PROGRESSO_LEGADO_FILE = "progresso_usuario.json"
 
 if not os.path.exists(QUESTOES_DIR):
     os.makedirs(QUESTOES_DIR)
+
+os.makedirs(DADOS_USUARIOS_DIR, exist_ok=True)
+
+
+def carregar_json(caminho, padrao):
+    """Lê JSON com bloqueio para evitar leitura durante outra gravação."""
+    with FileLock(f"{caminho}.lock"):
+        if not os.path.exists(caminho):
+            return padrao.copy() if isinstance(padrao, dict) else padrao
+        try:
+            with open(caminho, "r", encoding="utf-8") as arquivo:
+                conteudo = json.load(arquivo)
+                return conteudo if isinstance(conteudo, type(padrao)) else padrao
+        except (OSError, json.JSONDecodeError):
+            return padrao.copy() if isinstance(padrao, dict) else padrao
+
+
+def salvar_json(caminho, conteudo):
+    """Grava JSON de forma atômica e protegida contra concorrência."""
+    os.makedirs(os.path.dirname(caminho) or ".", exist_ok=True)
+    temporario = f"{caminho}.{uuid.uuid4().hex}.tmp"
+    with FileLock(f"{caminho}.lock"):
+        try:
+            with open(temporario, "w", encoding="utf-8") as arquivo:
+                json.dump(conteudo, arquivo, ensure_ascii=False, indent=2)
+            os.replace(temporario, caminho)
+        finally:
+            if os.path.exists(temporario):
+                os.remove(temporario)
+
+
+def gerar_hash_pin(pin, salt_hex=None):
+    salt = bytes.fromhex(salt_hex) if salt_hex else secrets.token_bytes(16)
+    pin_hash = hashlib.pbkdf2_hmac("sha256", pin.encode("utf-8"), salt, 200_000)
+    return salt.hex(), pin_hash.hex()
+
+
+def validar_pin(usuario, pin):
+    _, calculado = gerar_hash_pin(pin, usuario["pin_salt"])
+    return hmac.compare_digest(calculado, usuario["pin_hash"])
+
+
+def carregar_usuarios():
+    return carregar_json(USUARIOS_FILE, {})
+
+
+def criar_usuario(nome, pin):
+    nome = " ".join(nome.strip().split())
+    if len(nome) < 2 or len(nome) > 40:
+        raise ValueError("O nome deve ter entre 2 e 40 caracteres.")
+    if len(pin) < 4 or not pin.isdigit():
+        raise ValueError("O PIN deve conter pelo menos 4 números.")
+
+    with FileLock(f"{USUARIOS_FILE}.cadastro.lock"):
+        usuarios = carregar_usuarios()
+        if any(u["nome"].casefold() == nome.casefold() for u in usuarios.values()):
+            raise ValueError("Já existe um perfil com esse nome.")
+
+        usuario_id = uuid.uuid4().hex
+        salt, pin_hash = gerar_hash_pin(pin)
+        usuarios[usuario_id] = {
+            "id": usuario_id,
+            "nome": nome,
+            "pin_salt": salt,
+            "pin_hash": pin_hash,
+            "criado_em": datetime.now().isoformat(timespec="seconds")
+        }
+        salvar_json(USUARIOS_FILE, usuarios)
+
+        progresso_novo = os.path.join(DADOS_USUARIOS_DIR, f"{usuario_id}.json")
+        if len(usuarios) == 1 and os.path.exists(PROGRESSO_LEGADO_FILE):
+            salvar_json(progresso_novo, carregar_json(PROGRESSO_LEGADO_FILE, {}))
+        else:
+            salvar_json(progresso_novo, {})
+        return usuarios[usuario_id]
+
+
+def tela_de_perfil():
+    if st.session_state.get("usuario_id"):
+        return
+
+    st.title("⚡ Treinador IDECAN")
+    st.subheader("Escolha seu perfil de estudos")
+    st.caption("Cada perfil possui histórico, estatísticas e arquivo de backup próprios.")
+
+    usuarios = carregar_usuarios()
+    aba_entrar, aba_criar = st.tabs(["Entrar", "Criar perfil"])
+
+    with aba_entrar:
+        if usuarios:
+            por_nome = {u["nome"]: u for u in sorted(usuarios.values(), key=lambda x: x["nome"].casefold())}
+            nome_selecionado = st.selectbox("Usuário", list(por_nome), key="login_usuario")
+            pin = st.text_input("PIN", type="password", key="login_pin", max_chars=20)
+            if st.button("Entrar", type="primary", use_container_width=True):
+                usuario = por_nome[nome_selecionado]
+                if validar_pin(usuario, pin):
+                    st.session_state.usuario_id = usuario["id"]
+                    st.session_state.usuario_nome = usuario["nome"]
+                    st.session_state.pop("progresso", None)
+                    st.rerun()
+                else:
+                    st.error("PIN incorreto.")
+        else:
+            st.info("Ainda não existe nenhum perfil. Crie o primeiro na aba ao lado.")
+
+    with aba_criar:
+        novo_nome = st.text_input("Nome do novo usuário", key="novo_usuario", max_chars=40)
+        novo_pin = st.text_input("Crie um PIN numérico", type="password", key="novo_pin", max_chars=20)
+        confirmar_pin = st.text_input("Confirme o PIN", type="password", key="confirmar_pin", max_chars=20)
+        if st.button("Criar perfil", use_container_width=True):
+            if novo_pin != confirmar_pin:
+                st.error("Os PINs não coincidem.")
+            else:
+                try:
+                    usuario = criar_usuario(novo_nome, novo_pin)
+                    st.session_state.usuario_id = usuario["id"]
+                    st.session_state.usuario_nome = usuario["nome"]
+                    st.session_state.pop("progresso", None)
+                    st.rerun()
+                except ValueError as erro:
+                    st.error(str(erro))
+
+    st.warning(
+        "No Streamlit Community Cloud, arquivos locais podem ser apagados em reinicializações. "
+        "Use o backup individual disponível após entrar."
+    )
+    st.stop()
+
+
+tela_de_perfil()
+PROGRESSO_FILE = os.path.join(DADOS_USUARIOS_DIR, f"{st.session_state.usuario_id}.json")
 
 # --- Mapeamento do Edital: Assuntos, Blocos e Metas ---
 MAPEAMENTO_ASSUNTOS = {
@@ -58,17 +196,10 @@ def identificar_assunto_e_bloco(nome_arquivo, tag_questao):
 
 # --- Gerenciamento de Estado e Progresso ---
 def carregar_progresso():
-    if os.path.exists(PROGRESSO_FILE):
-        try:
-            with open(PROGRESSO_FILE, "r", encoding="utf-8") as f:
-                return json.load(f)
-        except Exception:
-            return {}
-    return {}
+    return carregar_json(PROGRESSO_FILE, {})
 
 def salvar_progresso(progresso):
-    with open(PROGRESSO_FILE, "w", encoding="utf-8") as f:
-        json.dump(progresso, f, ensure_ascii=False, indent=2)
+    salvar_json(PROGRESSO_FILE, progresso)
 
 if "progresso" not in st.session_state:
     st.session_state.progresso = carregar_progresso()
@@ -166,6 +297,11 @@ if houve_ajuste:
 
 # --- Barra Lateral: Metas, Filtros e Modos de Visualização ---
 st.sidebar.title("⚡ Painel de Metas • IDECAN")
+st.sidebar.caption(f"Perfil ativo: **{st.session_state.usuario_nome}**")
+if st.sidebar.button("Trocar usuário", use_container_width=True):
+    for chave in ("usuario_id", "usuario_nome", "progresso", "ultimo_upload_sig"):
+        st.session_state.pop(chave, None)
+    st.rerun()
 
 if not todas_questoes:
     st.warning(f"Nenhum caderno `.html` encontrado na pasta `{QUESTOES_DIR}/`.")
@@ -202,7 +338,7 @@ json_progresso = json.dumps(progresso, ensure_ascii=False, indent=2)
 st.sidebar.download_button(
     label="📥 Baixar Progresso (.json)",
     data=json_progresso,
-    file_name="progresso_usuario.json",
+    file_name=f"progresso_{st.session_state.usuario_nome.replace(' ', '_').lower()}.json",
     mime="application/json",
     help="Baixe seu arquivo de progresso para guardar no PC/Celular ou subir no GitHub.",
     use_container_width=True
@@ -277,6 +413,16 @@ elif modo_estudo == "Apenas Não Resolvidas":
     questoes_filtradas = [q for q in questoes_filtradas if q["id"] not in progresso]
 
 # --- Função de Renderização de Card de Questão ---
+def html_para_markdown(fragmento):
+    """Converte o HTML simples dos cadernos em Markdown compatível com KaTeX."""
+    soup = BeautifulSoup(fragmento or "", "html.parser")
+    for quebra in soup.find_all("br"):
+        quebra.replace_with("\n\n")
+    for negrito in soup.find_all(["strong", "b"]):
+        negrito.replace_with(f"**{negrito.get_text()}**")
+    return soup.get_text("", strip=False).strip()
+
+
 def renderizar_questao(q):
     q_id = q["id"]
     historico = progresso.get(q_id, None)
@@ -293,36 +439,34 @@ def renderizar_questao(q):
             else:
                 col_t2.warning(f"❌ Errada (Marcou: {historico.get('resposta', '-')})")
         
-        st.markdown(q["enunciado"], unsafe_allow_html=True)
+        st.markdown(html_para_markdown(q["enunciado"]))
         st.write("")
         
-        opcoes = []
-        opcoes_map = {}
+        letras_disponiveis = []
         for alt in q["alternativas"]:
             match = re.search(r"<strong>([A-E])\)<\/strong>\s*(.*)", alt, re.DOTALL)
             if match:
                 letra = match.group(1).upper()
-                texto_puro = BeautifulSoup(match.group(2), "html.parser").get_text(strip=True)
-                rotulo = f"{letra}) {texto_puro}"
-                opcoes.append(rotulo)
-                opcoes_map[rotulo] = letra
+                texto_markdown = html_para_markdown(match.group(2))
             else:
-                texto_puro = BeautifulSoup(alt, "html.parser").get_text(strip=True)
-                opcoes.append(texto_puro)
-                opcoes_map[texto_puro] = texto_puro[:1].upper()
+                texto_markdown = html_para_markdown(alt)
+                letra = chr(ord("A") + len(letras_disponiveis))
+            letras_disponiveis.append(letra)
+            st.markdown(f"**{letra})** {texto_markdown}")
 
         escolha = st.radio(
-            "Alternativa:",
-            opcoes,
+            "Selecione a alternativa:",
+            letras_disponiveis,
             key=f"radio_{q_id}",
-            index=None
+            index=None,
+            horizontal=True
         )
         
         col_btn1, col_btn2 = st.columns([1, 4])
         confirmar = col_btn1.button("Confirmar Resposta", key=f"btn_{q_id}", type="primary")
         
         if confirmar and escolha:
-            letra_escolhida = opcoes_map[escolha]
+            letra_escolhida = escolha
             gabarito_correto = q["gabarito"]
             acertou = (letra_escolhida == gabarito_correto)
             
@@ -348,9 +492,9 @@ def renderizar_questao(q):
             else:
                 st.info(f"**Gabarito Oficial:** Alternativa **{q['gabarito']}**")
                 
-            st.markdown(q["resolucao"], unsafe_allow_html=True)
+            st.markdown(html_para_markdown(q["resolucao"]))
             if q["dica"]:
-                st.markdown(q["dica"], unsafe_allow_html=True)
+                st.markdown(html_para_markdown(q["dica"]))
 
 # --- Área Principal ---
 st.title("📚 Resolução de Questões IDECAN")
