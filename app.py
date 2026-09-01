@@ -458,6 +458,33 @@ def html_para_markdown(fragmento):
     return soup.get_text("", strip=False).strip()
 
 
+def renderizar_fragmento(fragmento):
+    """Renderiza Markdown/KaTeX e imagens locais mantendo a ordem do HTML."""
+    soup = BeautifulSoup(fragmento or "", "html.parser")
+    imagens = []
+    for indice, img in enumerate(soup.find_all("img")):
+        marcador = f"@@IMAGEM_LOCAL_{indice}@@"
+        imagens.append({"src": img.get("src", ""), "alt": img.get("alt", "Diagrama da questão")})
+        img.replace_with(f"\n\n{marcador}\n\n")
+
+    conteudo = html_para_markdown(str(soup))
+    partes = re.split(r"(@@IMAGEM_LOCAL_\d+@@)", conteudo)
+    raiz_questoes = os.path.realpath(QUESTOES_DIR)
+    for parte in partes:
+        match = re.fullmatch(r"@@IMAGEM_LOCAL_(\d+)@@", parte.strip())
+        if not match:
+            if parte.strip():
+                st.markdown(parte.strip())
+            continue
+
+        imagem = imagens[int(match.group(1))]
+        caminho = os.path.realpath(os.path.join(QUESTOES_DIR, imagem["src"]))
+        if caminho.startswith(raiz_questoes + os.sep) and os.path.isfile(caminho):
+            st.image(caminho, caption=imagem["alt"], use_column_width=True)
+        else:
+            st.warning("Imagem da questão não encontrada.")
+
+
 def extrair_alternativas(q):
     alternativas = []
     for indice, alt in enumerate(q["alternativas"]):
@@ -676,7 +703,7 @@ def renderizar_simulado():
                 st.caption(f"{q['assunto']} • {q['subtema']}")
             else:
                 st.caption("Engenharia Elétrica • tema não identificado durante a prova")
-            st.markdown(html_para_markdown(q["enunciado"]))
+            renderizar_fragmento(q["enunciado"])
             alternativas = extrair_alternativas(q)
             for letra, texto in alternativas:
                 st.markdown(f"**{letra})** {texto}")
@@ -697,9 +724,9 @@ def renderizar_simulado():
                 else:
                     st.error(f"Você marcou **{detalhe['resposta']}**. Gabarito: **{detalhe['gabarito']}**.")
                 with st.expander("Ver resolução", expanded=False):
-                    st.markdown(html_para_markdown(q["resolucao"]))
+                    renderizar_fragmento(q["resolucao"])
                     if q["dica"]:
-                        st.markdown(html_para_markdown(q["dica"]))
+                        renderizar_fragmento(q["dica"])
 
     if not finalizado:
         respondidas = sum(
@@ -760,7 +787,7 @@ def renderizar_questao(q):
             else:
                 col_t2.warning(f"❌ Errada (Marcou: {historico.get('resposta', '-')})")
         
-        st.markdown(html_para_markdown(q["enunciado"]))
+        renderizar_fragmento(q["enunciado"])
         st.write("")
         
         letras_disponiveis = []
@@ -802,9 +829,9 @@ def renderizar_questao(q):
                     st.success(f"**Gabarito Oficial:** Alternativa **{q['gabarito']}** (Você acertou!)")
                 else:
                     st.error(f"**Gabarito Oficial:** Alternativa **{q['gabarito']}** (Na última tentativa você marcou **{historico.get('resposta')}**)")
-                st.markdown(html_para_markdown(q["resolucao"]))
+                renderizar_fragmento(q["resolucao"])
                 if q["dica"]:
-                    st.markdown(html_para_markdown(q["dica"]))
+                    renderizar_fragmento(q["dica"])
         else:
             st.caption("Confirme uma resposta para liberar o gabarito e a resolução.")
 

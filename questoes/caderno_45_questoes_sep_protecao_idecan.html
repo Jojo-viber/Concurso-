@@ -1,0 +1,504 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sistemas de Potência e Proteção - 45 Questões IDECAN</title><style>
+body{font-family:Arial,sans-serif;background:#eef2f7;color:#172033;margin:0;padding:28px}
+.page{max-width:980px;margin:auto}.header{background:#17365d;color:white;padding:24px;border-radius:12px;margin-bottom:22px}
+.question-card{background:white;border:1px solid #cbd5e1;border-radius:12px;padding:22px;margin:20px 0;box-shadow:0 2px 8px #00000012}
+.q-badge-table{width:100%;border-collapse:collapse;margin-bottom:16px}.q-number{font-weight:bold;color:#17365d;font-size:20px}.q-tag{text-align:right;color:#52647a}
+.q-statement{font-size:17px;line-height:1.55;margin:14px 0}.q-image{display:block;max-width:92%;height:auto;margin:18px auto;border:1px solid #d6deea;border-radius:8px;background:white}
+.alt-item{padding:10px 12px;margin:8px 0;background:#f7f9fc;border-left:4px solid #829ab8;line-height:1.45}
+.solution-box{margin-top:18px;border-top:2px solid #2e6f9e;padding-top:14px}.sol-header{font-weight:bold;color:#0b5e42}.sol-text{line-height:1.55;margin-top:10px}
+.tip-box{margin-top:12px;background:#fff7d6;border-left:5px solid #d5a000;padding:13px}.tip-title{display:block;font-weight:bold;margin-bottom:5px}.tip-text{line-height:1.45}
+</style></head><body><main class="page"><div class="header"><h1>Sistemas de Potência e Proteção</h1><p>45 questões autorais no padrão IDECAN • Engenharia Elétrica</p></div><div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 01</td><td class="q-tag">SEP • Funções dos Equipamentos de Manobra</td></tr></table>
+<div class="q-statement">Considere o diagrama unifilar simplificado de um alimentador de subestação. Para isolar o trecho em manutenção, a sequência operacional segura exige distinguir a capacidade de interrupção dos equipamentos representados.<img class="q-image" src="assets/sep_q01_unifilar.svg" alt="Diagrama da questão 01"></div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> A chave seccionadora S deve interromper a corrente de curto-circuito, enquanto o disjuntor Q apenas estabelece isolamento visível.</div>
+<div class="alt-item"><strong>B)</strong> O disjuntor Q e a chave S podem interromper correntes de falta com a mesma capacidade, desde que sejam comandados simultaneamente.</div>
+<div class="alt-item"><strong>C)</strong> O disjuntor Q interrompe a corrente de carga ou de falta; depois de aberto, a seccionadora S estabelece o isolamento do trecho sem corrente.</div>
+<div class="alt-item"><strong>D)</strong> A seccionadora S deve ser aberta antes do disjuntor Q para impedir que o arco elétrico se forme nos contatos do disjuntor.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa C</span>
+<div class="sol-text">O disjuntor é dimensionado para estabelecer e interromper correntes normais e de curto-circuito. A seccionadora, em regra, não possui capacidade para interromper corrente de falta e é empregada para produzir isolamento após a abertura do disjuntor. Assim, abre-se Q, confirma-se a ausência de corrente e, então, abre-se S. Na recomposição, a ordem é inversa.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">Primeiro identifique qual equipamento extingue arco de potência. Em unifilares, o disjuntor elimina a corrente; a seccionadora cria a condição visível de isolamento.</span></div>
+</div></div>
+<div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 02</td><td class="q-tag">Estrutura do SEP • Transformação de Tensão</td></tr></table>
+<div class="q-statement">Uma usina entrega potência a um centro consumidor distante. Desconsiderando limites específicos de cada concessionária, qual justificativa técnica explica a elevação da tensão antes da transmissão e sua posterior redução próxima às cargas?</div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> Para uma mesma potência, elevar a tensão reduz a corrente e as perdas $I^2R$; próximo às cargas, a tensão é reduzida para níveis compatíveis com distribuição e utilização.</div>
+<div class="alt-item"><strong>B)</strong> Elevar a tensão aumenta a corrente e reduz a reatância das linhas, enquanto a redução posterior recupera o fator de potência original.</div>
+<div class="alt-item"><strong>C)</strong> A transformação é necessária para manter constante a frequência, que seria proporcional à tensão durante o transporte de energia.</div>
+<div class="alt-item"><strong>D)</strong> A transmissão em tensão elevada elimina a potência reativa da linha, tornando desnecessária qualquer compensação no sistema.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa A</span>
+<div class="sol-text">Em sistema trifásico, $P=\sqrt{3}VI\cos\varphi$. Mantidos potência e fator de potência, o aumento de $V$ reduz $I$. Como as perdas nos condutores são proporcionais a $3I^2R$, a transmissão em tensão elevada reduz perdas e queda de tensão. A redução posterior atende requisitos de isolamento, segurança e utilização das cargas.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">Quando a pergunta tratar da cadeia geração-transmissão-distribuição, relacione tensão elevada com corrente menor para a mesma potência; não associe a transformação à mudança de frequência.</span></div>
+</div></div>
+<div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 03</td><td class="q-tag">Sistema por Unidade • Impedância de Base</td></tr></table>
+<div class="q-statement">Em uma barra trifásica adotam-se $S_b=100\,\text{MVA}$ e $V_b=13{,}8\,\text{kV}$, sendo $V_b$ a tensão de linha. A impedância de base nessa barra é aproximadamente:</div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> $0{,}526\,\Omega$.</div>
+<div class="alt-item"><strong>B)</strong> $1{,}38\,\Omega$.</div>
+<div class="alt-item"><strong>C)</strong> $13{,}8\,\Omega$.</div>
+<div class="alt-item"><strong>D)</strong> $1{,}90\,\Omega$.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa D</span>
+<div class="sol-text">Para bases trifásicas, usa-se diretamente $Z_b=V_b^2/S_b$, com tensão de linha em kV e potência trifásica em MVA. Portanto, $Z_b=13{,}8^2/100=1{,}9044\,\Omega$. Não se introduz o fator 3 nessa expressão, pois ele já está incorporado na definição das bases trifásicas.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">Memorize o par: $Z_b=V_b^2/S_b$ e $I_b=S_b/(\sqrt{3}V_b)$. Antes de calcular, confira se as bases são trifásicas e se a tensão é de linha.</span></div>
+</div></div>
+<div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 04</td><td class="q-tag">Sistema por Unidade • Mudança de Base</td></tr></table>
+<div class="q-statement">Um transformador possui reatância $x=0{,}10\,pu$ em sua própria base de $50\,MVA$ e $13{,}8\,kV$. Mantida a mesma tensão-base, o valor da reatância na base de $100\,MVA$ é:</div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> $0{,}05\,pu$.</div>
+<div class="alt-item"><strong>B)</strong> $0{,}20\,pu$.</div>
+<div class="alt-item"><strong>C)</strong> $0{,}40\,pu$.</div>
+<div class="alt-item"><strong>D)</strong> $1{,}00\,pu$.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa B</span>
+<div class="sol-text">A mudança de base é $x_{novo}=x_{antigo}(S_{novo}/S_{antigo})(V_{antigo}/V_{novo})^2$. Como as tensões-base são iguais, o último fator vale 1. Logo, $x_{novo}=0{,}10(100/50)=0{,}20\,pu$.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">Não faça regra de três inversa automaticamente. Em pu, para tensão-base constante, a impedância em pu cresce na mesma proporção da potência-base.</span></div>
+</div></div>
+<div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 05</td><td class="q-tag">Curto-Circuito Trifásico • Cálculo em pu</td></tr></table>
+<div class="q-statement">No sistema da figura, as reatâncias equivalentes entre a fonte e o ponto F somam $j0{,}25\,pu$. Admitindo tensão pré-falta $1\angle0^\circ\,pu$ e desprezando a resistência, a corrente de falta trifásica e seu valor para $S_b=100\,MVA$ e $V_b=13{,}8\,kV$ são, aproximadamente:<img class="q-image" src="assets/sep_q05_curto.svg" alt="Diagrama da questão 05"></div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> $-j4{,}0\,pu$ e $16{,}7\,kA$.</div>
+<div class="alt-item"><strong>B)</strong> $-j0{,}25\,pu$ e $1{,}05\,kA$.</div>
+<div class="alt-item"><strong>C)</strong> $j4{,}0\,pu$ e $4{,}18\,kA$.</div>
+<div class="alt-item"><strong>D)</strong> $-j2{,}0\,pu$ e $8{,}37\,kA$.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa A</span>
+<div class="sol-text">A corrente simétrica é $I_f=V_{pré}/Z_{th}=1/(j0{,}25)=-j4\,pu$. A corrente-base vale $I_b=S_b/(\sqrt{3}V_b)=100/(\sqrt{3}\cdot13{,}8)=4{,}184\,kA$. Assim, $|I_f|=4\cdot4{,}184\approx16{,}7\,kA$.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">Separe o problema em duas etapas: resolva a rede em pu e, somente no final, multiplique pela corrente-base da barra onde ocorre a falta.</span></div>
+</div></div>
+<div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 06</td><td class="q-tag">Componentes Simétricas • Sequência Positiva</td></tr></table>
+<div class="q-statement">Em relação às componentes simétricas de um conjunto trifásico desequilibrado, a componente de sequência positiva é formada por três fasores:</div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> de mesmo módulo, em fase, cuja soma é diferente de zero no condutor neutro.</div>
+<div class="alt-item"><strong>B)</strong> de módulos distintos e defasagens determinadas pelas impedâncias de cada fase.</div>
+<div class="alt-item"><strong>C)</strong> de mesmo módulo, defasados de $120^\circ$, mantendo a ordem de fases do sistema original.</div>
+<div class="alt-item"><strong>D)</strong> de mesmo módulo, defasados de $120^\circ$, com ordem de fases oposta à sequência de referência.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa C</span>
+<div class="sol-text">A sequência positiva constitui um sistema equilibrado com a mesma ordem de fases da referência, por exemplo a-b-c. A sequência negativa também é equilibrada, mas apresenta ordem inversa, a-c-b. A sequência zero possui três fasores em fase.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">Para não confundir positiva e negativa, observe a ordem de rotação dos fasores; o módulo e a defasagem de $120^\circ$ aparecem nas duas.</span></div>
+</div></div>
+<div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 07</td><td class="q-tag">Componentes Simétricas • Sequência Negativa</td></tr></table>
+<div class="q-statement">Em uma máquina de indução, correntes de sequência negativa são particularmente indesejáveis porque produzem um campo girante que:</div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> gira no mesmo sentido e na mesma velocidade do campo positivo, elevando apenas o fator de potência.</div>
+<div class="alt-item"><strong>B)</strong> gira em sentido oposto ao campo positivo, podendo provocar aquecimento adicional no rotor.</div>
+<div class="alt-item"><strong>C)</strong> permanece estacionário no entreferro e atua somente sobre o circuito de excitação.</div>
+<div class="alt-item"><strong>D)</strong> existe apenas quando o neutro é solidamente aterrado e desaparece em ligação triângulo.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa B</span>
+<div class="sol-text">A sequência negativa cria campo girante em sentido contrário ao da sequência positiva. Visto do rotor, a frequência relativa associada pode ser elevada, induzindo correntes adicionais e aquecimento. Por isso, relés de desequilíbrio ou de sequência negativa são relevantes na proteção de máquinas.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">Associe sequência negativa a desequilíbrio e aquecimento de máquinas. Não a confunda com sequência zero, cuja circulação depende do caminho de retorno.</span></div>
+</div></div>
+<div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 08</td><td class="q-tag">Componentes Simétricas • Sequência Zero</td></tr></table>
+<div class="q-statement">Para que uma corrente de sequência zero circule em um sistema trifásico, é necessário existir:</div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> somente uma fonte de sequência positiva com tensão nominal superior à da carga.</div>
+<div class="alt-item"><strong>B)</strong> uma ligação em triângulo em todos os lados dos transformadores, sem qualquer aterramento.</div>
+<div class="alt-item"><strong>C)</strong> uma diferença entre as reatâncias de sequência positiva e negativa da linha.</div>
+<div class="alt-item"><strong>D)</strong> um caminho de retorno compatível, normalmente pelo neutro aterrado, terra ou enrolamento em triângulo fechado.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa D</span>
+<div class="sol-text">As três correntes de sequência zero estão em fase e sua soma é $3I_0$. Portanto, precisam de caminho de retorno. Um neutro aterrado permite esse retorno; um triângulo pode oferecer caminho interno para circulação, ainda que bloqueie a transferência da sequência zero para o outro lado da linha.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">Em sequência zero, a pergunta-chave é: por onde a soma das três correntes retorna? Se não houver caminho, $I_0$ não circula naquele trecho.</span></div>
+</div></div>
+<div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 09</td><td class="q-tag">Falta Monofásica à Terra • Redes de Sequência</td></tr></table>
+<div class="q-statement">A figura apresenta três possibilidades de conexão das redes de sequência no ponto de uma falta monofásica à terra, com impedância de falta $Z_f$. Qual relação caracteriza corretamente esse defeito?<img class="q-image" src="assets/sep_q09_sequencias.svg" alt="Diagrama da questão 09"></div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> As redes positiva e negativa ficam em paralelo, enquanto a rede zero permanece aberta.</div>
+<div class="alt-item"><strong>B)</strong> Somente a rede positiva participa, pois as correntes das fases sãs são nulas.</div>
+<div class="alt-item"><strong>C)</strong> As redes positiva, negativa e zero são ligadas em série, incluindo-se $3Z_f$ no circuito equivalente.</div>
+<div class="alt-item"><strong>D)</strong> As três redes são ligadas em paralelo e submetidas à mesma corrente de sequência positiva.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa C</span>
+<div class="sol-text">Na falta fase-terra, $I_1=I_2=I_0$ no circuito de componentes simétricas. Essa igualdade conduz à ligação em série das três redes. Como a corrente de fase faltosa é $I_a=3I_0$, a impedância física da falta aparece como $3Z_f$ no circuito de sequência.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">Decore pela condição de contorno, não pelo desenho: falta fase-terra implica correntes de sequência iguais; igualdade de corrente leva à associação em série.</span></div>
+</div></div>
+<div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 10</td><td class="q-tag">Falta Bifásica • Redes de Sequência</td></tr></table>
+<div class="q-statement">Em uma falta bifásica sem contato com a terra entre as fases b e c, a rede de sequência zero não participa e as redes positiva e negativa são conectadas de modo que:</div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> $I_0=I_1=I_2$ e as três tensões de sequência são nulas.</div>
+<div class="alt-item"><strong>B)</strong> $I_2=0$ e a corrente de falta depende somente da impedância de sequência positiva.</div>
+<div class="alt-item"><strong>C)</strong> $I_1=0$, circulando apenas correntes iguais de sequência negativa e zero.</div>
+<div class="alt-item"><strong>D)</strong> $I_0=0$, $I_2=-I_1$ e as redes positiva e negativa ficam associadas no ponto de falta.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa D</span>
+<div class="sol-text">Sem ligação à terra, não existe caminho para sequência zero, logo $I_0=0$. A condição $I_a=0$ e a oposição das correntes nas fases b e c resultam em $I_2=-I_1$. Assim, as redes positiva e negativa participam do cálculo.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">Primeiro verifique se há terra envolvida. Em falta entre duas fases sem terra, elimine a rede zero e relacione as redes positiva e negativa.</span></div>
+</div></div>
+<div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 11</td><td class="q-tag">Falta Bifásica à Terra • Componentes Simétricas</td></tr></table>
+<div class="q-statement">Para uma falta bifásica à terra, a corrente de sequência positiva alimenta uma associação equivalente em que:</div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> as redes negativa e zero aparecem em paralelo, considerando a impedância de falta no ramo de sequência zero.</div>
+<div class="alt-item"><strong>B)</strong> as três redes aparecem em série porque suas correntes são obrigatoriamente iguais.</div>
+<div class="alt-item"><strong>C)</strong> a rede negativa é eliminada e a corrente depende apenas das redes positiva e zero.</div>
+<div class="alt-item"><strong>D)</strong> a rede zero fica aberta, pois duas fases em falta produzem soma instantânea nula.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa A</span>
+<div class="sol-text">Na falta dupla fase-terra, as redes negativa e zero compartilham o mesmo ponto de tensão no defeito e formam uma associação em paralelo vista pela rede positiva. A impedância de falta é incorporada ao ramo correspondente à corrente total de retorno à terra.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">Diferencie os três defeitos: fase-terra usa três redes em série; fase-fase usa positiva e negativa; fase-fase-terra cria o paralelo entre negativa e zero.</span></div>
+</div></div>
+<div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 12</td><td class="q-tag">Potência de Curto-Circuito • Capacidade de Interrupção</td></tr></table>
+<div class="q-statement">Em uma barra de $13{,}8\,kV$, a corrente simétrica de curto-circuito trifásico é $20\,kA$. A potência de curto-circuito aproximada na barra é:</div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> $159\,MVA$.</div>
+<div class="alt-item"><strong>B)</strong> $276\,MVA$.</div>
+<div class="alt-item"><strong>C)</strong> $390\,MVA$.</div>
+<div class="alt-item"><strong>D)</strong> $478\,MVA$.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa D</span>
+<div class="sol-text">A potência aparente de curto-circuito trifásico é $S_{cc}=\sqrt{3}V_{LL}I_{cc}$. Logo, $S_{cc}=\sqrt{3}\cdot13{,}8\cdot20\approx478\,MVA$. Esse valor auxilia a especificação da capacidade de interrupção e suportabilidade dos equipamentos.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">Use tensão de linha e corrente de linha na expressão trifásica. O erro mais comum é esquecer o fator $\sqrt{3}$.</span></div>
+</div></div>
+<div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 13</td><td class="q-tag">Curto-Circuito • Relação X/R</td></tr></table>
+<div class="q-statement">Dois pontos do sistema possuem a mesma corrente eficaz simétrica de curto-circuito, porém relações $X/R$ distintas. No ponto com maior $X/R$, espera-se, em geral:</div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> menor componente contínua e menor corrente de crista no primeiro ciclo.</div>
+<div class="alt-item"><strong>B)</strong> maior assimetria inicial e maior corrente de crista, afetando a suportabilidade eletrodinâmica.</div>
+<div class="alt-item"><strong>C)</strong> a mesma corrente de crista, pois $X/R$ altera apenas o regime permanente após a abertura.</div>
+<div class="alt-item"><strong>D)</strong> eliminação natural da componente contínua antes do primeiro máximo de corrente.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa B</span>
+<div class="sol-text">A relação $X/R$ influencia a constante de tempo de decaimento da componente contínua. Quanto maior $X/R$, mais lenta tende a ser a atenuação dessa componente e maior pode ser a corrente assimétrica de crista. Isso é relevante para esforços eletrodinâmicos e capacidade de estabelecimento do disjuntor.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">Quando aparecer $X/R$, pense no primeiro ciclo da falta e na componente contínua, não apenas no valor eficaz simétrico.</span></div>
+</div></div>
+<div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 14</td><td class="q-tag">Limitação de Corrente • Reator Série</td></tr></table>
+<div class="q-statement">Após a expansão de uma subestação, o nível de curto-circuito calculado ultrapassou a capacidade de interrupção de parte dos disjuntores existentes. Uma medida tecnicamente aplicável para reduzir a corrente de falta é:</div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> instalar capacitores em série com os alimentadores para cancelar a reatância do sistema durante a falta.</div>
+<div class="alt-item"><strong>B)</strong> reduzir a tensão nominal dos TCs, sem alterar as impedâncias do circuito de potência.</div>
+<div class="alt-item"><strong>C)</strong> inserir reator limitador em série ou seccionar barramentos, aumentando a impedância vista do ponto de falta.</div>
+<div class="alt-item"><strong>D)</strong> elevar a potência nominal dos transformadores em paralelo, mantendo as impedâncias percentuais originais.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa C</span>
+<div class="sol-text">A corrente de curto-circuito diminui quando a impedância equivalente entre fontes e falta aumenta. Reatores série e a separação de barras/fontes são soluções clássicas. Capacitores série reduziriam a reatância indutiva e tenderiam a aumentar a corrente; alterações em TCs não modificam o circuito primário de potência.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">Procure a alternativa que realmente altera a impedância de Thévenin vista pela falta. Mudanças apenas em medição ou ajuste de relé não reduzem a corrente física.</span></div>
+</div></div>
+<div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 15</td><td class="q-tag">Transformador de Corrente • Saturação</td></tr></table>
+<div class="q-statement">Durante uma falta externa de elevada corrente, um dos TCs de uma proteção diferencial satura antes dos demais. A consequência mais crítica para o relé é:</div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> aumento proporcional e idêntico das correntes secundárias, preservando a soma diferencial nula.</div>
+<div class="alt-item"><strong>B)</strong> redução automática da corrente primária por elevação da impedância do TC saturado.</div>
+<div class="alt-item"><strong>C)</strong> bloqueio definitivo do disjuntor por perda da tensão secundária do transformador de potencial.</div>
+<div class="alt-item"><strong>D)</strong> aparecimento de corrente diferencial espúria, que deve ser contida pela característica percentual do relé.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa D</span>
+<div class="sol-text">A saturação distorce e reduz a corrente reproduzida pelo TC afetado. Embora a falta seja externa, as correntes secundárias deixam de se equilibrar e surge corrente diferencial falsa. A restrição percentual aumenta a segurança para correntes passantes elevadas e diferenças de desempenho entre TCs.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">Em proteção diferencial, pergunte se a falta é interna ou externa. Saturação em falta externa é um problema de segurança contra atuação indevida.</span></div>
+</div></div>
+<div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 16</td><td class="q-tag">Transformador de Corrente • Segurança do Secundário</td></tr></table>
+<div class="q-statement">Com o primário de um transformador de corrente energizado, seu circuito secundário deve:</div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> permanecer ligado a carga adequada ou curto-circuitado antes da retirada do instrumento, evitando tensão secundária perigosa.</div>
+<div class="alt-item"><strong>B)</strong> ser mantido aberto para impedir circulação de corrente nos instrumentos durante qualquer manutenção.</div>
+<div class="alt-item"><strong>C)</strong> ser conectado diretamente a uma fonte de tensão alternada para conservar a relação de transformação.</div>
+<div class="alt-item"><strong>D)</strong> ter os dois terminais aterrados em pontos distantes para reduzir a corrente de magnetização do núcleo.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa A</span>
+<div class="sol-text">O TC é aproximadamente uma fonte de corrente. Com o primário energizado, a abertura do secundário força aumento do fluxo e pode produzir tensão elevada, aquecimento e risco ao isolamento. Antes de desconectar medidores ou relés, o secundário deve ser curto-circuitado por dispositivo apropriado.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">Use a oposição clássica: TC não pode ficar aberto; TP não pode ser curto-circuitado. Essa comparação resolve muitas questões.</span></div>
+</div></div>
+<div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 17</td><td class="q-tag">Transformador de Potencial • Proteção Secundária</td></tr></table>
+<div class="q-statement">Ao contrário do TC, um transformador de potencial empregado em medição e proteção deve operar com o secundário:</div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> em curto-circuito, para que a tensão aplicada aos relés permaneça próxima de zero.</div>
+<div class="alt-item"><strong>B)</strong> conectado em série com a linha primária, de modo a reproduzir a corrente de falta.</div>
+<div class="alt-item"><strong>C)</strong> sem qualquer referência à terra, mesmo quando o esquema exige um ponto secundário aterrado.</div>
+<div class="alt-item"><strong>D)</strong> alimentando carga de alta impedância e protegido contra curto-circuito no circuito secundário.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa D</span>
+<div class="sol-text">O TP se comporta como fonte de tensão e alimenta cargas de elevada impedância. Um curto no secundário produz sobrecorrente e pode danificá-lo, razão pela qual se emprega proteção adequada. Dependendo do esquema, um ponto do secundário é aterrado para segurança e referência.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">Compare o comportamento ideal: TC é fonte de corrente; TP é fonte de tensão. A condição perigosa de um é a condição normal aproximada do outro.</span></div>
+</div></div>
+<div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 18</td><td class="q-tag">Relés de Sobrecorrente • Funções ANSI 50 e 51</td></tr></table>
+<div class="q-statement">Em um alimentador radial, as funções ANSI 50 e 51 correspondem, respectivamente, à proteção de sobrecorrente:</div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> direcional temporizada e diferencial percentual.</div>
+<div class="alt-item"><strong>B)</strong> de terra instantânea e de sequência negativa.</div>
+<div class="alt-item"><strong>C)</strong> instantânea e temporizada, esta última geralmente com curva de tempo dependente da corrente.</div>
+<div class="alt-item"><strong>D)</strong> temporizada de tensão e instantânea de frequência.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa C</span>
+<div class="sol-text">A função 50 atua sem atraso intencional relevante quando a corrente supera o ajuste instantâneo. A função 51 possui temporização, frequentemente de tempo inverso: correntes maiores resultam em tempos menores. As variantes com neutro ou terra são identificadas por N ou G, conforme o esquema.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">Para códigos ANSI, associe primeiro o número à grandeza e depois observe os sufixos: 50/51 são sobrecorrente; N ou G indicam medição residual ou de terra.</span></div>
+</div></div>
+<div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 19</td><td class="q-tag">Proteção de Terra • Funções 50N e 51N</td></tr></table>
+<div class="q-statement">Em um sistema com três TCs de fase, a corrente residual utilizada por funções 50N/51N pode ser obtida pela soma vetorial das correntes secundárias. Em condição trifásica equilibrada sem falta à terra, essa soma é idealmente:</div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> igual à corrente de fase.</div>
+<div class="alt-item"><strong>B)</strong> próxima de zero.</div>
+<div class="alt-item"><strong>C)</strong> igual a três vezes a sequência positiva.</div>
+<div class="alt-item"><strong>D)</strong> proporcional à tensão de linha.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa B</span>
+<div class="sol-text">Em equilíbrio, $I_a+I_b+I_c=0$. Na ocorrência de corrente de sequência zero, a soma residual torna-se $3I_0$ e pode sensibilizar as funções de terra. Erros de TC e desequilíbrios naturais justificam margem no ajuste.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">A soma residual elimina as componentes equilibradas. Se a questão apresentar $I_a+I_b+I_c$, pense imediatamente em sequência zero e proteção de terra.</span></div>
+</div></div>
+<div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 20</td><td class="q-tag">Proteção Diferencial de Transformador • Função 87T</td></tr></table>
+<div class="q-statement">O transformador da figura é protegido por relé diferencial percentual. Após compensar relação, defasagem e ligação dos TCs, o relé deve atuar prioritariamente quando:<img class="q-image" src="assets/sep_q20_diferencial.svg" alt="Diagrama da questão 20"></div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> a diferença entre correntes de entrada e saída indica falta interna dentro da zona protegida.</div>
+<div class="alt-item"><strong>B)</strong> uma falta externa produz grande corrente passante, ainda que as correntes compensadas permaneçam equilibradas.</div>
+<div class="alt-item"><strong>C)</strong> a tensão do secundário cai durante a partida de um motor localizado fora da zona diferencial.</div>
+<div class="alt-item"><strong>D)</strong> o transformador opera em carga nominal com fator de potência indutivo.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa A</span>
+<div class="sol-text">A proteção 87T compara as correntes que entram e saem da zona delimitada pelos TCs. Em operação normal ou falta externa, as correntes compensadas tendem a se equilibrar. Em falta interna, surge corrente diferencial. A restrição percentual evita atuação indevida por erros e saturação dos TCs.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">Marque mentalmente a zona entre os TCs. Falta dentro da zona exige atuação; falta fora exige estabilidade, mesmo com corrente elevada.</span></div>
+</div></div>
+<div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 21</td><td class="q-tag">Transformadores • Corrente de Inrush</td></tr></table>
+<div class="q-statement">Na energização de um transformador sem defeito interno, pode surgir elevada corrente de magnetização. Para evitar atuação indevida da proteção diferencial, relés digitais costumam utilizar:</div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> sobretensão residual de sequência negativa como critério exclusivo de disparo.</div>
+<div class="alt-item"><strong>B)</strong> redução permanente do pickup diferencial abaixo da corrente nominal.</div>
+<div class="alt-item"><strong>C)</strong> temporização fixa de várias horas após toda manobra do disjuntor.</div>
+<div class="alt-item"><strong>D)</strong> restrição ou bloqueio baseado no conteúdo harmônico característico da corrente de inrush, especialmente a segunda harmônica.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa D</span>
+<div class="sol-text">A corrente de inrush é assimétrica e historicamente apresenta conteúdo significativo de segunda harmônica. O relé identifica essa assinatura e restringe ou bloqueia o elemento diferencial, distinguindo energização de uma falta interna. Algoritmos modernos podem combinar outras características de forma de onda.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">Corrente alta não significa automaticamente falta. Procure a assinatura do fenômeno: energização, fluxo remanescente e conteúdo harmônico.</span></div>
+</div></div>
+<div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 22</td><td class="q-tag">Proteção de Transformadores • Relé Buchholz</td></tr></table>
+<div class="q-statement">O relé Buchholz, quando aplicado a transformadores imersos em líquido isolante com conservador, é destinado principalmente a detectar:</div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> sobrecargas externas por medição da corrente de sequência positiva.</div>
+<div class="alt-item"><strong>B)</strong> formação de gases e deslocamento do líquido associados a falhas internas no tanque.</div>
+<div class="alt-item"><strong>C)</strong> perda de sincronismo entre transformadores operando em paralelo.</div>
+<div class="alt-item"><strong>D)</strong> descargas atmosféricas na linha por medição direta da tensão de impulso.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa B</span>
+<div class="sol-text">Falhas internas incipientes podem decompor o líquido e gerar gás, acionando alarme. Defeitos mais severos provocam fluxo rápido do líquido em direção ao conservador e podem causar desligamento. O dispositivo não substitui as proteções elétricas de sobrecorrente e diferencial.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">Associe Buchholz a fenômenos dentro do tanque: gás e movimento do líquido. Se a alternativa falar apenas de grandezas externas, desconfie.</span></div>
+</div></div>
+<div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 23</td><td class="q-tag">Proteção de Distância • Zonas de Alcance</td></tr></table>
+<div class="q-statement">O diagrama R-X mostra três zonas de um relé de distância instalado no terminal A da linha AB. Em uma filosofia usual, a Zona 1 é ajustada para:<img class="q-image" src="assets/sep_q23_distancia.svg" alt="Diagrama da questão 23"></div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> alcançar toda a linha AB e parte extensa da linha seguinte, com atraso coordenado.</div>
+<div class="alt-item"><strong>B)</strong> proteger apenas o barramento local por elemento diferencial de corrente.</div>
+<div class="alt-item"><strong>C)</strong> cobrir a maior parte da linha AB sem sobrealcance no terminal remoto, com atuação rápida.</div>
+<div class="alt-item"><strong>D)</strong> medir exclusivamente a resistência de arco, independentemente da reatância até a falta.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa C</span>
+<div class="sol-text">A Zona 1 costuma cobrir cerca de 80% a 90% da linha protegida para evitar sobrealcance devido a erros de medição e parâmetros, atuando rapidamente. A Zona 2 ultrapassa o terminal remoto e opera com atraso; a Zona 3 oferece retaguarda mais ampla e mais lenta.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">Nas zonas de distância, relacione alcance e tempo: quanto maior o alcance de retaguarda, maior tende a ser a temporização coordenada.</span></div>
+</div></div>
+<div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 24</td><td class="q-tag">Proteção de Linhas • Diferencial 87L</td></tr></table>
+<div class="q-statement">Uma proteção diferencial de linha com comunicação entre terminais compara correntes sincronizadas nos extremos. Em uma falta externa com TCs ideais, espera-se:</div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> corrente diferencial próxima de zero e corrente de restrição elevada, sem disparo.</div>
+<div class="alt-item"><strong>B)</strong> corrente diferencial igual à soma aritmética das correntes de carga, com disparo instantâneo.</div>
+<div class="alt-item"><strong>C)</strong> ausência de corrente em ambos os terminais, pois a zona diferencial bloqueia a contribuição das fontes.</div>
+<div class="alt-item"><strong>D)</strong> atuação somente do terminal mais próximo da fonte de maior potência de curto-circuito.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa A</span>
+<div class="sol-text">Para falta externa, a corrente que entra na zona tende a sair pelo outro terminal; com referências coerentes, a soma diferencial é pequena. A corrente de restrição, relacionada ao fluxo passante, pode ser grande e aumenta a estabilidade diante de erros e saturação.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">Não confunda corrente elevada com corrente diferencial. A localização da falta em relação aos TCs determina se o relé deve atuar.</span></div>
+</div></div>
+<div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 25</td><td class="q-tag">Sobrecorrente Direcional • Função 67</td></tr></table>
+<div class="q-statement">Em uma rede em anel ou com geração distribuída, a função 67 pode ser preferida à 51 não direcional porque a função 67:</div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> mede apenas a magnitude da tensão e independe do sentido da corrente de falta.</div>
+<div class="alt-item"><strong>B)</strong> substitui o disjuntor ao interromper diretamente a corrente por contatos eletrônicos.</div>
+<div class="alt-item"><strong>C)</strong> atua somente em faltas trifásicas equilibradas, ignorando sobrecorrentes de fase-terra.</div>
+<div class="alt-item"><strong>D)</strong> combina magnitude de corrente com uma referência de polarização para determinar a direção da falta.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa D</span>
+<div class="sol-text">Em sistemas com alimentação por mais de um lado, a magnitude isolada pode não indicar o trecho defeituoso. A função 67 usa relação angular entre corrente e grandeza de polarização, normalmente tensão, para reconhecer o sentido de atuação e melhorar a seletividade.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">Se a rede deixou de ser radial, pergunte se a corrente pode fluir nos dois sentidos. Essa é a pista para proteção direcional.</span></div>
+</div></div>
+<div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 26</td><td class="q-tag">Falha de Disjuntor • Função 50BF</td></tr></table>
+<div class="q-statement">Após um relé principal emitir comando de abertura, a corrente de falta permanece circulando porque o disjuntor local não abriu. A lógica de falha de disjuntor deve:</div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> bloquear todas as proteções de retaguarda até que o operador chegue à subestação.</div>
+<div class="alt-item"><strong>B)</strong> aguardar confirmação de corrente persistente e, após tempo coordenado, comandar disjuntores adjacentes capazes de eliminar a falta.</div>
+<div class="alt-item"><strong>C)</strong> religar repetidamente o mesmo disjuntor até que a corrente seja reduzida pela resistência de arco.</div>
+<div class="alt-item"><strong>D)</strong> transferir a medição para o TP, pois a corrente não pode ser usada como critério após o primeiro trip.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa B</span>
+<div class="sol-text">A função 50BF é iniciada pelo trip da proteção principal e supervisiona a abertura, por contatos auxiliares e/ou corrente. Se o disjuntor não interromper dentro do tempo previsto, a lógica envia disparo de retaguarda aos disjuntores que alimentam a zona.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">Pense em dois critérios: houve comando de trip e a falta continua? Se sim, a retaguarda deve retirar as demais fontes que sustentam o defeito.</span></div>
+</div></div>
+<div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 27</td><td class="q-tag">Religamento Automático • Função 79</td></tr></table>
+<div class="q-statement">Em linhas aéreas de distribuição, a função 79 pode melhorar a continuidade porque muitas faltas são transitórias. Entretanto, o religamento deve ser bloqueado quando:</div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> a filosofia de proteção identifica condição incompatível, como falta interna em transformador ou atuação de bloqueio definitivo.</div>
+<div class="alt-item"><strong>B)</strong> a falta é eliminada por proteção instantânea de linha e há evidência de arco transitório.</div>
+<div class="alt-item"><strong>C)</strong> o alimentador possui cargas residenciais, independentemente da origem do disparo.</div>
+<div class="alt-item"><strong>D)</strong> a tensão retorna ao valor nominal antes de terminar o tempo morto programado.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa A</span>
+<div class="sol-text">O religamento é adequado para defeitos transitórios em linhas, mas pode agravar danos em faltas permanentes de equipamentos como transformadores e barramentos. Por isso, atuações como 87T, 87B ou lockout 86 normalmente bloqueiam a função 79 conforme a filosofia adotada.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">Antes de escolher religar, classifique a zona e o tipo de equipamento. Linha aérea admite falta transitória; equipamento com defeito interno exige bloqueio.</span></div>
+</div></div>
+<div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 28</td><td class="q-tag">Proteção de Barramentos • Função 87B</td></tr></table>
+<div class="q-statement">Uma proteção diferencial de barramento recebe correntes de todos os circuitos conectados à zona. Para uma falta interna, a aplicação da lei de Kirchhoff resulta em:</div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> soma vetorial aproximadamente nula, pois toda corrente que entra deve sair pelos alimentadores.</div>
+<div class="alt-item"><strong>B)</strong> corrente diferencial inferior à corrente de carga, impedindo atuação rápida.</div>
+<div class="alt-item"><strong>C)</strong> soma vetorial não nula das correntes dos terminais, indicando corrente convergindo para a falta na zona.</div>
+<div class="alt-item"><strong>D)</strong> atuação condicionada à presença de tensão nominal no barramento durante toda a falta.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa C</span>
+<div class="sol-text">Em condição normal ou falta externa, a soma orientada das correntes dos terminais tende a zero. Em falta dentro do barramento, as fontes alimentam o defeito e a soma deixa de se anular. Como faltas de barra são severas, a proteção deve ser rápida e seletiva.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">Desenhe setas entrando na zona. Se a corrente não encontra uma saída medida por TC, ela aparece como corrente diferencial interna.</span></div>
+</div></div>
+<div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 29</td><td class="q-tag">Coordenação • Curvas Tempo-Corrente</td></tr></table>
+<div class="q-statement">As curvas tempo-corrente dos dispositivos M (montante) e J (jusante) estão representadas na figura. Para obter seletividade nas sobrecorrentes dentro da faixa analisada, a curva do dispositivo M deve ficar:<img class="q-image" src="assets/sep_q29_curvas.svg" alt="Diagrama da questão 29"></div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> à esquerda e abaixo da curva de J, atuando antes para preservar o equipamento jusante.</div>
+<div class="alt-item"><strong>B)</strong> sobreposta à curva de J, de modo que ambos eliminem a falta simultaneamente.</div>
+<div class="alt-item"><strong>C)</strong> independente da curva de J, pois seletividade depende somente da corrente nominal dos cabos.</div>
+<div class="alt-item"><strong>D)</strong> à direita e acima da curva de J, mantendo margem de tempo para que o dispositivo jusante atue primeiro.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa D</span>
+<div class="sol-text">Em um gráfico log-log de tempo por corrente, a curva mais à direita/acima atua mais lentamente para a mesma corrente. O dispositivo jusante deve eliminar a falta local antes; o montante atua como retaguarda após uma margem que considera tempo de abertura, tolerâncias e sobrepercurso.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">Escolha uma corrente de falta e trace mentalmente uma linha vertical. O primeiro dispositivo encontrado de baixo para cima deve ser o mais próximo da falta.</span></div>
+</div></div>
+<div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 30</td><td class="q-tag">Coordenação Fusível-Religador • Filosofia de Proteção</td></tr></table>
+<div class="q-statement">Em um ramal protegido por fusível a jusante de um religador, uma filosofia do tipo 'salva-fusível' procura, para faltas transitórias no ramal:</div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> fazer o religador atuar em curva rápida antes da fusão do elo e, se a falta persistir, permitir atuação coordenada do fusível.</div>
+<div class="alt-item"><strong>B)</strong> dimensionar o fusível para abrir antes de qualquer operação do religador, inclusive na primeira falta transitória.</div>
+<div class="alt-item"><strong>C)</strong> bloquear a curva rápida do religador e utilizar somente a proteção de terra do alimentador.</div>
+<div class="alt-item"><strong>D)</strong> substituir o elo fusível por seccionador sem capacidade de interrupção e sem comunicação.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa A</span>
+<div class="sol-text">Na filosofia salva-fusível, a operação rápida do religador elimina a corrente e permite que faltas transitórias desapareçam sem fundir o elo. Se a falta for permanente, operações posteriores lentas permitem que o fusível do ramal defeituoso atue seletivamente.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">Observe o objetivo declarado: salvar o elo em faltas transitórias. Isso exige que a primeira atuação rápida ocorra a montante antes da curva de mínima fusão.</span></div>
+</div></div>
+<div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 31</td><td class="q-tag">Seletividade • Estudo de Caso</td></tr></table>
+<div class="q-statement">Uma falta ocorre no circuito terminal C3. O disjuntor de C3, o alimentador do quadro e o disjuntor geral possuem capacidade de interrupção suficiente. A resposta mais seletiva é:</div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> abrir primeiro o disjuntor geral, reduzindo o tempo total de exposição de todos os circuitos.</div>
+<div class="alt-item"><strong>B)</strong> abrir o disjuntor de C3; os dispositivos a montante permanecem fechados, salvo falha da proteção local.</div>
+<div class="alt-item"><strong>C)</strong> abrir simultaneamente C3 e o alimentador, pois seletividade exige redundância imediata.</div>
+<div class="alt-item"><strong>D)</strong> bloquear C3 e permitir que apenas a proteção da concessionária elimine a falta.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa B</span>
+<div class="sol-text">Seletividade significa desligar a menor parte possível do sistema compatível com a eliminação do defeito. O dispositivo de C3 deve atuar primeiro. Os dispositivos a montante fornecem retaguarda caso C3 ou seu disjuntor falhem.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">Localize a falta e caminhe em direção à fonte. O primeiro dispositivo capaz de interrompê-la deve ter prioridade; os demais são retaguarda.</span></div>
+</div></div>
+<div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 32</td><td class="q-tag">Arranjos de Barramentos • Confiabilidade</td></tr></table>
+<div class="q-statement">O arranjo apresentado possui duas barras principais e dois disjuntores por circuito. Sua principal vantagem operacional é:<img class="q-image" src="assets/sep_q32_barras.svg" alt="Diagrama da questão 32"></div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> usar apenas um disjuntor por circuito, reduzindo o custo ao mesmo nível de uma barra simples.</div>
+<div class="alt-item"><strong>B)</strong> impedir qualquer transferência de circuito entre barras durante manutenção programada.</div>
+<div class="alt-item"><strong>C)</strong> oferecer elevada flexibilidade e continuidade, permitindo manutenção de barra ou disjuntor com menor indisponibilidade.</div>
+<div class="alt-item"><strong>D)</strong> eliminar a necessidade de proteção diferencial de barras por não haver zonas sobrepostas.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa C</span>
+<div class="sol-text">No arranjo barra dupla-disjuntor duplo, cada circuito pode ser conectado às duas barras por disjuntores próprios. Isso oferece elevada confiabilidade e flexibilidade, porém aumenta custo, espaço e complexidade de proteção e operação.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">Em arranjos de barras, quase sempre há troca entre custo e continuidade. Quanto mais caminhos e disjuntores, maior a flexibilidade e também o investimento.</span></div>
+</div></div>
+<div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 33</td><td class="q-tag">Arranjos de Barramentos • Disjuntor e Meio</td></tr></table>
+<div class="q-statement">No arranjo disjuntor e meio, três disjuntores atendem dois circuitos. Uma característica correta desse arranjo é:</div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> cada circuito utiliza exclusivamente um disjuntor e uma seccionadora, sem compartilhamento de equipamentos.</div>
+<div class="alt-item"><strong>B)</strong> o disjuntor central é compartilhado por dois circuitos, exigindo filosofia de proteção e manutenção compatível.</div>
+<div class="alt-item"><strong>C)</strong> uma falta em qualquer barra desliga necessariamente todos os circuitos conectados à subestação.</div>
+<div class="alt-item"><strong>D)</strong> a retirada de um disjuntor sempre interrompe os dois circuitos associados, sem possibilidade de transferência.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa B</span>
+<div class="sol-text">Cada diâmetro do arranjo possui três disjuntores e dois circuitos; o disjuntor central é comum aos dois. O esquema oferece boa continuidade e flexibilidade, mas requer atenção às zonas de proteção, correntes nos TCs e lógica de falha de disjuntor.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">Reconheça a contagem: três disjuntores para dois circuitos equivalem a 1,5 disjuntor por circuito; o equipamento do meio é compartilhado.</span></div>
+</div></div>
+<div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 34</td><td class="q-tag">Aterramento do Neutro • Resistor de Aterramento</td></tr></table>
+<div class="q-statement">Um gerador industrial tem o neutro aterrado por resistor. Comparado ao aterramento solidamente conectado, o resistor é empregado para:</div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> limitar a corrente de falta à terra a valor definido, reduzindo danos sem eliminar a detecção da falta.</div>
+<div class="alt-item"><strong>B)</strong> aumentar a corrente de sequência zero até o mesmo valor da falta trifásica.</div>
+<div class="alt-item"><strong>C)</strong> impedir qualquer deslocamento do potencial do neutro, mesmo durante faltas assimétricas.</div>
+<div class="alt-item"><strong>D)</strong> substituir as funções de proteção de terra, tornando desnecessária a medição de corrente residual.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa A</span>
+<div class="sol-text">O resistor introduz impedância no caminho de sequência zero e limita a corrente fase-terra. O valor é escolhido considerando sensibilidade da proteção, tensão de deslocamento do neutro, energia no resistor e danos admissíveis. A falta continua devendo ser detectada e eliminada.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">Aterramento por impedância é compromisso: limita corrente, mas mantém referência e possibilidade de detecção. Não significa circuito de terra aberto.</span></div>
+</div></div>
+<div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 35</td><td class="q-tag">Transformador de Aterramento • Ligação Zig-Zag</td></tr></table>
+<div class="q-statement">Em um sistema sem neutro acessível, o transformador de aterramento em zig-zag mostrado na figura pode ser utilizado para:<img class="q-image" src="assets/sep_q35_zigzag.svg" alt="Diagrama da questão 35"></div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> converter a frequência do sistema e alimentar cargas monofásicas de potência elevada.</div>
+<div class="alt-item"><strong>B)</strong> bloquear todas as componentes de sequência zero, mantendo a rede totalmente isolada da terra.</div>
+<div class="alt-item"><strong>C)</strong> criar um ponto neutro e fornecer caminho controlado para correntes de sequência zero e proteção de terra.</div>
+<div class="alt-item"><strong>D)</strong> compensar potência reativa positiva por meio dos enrolamentos conectados em oposição.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa C</span>
+<div class="sol-text">A ligação zig-zag combina fluxos das fases de modo a apresentar baixa impedância para sequência zero e criar um neutro artificial. Esse neutro pode ser aterrado diretamente ou por resistor/reator, possibilitando controle e detecção de faltas à terra.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">Se não existe neutro físico, procure o equipamento que cria referência de sequência zero. Zig-zag é uma pista clássica.</span></div>
+</div></div>
+<div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 36</td><td class="q-tag">Proteção contra Surtos • Para-Raios de Óxido Metálico</td></tr></table>
+<div class="q-statement">Em subestações, o para-raios de óxido metálico conectado entre fase e terra protege equipamentos principalmente ao:</div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> interromper correntes de carga e de curto-circuito como um disjuntor de alta velocidade.</div>
+<div class="alt-item"><strong>B)</strong> limitar sobretensões transitórias, conduzindo corrente de surto ao sistema de aterramento e retornando ao estado de alta impedância.</div>
+<div class="alt-item"><strong>C)</strong> corrigir permanentemente o fator de potência por fornecimento de potência reativa capacitiva.</div>
+<div class="alt-item"><strong>D)</strong> medir a frente de onda e transmitir o valor ao relé diferencial do transformador.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa B</span>
+<div class="sol-text">O para-raios apresenta alta impedância na tensão normal e passa a conduzir durante a sobretensão, limitando o valor aplicado ao isolamento. Após o surto, retorna ao estado de baixa condução. Ele deve ser coordenado com o nível de isolamento e instalado com conexões curtas ao aterramento.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">Não confunda proteção contra surto com interrupção de falta. Para-raios limita tensão; disjuntor interrompe corrente de potência.</span></div>
+</div></div>
+<div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 37</td><td class="q-tag">Continuidade do Serviço • Indicadores de Distribuição</td></tr></table>
+<div class="q-statement">Dois alimentadores atendem o mesmo número de consumidores. No período analisado, o alimentador A teve muitas interrupções curtas e o B teve poucas interrupções, porém longas. Qual interpretação é correta?</div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> A tende a apresentar indicador de frequência mais elevado, enquanto B pode apresentar duração acumulada mais elevada.</div>
+<div class="alt-item"><strong>B)</strong> A e B necessariamente possuem os mesmos indicadores, pois atendem o mesmo número de consumidores.</div>
+<div class="alt-item"><strong>C)</strong> interrupções curtas alteram apenas perdas técnicas e não afetam indicadores de continuidade.</div>
+<div class="alt-item"><strong>D)</strong> a duração acumulada depende somente da potência instalada, e não do tempo de interrupção.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa A</span>
+<div class="sol-text">Indicadores de frequência contabilizam quantas interrupções atingem, em média, as unidades consumidoras; indicadores de duração acumulam o tempo sem fornecimento. Portanto, muitas interrupções curtas elevam frequência, enquanto poucas interrupções longas podem dominar a duração.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">Separe sempre as duas perguntas: quantas vezes ocorreu e por quanto tempo durou. Não tente concluir ambos os indicadores usando apenas um dado.</span></div>
+</div></div>
+<div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 38</td><td class="q-tag">Redes de Distribuição • Radial e Anel</td></tr></table>
+<div class="q-statement">Comparada a uma rede radial simples, uma rede em anel operada com recursos de manobra pode melhorar a continuidade porque:</div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> elimina a necessidade de proteção, já que a corrente de falta não circula em malhas.</div>
+<div class="alt-item"><strong>B)</strong> reduz a tensão nominal de todos os trechos e, por isso, impede a ocorrência de curtos-circuitos.</div>
+<div class="alt-item"><strong>C)</strong> permite isolar o trecho defeituoso e realimentar parte das cargas por caminho alternativo, exigindo proteção mais elaborada.</div>
+<div class="alt-item"><strong>D)</strong> garante que a corrente flua em um único sentido em qualquer configuração operacional.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa C</span>
+<div class="sol-text">A existência de caminhos alternativos permite recomposição após o isolamento do defeito. Em contrapartida, fluxos bidirecionais e diferentes configurações de operação tornam o estudo de proteção, capacidade e coordenação mais complexo.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">Em topologia de rede, procure o equilíbrio entre continuidade e complexidade: caminhos alternativos ajudam a operação, mas complicam proteção e fluxo de potência.</span></div>
+</div></div>
+<div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 39</td><td class="q-tag">Geração Distribuída • Fluxo Bidirecional</td></tr></table>
+<div class="q-statement">O alimentador da figura recebeu geração distribuída a jusante. Em determinados períodos, há fluxo reverso em direção à subestação. Uma revisão necessária no estudo de proteção é:<img class="q-image" src="assets/sep_q39_gd.svg" alt="Diagrama da questão 39"></div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> manter todos os ajustes porque a geração reduz, em qualquer ponto, a corrente de curto-circuito.</div>
+<div class="alt-item"><strong>B)</strong> eliminar a proteção de subtensão, pois a geração sempre sustenta a tensão após o ilhamento.</div>
+<div class="alt-item"><strong>C)</strong> substituir todos os disjuntores por seccionadoras, já que o fluxo reverso não pode ser interrompido.</div>
+<div class="alt-item"><strong>D)</strong> avaliar contribuição de curto-circuito, direcionalidade, coordenação e risco de ilhamento nas novas condições de fluxo.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa D</span>
+<div class="sol-text">A geração distribuída altera níveis e sentidos de corrente, podendo causar perda de coordenação, alcance inadequado, atuação indevida ou zonas sem sensibilidade. Também exige avaliar detecção de ilhamento e condições de reconexão. O efeito depende da tecnologia e localização da geração.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">Quando surge uma nova fonte, redes antes radiais podem deixar de ter corrente unidirecional. Refaça mentalmente os caminhos de contribuição para cada falta.</span></div>
+</div></div>
+<div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 40</td><td class="q-tag">Ajuste de Sobrecorrente • Pickup</td></tr></table>
+<div class="q-statement">Um alimentador possui corrente máxima de carga de $180\,A$ e TC $300/5\,A$. Deseja-se pickup primário de $240\,A$ para a função 51. O ajuste secundário correspondente é:</div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> $3{,}0\,A$.</div>
+<div class="alt-item"><strong>B)</strong> $4{,}0\,A$.</div>
+<div class="alt-item"><strong>C)</strong> $5{,}0\,A$.</div>
+<div class="alt-item"><strong>D)</strong> $8{,}0\,A$.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa B</span>
+<div class="sol-text">A relação do TC é $300/5=60$. Logo, a corrente secundária é $I_s=240/60=4\,A$. O pickup está acima da carga máxima, mas sua adequação final depende de sobrecargas admissíveis, corrente mínima de falta e coordenação com dispositivos adjacentes.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">Converta o ajuste pela relação do TC e depois faça duas verificações: não atuar na carga e ser sensível à menor falta da zona protegida.</span></div>
+</div></div>
+<div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 41</td><td class="q-tag">Motores e Proteção • Partida versus Curto-Circuito</td></tr></table>
+<div class="q-statement">Um motor apresenta corrente de partida de seis vezes a nominal durante 4 s. Para evitar atuação indevida da proteção de fase sem perder a proteção contra faltas severas, deve-se:</div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> ajustar pickup e temporização considerando a curva de partida, mantendo elemento instantâneo acima da corrente transitória e abaixo das faltas relevantes.</div>
+<div class="alt-item"><strong>B)</strong> ajustar o instantâneo abaixo da corrente nominal para antecipar qualquer aumento de corrente.</div>
+<div class="alt-item"><strong>C)</strong> desabilitar toda proteção de sobrecorrente durante a vida útil do motor e usar apenas proteção térmica mecânica.</div>
+<div class="alt-item"><strong>D)</strong> usar a mesma curva e pickup do circuito de iluminação, pois a corrente de partida não altera a coordenação.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa A</span>
+<div class="sol-text">A curva de partida deve ficar à esquerda/abaixo do limite térmico do motor e sem cruzar indevidamente a curva de atuação da proteção. O elemento temporizado suporta a partida; o instantâneo deve evitar a região de inrush e ainda atuar para faltas de alta corrente.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">Em motores, não compare apenas valores de corrente: compare corrente e duração. A partida é elevada, mas limitada no tempo.</span></div>
+</div></div>
+<div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 42</td><td class="q-tag">Proteção de Geradores • Perda de Excitação</td></tr></table>
+<div class="q-statement">A função ANSI usualmente associada à perda de excitação de um gerador síncrono é:</div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> 21, distância de linha.</div>
+<div class="alt-item"><strong>B)</strong> 32, potência reversa.</div>
+<div class="alt-item"><strong>C)</strong> 40, perda de campo.</div>
+<div class="alt-item"><strong>D)</strong> 64, terra restrita.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa C</span>
+<div class="sol-text">A função 40 detecta perda ou redução inadequada do campo do gerador. A condição pode levar a absorção de potência reativa, aquecimento e perda de estabilidade. Elementos de impedância no plano R-X são frequentemente utilizados nessa proteção.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">Nos códigos de gerador, diferencie 40 de 32: 40 trata do campo/excitação; 32 trata da direção da potência ativa.</span></div>
+</div></div>
+<div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 43</td><td class="q-tag">Proteção de Geradores • Potência Reversa</td></tr></table>
+<div class="q-statement">Após perda da potência mecânica da máquina primária, um gerador síncrono permanece conectado ao sistema e passa a absorver potência ativa, operando como motor. A função indicada para detectar essa condição é:</div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> 27, subtensão.</div>
+<div class="alt-item"><strong>B)</strong> 32, potência direcional/reversa.</div>
+<div class="alt-item"><strong>C)</strong> 46, sequência negativa.</div>
+<div class="alt-item"><strong>D)</strong> 59, sobretensão.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa B</span>
+<div class="sol-text">A função 32 supervisiona o sentido da potência ativa. Quando a máquina primária perde torque, o sistema pode alimentar o gerador, que passa a motorizar a turbina ou motor primário. O ajuste considera perdas e características do conjunto para evitar atuação em oscilações normais.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">Procure no enunciado a inversão do sentido de energia. Se o gerador começa a consumir potência ativa, pense em potência reversa.</span></div>
+</div></div>
+<div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 44</td><td class="q-tag">Proteção de Frequência • Funções 81U e 81O</td></tr></table>
+<div class="q-statement">As funções 81U e 81O são empregadas, respectivamente, para detectar:</div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> subtensão e sobretensão de sequência positiva.</div>
+<div class="alt-item"><strong>B)</strong> subcorrente e sobrecorrente temporizadas.</div>
+<div class="alt-item"><strong>C)</strong> perda de sincronismo e potência reversa.</div>
+<div class="alt-item"><strong>D)</strong> subfrequência e sobrefrequência.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa D</span>
+<div class="sol-text">O número ANSI 81 está associado à frequência. O sufixo U indica underfrequency e O indica overfrequency. Essas funções podem integrar esquemas de rejeição de carga, proteção de geração e supervisão de reconexão.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">Quando houver sufixos em inglês, traduza-os antes de analisar: U = under, abaixo; O = over, acima.</span></div>
+</div></div>
+<div class="question-card">
+<table class="q-badge-table"><tr><td class="q-number">Questão 45</td><td class="q-tag">Operação de Subestações • Texto-Base e Intertravamentos</td></tr></table>
+<div class="q-statement">Leia o caso: após uma falta interna no transformador T1, atuaram 87T e o relé de bloqueio 86. O disjuntor Q1 abriu e o transformador permaneceu isolado. A equipe eliminou o defeito e concluiu os ensaios. Considerando o diagrama e uma filosofia segura de recomposição, a ação correta é:<img class="q-image" src="assets/sep_q45_operacao.svg" alt="Diagrama da questão 45"></div>
+<div class="alternatives"><div class="alt-item"><strong>A)</strong> fechar Q1 remotamente sem inspeção, pois a abertura pela 87T caracteriza falta transitória de linha.</div>
+<div class="alt-item"><strong>B)</strong> contornar o contato 86 e manter a proteção diferencial bloqueada até a próxima manutenção anual.</div>
+<div class="alt-item"><strong>C)</strong> restabelecer as condições de segurança, liberar o bloqueio 86 por procedimento autorizado e recompor a instalação conforme sequência operacional aprovada.</div>
+<div class="alt-item"><strong>D)</strong> religar primeiro as seccionadoras sob corrente de carga e, em seguida, verificar se o disjuntor permaneceu aberto.</div></div>
+<div class="solution-box"><span class="sol-header">Gabarito Comentado: Alternativa C</span>
+<div class="sol-text">A atuação de 87T indica defeito dentro da zona do transformador e normalmente aciona bloqueio 86, impedindo religamento automático. Após correção, ensaios e liberação formal, o lockout é rearmado por pessoal autorizado e a recomposição segue procedimento e intertravamentos. Não se deve burlar a proteção.</div>
+<div class="tip-box"><span class="tip-title">Dica de Concurso • Como Pensar:</span><span class="tip-text">Em questões operacionais, identifique a causa do trip. Proteção diferencial e lockout apontam defeito interno e exigem inspeção, correção e rearme autorizado antes da recomposição.</span></div>
+</div></div></main></body></html>
