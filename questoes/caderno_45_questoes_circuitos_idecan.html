@@ -791,28 +791,24 @@
             <td class="q-tag">Defasagem em Circuito RC Série • Corrente Adiantada</td>
         </tr>
     </table>
-    <div class="q-statement">
-        Em um circuito puramente capacitivo e resistivo série (RC) alimentado por tensão senoidal alternada, o comportamento fasorial da corrente em relação à tensão na fonte é:
-    </div>
+    <div class="q-statement">Um circuito RC série possui $R=30\,\Omega$ e reatância capacitiva de módulo $|X_C|=40\,\Omega$. Aplicando-se $V=100\angle0^\circ\,V$, qual é aproximadamente o fasor da corrente da fonte?</div>
     <div class="alternatives">
         <div class="alt-item">
-<strong>A)</strong> A corrente possui o dobro da frequência da tensão.</div>
+<strong>A)</strong> $I=2{,}00\angle-53{,}13^\circ\,A$.</div>
 
     <div class="alt-item">
-<strong>B)</strong> A corrente está atrasada de 90° em relação à tensão.</div>
+<strong>B)</strong> $I=2{,}00\angle+36{,}87^\circ\,A$.</div>
 <div class="alt-item">
-<strong>C)</strong> A corrente e a tensão estão perfeitamente em fase.</div>
+<strong>C)</strong> $I=2{,}50\angle+53{,}13^\circ\,A$.</div>
 <div class="alt-item">
-<strong>D)</strong> A corrente está adiantada de um ângulo φ (onde 0° &lt; φ &lt; 90°) em relação à tensão da fonte.</div>
+<strong>D)</strong> $I=2{,}00\angle+53{,}13^\circ\,A$.</div>
 </div>
     <div class="solution-box">
         <span class="sol-header">Gabarito Comentado: Alternativa D</span>
-        <div class="sol-text">
-            No circuito RC série, a impedância é $Z = R - jX_C = |Z|\angle -	heta$. A corrente é $\vec{I} = \frac{\vec{V}}{Z} = \frac{V\angle 0^\circ}{|Z|\angle -	heta} = \frac{V}{|Z|}\angle +	heta$, estando a corrente **adiantada** em relação à tensão da fonte.
-        </div>
+        <div class="sol-text">A impedância é $Z=R-j|X_C|=30-j40=50\angle-53{,}13^\circ\,\Omega$. Portanto, $I=V/Z=100\angle0^\circ/(50\angle-53{,}13^\circ)=2\angle+53{,}13^\circ\,A$. O ângulo positivo confirma que a corrente está adiantada em um circuito capacitivo.</div>
         <div class="tip-box">
             <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
-            <span class="tip-text">Circuito Indutivo = Corrente ATRASADA. Circuito Capacitivo = Corrente ADIANTADA.</span>
+            <span class="tip-text">Monte primeiro a impedância com o sinal correto: capacitor contribui com parte imaginária negativa. Na divisão fasorial, subtraia os ângulos.</span>
         </div>
     </div>
 </div>
@@ -824,28 +820,24 @@
             <td class="q-tag">Potência Reativa em Indutores e Capacitores • Convenção de Sinais</td>
         </tr>
     </table>
-    <div class="q-statement">
-        Pela convenção do triângulo de potências adotada pelas normas técnicas de engenharia elétrica (IEEE/ABNT), os indutores e os capacitores, respectivamente:
-    </div>
+    <div class="q-statement">Uma instalação absorve $P=80\,kW$ e $Q_L=+60\,kvar$. Um banco de capacitores que fornece $Q_C=-35\,kvar$ é conectado em paralelo. Após a compensação, quais são a potência reativa resultante, o fator de potência aproximado e a natureza da instalação?</div>
     <div class="alternatives">
         <div class="alt-item">
-<strong>A)</strong> Fornecem potência reativa negativa, embora armazenem energia em campos de natureza distinta.</div>
+<strong>A)</strong> $Q=-25\,kvar$, $FP=0{,}954$ e comportamento capacitivo.</div>
 <div class="alt-item">
-<strong>B)</strong> Absorvem potência reativa positiva, diferenciando-se apenas pelo valor da reatância.</div>
+<strong>B)</strong> $Q=+95\,kvar$, $FP=0{,}644$ e comportamento indutivo.</div>
 <div class="alt-item">
-<strong>C)</strong> Consomem potência reativa indutiva (Q &gt; 0) e fornecem potência reativa capacitiva (Q &lt; 0 ou compensação de reativos).</div>
+<strong>C)</strong> $Q=+25\,kvar$, $FP=0{,}954$ e comportamento indutivo.</div>
 <div class="alt-item">
-<strong>D)</strong> O indutor fornece potência reativa capacitiva e o capacitor absorve potência reativa indutiva.</div>
+<strong>D)</strong> $Q=+25\,kvar$, $FP=0{,}313$ e comportamento indutivo.</div>
 
     </div>
     <div class="solution-box">
         <span class="sol-header">Gabarito Comentado: Alternativa C</span>
-        <div class="sol-text">
-            Indutores absorvem potência reativa indutiva ($+jQ$) para criar seus campos magnéticos. Capacitores geram/fornecem potência reativa capacitiva (ou absorvem potência reativa negativa, $-jQ$), compensando a defasagem indutiva.
-        </div>
+        <div class="sol-text">As potências reativas somam-se algebricamente: $Q=Q_L+Q_C=60-35=+25\,kvar$. A potência aparente é $S=\sqrt{80^2+25^2}\approx83{,}8\,kVA$, portanto $FP=P/S\approx80/83{,}8=0{,}954$. Como o saldo de $Q$ permanece positivo, a instalação continua indutiva.</div>
         <div class="tip-box">
             <span class="tip-title">Dica de Concurso • Como Pensar na IDECAN:</span>
-            <span class="tip-text">Indutor = Consome reativo (+Q). Capacitor = Fornece reativo (-Q na convenção de carga).</span>
+            <span class="tip-text">Na correção do fator de potência, some $Q$ com sinal antes de calcular $S$. Um banco capacitivo reduz o reativo indutivo, mas só torna a instalação capacitiva se houver sobrecompensação.</span>
         </div>
     </div>
 </div>
