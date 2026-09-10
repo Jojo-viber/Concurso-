@@ -9,8 +9,11 @@ import secrets
 import uuid
 import random
 import time
-from datetime import datetime
+from datetime import datetime, timezone
 from filelock import FileLock
+from urllib import error as urllib_error
+from urllib import parse as urllib_parse
+from urllib import request as urllib_request
 
 st.set_page_config(
     page_title="Treinador IDECAN - Engenharia Elétrica",
@@ -24,6 +27,23 @@ USUARIOS_FILE = os.path.join(DADOS_USUARIOS_DIR, "usuarios.json")
 PROGRESSO_LEGADO_FILE = "progresso_usuario.json"
 MIGRACAO_GABARITOS_FILE = "migracao_gabaritos_v2.json"
 REVISAO_QUESTOES = "v2"
+
+
+def ler_secret(nome, padrao=""):
+    """Lê um Secret do Streamlit e mantém compatibilidade com execução local."""
+    try:
+        valor = st.secrets.get(nome, os.environ.get(nome, padrao))
+    except (FileNotFoundError, KeyError):
+        valor = os.environ.get(nome, padrao)
+    return str(valor).strip() if valor is not None else padrao
+
+
+SUPABASE_URL = ler_secret("SUPABASE_URL").rstrip("/")
+SUPABASE_SECRET_KEY = ler_secret("SUPABASE_SECRET_KEY") or ler_secret("SUPABASE_KEY")
+SUPABASE_ATIVO = bool(SUPABASE_URL and SUPABASE_SECRET_KEY)
+SUPABASE_ESTADO = {"online": False, "erro": None}
+_REMOTO_AUSENTE = object()
+_REMOTO_ERRO = object()
 
 if not os.path.exists(QUESTOES_DIR):
     os.makedirs(QUESTOES_DIR)
@@ -58,6 +78,108 @@ def salvar_json(caminho, conteudo):
                 os.remove(temporario)
 
 
+def requisicao_supabase(metodo, caminho, conteudo=None, prefer=None):
+    """Executa uma chamada REST ao Supabase sem expor a chave em mensagens."""
+    if not SUPABASE_ATIVO:
+        raise RuntimeError("Supabase não configurado.")
+
+    dados = None
+    if conteudo is not None:
+        dados = json.dumps(conteudo, ensure_ascii=False).encode("utf-8")
+    cabecalhos = {
+        "apikey": SUPABASE_SECRET_KEY,
+        "Authorization": f"Bearer {SUPABASE_SECRET_KEY}",
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+    }
+    if prefer:
+        cabecalhos["Prefer"] = prefer
+
+    requisicao = urllib_request.Request(
+        f"{SUPABASE_URL}{caminho}",
+        data=dados,
+        headers=cabecalhos,
+        method=metodo,
+    )
+    try:
+        with urllib_request.urlopen(requisicao, timeout=12) as resposta:
+            corpo = resposta.read().decode("utf-8")
+            SUPABASE_ESTADO.update(online=True, erro=None)
+            return json.loads(corpo) if corpo else None
+    except urllib_error.HTTPError as erro:
+        detalhe = erro.read().decode("utf-8", errors="replace")[:300]
+        if erro.code in (401, 403):
+            mensagem = "A chave configurada não possui acesso ao banco. Confira SUPABASE_SECRET_KEY."
+        elif erro.code == 404 or "PGRST205" in detalhe or "42P01" in detalhe:
+            mensagem = "Tabela app_state não encontrada. Execute o arquivo supabase_setup.sql no SQL Editor."
+        else:
+            mensagem = f"Supabase respondeu HTTP {erro.code}."
+        SUPABASE_ESTADO.update(online=False, erro=mensagem)
+        raise RuntimeError(mensagem) from erro
+    except (urllib_error.URLError, TimeoutError, json.JSONDecodeError) as erro:
+        mensagem = "Não foi possível acessar o Supabase neste momento."
+        SUPABASE_ESTADO.update(online=False, erro=mensagem)
+        raise RuntimeError(mensagem) from erro
+
+
+def carregar_estado_remoto(namespace, chave):
+    if not SUPABASE_ATIVO:
+        return _REMOTO_AUSENTE
+    consulta = (
+        "/rest/v1/app_state?namespace=eq."
+        f"{urllib_parse.quote(namespace, safe='')}&record_key=eq."
+        f"{urllib_parse.quote(chave, safe='')}&select=payload"
+    )
+    try:
+        registros = requisicao_supabase("GET", consulta) or []
+        return registros[0].get("payload") if registros else _REMOTO_AUSENTE
+    except RuntimeError:
+        return _REMOTO_ERRO
+
+
+def salvar_estado_remoto(namespace, chave, conteudo):
+    if not SUPABASE_ATIVO:
+        return False
+    registro = {
+        "namespace": namespace,
+        "record_key": chave,
+        "payload": conteudo,
+        "updated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+    }
+    try:
+        requisicao_supabase(
+            "POST",
+            "/rest/v1/app_state?on_conflict=namespace,record_key",
+            registro,
+            prefer="resolution=merge-duplicates,return=minimal",
+        )
+        return True
+    except RuntimeError:
+        return False
+
+
+def carregar_persistente(namespace, chave, caminho_local, padrao):
+    """Prioriza o banco e migra automaticamente o JSON local na primeira leitura."""
+    local = carregar_json(caminho_local, padrao)
+    remoto = carregar_estado_remoto(namespace, chave)
+    if remoto is _REMOTO_ERRO:
+        return local
+    if remoto is _REMOTO_AUSENTE:
+        if SUPABASE_ATIVO and local != padrao:
+            salvar_estado_remoto(namespace, chave, local)
+        return local
+    if isinstance(remoto, type(padrao)):
+        salvar_json(caminho_local, remoto)
+        return remoto
+    return local
+
+
+def salvar_persistente(namespace, chave, caminho_local, conteudo):
+    """Mantém cópia local e sincroniza uma segunda cópia persistente no Supabase."""
+    salvar_json(caminho_local, conteudo)
+    salvar_estado_remoto(namespace, chave, conteudo)
+
+
 def gerar_hash_pin(pin, salt_hex=None):
     salt = bytes.fromhex(salt_hex) if salt_hex else secrets.token_bytes(16)
     pin_hash = hashlib.pbkdf2_hmac("sha256", pin.encode("utf-8"), salt, 200_000)
@@ -70,7 +192,7 @@ def validar_pin(usuario, pin):
 
 
 def carregar_usuarios():
-    return carregar_json(USUARIOS_FILE, {})
+    return carregar_persistente("usuarios", "global", USUARIOS_FILE, {})
 
 
 def criar_usuario(nome, pin):
@@ -94,13 +216,14 @@ def criar_usuario(nome, pin):
             "pin_hash": pin_hash,
             "criado_em": datetime.now().isoformat(timespec="seconds")
         }
-        salvar_json(USUARIOS_FILE, usuarios)
+        salvar_persistente("usuarios", "global", USUARIOS_FILE, usuarios)
 
         progresso_novo = os.path.join(DADOS_USUARIOS_DIR, f"{usuario_id}.json")
         if len(usuarios) == 1 and os.path.exists(PROGRESSO_LEGADO_FILE):
-            salvar_json(progresso_novo, carregar_json(PROGRESSO_LEGADO_FILE, {}))
+            progresso_inicial = carregar_json(PROGRESSO_LEGADO_FILE, {})
         else:
-            salvar_json(progresso_novo, {})
+            progresso_inicial = {}
+        salvar_persistente("progresso", usuario_id, progresso_novo, progresso_inicial)
         return usuarios[usuario_id]
 
 
@@ -149,10 +272,16 @@ def tela_de_perfil():
                 except ValueError as erro:
                     st.error(str(erro))
 
-    st.warning(
-        "No Streamlit Community Cloud, arquivos locais podem ser apagados em reinicializações. "
-        "Use o backup individual disponível após entrar."
-    )
+    if SUPABASE_ESTADO["online"]:
+        st.success("☁️ Sincronização persistente com o Supabase ativa.")
+    elif SUPABASE_ATIVO:
+        st.error(SUPABASE_ESTADO["erro"] or "Não foi possível confirmar a conexão com o Supabase.")
+        st.caption("O app continua em modo local e o backup JSON permanece disponível.")
+    else:
+        st.warning(
+            "Supabase não configurado. No Streamlit Community Cloud, arquivos locais podem "
+            "ser apagados em reinicializações."
+        )
     st.stop()
 
 
@@ -207,10 +336,14 @@ def identificar_assunto_e_bloco(nome_arquivo, tag_questao):
 
 # --- Gerenciamento de Estado e Progresso ---
 def carregar_progresso():
-    return carregar_json(PROGRESSO_FILE, {})
+    return carregar_persistente(
+        "progresso", st.session_state.usuario_id, PROGRESSO_FILE, {}
+    )
 
 def salvar_progresso(progresso):
-    salvar_json(PROGRESSO_FILE, progresso)
+    salvar_persistente(
+        "progresso", st.session_state.usuario_id, PROGRESSO_FILE, progresso
+    )
 
 if "progresso" not in st.session_state:
     st.session_state.progresso = carregar_progresso()
@@ -318,6 +451,12 @@ if houve_ajuste:
 # --- Barra Lateral: Metas, Filtros e Modos de Visualização ---
 st.sidebar.title("⚡ Painel de Metas • IDECAN")
 st.sidebar.caption(f"Perfil ativo: **{st.session_state.usuario_nome}**")
+if SUPABASE_ESTADO["online"]:
+    st.sidebar.caption("☁️ Progresso sincronizado com o Supabase")
+elif SUPABASE_ATIVO:
+    st.sidebar.warning(SUPABASE_ESTADO["erro"] or "Sincronização online indisponível.")
+else:
+    st.sidebar.warning("Progresso salvo apenas neste servidor.")
 if st.sidebar.button("Trocar usuário", use_container_width=True):
     for chave in list(st.session_state):
         if chave.startswith("sim_") or chave in ("usuario_id", "usuario_nome", "progresso", "ultimo_upload_sig"):
@@ -500,13 +639,17 @@ def extrair_alternativas(q):
 
 
 def carregar_historico_simulados():
-    return carregar_json(SIMULADOS_FILE, [])
+    return carregar_persistente(
+        "simulados", st.session_state.usuario_id, SIMULADOS_FILE, []
+    )
 
 
 def salvar_resultado_simulado(resultado):
     historico = carregar_historico_simulados()
     historico.append(resultado)
-    salvar_json(SIMULADOS_FILE, historico[-50:])
+    salvar_persistente(
+        "simulados", st.session_state.usuario_id, SIMULADOS_FILE, historico[-50:]
+    )
 
 
 def limpar_estado_simulado():
