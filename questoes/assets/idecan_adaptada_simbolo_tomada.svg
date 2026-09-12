@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="310" viewBox="0 0 700 310">
+  <rect width="700" height="310" fill="#f8fafc"/>
+  <style>.t{font:22px Arial;fill:#0f172a}.s{font:18px Arial;fill:#475569}.l{stroke:#0f172a;stroke-width:5;fill:none}</style>
+  <text x="25" y="38" class="t">Recorte de planta elétrica</text>
+  <line x1="70" y1="235" x2="630" y2="235" class="l"/>
+  <line x1="330" y1="235" x2="330" y2="125" class="l"/>
+  <circle cx="330" cy="102" r="30" class="l"/>
+  <line x1="315" y1="82" x2="315" y2="122" class="l"/>
+  <line x1="345" y1="82" x2="345" y2="122" class="l"/>
+  <text x="375" y="108" class="t">2P+T</text>
+  <text x="375" y="142" class="t">1,30 m</text>
+  <text x="75" y="275" class="s">Parede</text>
+</svg>
