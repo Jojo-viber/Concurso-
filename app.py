@@ -449,11 +449,19 @@ def carregar_todas_questoes():
                     tip_text = tip_div.decode_contents().strip()
             
             assunto, bloco, meta = identificar_assunto_e_bloco(arq, subtema)
+            assunto = card.get("data-assunto", assunto)
+            if assunto in MAPEAMENTO_ASSUNTOS:
+                bloco = card.get("data-bloco", MAPEAMENTO_ASSUNTOS[assunto]["bloco"])
+                meta = MAPEAMENTO_ASSUNTOS[assunto]["meta"]
+            fonte = card.get("data-origem", "Questões autorais")
             q_id = f"{arq}_{q_num}_{idx}"
             
             questoes.append({
                 "id": q_id,
                 "origem": arq,
+                "fonte": fonte,
+                "prova_fonte": card.get("data-prova", ""),
+                "questao_original": card.get("data-questao-original", ""),
                 "numero": q_num,
                 "assunto": assunto,
                 "subtema": subtema,
@@ -698,6 +706,7 @@ if arquivo_upload is not None:
             st.sidebar.error(f"Erro ao ler arquivo: {e}")
 
 bloco_sel = "Todos os Blocos"
+origem_sel = "Todas as Origens"
 assunto_sel = "Todos os Assuntos"
 subtema_sel = "Todos os Subtemas"
 modo_estudo = "Todas as Questões"
@@ -708,28 +717,38 @@ if modo_aplicacao == "Estudo por cadernos":
     st.sidebar.divider()
     st.sidebar.subheader("🔍 Filtros de Busca")
 
+    origens_disponiveis = sorted({q["fonte"] for q in todas_questoes})
+    origem_sel = st.sidebar.selectbox(
+        "1. Origem das questões:", ["Todas as Origens"] + origens_disponiveis,
+        key="filtro_origem"
+    )
+
     bloco_sel = st.sidebar.selectbox(
-        "1. Bloco do Edital:", ["Todos os Blocos", "OURO", "PRATA", "BRONZE"],
+        "2. Bloco do Edital:", ["Todos os Blocos", "OURO", "PRATA", "BRONZE"],
         key="filtro_bloco"
     )
 
-    assuntos_filtrados = sorted(list(set(q["assunto"] for q in todas_questoes if (bloco_sel == "Todos os Blocos" or q["bloco"] == bloco_sel))))
+    assuntos_filtrados = sorted(list(set(q["assunto"] for q in todas_questoes if (
+        (origem_sel == "Todas as Origens" or q["fonte"] == origem_sel) and
+        (bloco_sel == "Todos os Blocos" or q["bloco"] == bloco_sel)
+    ))))
     assunto_sel = st.sidebar.selectbox(
-        "2. Assunto (Macro):", ["Todos os Assuntos"] + assuntos_filtrados,
+        "3. Assunto (Macro):", ["Todos os Assuntos"] + assuntos_filtrados,
         key="filtro_assunto"
     )
 
     subtemas_filtrados = sorted(list(set(q["subtema"] for q in todas_questoes if (
+        (origem_sel == "Todas as Origens" or q["fonte"] == origem_sel) and
         (bloco_sel == "Todos os Blocos" or q["bloco"] == bloco_sel) and
         (assunto_sel == "Todos os Assuntos" or q["assunto"] == assunto_sel)
     ))))
     subtema_sel = st.sidebar.selectbox(
-        "3. Subtema / Tag:", ["Todos os Subtemas"] + subtemas_filtrados,
+        "4. Subtema / Tag:", ["Todos os Subtemas"] + subtemas_filtrados,
         key="filtro_subtema"
     )
 
     modo_estudo = st.sidebar.radio(
-        "4. Status das Questões:",
+        "5. Status das Questões:",
         ["Todas as Questões", "Caderno de Erros (Apenas Erradas)", "Apenas Não Resolvidas"],
         key="filtro_status"
     )
@@ -747,6 +766,9 @@ if modo_aplicacao == "Estudo por cadernos":
 
 # --- Aplicação dos Filtros ---
 questoes_filtradas = todas_questoes
+if origem_sel != "Todas as Origens":
+    questoes_filtradas = [q for q in questoes_filtradas if q["fonte"] == origem_sel]
+
 if bloco_sel != "Todos os Blocos":
     questoes_filtradas = [q for q in questoes_filtradas if q["bloco"] == bloco_sel]
 
@@ -1083,6 +1105,7 @@ def renderizar_simulado():
 
 def abrir_tema_para_estudo(assunto, bloco, somente_pendentes=False):
     st.session_state["modo_aplicacao_app"] = "Estudo por cadernos"
+    st.session_state["filtro_origem"] = "Todas as Origens"
     st.session_state["filtro_bloco"] = bloco
     st.session_state["filtro_assunto"] = assunto
     st.session_state["filtro_subtema"] = "Todos os Subtemas"
@@ -1216,6 +1239,11 @@ def renderizar_questao(q):
         col_t1, col_t2 = st.columns([3, 1])
         col_t1.markdown(f"### {q['numero']} • `{q['subtema']}`")
         col_t1.caption(f"**Assunto:** {q['assunto']} &nbsp;|&nbsp; **Bloco:** {cor_bloco}")
+        if q["fonte"] != "Questões autorais":
+            referencia = q["prova_fonte"]
+            if q["questao_original"]:
+                referencia += f" • questão original {q['questao_original']}"
+            col_t1.caption(f"**Origem:** {q['fonte']} &nbsp;|&nbsp; {referencia}")
         
         if historico:
             if historico.get("acertou"):
@@ -1253,11 +1281,12 @@ def renderizar_questao(q):
 
         st.write("")
         if historico:
-            with st.expander("💡 Ver Gabarito Oficial & Resolução Detalhada", expanded=False):
+            rotulo_gabarito = "Gabarito comentado" if q["fonte"] != "Questões autorais" else "Gabarito oficial"
+            with st.expander(f"💡 Ver {rotulo_gabarito} & Resolução Detalhada", expanded=False):
                 if historico.get("acertou"):
-                    st.success(f"**Gabarito Oficial:** Alternativa **{q['gabarito']}** (Você acertou!)")
+                    st.success(f"**{rotulo_gabarito}:** Alternativa **{q['gabarito']}** (Você acertou!)")
                 else:
-                    st.error(f"**Gabarito Oficial:** Alternativa **{q['gabarito']}** (Na última tentativa você marcou **{historico.get('resposta')}**)")
+                    st.error(f"**{rotulo_gabarito}:** Alternativa **{q['gabarito']}** (Na última tentativa você marcou **{historico.get('resposta')}**)")
                 renderizar_fragmento(q["resolucao"])
                 if q["dica"]:
                     renderizar_fragmento(q["dica"])
@@ -1276,9 +1305,29 @@ if modo_aplicacao == "Simulado específico":
 st.title("📚 Resolução de Questões IDECAN")
 
 if assunto_sel != "Todos os Assuntos":
-    meta_atual = next((q["meta"] for q in todas_questoes if q["assunto"] == assunto_sel), 50)
-    feitas_assunto = sum(1 for q in todas_questoes if q["assunto"] == assunto_sel and q["id"] in progresso)
-    st.info(f"📌 **Assunto:** {assunto_sel} | **Progresso:** {feitas_assunto} de {meta_atual} questões feitas ({min(feitas_assunto/meta_atual*100, 100.0):.0f}% da meta)")
+    if origem_sel != "Todas as Origens":
+        questoes_origem = [
+            q for q in todas_questoes
+            if q["assunto"] == assunto_sel and q["fonte"] == origem_sel
+        ]
+        feitas_origem = sum(q["id"] in progresso for q in questoes_origem)
+        st.info(
+            f"📌 **Assunto:** {assunto_sel} | **{origem_sel}:** "
+            f"{feitas_origem} de {len(questoes_origem)} questões feitas"
+        )
+    else:
+        meta_atual = next((q["meta"] for q in todas_questoes if q["assunto"] == assunto_sel), 50)
+        feitas_assunto = sum(
+            1 for q in todas_questoes
+            if q["assunto"] == assunto_sel
+            and q["fonte"] == "Questões autorais"
+            and q["id"] in progresso
+        )
+        st.info(
+            f"📌 **Assunto:** {assunto_sel} | **Progresso do caderno-base:** "
+            f"{feitas_assunto} de {meta_atual} questões feitas "
+            f"({min(feitas_assunto/meta_atual*100, 100.0):.0f}% da meta)"
+        )
 
 total_q = len(questoes_filtradas)
 
