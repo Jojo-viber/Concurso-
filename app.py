@@ -9,7 +9,8 @@ import secrets
 import uuid
 import random
 import time
-from datetime import datetime, timezone
+from collections import Counter
+from datetime import date, datetime, timezone
 from filelock import FileLock
 from urllib import error as urllib_error
 from urllib import parse as urllib_parse
@@ -288,17 +289,18 @@ def tela_de_perfil():
 tela_de_perfil()
 PROGRESSO_FILE = os.path.join(DADOS_USUARIOS_DIR, f"{st.session_state.usuario_id}.json")
 SIMULADOS_FILE = os.path.join(DADOS_USUARIOS_DIR, f"{st.session_state.usuario_id}_simulados.json")
+TRILHA_FILE = os.path.join(DADOS_USUARIOS_DIR, f"{st.session_state.usuario_id}_trilha.json")
 
 # --- Mapeamento do Edital: Assuntos, Blocos e Metas ---
 MAPEAMENTO_ASSUNTOS = {
     # "esperadas" é uma distribuição estratégica para um simulado de 20 questões.
     # Não representa uma divisão oficial da IDECAN por assunto.
-    "NBR 5410 & Instalações BT": {"bloco": "OURO", "meta": 50, "esperadas": 2, "keywords": ["5410", "BAIXA TENSÃO", "BAIXA TENSAO", "COMANDO", "MOTOR", "CONTATOR", "PARTIDA", "NOBREAK", "MOTOGERADOR"]},
+    "NBR 5410 & Instalações BT": {"bloco": "OURO", "meta": 50, "esperadas": 2, "keywords": ["5410", "BAIXA TENSÃO", "BAIXA TENSAO", "NOBREAK", "MOTOGERADOR"]},
     "NBR 14039 & Instalações MT": {"bloco": "OURO", "meta": 45, "esperadas": 1, "keywords": ["14039", "MEDIA TENSAO", "MÉDIA TENSÃO", "CABINE", "SUBESTACAO", "SUBESTAÇÃO"]},
-    "Sistemas de Potência & Proteção": {"bloco": "OURO", "meta": 45, "esperadas": 2, "keywords": ["SISTEMAS DE POTENCIA", "SISTEMAS DE POTÊNCIA", "SEP", "TRANSMISSAO", "TRANSMISSÃO", "DISTRIBUICAO", "DISTRIBUIÇÃO", "RELE", "RELÉ"]},
+    "Sistemas de Potência & Proteção": {"bloco": "OURO", "meta": 45, "esperadas": 1, "keywords": ["SISTEMAS DE POTENCIA", "SISTEMAS DE POTÊNCIA", "SEP", "TRANSMISSAO", "TRANSMISSÃO", "DISTRIBUICAO", "DISTRIBUIÇÃO", "RELE", "RELÉ"]},
     "Grandezas Elétricas & Circuitos": {"bloco": "OURO", "meta": 45, "esperadas": 1, "keywords": ["CIRCUITO", "GRANDEZA", "FATOR DE POTENCIA", "FATOR DE POTÊNCIA", "TRIFASICO", "TRIFÁSICO"]},
     "Aterramento e SPDA (NBR 5419)": {"bloco": "OURO", "meta": 45, "esperadas": 1, "keywords": ["5419", "SPDA", "ATERRAMENTO", "DESCARGA"]},
-    "NR-10 & Segurança em Eletricidade": {"bloco": "OURO", "meta": 40, "esperadas": 1, "keywords": ["NR-10", "NR10", "SEGURANÇA EM ELETRICIDADE"]},
+    "NR-10 & Segurança em Eletricidade": {"bloco": "OURO", "meta": 45, "esperadas": 1, "keywords": ["NR-10", "NR10", "SEGURANÇA EM ELETRICIDADE"]},
     "Lei nº 14.133/2021, Orçamentação & Planejamento": {"bloco": "OURO", "meta": 45, "esperadas": 1, "keywords": ["14.133", "14133", "LICITACAO", "LICITAÇÃO", "LICITACOES", "LICITAÇÕES", "BDI", "ORÇAMENTO", "ORCAMENTO", "CRONOGRAMA"]},
 
     "Luminotécnica & Iluminação Pública": {"bloco": "PRATA", "meta": 30, "esperadas": 1, "keywords": ["LUMINOTECNICA", "LUMINOTÉCNICA", "ILUMINACAO", "ILUMINAÇÃO"]},
@@ -310,9 +312,32 @@ MAPEAMENTO_ASSUNTOS = {
     "Eficiência Energética, Cogeração & Fontes Alternativas": {"bloco": "PRATA", "meta": 25, "esperadas": 1, "keywords": ["EFICIENCIA", "EFICIÊNCIA", "COGERACAO", "COGERAÇÃO", "SOLAR", "FOTOVOLTAICA", "EOLICA", "EÓLICA", "BIOMASSA"]},
 
     "Redes Estruturadas & Cabeamento": {"bloco": "BRONZE", "meta": 15, "esperadas": 1, "keywords": ["ESTRUTURADA", "CABEAMENTO", "TELEFONIA", "DADOS", "AUDIO", "ÁUDIO", "VIDEO", "VÍDEO"]},
+    "Comandos Elétricos & Motores": {"bloco": "BRONZE", "meta": 15, "esperadas": 1, "keywords": ["COMANDOS_ELETRICOS_MOTORES", "COMANDOS ELÉTRICOS", "COMANDOS ELETRICOS", "CONTATOR", "PARTIDA DE MOTOR"]},
     "Desenho Técnico & Interpretação de Projetos": {"bloco": "BRONZE", "meta": 15, "esperadas": 1, "keywords": ["DESENHO", "PLANTA", "UNIFILAR", "MULTIFILAR", "SIMBOLOGIA", "INTERPRETACAO", "INTERPRETAÇÃO"]},
     "Legislação Urbanística & Parcelamento": {"bloco": "BRONZE", "meta": 15, "esperadas": 1, "keywords": ["6.766", "6766", "URBANO", "URBANISTICA", "URBANÍSTICA", "POSTURAS", "PLANO DIRETOR", "PARCELAMENTO"]},
     "Licenciamento Ambiental & Segurança em Obras": {"bloco": "BRONZE", "meta": 15, "esperadas": 1, "keywords": ["AMBIENTAL", "LICENCA", "LICENÇA", "EIA", "RIMA", "SEGURANÇA DO TRABALHO", "SEGURANCA DO TRABALHO"]}
+}
+
+ASSUNTO_POR_ARQUIVO = {
+    "caderno_50_questoes_nbr5410_idecan.html": "NBR 5410 & Instalações BT",
+    "caderno_45_questoes_nbr14039_idecan.html": "NBR 14039 & Instalações MT",
+    "caderno_45_questoes_sep_protecao_idecan.html": "Sistemas de Potência & Proteção",
+    "caderno_45_questoes_circuitos_idecan.html": "Grandezas Elétricas & Circuitos",
+    "caderno_45_questoes_spda_idecan.html": "Aterramento e SPDA (NBR 5419)",
+    "caderno_45_questoes_nr10_idecan.html": "NR-10 & Segurança em Eletricidade",
+    "caderno_45_questoes_licitacoes_idecan.html": "Lei nº 14.133/2021, Orçamentação & Planejamento",
+    "caderno_30_questoes_luminotecnica_idecan.html": "Luminotécnica & Iluminação Pública",
+    "caderno_25_questoes_infraestrutura_projetos_idecan.html": "Obras de Infraestrutura Elétrica & Projetos",
+    "caderno_30_questoes_fiscalizacao_vistorias_nbr9050_idecan.html": "Fiscalização de Obras, Vistorias & NBR 9050",
+    "caderno_25_questoes_legislacao_profissional_confea_art_idecan.html": "Legislação Profissional & CONFEA/ART",
+    "caderno_20_questoes_manutencao_gestao_predial_idecan.html": "Manutenção & Gestão Predial",
+    "caderno_20_questoes_sdai_idecan.html": "Detecção e Alarme de Incêndio (SDAI)",
+    "caderno_25_questoes_eficiencia_energetica_cogeracao_fontes_alternativas_idecan.html": "Eficiência Energética, Cogeração & Fontes Alternativas",
+    "caderno_15_questoes_redes_estruturadas_cabeamento_idecan.html": "Redes Estruturadas & Cabeamento",
+    "caderno_15_questoes_comandos_eletricos_motores_idecan.html": "Comandos Elétricos & Motores",
+    "caderno_15_questoes_desenho_tecnico_interpretacao_projetos_idecan.html": "Desenho Técnico & Interpretação de Projetos",
+    "caderno_15_questoes_legislacao_urbanistica_parcelamento_solo_idecan.html": "Legislação Urbanística & Parcelamento",
+    "caderno_15_questoes_licenciamento_ambiental_obras_idecan.html": "Licenciamento Ambiental & Segurança em Obras",
 }
 
 META_POR_BLOCO = {
@@ -323,6 +348,11 @@ META_GLOBAL = sum(META_POR_BLOCO.values())
 TOTAL_QUESTOES_SIMULADO = sum(info["esperadas"] for info in MAPEAMENTO_ASSUNTOS.values())
 
 def identificar_assunto_e_bloco(nome_arquivo, tag_questao):
+    assunto_exato = ASSUNTO_POR_ARQUIVO.get(nome_arquivo)
+    if assunto_exato:
+        info = MAPEAMENTO_ASSUNTOS[assunto_exato]
+        return assunto_exato, info["bloco"], info["meta"]
+
     texto = (nome_arquivo + " " + tag_questao).upper()
     for assunto, info in MAPEAMENTO_ASSUNTOS.items():
         if any(k in nome_arquivo.upper() for k in info["keywords"]):
@@ -345,8 +375,23 @@ def salvar_progresso(progresso):
         "progresso", st.session_state.usuario_id, PROGRESSO_FILE, progresso
     )
 
+
+def carregar_trilha():
+    return carregar_persistente(
+        "trilha", st.session_state.usuario_id, TRILHA_FILE, {}
+    )
+
+
+def salvar_trilha(trilha):
+    salvar_persistente(
+        "trilha", st.session_state.usuario_id, TRILHA_FILE, trilha
+    )
+
 if "progresso" not in st.session_state:
     st.session_state.progresso = carregar_progresso()
+
+if "trilha" not in st.session_state:
+    st.session_state.trilha = carregar_trilha()
 
 if "idx_individual" not in st.session_state:
     st.session_state.idx_individual = 0
@@ -425,6 +470,118 @@ def carregar_todas_questoes():
 
 todas_questoes = carregar_todas_questoes()
 
+ESTADOS_TRILHA = [
+    "Não iniciado", "Reconhecimento", "Em estudo", "Em revisão", "Consolidado"
+]
+PESO_ESTRATEGICO = {"OURO": 1.00, "PRATA": 0.70, "BRONZE": 0.45}
+
+
+def converter_data(valor):
+    """Converte datas antigas e ISO em date sem invalidar o progresso legado."""
+    if not valor:
+        return None
+    try:
+        return datetime.fromisoformat(str(valor).replace("Z", "+00:00")).date()
+    except (TypeError, ValueError):
+        return None
+
+
+def estatisticas_trilha(assunto, info, questoes, progresso_atual, trilha_atual, hoje=None):
+    hoje = hoje or date.today()
+    questoes_tema = [q for q in questoes if q["assunto"] == assunto]
+    ids_tema = {q["id"] for q in questoes_tema}
+    registros = [v for qid, v in progresso_atual.items() if qid in ids_tema]
+    respondidas = len(registros)
+
+    tentativas = sum(max(1, int(r.get("tentativas", 1))) for r in registros)
+    acertos = sum(
+        int(r.get("acertos_total", 1 if r.get("acertou") else 0)) for r in registros
+    )
+    taxa_acerto = acertos / tentativas if tentativas else 0.0
+
+    subtemas = sorted({q["subtema"] for q in questoes_tema})
+    subtemas_cobertos = {
+        q["subtema"] for q in questoes_tema if q["id"] in progresso_atual
+    }
+    subtemas_pendentes = [s for s in subtemas if s not in subtemas_cobertos]
+    cobertura = len(subtemas_cobertos) / len(subtemas) if subtemas else 0.0
+    meta_efetiva = max(1, min(info["meta"], len(questoes_tema) or info["meta"]))
+    volume = min(respondidas / meta_efetiva, 1.0)
+
+    datas = [converter_data(r.get("data")) for r in registros]
+    dados_tema = trilha_atual.get(assunto, {})
+    datas.append(converter_data(dados_tema.get("ultima_revisao")))
+    datas = [d for d in datas if d]
+    ultima_atividade = max(datas) if datas else None
+    dias_sem_revisar = max(0, (hoje - ultima_atividade).days) if ultima_atividade else None
+
+    # A taxa recebe confiança gradual: poucas respostas não geram domínio alto artificial.
+    dominio = 100 * taxa_acerto * (0.45 + 0.35 * volume + 0.20 * cobertura)
+    dominio = round(max(0.0, min(dominio, 100.0)), 1)
+
+    if respondidas == 0:
+        estado_automatico = "Não iniciado"
+    elif volume < 0.15 or cobertura < 0.25:
+        estado_automatico = "Reconhecimento"
+    elif dominio < 70 or cobertura < 0.65:
+        estado_automatico = "Em estudo"
+    elif dominio >= 80 and volume >= 0.65 and cobertura >= 0.75 and (dias_sem_revisar or 0) < 10:
+        estado_automatico = "Consolidado"
+    else:
+        estado_automatico = "Em revisão"
+
+    estado_manual = dados_tema.get("estado")
+    estado = estado_manual if estado_manual in ESTADOS_TRILHA else estado_automatico
+    atraso = 0.35 if dias_sem_revisar is None else min(dias_sem_revisar / 14, 1.0)
+    lacuna_dominio = 1 - dominio / 100
+    lacuna_cobertura = 1 - cobertura
+    peso = PESO_ESTRATEGICO.get(info["bloco"], 0.45)
+    prioridade = round(100 * (
+        0.35 * peso + 0.30 * lacuna_dominio + 0.20 * atraso + 0.15 * lacuna_cobertura
+    ), 1)
+
+    if respondidas == 0:
+        acao = "Reconhecimento: resolva 5 questões variadas e leia as resoluções."
+    elif subtemas_pendentes and cobertura < 0.65:
+        acao = f"Cobertura: avance em “{subtemas_pendentes[0]}”."
+    elif taxa_acerto < 0.70:
+        acao = "Correção: refaça questões erradas e compare os distratores."
+    elif dias_sem_revisar is not None and dias_sem_revisar >= 10:
+        acao = "Revisão espaçada: faça de 5 a 10 questões sem consultar o resumo."
+    else:
+        acao = "Consolidação: faça 10 questões mistas e registre os pontos frágeis."
+
+    return {
+        "assunto": assunto, "bloco": info["bloco"], "meta": info["meta"],
+        "disponiveis": len(questoes_tema), "respondidas": respondidas,
+        "tentativas": tentativas, "acertos": acertos, "taxa_acerto": taxa_acerto,
+        "subtemas_total": len(subtemas), "subtemas_pendentes": subtemas_pendentes,
+        "cobertura": cobertura, "dias_sem_revisar": dias_sem_revisar,
+        "dominio": dominio, "estado": estado, "estado_automatico": estado_automatico,
+        "prioridade": prioridade, "acao": acao,
+    }
+
+
+def calcular_trilha(questoes, progresso_atual, trilha_atual, hoje=None):
+    resultados = [
+        estatisticas_trilha(assunto, info, questoes, progresso_atual, trilha_atual, hoje)
+        for assunto, info in MAPEAMENTO_ASSUNTOS.items()
+    ]
+    return sorted(resultados, key=lambda item: (-item["prioridade"], item["assunto"]))
+
+
+def registrar_tentativa(q, resposta, acertou, origem="estudo"):
+    anterior = progresso.get(q["id"], {})
+    tentativas_anteriores = int(anterior.get("tentativas", 1 if anterior.get("resposta") else 0))
+    acertos_anteriores = int(anterior.get("acertos_total", 1 if anterior.get("acertou") else 0))
+    progresso[q["id"]] = {
+        "resposta": resposta, "acertou": acertou, "assunto": q["assunto"],
+        "tema": q["subtema"], "bloco": q["bloco"], "origem_resposta": origem,
+        "data": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "tentativas": tentativas_anteriores + 1,
+        "acertos_total": acertos_anteriores + int(acertou),
+    }
+
 # Sincronização do progresso salvo
 progresso = st.session_state.progresso
 migracao_gabaritos = carregar_json(MIGRACAO_GABARITOS_FILE, {})
@@ -439,6 +596,12 @@ for q in todas_questoes:
                 registro["resposta"] = conversao[resposta_antiga]
             registro["revisao_questoes"] = REVISAO_QUESTOES
             houve_ajuste = True
+        resposta_atual = registro.get("resposta")
+        if isinstance(resposta_atual, str) and resposta_atual in "ABCDE" and q["gabarito"]:
+            acertou_atual = resposta_atual == q["gabarito"]
+            if registro.get("acertou") != acertou_atual:
+                registro["acertou"] = acertou_atual
+                houve_ajuste = True
         if progresso[q["id"]].get("bloco") != q["bloco"] or progresso[q["id"]].get("assunto") != q["assunto"]:
             progresso[q["id"]]["bloco"] = q["bloco"]
             progresso[q["id"]]["assunto"] = q["assunto"]
@@ -459,7 +622,7 @@ else:
     st.sidebar.warning("Progresso salvo apenas neste servidor.")
 if st.sidebar.button("Trocar usuário", use_container_width=True):
     for chave in list(st.session_state):
-        if chave.startswith("sim_") or chave in ("usuario_id", "usuario_nome", "progresso", "ultimo_upload_sig"):
+        if chave.startswith("sim_") or chave in ("usuario_id", "usuario_nome", "progresso", "trilha", "ultimo_upload_sig"):
             st.session_state.pop(chave, None)
     st.rerun()
 
@@ -477,8 +640,9 @@ st.sidebar.metric("Aproveitamento Global", f"{taxa_acerto:.1f}%")
 st.sidebar.divider()
 modo_aplicacao = st.sidebar.radio(
     "Modo de uso:",
-    ["Estudo por cadernos", "Simulado específico"],
-    help="O simulado específico usa 20 questões, quatro alternativas e vale 40 pontos."
+    ["Trilha do edital", "Estudo por cadernos", "Simulado específico"],
+    key="modo_aplicacao_app",
+    help="A trilha recomenda o estudo do dia; o simulado usa 20 questões e vale 40 pontos."
 )
 
 st.sidebar.divider()
@@ -544,27 +708,38 @@ if modo_aplicacao == "Estudo por cadernos":
     st.sidebar.divider()
     st.sidebar.subheader("🔍 Filtros de Busca")
 
-    bloco_sel = st.sidebar.selectbox("1. Bloco do Edital:", ["Todos os Blocos", "OURO", "PRATA", "BRONZE"])
+    bloco_sel = st.sidebar.selectbox(
+        "1. Bloco do Edital:", ["Todos os Blocos", "OURO", "PRATA", "BRONZE"],
+        key="filtro_bloco"
+    )
 
     assuntos_filtrados = sorted(list(set(q["assunto"] for q in todas_questoes if (bloco_sel == "Todos os Blocos" or q["bloco"] == bloco_sel))))
-    assunto_sel = st.sidebar.selectbox("2. Assunto (Macro):", ["Todos os Assuntos"] + assuntos_filtrados)
+    assunto_sel = st.sidebar.selectbox(
+        "2. Assunto (Macro):", ["Todos os Assuntos"] + assuntos_filtrados,
+        key="filtro_assunto"
+    )
 
     subtemas_filtrados = sorted(list(set(q["subtema"] for q in todas_questoes if (
         (bloco_sel == "Todos os Blocos" or q["bloco"] == bloco_sel) and
         (assunto_sel == "Todos os Assuntos" or q["assunto"] == assunto_sel)
     ))))
-    subtema_sel = st.sidebar.selectbox("3. Subtema / Tag:", ["Todos os Subtemas"] + subtemas_filtrados)
+    subtema_sel = st.sidebar.selectbox(
+        "3. Subtema / Tag:", ["Todos os Subtemas"] + subtemas_filtrados,
+        key="filtro_subtema"
+    )
 
     modo_estudo = st.sidebar.radio(
         "4. Status das Questões:",
-        ["Todas as Questões", "Caderno de Erros (Apenas Erradas)", "Apenas Não Resolvidas"]
+        ["Todas as Questões", "Caderno de Erros (Apenas Erradas)", "Apenas Não Resolvidas"],
+        key="filtro_status"
     )
 
     st.sidebar.divider()
     st.sidebar.subheader("👁️ Formato de Visualização")
     formato_visualizacao = st.sidebar.radio(
         "Como deseja visualizar?",
-        ["Uma por vez (Modo Estudo / Slide)", "Em blocos menores (Paginação)", "Lista completa contínua"]
+        ["Uma por vez (Modo Estudo / Slide)", "Em blocos menores (Paginação)", "Lista completa contínua"],
+        key="filtro_visualizacao"
     )
 
     if formato_visualizacao == "Em blocos menores (Paginação)":
@@ -741,15 +916,7 @@ def finalizar_simulado(questoes_simulado):
     for q in questoes_simulado:
         resposta = respostas[q["id"]]
         acertou = resposta == q["gabarito"]
-        progresso[q["id"]] = {
-            "resposta": resposta,
-            "acertou": acertou,
-            "assunto": q["assunto"],
-            "tema": q["subtema"],
-            "bloco": q["bloco"],
-            "origem_resposta": "simulado_especifico",
-            "data": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        }
+        registrar_tentativa(q, resposta, acertou, origem="simulado_especifico")
         resumo = por_assunto.setdefault(q["assunto"], {"total": 0, "acertos": 0})
         resumo["total"] += 1
         resumo["acertos"] += int(acertou)
@@ -799,7 +966,7 @@ def renderizar_simulado():
         "O tempo-alvo de 90 minutos é proporcional às 3 horas da prova e serve apenas para treino."
     )
 
-    with st.expander("Ver divisão planejada dos 18 temas", expanded=False):
+    with st.expander(f"Ver divisão planejada dos {len(MAPEAMENTO_ASSUNTOS)} temas", expanded=False):
         st.info(
             "A quantidade por tema é uma estimativa estratégica. O edital define 20 questões específicas, "
             "mas não fixa quantas serão cobradas de cada assunto."
@@ -830,7 +997,7 @@ def renderizar_simulado():
 
     if st.session_state.get("simulado_temas_ausentes"):
         st.warning(
-            f"Cobertura parcial do edital: {len(st.session_state.simulado_temas_ausentes)} dos 18 temas ainda não possuem caderno. "
+            f"Cobertura parcial do edital: {len(st.session_state.simulado_temas_ausentes)} dos {len(MAPEAMENTO_ASSUNTOS)} temas ainda não possuem caderno. "
             "As vagas foram redistribuídas entre os temas disponíveis."
         )
 
@@ -914,6 +1081,132 @@ def renderizar_simulado():
         )
 
 
+def abrir_tema_para_estudo(assunto, bloco, somente_pendentes=False):
+    st.session_state["modo_aplicacao_app"] = "Estudo por cadernos"
+    st.session_state["filtro_bloco"] = bloco
+    st.session_state["filtro_assunto"] = assunto
+    st.session_state["filtro_subtema"] = "Todos os Subtemas"
+    st.session_state["filtro_status"] = (
+        "Apenas Não Resolvidas" if somente_pendentes else "Todas as Questões"
+    )
+    st.session_state["filtro_visualizacao"] = "Uma por vez (Modo Estudo / Slide)"
+    st.session_state.idx_individual = 0
+
+
+def renderizar_trilha_edital():
+    dados = calcular_trilha(todas_questoes, progresso, st.session_state.trilha)
+    st.title("🧭 Trilha do edital")
+    st.caption(
+        "O painel combina importância estratégica, domínio estimado, atraso de revisão "
+        "e subtemas ainda não praticados para sugerir o estudo do dia."
+    )
+
+    st.subheader("O que estudar hoje")
+    colunas = st.columns(3)
+    for indice, (coluna, item) in enumerate(zip(colunas, dados[:3]), start=1):
+        with coluna:
+            with st.container(border=True):
+                st.caption(f"PRIORIDADE {indice} • BLOCO {item['bloco']}")
+                st.markdown(f"#### {item['assunto']}")
+                st.metric("Prioridade", f"{item['prioridade']:.0f}/100")
+                st.write(f"**Estado:** {item['estado']}")
+                st.write(item["acao"])
+                st.button(
+                    "Estudar agora",
+                    key=f"abrir_trilha_{indice}",
+                    use_container_width=True,
+                    on_click=abrir_tema_para_estudo,
+                    args=(item["assunto"], item["bloco"], bool(item["subtemas_pendentes"]))
+                )
+
+    estados = Counter(item["estado"] for item in dados)
+    consolidados = estados.get("Consolidado", 0)
+    iniciados = len(dados) - estados.get("Não iniciado", 0)
+    dominio_medio = sum(item["dominio"] for item in dados) / len(dados) if dados else 0
+    m1, m2, m3, m4 = st.columns(4)
+    m1.metric("Temas iniciados", f"{iniciados}/{len(dados)}")
+    m2.metric("Consolidados", consolidados)
+    m3.metric("Domínio médio", f"{dominio_medio:.0f}%")
+    m4.metric("Questões respondidas", len(progresso))
+
+    st.subheader("Painel completo")
+    linhas = []
+    for item in dados:
+        dias = "Nunca" if item["dias_sem_revisar"] is None else item["dias_sem_revisar"]
+        linhas.append({
+            "Prioridade": item["prioridade"],
+            "Tema": item["assunto"],
+            "Bloco": item["bloco"].title(),
+            "Estado": item["estado"],
+            "Respondidas": f"{item['respondidas']}/{item['disponiveis']}",
+            "Acerto": f"{item['taxa_acerto'] * 100:.0f}%" if item["tentativas"] else "—",
+            "Subtemas pendentes": f"{len(item['subtemas_pendentes'])}/{item['subtemas_total']}",
+            "Dias sem revisar": dias,
+            "Domínio": item["dominio"],
+        })
+    st.dataframe(
+        linhas,
+        use_container_width=True,
+        hide_index=True,
+        column_config={
+            "Prioridade": st.column_config.ProgressColumn(
+                "Prioridade", min_value=0, max_value=100, format="%.0f"
+            ),
+            "Domínio": st.column_config.ProgressColumn(
+                "Domínio estimado", min_value=0, max_value=100, format="%.0f%%"
+            ),
+        },
+    )
+
+    with st.expander("Como a prioridade e o domínio são calculados"):
+        st.markdown(
+            "**Prioridade = 35% peso estratégico + 30% lacuna de domínio + "
+            "20% atraso de revisão + 15% lacuna de cobertura.**\n\n"
+            "O peso estratégico é Ouro = 100%, Prata = 70% e Bronze = 45%. "
+            "O domínio não é apenas a taxa de acerto: ele também exige volume de questões "
+            "e cobertura de subtemas, evitando considerar um assunto dominado após poucos acertos."
+        )
+
+    st.subheader("Ajustar tema e registrar revisão")
+    nomes = [item["assunto"] for item in dados]
+    tema = st.selectbox("Tema", nomes, key="trilha_tema_ajuste")
+    item = next(d for d in dados if d["assunto"] == tema)
+    configuracao = st.session_state.trilha.get(tema, {})
+    opcoes_estado = ["Automático"] + ESTADOS_TRILHA
+    estado_salvo = configuracao.get("estado", "Automático")
+    if estado_salvo not in opcoes_estado:
+        estado_salvo = "Automático"
+    estado_escolhido = st.selectbox(
+        "Estado do tema",
+        opcoes_estado,
+        index=opcoes_estado.index(estado_salvo),
+        help=f"Estado sugerido atualmente: {item['estado_automatico']}",
+        key=f"trilha_estado_{hashlib.sha1(tema.encode('utf-8')).hexdigest()[:10]}",
+    )
+
+    c1, c2 = st.columns(2)
+    if c1.button("Salvar estado", type="primary", use_container_width=True):
+        registro = st.session_state.trilha.setdefault(tema, {})
+        if estado_escolhido == "Automático":
+            registro.pop("estado", None)
+        else:
+            registro["estado"] = estado_escolhido
+        salvar_trilha(st.session_state.trilha)
+        st.rerun()
+    if c2.button("Registrar revisão de hoje", use_container_width=True):
+        registro = st.session_state.trilha.setdefault(tema, {})
+        registro["ultima_revisao"] = datetime.now().isoformat(timespec="seconds")
+        salvar_trilha(st.session_state.trilha)
+        st.rerun()
+
+    if item["subtemas_pendentes"]:
+        st.markdown(f"**Subtemas ainda não cobrados no seu estudo ({len(item['subtemas_pendentes'])}):**")
+        for subtema in item["subtemas_pendentes"]:
+            st.markdown(f"- {subtema}")
+    else:
+        st.success("Todos os subtemas disponíveis deste caderno já apareceram no seu estudo.")
+
+
 def renderizar_questao(q):
     q_id = q["id"]
     historico = progresso.get(q_id, None)
@@ -954,14 +1247,7 @@ def renderizar_questao(q):
             gabarito_correto = q["gabarito"]
             acertou = (letra_escolhida == gabarito_correto)
             
-            progresso[q_id] = {
-                "resposta": letra_escolhida,
-                "acertou": acertou,
-                "assunto": q["assunto"],
-                "tema": q["subtema"],
-                "bloco": q["bloco"],
-                "data": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            }
+            registrar_tentativa(q, letra_escolhida, acertou)
             salvar_progresso(progresso)
             st.rerun()
 
@@ -979,6 +1265,10 @@ def renderizar_questao(q):
             st.caption("Confirme uma resposta para liberar o gabarito e a resolução.")
 
 # --- Área Principal ---
+if modo_aplicacao == "Trilha do edital":
+    renderizar_trilha_edital()
+    st.stop()
+
 if modo_aplicacao == "Simulado específico":
     renderizar_simulado()
     st.stop()
