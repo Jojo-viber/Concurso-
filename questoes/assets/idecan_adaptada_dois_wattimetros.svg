@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="330" viewBox="0 0 900 330">
+  <rect width="900" height="330" fill="#f8fafc"/>
+  <style>.t{font:20px Arial;fill:#0f172a}.s{font:17px Arial;fill:#334155}.w{stroke:#0f172a;stroke-width:4;fill:none}.m{fill:#fff;stroke:#0369a1;stroke-width:4}</style>
+  <text x="30" y="35" class="t">Sistema trifásico a três fios</text>
+  <text x="35" y="100" class="t">A</text><line x1="65" y1="93" x2="830" y2="93" class="w"/>
+  <text x="35" y="175" class="t">B</text><line x1="65" y1="168" x2="830" y2="168" class="w"/>
+  <text x="35" y="250" class="t">C</text><line x1="65" y1="243" x2="830" y2="243" class="w"/>
+  <circle cx="260" cy="93" r="28" class="m"/><text x="248" y="101" class="t">I?</text>
+  <circle cx="260" cy="243" r="28" class="m"/><text x="248" y="251" class="t">I?</text>
+  <rect x="430" y="57" width="100" height="72" rx="10" class="m"/><text x="454" y="101" class="t">W1</text>
+  <rect x="430" y="207" width="100" height="72" rx="10" class="m"/><text x="454" y="251" class="t">W2</text>
+  <line x1="480" y1="129" x2="480" y2="168" class="w"/>
+  <line x1="480" y1="207" x2="480" y2="168" class="w"/>
+  <text x="565" y="157" class="s">B é o terminal comum das bobinas de tensão</text>
+  <polygon points="830,75 875,168 830,261" fill="#e2e8f0" stroke="#0f172a" stroke-width="4"/>
+  <text x="804" y="305" class="s">Carga</text>
+</svg>
