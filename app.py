@@ -315,7 +315,13 @@ MAPEAMENTO_ASSUNTOS = {
     "Comandos Elétricos & Motores": {"bloco": "BRONZE", "meta": 15, "esperadas": 1, "keywords": ["COMANDOS_ELETRICOS_MOTORES", "COMANDOS ELÉTRICOS", "COMANDOS ELETRICOS", "CONTATOR", "PARTIDA DE MOTOR"]},
     "Desenho Técnico & Interpretação de Projetos": {"bloco": "BRONZE", "meta": 15, "esperadas": 1, "keywords": ["DESENHO", "PLANTA", "UNIFILAR", "MULTIFILAR", "SIMBOLOGIA", "INTERPRETACAO", "INTERPRETAÇÃO"]},
     "Legislação Urbanística & Parcelamento": {"bloco": "BRONZE", "meta": 15, "esperadas": 1, "keywords": ["6.766", "6766", "URBANO", "URBANISTICA", "URBANÍSTICA", "POSTURAS", "PLANO DIRETOR", "PARCELAMENTO"]},
-    "Licenciamento Ambiental & Segurança em Obras": {"bloco": "BRONZE", "meta": 15, "esperadas": 1, "keywords": ["AMBIENTAL", "LICENCA", "LICENÇA", "EIA", "RIMA", "SEGURANÇA DO TRABALHO", "SEGURANCA DO TRABALHO"]}
+    "Licenciamento Ambiental & Segurança em Obras": {"bloco": "BRONZE", "meta": 15, "esperadas": 1, "keywords": ["AMBIENTAL", "LICENCA", "LICENÇA", "EIA", "RIMA", "SEGURANÇA DO TRABALHO", "SEGURANCA DO TRABALHO"]},
+    # Conhecimentos Gerais: "esperadas" permanece zero para não alterar
+    # o simulado específico de Engenharia Elétrica com 20 questões.
+    "Língua Portuguesa": {"bloco": "GERAL", "meta": 60, "esperadas": 0, "peso": 0.75, "keywords": ["PORTUGUES", "PORTUGUÊS", "INTERPRETACAO TEXTUAL", "INTERPRETAÇÃO TEXTUAL"]},
+    "Noções de Informática": {"bloco": "GERAL", "meta": 40, "esperadas": 0, "peso": 0.50, "keywords": ["INFORMATICA", "INFORMÁTICA", "WINDOWS", "LINUX", "PLANILHAS"]},
+    "Legislação e Ética no Serviço Público": {"bloco": "GERAL", "meta": 35, "esperadas": 0, "peso": 0.45, "keywords": ["LGPD", "LAI", "LEI ORGANICA", "LEI ORGÂNICA", "ETICA SERVICO PUBLICO", "ÉTICA SERVIÇO PÚBLICO"]},
+    "História de Campina Grande/PB": {"bloco": "GERAL", "meta": 25, "esperadas": 0, "peso": 0.40, "keywords": ["HISTORIA CAMPINA GRANDE", "HISTÓRIA CAMPINA GRANDE"]}
 }
 
 ASSUNTO_POR_ARQUIVO = {
@@ -338,11 +344,15 @@ ASSUNTO_POR_ARQUIVO = {
     "caderno_15_questoes_desenho_tecnico_interpretacao_projetos_idecan.html": "Desenho Técnico & Interpretação de Projetos",
     "caderno_15_questoes_legislacao_urbanistica_parcelamento_solo_idecan.html": "Legislação Urbanística & Parcelamento",
     "caderno_15_questoes_licenciamento_ambiental_obras_idecan.html": "Licenciamento Ambiental & Segurança em Obras",
+    "caderno_60_questoes_portugues_idecan.html": "Língua Portuguesa",
+    "caderno_40_questoes_informatica_idecan.html": "Noções de Informática",
+    "caderno_35_questoes_legislacao_etica_servico_publico_idecan.html": "Legislação e Ética no Serviço Público",
+    "caderno_25_questoes_historia_campina_grande_idecan.html": "História de Campina Grande/PB",
 }
 
 META_POR_BLOCO = {
     bloco: sum(info["meta"] for info in MAPEAMENTO_ASSUNTOS.values() if info["bloco"] == bloco)
-    for bloco in ("OURO", "PRATA", "BRONZE")
+    for bloco in ("OURO", "PRATA", "BRONZE", "GERAL")
 }
 META_GLOBAL = sum(META_POR_BLOCO.values())
 TOTAL_QUESTOES_SIMULADO = sum(info["esperadas"] for info in MAPEAMENTO_ASSUNTOS.values())
@@ -481,7 +491,7 @@ todas_questoes = carregar_todas_questoes()
 ESTADOS_TRILHA = [
     "Não iniciado", "Reconhecimento", "Em estudo", "Em revisão", "Consolidado"
 ]
-PESO_ESTRATEGICO = {"OURO": 1.00, "PRATA": 0.70, "BRONZE": 0.45}
+PESO_ESTRATEGICO = {"OURO": 1.00, "PRATA": 0.70, "BRONZE": 0.45, "GERAL": 0.50}
 
 
 def converter_data(valor):
@@ -543,7 +553,7 @@ def estatisticas_trilha(assunto, info, questoes, progresso_atual, trilha_atual, 
     atraso = 0.35 if dias_sem_revisar is None else min(dias_sem_revisar / 14, 1.0)
     lacuna_dominio = 1 - dominio / 100
     lacuna_cobertura = 1 - cobertura
-    peso = PESO_ESTRATEGICO.get(info["bloco"], 0.45)
+    peso = info.get("peso", PESO_ESTRATEGICO.get(info["bloco"], 0.45))
     prioridade = round(100 * (
         0.35 * peso + 0.30 * lacuna_dominio + 0.20 * atraso + 0.15 * lacuna_cobertura
     ), 1)
@@ -724,7 +734,7 @@ if modo_aplicacao == "Estudo por cadernos":
     )
 
     bloco_sel = st.sidebar.selectbox(
-        "2. Bloco do Edital:", ["Todos os Blocos", "OURO", "PRATA", "BRONZE"],
+        "2. Bloco do Edital:", ["Todos os Blocos", "GERAL", "OURO", "PRATA", "BRONZE"],
         key="filtro_bloco"
     )
 
@@ -1125,8 +1135,11 @@ def renderizar_trilha_edital():
     )
 
     st.subheader("O que estudar hoje")
+    especificos = [item for item in dados if item["bloco"] != "GERAL"]
+    gerais = [item for item in dados if item["bloco"] == "GERAL"]
+    recomendacoes = especificos[:2] + gerais[:1]
     colunas = st.columns(3)
-    for indice, (coluna, item) in enumerate(zip(colunas, dados[:3]), start=1):
+    for indice, (coluna, item) in enumerate(zip(colunas, recomendacoes), start=1):
         with coluna:
             with st.container(border=True):
                 st.caption(f"PRIORIDADE {indice} • BLOCO {item['bloco']}")
@@ -1233,7 +1246,10 @@ def renderizar_trilha_edital():
 def renderizar_questao(q):
     q_id = q["id"]
     historico = progresso.get(q_id, None)
-    cor_bloco = "🥇 OURO" if q["bloco"] == "OURO" else ("🥈 PRATA" if q["bloco"] == "PRATA" else "🥉 BRONZE")
+    cor_bloco = {
+        "OURO": "🥇 OURO", "PRATA": "🥈 PRATA", "BRONZE": "🥉 BRONZE",
+        "GERAL": "📘 CONHECIMENTOS GERAIS"
+    }.get(q["bloco"], q["bloco"])
     
     with st.container(border=True):
         col_t1, col_t2 = st.columns([3, 1])
