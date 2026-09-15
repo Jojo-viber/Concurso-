@@ -669,6 +669,7 @@ st.sidebar.subheader("🎯 Progresso por Bloco")
 qtd_ouro = sum(1 for q in todas_questoes if q["id"] in progresso and q["bloco"] == "OURO")
 qtd_prata = sum(1 for q in todas_questoes if q["id"] in progresso and q["bloco"] == "PRATA")
 qtd_bronze = sum(1 for q in todas_questoes if q["id"] in progresso and q["bloco"] == "BRONZE")
+qtd_geral = sum(1 for q in todas_questoes if q["id"] in progresso and q["bloco"] == "GERAL")
 
 st.sidebar.write(f"🥇 **Bloco Ouro:** {qtd_ouro} / {META_POR_BLOCO['OURO']} questões")
 st.sidebar.progress(min(qtd_ouro / META_POR_BLOCO["OURO"], 1.0))
@@ -678,6 +679,9 @@ st.sidebar.progress(min(qtd_prata / META_POR_BLOCO["PRATA"], 1.0))
 
 st.sidebar.write(f"🥉 **Bloco Bronze:** {qtd_bronze} / {META_POR_BLOCO['BRONZE']} questões")
 st.sidebar.progress(min(qtd_bronze / META_POR_BLOCO["BRONZE"], 1.0))
+
+st.sidebar.write(f"📘 **Conhecimentos Gerais:** {qtd_geral} / {META_POR_BLOCO['GERAL']} questões")
+st.sidebar.progress(min(qtd_geral / META_POR_BLOCO["GERAL"], 1.0))
 
 # --- Gerenciamento e Backup de Progresso (Streamlit Cloud & Local) ---
 st.sidebar.divider()
@@ -1263,9 +1267,13 @@ def renderizar_questao(q):
         
         if historico:
             if historico.get("acertou"):
-                col_t2.success("✅ Acertou")
+                col_t2.success(
+                    f"✅ Última tentativa: {historico.get('resposta', '-')} (acerto)"
+                )
             else:
-                col_t2.warning(f"❌ Errada (Marcou: {historico.get('resposta', '-')})")
+                col_t2.warning(
+                    f"❌ Última tentativa: {historico.get('resposta', '-')} (erro)"
+                )
         
         renderizar_fragmento(q["enunciado"])
         st.write("")
@@ -1275,16 +1283,34 @@ def renderizar_questao(q):
             letras_disponiveis.append(letra)
             st.markdown(f"**{letra})** {texto_markdown}")
 
+        rotulo_escolha = (
+            "Selecione a alternativa para uma nova tentativa:"
+            if historico else "Selecione a alternativa:"
+        )
         escolha = st.radio(
-            "Selecione a alternativa:",
+            rotulo_escolha,
             letras_disponiveis,
             key=f"radio_{q_id}",
             index=None,
             horizontal=True
         )
+
+        resposta_confirmada = historico.get("resposta") if historico else None
+        if historico and escolha and escolha != resposta_confirmada:
+            st.info(
+                f"A alternativa **{escolha}** está apenas selecionada. "
+                f"Sua última resposta confirmada continua sendo **{resposta_confirmada}** "
+                "até você confirmar a nova tentativa."
+            )
+        elif historico and escolha == resposta_confirmada:
+            st.caption(
+                f"A alternativa **{resposta_confirmada}** corresponde à sua última "
+                "resposta confirmada."
+            )
         
         col_btn1, col_btn2 = st.columns([1, 4])
-        confirmar = col_btn1.button("Confirmar Resposta", key=f"btn_{q_id}", type="primary")
+        texto_botao = "Confirmar nova tentativa" if historico else "Confirmar resposta"
+        confirmar = col_btn1.button(texto_botao, key=f"btn_{q_id}", type="primary")
         
         if confirmar and escolha:
             letra_escolhida = escolha
@@ -1297,12 +1323,18 @@ def renderizar_questao(q):
 
         st.write("")
         if historico:
-            rotulo_gabarito = "Gabarito comentado" if q["fonte"] != "Questões autorais" else "Gabarito oficial"
+            rotulo_gabarito = "Gabarito comentado"
             with st.expander(f"💡 Ver {rotulo_gabarito} & Resolução Detalhada", expanded=False):
                 if historico.get("acertou"):
-                    st.success(f"**{rotulo_gabarito}:** Alternativa **{q['gabarito']}** (Você acertou!)")
+                    st.success(
+                        f"**{rotulo_gabarito}:** alternativa **{q['gabarito']}**. "
+                        f"Sua última resposta confirmada foi **{historico.get('resposta')}** — acerto."
+                    )
                 else:
-                    st.error(f"**{rotulo_gabarito}:** Alternativa **{q['gabarito']}** (Na última tentativa você marcou **{historico.get('resposta')}**)")
+                    st.error(
+                        f"**{rotulo_gabarito}:** alternativa **{q['gabarito']}**. "
+                        f"Sua última resposta confirmada foi **{historico.get('resposta')}** — erro."
+                    )
                 renderizar_fragmento(q["resolucao"])
                 if q["dica"]:
                     renderizar_fragmento(q["dica"])
